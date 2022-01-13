@@ -65,10 +65,10 @@ public final class Constants {
         public static double turnKD = 0.00000001; 
         public static double turnKF = 0;
 
-        public static double topLeftOffset = 0;
-        public static double topRightOffset = 0;
-        public static double bottomLeftOffset = 0;
-        public static double bottomRightOffset = 0;
+        public static double topLeftOffset = 70.9277343;
+        public static double topRightOffset = 107.138671875;
+        public static double bottomLeftOffset = 117.94921875;
+        public static double bottomRightOffset = -47.109375;
 
         public static double voltComp = 12;
 
@@ -78,38 +78,6 @@ public final class Constants {
     {
         public static int PWMPORT = 0; 
         public static int bufferNum = 100; 
-    }
-
-    public static class CANNON
-    {
-        //TODO fix all of these
-        public static int solenoidOneID = 0;
-        public static int solenoidTwoID = 0;
-        public static int compressorID = 0;
-        public static int genevaConventionCANID = 0;
-        public static int trunnionCANID = 0;
-
-        public static double voltComp = 12;
-        
-        public static double genevaKP = 0.000001;
-        public static double genevaKI = 0;
-        public static double genevaKD = 0;
-        public static double genevaKF = 0;
-
-        public static double trunnionKP = 0.000001;
-        public static double trunnionKI = 0;
-        public static double trunnionKD = 0;
-        public static double trunnionKF = 0;
-
-        public static double trunnionGreerRatio = 0;
-
-        public static double maxRotTalonSRX = 0;
-
-        //!tester constants for feedforward
-
-        public static double horizontalPosition = 0;
-        public static double weight = 0;
-        public static double cannonDistance = 0;
     }
 }
 
