@@ -5,6 +5,8 @@
 package frc.robot;
 
 
+import java.util.spi.CurrencyNameProvider;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -28,6 +30,12 @@ public class Drive {
     private TalonFX bottomTurnLeft = new TalonFX(TURN.bottomTurnLeftCANID);
     private TalonFX bottomTurnRight = new TalonFX(TURN.bottomTurnRightCANID);
 
+    private TalonFX topDriveLeft = new TalonFX(DRIVE.topDriveLeftCANID);    
+    private TalonFX topDriveRight = new TalonFX(DRIVE.topDriveRightCANID);    
+    private TalonFX bottomDriveLeft = new TalonFX(DRIVE.bottomDriveLeftCANID);
+    private TalonFX bottomDriveRight = new TalonFX(DRIVE.bottomDriveRightCANID);   
+
+
     private CANCoder topTurnLeftEncoder = new CANCoder(TURN.topTurnLeftCANCoderCANID);
     private CANCoder topTurnRightEncoder = new CANCoder(TURN.topTurnRightCANCoderCANID);
     private CANCoder bottomTurnLeftEncoder = new CANCoder(TURN.bottomTurnLeftCANCoderCANID);
@@ -40,10 +48,41 @@ public class Drive {
 
     private PIDController turningPID = new PIDController(TURN.turnKP, TURN.turnKI, TURN.turnKD);
     private PIDController drivePID = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
-    private PIDController driveEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+    private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+    private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+    private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+    private PIDController driveBotRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
 
 
     private AHRS navX = new AHRS();
+
+    private double distance;
+
+    private double leftTopPosNative, leftBottomPosNative, 
+    rightTopPosNative, rightBottomPosNative,
+    
+    leftTopPosInch, leftBottomPosInch,
+    rightTopPosInch, rightBottomPosInch,
+
+    leftTopPosMeters, leftBottomPosMeters,
+    rightTopPosMeters, rightBottomPosMeters,
+    
+    leftTopVelInch, leftBottomVelInch,
+    rightTopVelInch, rightBottomVelInch,
+
+    leftTopVelNative, leftBottomVelNative,
+    rightTopVelNative, rightBottomVelNative,
+    
+    leftTopVelMeters, leftBottomVelMeters,
+    rightTopVelMeters, rightBottomVelMeters,
+    
+    avgVelInches, avgDistInches,
+
+    leftTopDeg, leftBottomDeg,
+    rightTopDeg, rightBottomDeg,
+
+    leftTopOutput, leftBottomOutput,
+    rightTopOutput, rightBottomOutput;
 
 
     private Drive()
@@ -81,10 +120,10 @@ public class Drive {
         bottomTurnRight.config_kF(0, TURN.turnKF);
 
 
-        topTurnLeft.setInverted(false);
-        topTurnRight.setInverted(false);
-        bottomTurnLeft.setInverted(false);
-        bottomTurnRight.setInverted(false);
+        topTurnLeft.setInverted(true);
+        topTurnRight.setInverted(true);
+        bottomTurnLeft.setInverted(true);
+        bottomTurnRight.setInverted(true);
 
 
         topTurnLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
@@ -132,12 +171,6 @@ public class Drive {
         bottomTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
 
-        topTurnLeft.configFeedbackNotContinuous(true, 15);
-        topTurnRight.configFeedbackNotContinuous(true, 15);
-        bottomTurnLeft.configFeedbackNotContinuous(true, 15);
-        bottomTurnRight.configFeedbackNotContinuous(true, 15);
-
-        
         topTurnLeftEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
         topTurnRightEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
         bottomTurnLeftEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
@@ -148,6 +181,97 @@ public class Drive {
         offsetTopRightCANCoder = topTurnRightEncoder.getAbsolutePosition() - TURN.topRightOffset;//-67.3242187;//115.224;
         offsetBottomLeftCANCoder = bottomTurnLeftEncoder.getAbsolutePosition() - TURN.bottomLeftOffset;//-63.89648437; //117.0703125;//121.289;
         offsetBottomRightCANCoder = bottomTurnRightEncoder.getAbsolutePosition() - TURN.bottomRightOffset;//134.1210937;//320.361;
+
+
+
+        topDriveLeft.configFactoryDefault();
+        topDriveRight.configFactoryDefault();
+        bottomDriveLeft.configFactoryDefault();
+        bottomDriveRight.configFactoryDefault();
+
+
+        topDriveLeft.setNeutralMode(NeutralMode.Brake);
+        topDriveRight.setNeutralMode(NeutralMode.Brake);
+        bottomDriveLeft.setNeutralMode(NeutralMode.Brake);
+        bottomDriveRight.setNeutralMode(NeutralMode.Brake);
+
+
+        topDriveLeft.setInverted(false);
+        topDriveRight.setInverted(false);
+        bottomDriveLeft.setInverted(false);
+        bottomDriveRight.setInverted(false);
+
+
+        topDriveLeft.configMotionSCurveStrength(6);
+        topDriveRight.configMotionSCurveStrength(6);
+        bottomDriveLeft.configMotionSCurveStrength(6);
+        bottomDriveRight.configMotionSCurveStrength(6);
+
+
+        topDriveLeft.config_kP(0, DRIVE.driveKP);
+        topDriveLeft.config_kI(0, DRIVE.driveKI);
+        topDriveLeft.config_kD(0, DRIVE.driveKD);
+        topDriveLeft.config_kF(0, DRIVE.driveKF);
+
+        topDriveRight.config_kP(0, DRIVE.driveKP);
+        topDriveRight.config_kI(0, DRIVE.driveKI);
+        topDriveRight.config_kD(0, DRIVE.driveKD);
+        topDriveRight.config_kF(0, DRIVE.driveKF);
+
+        bottomDriveLeft.config_kP(0, DRIVE.driveKP);
+        bottomDriveLeft.config_kI(0, DRIVE.driveKI);
+        bottomDriveLeft.config_kD(0, DRIVE.driveKD);
+        bottomDriveLeft.config_kF(0, DRIVE.driveKF);
+
+        bottomDriveRight.config_kP(0, DRIVE.driveKP);
+        bottomDriveRight.config_kI(0, DRIVE.driveKI);
+        bottomDriveRight.config_kD(0, DRIVE.driveKD);
+        bottomDriveRight.config_kF(0, DRIVE.driveKF);
+
+
+        topDriveLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
+        topDriveLeft.configVelocityMeasurementWindow(16);
+
+        topDriveRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
+        topDriveRight.configVelocityMeasurementWindow(16);
+
+        bottomDriveLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
+        bottomDriveLeft.configVelocityMeasurementWindow(16);
+
+        bottomDriveRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
+        bottomDriveRight.configVelocityMeasurementWindow(16);
+
+
+        topDriveLeft.configVoltageCompSaturation(DRIVE.voltComp);
+        topDriveLeft.enableVoltageCompensation(true);
+        
+        topDriveRight.configVoltageCompSaturation(DRIVE.voltComp);
+        topDriveRight.enableVoltageCompensation(true);
+
+        bottomDriveLeft.configVoltageCompSaturation(DRIVE.voltComp);
+        bottomDriveLeft.enableVoltageCompensation(true);
+
+        bottomDriveRight.configVoltageCompSaturation(DRIVE.voltComp);
+        bottomDriveRight.enableVoltageCompensation(true);
+
+
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+
+
+        topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        topDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     }
 
     public static Drive getInstance()
@@ -166,18 +290,75 @@ public class Drive {
         SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
+
+        SmartDashboard.putNumber("currentDistance", currentDistance);
+
+        leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
+        rightTopVelNative = topDriveRight.getSelectedSensorVelocity();
+        leftBottomVelNative = bottomDriveLeft.getSelectedSensorVelocity();
+        rightBottomVelNative = bottomDriveRight.getSelectedSensorVelocity();
+
+        leftTopPosNative = topDriveLeft.getSelectedSensorPosition();
+        rightTopPosNative = topDriveRight.getSelectedSensorPosition();
+        leftBottomPosNative = bottomDriveLeft.getSelectedSensorPosition();
+        rightBottomPosNative = bottomDriveRight.getSelectedSensorPosition();
+
+        leftTopVelInch = MkUtil.nativePer100MstoInchesPerSec(leftTopVelNative);
+        rightTopVelInch = MkUtil.nativePer100MstoInchesPerSec(rightTopVelNative);
+        leftBottomVelInch = MkUtil.nativePer100MstoInchesPerSec(leftBottomVelNative);
+        rightBottomVelInch = MkUtil.nativePer100MstoInchesPerSec(rightBottomVelNative);
+
+        leftTopPosInch = MkUtil.nativeToInches(leftTopPosNative);
+        rightTopPosInch = MkUtil.nativeToInches(rightTopPosNative);
+        leftBottomPosInch = MkUtil.nativeToInches(leftBottomPosNative);
+        rightBottomPosInch = MkUtil.nativeToInches(rightBottomPosNative);
+        
+        leftTopVelMeters = MkUtil.nativePer100MsToMetersPerSec(leftTopVelNative);
+        rightTopVelMeters = MkUtil.nativePer100MsToMetersPerSec(rightTopVelNative);
+        leftBottomVelMeters = MkUtil.nativePer100MsToMetersPerSec(leftBottomVelNative);
+        rightBottomVelMeters = MkUtil.nativePer100MsToMetersPerSec(rightBottomVelNative);
+
+        leftTopPosMeters = MkUtil.nativeToMeters(leftTopPosNative);
+        rightTopPosMeters = MkUtil.nativeToMeters(rightTopPosNative);
+        leftBottomPosMeters = MkUtil.nativeToMeters(leftBottomPosNative);
+        rightBottomPosMeters = MkUtil.nativeToMeters(rightBottomPosNative);
+
+        avgDistInches = (leftTopPosInch + rightTopPosInch + leftBottomPosInch + rightBottomPosInch) /4.0;
+        avgVelInches = (leftTopVelInch + rightTopVelInch + leftBottomVelInch + rightBottomVelInch) / 4.0;
+
+        leftTopDeg = MkUtil.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), TURN.greerRatio);
+        rightTopDeg = MkUtil.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), TURN.greerRatio);
+        leftBottomDeg = MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio);
+        rightBottomDeg = MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio);
+
     }
 
 
 
 
 
-    public void turnPercent(double setpoint)
+    public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
-        topTurnLeft.set(ControlMode.PercentOutput, setpoint);
-        topTurnRight.set(ControlMode.PercentOutput, setpoint);
-        bottomTurnLeft.set(ControlMode.PercentOutput, setpoint);
-        bottomTurnRight.set(ControlMode.PercentOutput, setpoint);
+        topTurnLeft.set(ControlMode.PercentOutput, topleft);
+        topTurnRight.set(ControlMode.PercentOutput, topright);
+        bottomTurnLeft.set(ControlMode.PercentOutput, botleft);
+        bottomTurnRight.set(ControlMode.PercentOutput, botright);
+    }
+
+    public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
+    {
+        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(topleft, TURN.greerRatio)));
+        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(topright, TURN.greerRatio)));
+        bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(botleft, TURN.greerRatio)));
+        bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
+    }
+
+    public void drivePercent(double setpoint)
+    {
+        topDriveLeft.set(ControlMode.PercentOutput, setpoint);
+        topDriveRight.set(ControlMode.PercentOutput, setpoint);
+        bottomDriveLeft.set(ControlMode.PercentOutput, setpoint);
+        bottomDriveRight.set(ControlMode.PercentOutput, setpoint);
     }
 
     public void resetTurn()
@@ -186,6 +367,14 @@ public class Drive {
         topTurnRight.setSelectedSensorPosition(0);
         bottomTurnLeft.setSelectedSensorPosition(0);
         bottomTurnRight.setSelectedSensorPosition(0);
+    }
+
+    public void resetDrive()
+    {
+        topDriveLeft.setSelectedSensorPosition(0);
+        topDriveRight.setSelectedSensorPosition(0);
+        bottomDriveLeft.setSelectedSensorPosition(0);
+        bottomDriveRight.setSelectedSensorPosition(0);
     }
 
     public void resetNavx()
@@ -240,10 +429,27 @@ public class Drive {
         max=ws1; if(ws2>max)max=ws2; if(ws3>max)max=ws3; if(ws4>max)max=ws4;
         if(max>1){ws1/=max; ws2/=max; ws3/=max; ws4/=max;}
 
+
+        wa1 = MkUtil.setDirection(topTurnRight, wa1, driveTopRightEther);
+        wa2 = MkUtil.setDirection(topTurnLeft, wa2, driveTopLeftEther);
+        wa3 = MkUtil.setDirection(bottomTurnLeft, wa3, driveBotLeftEther);
+        wa4 = MkUtil.setDirection(bottomTurnRight, wa4, driveBotRightEther);
+
+
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
         topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
+
+        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1);
+        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
+        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
+        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
+
+        topDriveRight.set(ControlMode.PercentOutput, ws1);
+        topDriveLeft.set(ControlMode.PercentOutput, ws2);
+        bottomDriveLeft.set(ControlMode.PercentOutput, ws3);
+        bottomDriveRight.set(ControlMode.PercentOutput, ws4);
     }
 
 
@@ -263,6 +469,117 @@ public class Drive {
     public double D;
 
     public double max;
+
+
+
+
+
+
+    public double currentDistance = 0;
+
+    public double distanceA = 0;
+    public double lengthB = 0;
+
+    //let the math begin
+    //in inches
+    public double calculateCircleRadius(double distanceAA, double lengthBB)
+    {
+        return ((Math.pow(distanceAA, 2)/4) + Math.pow(lengthBB, 2)) * (1 / (2 * lengthBB));
+    }
+    public double calculateAngularVelocity(double distanceAA, double lengthBB)
+    {
+        double radius = calculateCircleRadius(distanceAA, lengthBB);
+        return (DRIVE.maxInchesVelocity / radius);
+    }
+    public double calculateArcOfPath(double distanceAA, double lengthBB)
+    {
+        double radius = calculateCircleRadius(distanceAA, lengthBB);
+        double theta = 2 * (Math.asin((distanceAA/(2 * radius))));
+        return (theta / 360) * (2* (Constants.kPi * radius));
+    }
+    public double calculateAngleOfPath(double distanceAA, double lengthBB)
+    {
+        double radius = calculateCircleRadius(distanceAA, lengthBB);
+        return 2 * (Math.asin((distanceAA/(2 * radius))));
+    }
+
+
+    public void autoTurnSet(double distanceAA, double lengthBB, double totalDistance)
+    {
+        currentDistance = 0;
+    }
+    public void autoTurnUpdate(double totalDistance, double thetaTurn)
+    {
+        currentDistance = 
+            (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
+            MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
+            MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
+            MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
+
+        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
+        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
+        bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
+        bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
+    }
+
+    public boolean autoTurnIsDone(double totalDistance)
+    {
+        return Math.abs(totalDistance - currentDistance) < 0.5 && Math.abs(avgVelInches) < 0.1;
+    }
+
+
+
+    public void setMagicStraight(double setpoint)
+    {
+        resetDrive();
+        distance = setpoint;
+        topDriveLeft.configMotionCruiseVelocity(DRIVE.magicVel);
+        topDriveRight.configMotionCruiseVelocity(DRIVE.magicVel);
+        bottomDriveLeft.configMotionCruiseVelocity(DRIVE.magicVel);
+        bottomDriveRight.configMotionCruiseVelocity(DRIVE.magicVel);
+
+        topDriveLeft.configMotionAcceleration(DRIVE.magicAccel);
+        topDriveRight.configMotionAcceleration(DRIVE.magicAccel);
+        bottomDriveLeft.configMotionAcceleration(DRIVE.magicAccel);
+        bottomDriveRight.configMotionAcceleration(DRIVE.magicAccel);
+
+        //zeroSensors();
+    }
+
+    public void updateMagicStraight()
+    {
+        topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
+        topDriveRight.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
+        bottomDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
+        bottomDriveRight.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
+
+        leftTopOutput = MkUtil.inchesToNative(distance);
+        rightTopOutput = MkUtil.inchesToNative(distance);
+        leftBottomOutput = MkUtil.inchesToNative(distance);
+        rightBottomOutput = MkUtil.inchesToNative(distance);
+
+        SmartDashboard.putNumber("dist", distance);
+        SmartDashboard.putNumber("leftout", leftTopOutput);
+    }
+
+    public boolean isMagicStraightDone()
+    {
+        double err = distance - avgDistInches;
+        return Math.abs(err) < 0.5 && Math.abs(avgVelInches) < 0.1;
+    }
+
+
+    public boolean percentTurnDone()
+    {
+        return ((topTurnLeft.getMotorOutputPercent() +
+               topTurnRight.getMotorOutputPercent() +
+               bottomTurnLeft.getMotorOutputPercent() +
+               bottomTurnRight.getMotorOutputPercent()) / 4) < 0.1;
+    }
+
+
+
+
 
     private static class InstanceHolder
     {

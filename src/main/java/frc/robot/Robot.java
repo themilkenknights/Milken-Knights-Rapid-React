@@ -6,6 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Commands.DriveStr8;
+import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.TURN;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,35 +36,76 @@ public class Robot extends TimedRobot {
    private double two;
    private double three;
 
-  @Override
-  public void robotInit() {}
-
-  @Override
-  public void robotPeriodic() {}
-
-  @Override
-  public void autonomousInit() {}
-
-  @Override
-  public void autonomousPeriodic() {}
-
-  @Override
-  public void teleopInit() {}
-
+   private Command m_autonomousCommand;
+   private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
+   private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
+   private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
+   
+   public enum AutoPosition {
+     LEFT, NOTHING
+   }
+   @Override
+   public void robotInit() {
+     
+     //Shuffleboard.startRecording();
+     Shuffleboard.selectTab("Match");
+     positionChooser.addOption("Nothing", AutoPosition.NOTHING);
+     positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
+   }
+ 
+   @Override
+   public void robotPeriodic() {
+     CommandScheduler.getInstance().run();
+     Shuffle.getInstance().update();
+   }
+ 
+   @Override
+   public void autonomousInit() {
+     Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
+     mDrive.resetDrive();
+     switch (positionChooser.getSelected()) {
+       case LEFT:
+         m_autonomousCommand = new DriveStr8();
+         break;
+       case NOTHING:
+         
+         break;
+     }
+     if (m_autonomousCommand != null) {
+       m_autonomousCommand.schedule();
+     }
+   }
+ 
+   @Override
+   public void autonomousPeriodic() {
+     mDrive.driveUpdate();
+   }
+ 
+   @Override
+   public void teleopInit() {
+     Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
+     if (m_autonomousCommand != null) {
+       m_autonomousCommand.cancel();
+     }
+     mDrive.resetDrive();
+   }
+ 
+ 
   @Override
   public void teleopPeriodic() {
     mDrive.driveUpdate();
     
 
-      one = (xbox.getRawAxis(1));
-      two = (xbox.getRawAxis(0));
-      three = (xbox.getRawAxis(5));
+     
+    one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    three = (xbox.getRawAxis(5) - TURN.deadband) / (1 - TURN.deadband);
       
       if(Math.abs(xbox.getRawAxis(1)) < 0.1)
       {
         one = 0;
       }
-      if(Math.abs(xbox.getRawAxis(0)) < 0.1)
+      if(Math.abs(xbox.getRawAxis(0)) < 0.4)
       {
         two = 0;
       }
@@ -70,7 +122,8 @@ public class Robot extends TimedRobot {
       }
       else
       {
-        mDrive.turnPercent(0);
+        mDrive.turnPercent(0,0,0,0);
+        mDrive.drivePercent(0);
       }
   }
 
