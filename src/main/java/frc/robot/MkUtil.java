@@ -11,6 +11,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
+import frc.robot.Constants;
 
 public class MkUtil {
 //original ones 
@@ -193,6 +194,9 @@ public class MkUtil {
  */
   public static double closestAngle(double a, double b)
   {
+          // get direction
+          //!     modulo = %, right?
+          //!     has to be since it works lmao
           double dir = (b % 360.0) - (a % 360.0);
 
           // convert from -360 to 360 to -180 to 180
@@ -202,7 +206,6 @@ public class MkUtil {
           }
           return dir;
   }
-  
 
   //!     also stolen from 6624
   public static double setDirection(TalonFX talon, double setpoint, double greerRatio)
@@ -210,7 +213,9 @@ public class MkUtil {
     // use the fastest way
     double currentAngle = MkUtil.nativeToDegrees((talon.getSelectedSensorPosition()), greerRatio);
     return currentAngle + closestAngle(currentAngle, setpoint);
-  }  
+  }
+
+
 
   public static double setDirection(CANCoder coder, double setpoint)
   {
@@ -221,6 +226,26 @@ public class MkUtil {
 
 
 
+  //!     stolen from 1684
+  /*
+  public static void inversionAwarness(TalonFX talon, double wa)
+  {
+    double encoderw = talon.getSelectedSensorPosition();
+    double azimuthAngle = encoderw;
+    double azimuthError = azimuthAngle - wa;
+
+    if(Math.abs(azimuthError) > 90)//assuming our angles are in degrees
+    {
+      azimuthError = azimuthError - 180 * Math.signum(azimuthError);
+      talon.setInverted(true);
+    }
+      else
+      {
+        talon.setInverted(false);
+      }
+
+  }
+  */
 
   public static double setDirection(TalonFX talon, double setpoint, PIDController pid)
     {
@@ -244,6 +269,10 @@ public class MkUtil {
             return (currentAngle + setpointAngleFlipped);
         }
     }
+
+
+
+
 
 
     public static double setDirection(CANCoder coder, double setpoint, PIDController pid)

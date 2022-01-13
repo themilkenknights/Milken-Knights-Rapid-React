@@ -10,32 +10,24 @@ import frc.robot.Drive;
 public class DriveStraight extends CommandBase {
   private Drive mDrive = Drive.getInstance();
   double j;
-  double distanceA;
-  double lengthB;
-  double angle;
-  double RCW;
-  public DriveStraight(double distance, double dista, double lengb, double angl, double rcw) {
+  public DriveStraight(double i) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    j = distance;
-    distanceA = dista;
-    lengthB = lengb;
-    angle = angl;
-    RCW = rcw;
+    j = i;
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
     mDrive.setMagicStraight(j);
-    mDrive.autoTurnSet(distanceA, lengthB, j);
+    mDrive.autoTurnSet(37, 24, j);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
     mDrive.updateMagicStraight();
-    mDrive.autoTurnUpdate(j, angle + mDrive.calculateAngleOfPath(distanceA, lengthB),RCW);
+    mDrive.autoTurnUpdate(j, 180);
   }
 
   // Make this return true when this Command no longer needs to run execute()

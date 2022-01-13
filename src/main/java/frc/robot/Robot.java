@@ -63,7 +63,6 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      mDrive.resetDrive();
-     mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
          m_autonomousCommand = new DriveStr8();
@@ -115,26 +114,16 @@ public class Robot extends TimedRobot {
         three = 0;
       }
 
-
-      if(xbox.getYButton())
-      {
-        mDrive.resetNavx();
-      }
-
       
       
       if(one != 0 || two != 0 || three != 0)
       {
         mDrive.etherSwerve(one/3,two/3,three/3);
       }
-      else if(xbox.getAButton())
-      {
-        mDrive.turnCalcPercent(0, 0, 0, 0);
-      }
       else
       {
         mDrive.turnPercent(0,0,0,0);
-        mDrive.drivePercent(0,0,0,0);
+        mDrive.drivePercent(0);
       }
   }
 
