@@ -454,6 +454,7 @@ public class Drive {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
@@ -489,6 +490,8 @@ public class Drive {
     }
 
 
+=======
+>>>>>>> parent of 7e2aaa2 (maybe works need to test)
 =======
 >>>>>>> parent of 7e2aaa2 (maybe works need to test)
 =======

@@ -17,7 +17,11 @@ public class DriveStr8 extends SequentialCommandGroup {
     addCommands(deadline(new Turn(90)));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     addCommands(deadline(new DriveStraight(36,37,24,180,0)));
+=======
+    addCommands(deadline(new DriveStraight(36)));
+>>>>>>> parent of 7e2aaa2 (maybe works need to test)
 =======
     addCommands(deadline(new DriveStraight(36)));
 >>>>>>> parent of 7e2aaa2 (maybe works need to test)
