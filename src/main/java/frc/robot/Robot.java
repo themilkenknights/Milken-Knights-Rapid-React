@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
      
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
-    three = (xbox.getRawAxis(5) - TURN.deadband) / (1 - TURN.deadband);
+    three = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
       
       if(Math.abs(xbox.getRawAxis(1)) < 0.1)
       {
@@ -110,7 +110,7 @@ public class Robot extends TimedRobot {
       {
         two = 0;
       }
-      if(Math.abs(xbox.getRawAxis(5)) < 0.1)
+      if(Math.abs(xbox.getRawAxis(4)) < 0.1)
       {
         three = 0;
       }
@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
 
       if(one != 0 || two != 0 || three != 0)
       {
-        mDrive.etherSwerve(one/3,two/3,three/3);
+        mDrive.etherSwerve(-one/3,two/3,three/3);
       }
       else if(xbox.getAButton())
       {
@@ -131,6 +131,10 @@ public class Robot extends TimedRobot {
       else if(xbox.getXButton())
       {
         mDrive.setPosTurn(1024 * TURN.greerRatio);
+      }
+      else if(xbox.getYButton())
+      {
+        mDrive.encoderZero();
       }
       else
       {

@@ -91,7 +91,6 @@ public class Drive {
         topTurnRight.configFactoryDefault();
         bottomTurnRight.configFactoryDefault();
 
-
         topTurnLeft.setNeutralMode(NeutralMode.Brake);
         topTurnRight.setNeutralMode(NeutralMode.Brake);
         bottomTurnLeft.setNeutralMode(NeutralMode.Brake);
@@ -136,7 +135,6 @@ public class Drive {
 
         bottomTurnRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
         bottomTurnRight.configVelocityMeasurementWindow(16);
-   
 
         topTurnLeft.configVoltageCompSaturation(TURN.voltComp);
         topTurnLeft.enableVoltageCompensation(true);
@@ -170,11 +168,18 @@ public class Drive {
         bottomTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
 
+
         topTurnLeftEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
         topTurnRightEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
         bottomTurnLeftEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
         bottomTurnRightEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
+
+        
+        topTurnLeftEncoder.configSensorDirection(true);
+        topTurnRightEncoder.configSensorDirection(true);
+        bottomTurnLeftEncoder.configSensorDirection(true);
+        bottomTurnRightEncoder.configSensorDirection(true);
 /*
         offsetTopLeftCANCoder = ((topTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.topLeftOffset;//-107.050781;//78.75;
         offsetTopRightCANCoder = ((topTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.topRightOffset;//-67.3242187;//115.224;
@@ -295,13 +300,13 @@ public class Drive {
 
     public void driveUpdate()
     {
-        SmartDashboard.putNumber("topturnleft", topTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
-        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
 
-        SmartDashboard.putNumber("topturnright", topTurnRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
-        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
        
        /* SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
@@ -405,6 +410,14 @@ public class Drive {
         topDriveRight.setSelectedSensorPosition(0);
         bottomDriveLeft.setSelectedSensorPosition(0);
         bottomDriveRight.setSelectedSensorPosition(0);
+    }
+
+    public void encoderZero()
+    {
+        topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
+        topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+        bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
+        bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
     }
 
     public void resetNavx()
