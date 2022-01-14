@@ -296,10 +296,16 @@ public class Drive {
     public void driveUpdate()
     {
         SmartDashboard.putNumber("topturnleft", topTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("topturnright", topTurnRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
 
+        SmartDashboard.putNumber("topturnright", topTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+       
+       /* SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
+*/
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
