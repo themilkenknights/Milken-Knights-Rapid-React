@@ -176,11 +176,15 @@ public class Drive {
         bottomTurnRightEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
 
 
-        offsetTopLeftCANCoder = topTurnLeftEncoder.getAbsolutePosition() - TURN.topLeftOffset;//-107.050781;//78.75;
-        offsetTopRightCANCoder = topTurnRightEncoder.getAbsolutePosition() - TURN.topRightOffset;//-67.3242187;//115.224;
-        offsetBottomLeftCANCoder = bottomTurnLeftEncoder.getAbsolutePosition() - TURN.bottomLeftOffset;//-63.89648437; //117.0703125;//121.289;
-        offsetBottomRightCANCoder = bottomTurnRightEncoder.getAbsolutePosition() - TURN.bottomRightOffset;//134.1210937;//320.361;
+        offsetTopLeftCANCoder = ((topTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.topLeftOffset;//-107.050781;//78.75;
+        offsetTopRightCANCoder = ((topTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.topRightOffset;//-67.3242187;//115.224;
+        offsetBottomLeftCANCoder = ((bottomTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomLeftOffset;//-63.89648437; //117.0703125;//121.289;
+        offsetBottomRightCANCoder = ((bottomTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomRightOffset;//134.1210937;//320.361;
 
+        topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopLeftCANCoder, TURN.greerRatio));
+        topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopRightCANCoder, TURN.greerRatio));
+        bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomLeftCANCoder, TURN.greerRatio));
+        bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));
 
 
         topDriveLeft.configFactoryDefault();
@@ -292,6 +296,8 @@ public class Drive {
 
         SmartDashboard.putNumber("currentDistance", currentDistance);
 
+        SmartDashboard.putNumber("navx", navX.getYaw());
+
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
         rightTopVelNative = topDriveRight.getSelectedSensorVelocity();
         leftBottomVelNative = bottomDriveLeft.getSelectedSensorVelocity();
@@ -352,12 +358,34 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
 
-    public void drivePercent(double setpoint)
+    public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
-        topDriveLeft.set(ControlMode.PercentOutput, setpoint);
-        topDriveRight.set(ControlMode.PercentOutput, setpoint);
-        bottomDriveLeft.set(ControlMode.PercentOutput, setpoint);
-        bottomDriveRight.set(ControlMode.PercentOutput, setpoint);
+        topDriveLeft.set(ControlMode.PercentOutput, topleft);
+        topDriveRight.set(ControlMode.PercentOutput, topright);
+        bottomDriveLeft.set(ControlMode.PercentOutput, botleft);
+        bottomDriveRight.set(ControlMode.PercentOutput, botright);
+    }
+
+    public void setPosTurn(double setpoint)
+    {
+        topTurnLeft.setSelectedSensorPosition(setpoint);
+        topTurnRight.setSelectedSensorPosition(setpoint);
+        bottomTurnLeft.setSelectedSensorPosition(setpoint);
+        bottomTurnRight.setSelectedSensorPosition(setpoint);
+    }
+
+public void help()
+    {
+
+        offsetTopLeftCANCoder = ((topTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.topLeftOffset;//-107.050781;//78.75;
+        offsetTopRightCANCoder = ((topTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.topRightOffset;//-67.3242187;//115.224;
+        offsetBottomLeftCANCoder = ((bottomTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomLeftOffset;//-63.89648437; //117.0703125;//121.289;
+        offsetBottomRightCANCoder = ((bottomTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomRightOffset;//134.1210937;//320.361;
+
+        topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopLeftCANCoder, TURN.greerRatio));
+        topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopRightCANCoder, TURN.greerRatio));
+        bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomLeftCANCoder, TURN.greerRatio));
+        bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));
     }
 
     public void resetTurn()
@@ -411,19 +439,19 @@ public class Drive {
     public void etherSwerve(double FWD, double STR, double RCW)
     {
         double yaw = navX.getYaw();
-        double temp = (FWD * Math.cos(yaw)) + (STR* Math.sin(yaw));
-        STR = (-FWD * Math.sin(yaw)) + (STR * Math.cos(yaw));
+        double temp = FWD * Math.cos(Math.toRadians(yaw)) + STR* Math.sin(Math.toRadians(yaw));
+        STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
 
-        A = STR - RCW*(Constants.L/Constants.R);
-        B = STR + RCW*(Constants.L/Constants.R);
-        C = FWD - RCW*(Constants.W/Constants.R);
-        D = FWD + RCW*(Constants.W/Constants.R);
+        double A = STR - RCW*(Constants.L/Constants.R);
+        double B = STR + RCW*(Constants.L/Constants.R);
+        double C = FWD - RCW*(Constants.W/Constants.R);
+        double D = FWD + RCW*(Constants.W/Constants.R);
         
-        ws1 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(C, 2)));      wa1 = Math.atan2(B,C)*180/Constants.kPi;
-        ws2 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(D, 2)));      wa2 = Math.atan2(B,D)*180/Constants.kPi;
-        ws3 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(D, 2)));      wa3 = Math.atan2(A,D)*180/Constants.kPi;
-        ws4 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(C, 2)));      wa4 = Math.atan2(A,C)*180/Constants.kPi; 
+        double ws1 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(C, 2)));      double wa1 = Math.atan2(B,C)*180/Constants.kPi;
+        double ws2 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(D, 2)));      double wa2 = Math.atan2(B,D)*180/Constants.kPi;
+        double ws3 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(D, 2)));      double wa3 = Math.atan2(A,D)*180/Constants.kPi;
+        double ws4 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(C, 2)));      double wa4 = Math.atan2(A,C)*180/Constants.kPi; 
 
         max=ws1; if(ws2>max)max=ws2; if(ws3>max)max=ws3; if(ws4>max)max=ws4;
         if(max>1){ws1/=max; ws2/=max; ws3/=max; ws4/=max;}
@@ -435,8 +463,8 @@ public class Drive {
         wa4 = MkUtil.setDirection(bottomTurnRight, wa4, driveBotRightEther);
 
 
-        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
-        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
+        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
+        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
 
@@ -514,6 +542,9 @@ public class Drive {
     public double distanceA = 0;
     public double lengthB = 0;
 
+    public double FWDauto;
+    public double STRauto;
+
     //let the math begin
     //in inches
     public double calculateCircleRadius(double distanceAA, double lengthBB)
@@ -542,7 +573,7 @@ public class Drive {
     {
         currentDistance = 0;
     }
-    public void autoTurnUpdate(double totalDistance, double thetaTurn)
+    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW)
     {
         currentDistance = 
             (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
@@ -550,10 +581,15 @@ public class Drive {
             MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
 
+        FWDauto = Math.sin(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
+        STRauto = Math.cos(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
+        swerveAutonomousEther(FWDauto, STRauto, RCW);
+/*
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
         topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
+ */
     }
 
     public boolean autoTurnIsDone(double totalDistance)

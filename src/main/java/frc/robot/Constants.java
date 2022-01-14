@@ -60,15 +60,15 @@ public final class Constants {
         public static int bottomTurnLeftCANID = 2;
         public static int bottomTurnRightCANID = 1;
 
-        public static double turnKP = 0.00008;
+        public static double turnKP = 0.00008;//0.00008
         public static double turnKI = 0;
-        public static double turnKD = 0.00000001; 
+        public static double turnKD = 0.000001; 
         public static double turnKF = 0;
 
-        public static double topLeftOffset = 70.9277343;
-        public static double topRightOffset = 107.138671875;
-        public static double bottomLeftOffset = 117.94921875;
-        public static double bottomRightOffset = -47.109375;
+        public static double topLeftOffset = 257.87109375;
+        public static double topRightOffset = 285.8203125;
+        public static double bottomLeftOffset = 294.87304687;
+        public static double bottomRightOffset = 133.50585937;
 
         public static double voltComp = 12;
 

@@ -106,7 +106,7 @@ public class Robot extends TimedRobot {
       {
         one = 0;
       }
-      if(Math.abs(xbox.getRawAxis(0)) < 0.4)
+      if(Math.abs(xbox.getRawAxis(0)) < 0.1)
       {
         two = 0;
       }
@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
 
       if(xbox.getYButton())
       {
-        mDrive.resetNavx();
+        mDrive.help();
       }
 
       
@@ -130,6 +130,14 @@ public class Robot extends TimedRobot {
       else if(xbox.getAButton())
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
+      }
+      else if(xbox.getBButton())
+      {
+        mDrive.turnCalcPercent(180, 180, 180, 180);
+      }
+      else if(xbox.getXButton())
+      {
+        mDrive.setPosTurn(1024 * TURN.greerRatio);
       }
       else
       {
