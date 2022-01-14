@@ -116,13 +116,6 @@ public class Robot extends TimedRobot {
       }
 
 
-      if(xbox.getYButton())
-      {
-        mDrive.help();
-      }
-
-      
-      
       if(one != 0 || two != 0 || three != 0)
       {
         mDrive.etherSwerve(one/3,two/3,three/3);
