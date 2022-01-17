@@ -9,8 +9,15 @@ public final class Constants {
     public static double kPi = 3.14159265359;
     public static double oneEncoderRotation = 2048;
 
+    // see link for more info https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383 
+    //                        (Derivation of Inverse Kinematics for Swerve, page 4)
+
+    //wheelbase (distance between the middle of the wheels on the length side)
     public static double L = 29;
-    public static double W = 17.625;
+
+    //trackwidth (distance between the middle of the wheels on the width side)
+    public static double W = 17.625; 
+
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
     public static class DRIVE
@@ -24,6 +31,7 @@ public final class Constants {
 
         public static double maxNativeVelocity = 21000; 
 
+        //use team 3244's slideshow on motion magic to get pidf values
         public static double driveKP = 0.21;
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
@@ -37,6 +45,7 @@ public final class Constants {
         public static double kWheelDiameterInches = 4; 
         public static double kWheelCircumference = kWheelDiameterInches * kPi;
 
+        //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;
 
         public static double deadband = 0.1;
@@ -50,6 +59,8 @@ public final class Constants {
         public static int bottomTurnRightCANCoderCANID = 13;
 
         public static double deadband = 0.1;
+
+        //TODO figure these out
         public static double maxVel = 2000; 
         public static double maxAccel = 300; 
 
@@ -60,16 +71,19 @@ public final class Constants {
         public static int bottomTurnLeftCANID = 2;
         public static int bottomTurnRightCANID = 1;
 
+        //got these values by guessing and praying
         public static double turnKP = 0.00008;//0.00008
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; 
         public static double turnKF = 0;
 
+        // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = 70.9277343;
         public static double topRightOffset = 107.138671875;
         public static double bottomLeftOffset = 117.94921875;
         public static double bottomRightOffset = -47.109375;
 
+        //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;
 
     }

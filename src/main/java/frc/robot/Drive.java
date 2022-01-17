@@ -47,6 +47,7 @@ public class Drive {
 
     private PIDController turningPID = new PIDController(TURN.turnKP, TURN.turnKI, TURN.turnKD);
     private PIDController drivePID = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+    
     private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
@@ -363,7 +364,9 @@ public class Drive {
 
 
 
-
+    /**
+    powers all angular motors at varying speeds
+    */
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topleft);
@@ -371,7 +374,9 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, botleft);
         bottomTurnRight.set(ControlMode.PercentOutput, botright);
     }
-
+    /**
+    powers all angular motors to turn to specific angles
+    */
     public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(topleft, TURN.greerRatio)));
@@ -379,7 +384,9 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(botleft, TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
-
+    /**
+    powers all drive motors at varying speeds
+    */
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.PercentOutput, topleft);
@@ -387,7 +394,10 @@ public class Drive {
         bottomDriveLeft.set(ControlMode.PercentOutput, botleft);
         bottomDriveRight.set(ControlMode.PercentOutput, botright);
     }
-
+    /**
+    sets angular motors' integrated encoder's position to {@code setpoint}
+    @param setpoint angle that the positions will be set to
+    */
     public void setPosTurn(double setpoint)
     {
         topTurnLeft.setSelectedSensorPosition(setpoint);
@@ -395,7 +405,9 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(setpoint);
         bottomTurnRight.setSelectedSensorPosition(setpoint);
     }
-
+    /**
+    sets all angular motors' integrated encoder's positions to zero
+    */
     public void resetTurn()
     {
         topTurnLeft.setSelectedSensorPosition(0);
@@ -403,7 +415,9 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(0);
         bottomTurnRight.setSelectedSensorPosition(0);
     }
-
+    /***
+    sets all drive motors' integrated encoder's positions to zero
+    */
     public void resetDrive()
     {
         topDriveLeft.setSelectedSensorPosition(0);
@@ -411,7 +425,9 @@ public class Drive {
         bottomDriveLeft.setSelectedSensorPosition(0);
         bottomDriveRight.setSelectedSensorPosition(0);
     }
-
+    /***
+    sets all angular motors' integrated encoder's positions to their respective CANCoder's position
+    */
     public void encoderZero()
     {
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -419,7 +435,9 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
     }
-
+    /**
+    resets navX... so i dont have to type a lot...
+    */
     public void resetNavx()
     {
         navX.reset();
@@ -427,22 +445,38 @@ public class Drive {
 
     
 
-
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the top left angular motor
+    @return returns a speed for the motor
+    */
     public double topTurnLeftCalculateNative(double setpoint)
     {
         return turningPID.calculate(topTurnLeft.getSelectedSensorPosition(), setpoint);
     }
-
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the top right angular motor
+    @return returns a speed for the motor
+    */
     public double topTurnRightCalculateNative(double setpoint)
     {
         return turningPID.calculate(topTurnRight.getSelectedSensorPosition(), setpoint);
     }
-
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the bottom left angular motor
+    @return returns a speed for the motor
+    */
     public double bottomTurnLeftCalculateNative(double setpoint)
     {
         return turningPID.calculate(bottomTurnLeft.getSelectedSensorPosition(), setpoint);
     }
-
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for bottom right angular motor
+    @return returns a speed for the motor
+    */
     public double bottomTurnRightCalculateNative(double setpoint)
     {
         return turningPID.calculate(bottomTurnRight.getSelectedSensorPosition(), setpoint);
@@ -451,7 +485,17 @@ public class Drive {
 
 
 
-
+    /**
+    See <a href="https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this thread</a>
+    for more information 
+    <p>
+    Note - this function uses yaw due to the positioning of our navX.
+    @param FWD forward axis of controller
+    @param STR strafe axis of controller
+    @param RCW rotational axis of controller
+    @return performs swerve movement in both linear and rotational movement
+    @author ether (?)
+    */
     public void etherSwerve(double FWD, double STR, double RCW)
     {
         double yaw = navX.getYaw();
@@ -496,7 +540,14 @@ public class Drive {
     }
 
 
-    
+    /**
+    same as <code> etherSwerve() </code>, but it only powers the angular motors
+    @param FWD forward input
+    @param STR strafe input
+    @param RCW rotational input
+    @return performs swerve with only the angular wheels
+    @author ether (?)
+    */
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
         double yaw = navX.getYaw();
@@ -538,38 +589,156 @@ public class Drive {
 
 
     public double currentDistance = 0;
-
     public double distanceA = 0;
     public double lengthB = 0;
 
     //let the math begin
     //in inches
-    public double calculateCircleRadius(double distanceAA, double lengthBB)
+
+    /**
+    Calculates a curved autonomous path's radius by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
+    <pre>
+    .
+                         
+                          E
+                      ~~~~~~~~~
+                   ~~     +     ~~     
+  /o----o\       ~~       + B     ~~       /o----o\
+  |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
+  \o----o/      =====================      \o----o/ 
+                \     A   |   A     /    
+                 \        |        /
+                  \       |       /
+                   \      |D     / 
+                    \     |     / 
+                     \  __|__  / 
+                      \/  C  \/
+                       \  |  /
+                        \ | /
+                         \|/
+            
+    A = distanceA
+    B = lengthB
+    C = angle
+    D = radius
+    E = circumference
+    F = robot
+    1 = starting position
+    2 = ending position
+    </pre>
+
+    * @param distanceA
+    * @param lengthB
+    * @return radius of the path
+    */
+    public double calculateCircleRadius(double distanceA, double lengthB)
     {
-        return ((Math.pow(distanceAA, 2)/4) + Math.pow(lengthBB, 2)) * (1 / (2 * lengthBB));
+        return ((Math.pow(distanceA, 2)/4) + Math.pow(lengthB, 2)) * (1 / (2 * lengthB));
     }
-    public double calculateAngularVelocity(double distanceAA, double lengthBB)
+    /*public double calculateAngularVelocity(double distanceA, double lengthB)
     {
-        double radius = calculateCircleRadius(distanceAA, lengthBB);
+        double radius = calculateCircleRadius(distanceA, lengthB);
         return (DRIVE.maxInchesVelocity / radius);
-    }
-    public double calculateArcOfPath(double distanceAA, double lengthBB)
+    }*/
+    /**
+    Calculates a curved autonomous path's circumference/length by using the distance between the starting and ending point and the distance between the middle of the linear path and the max height of the angular path
+    <pre>
+    .
+                         
+                          E
+                      ~~~~~~~~~
+                   ~~     +     ~~     
+  /o----o\       ~~       + B     ~~       /o----o\
+  |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
+  \o----o/      =====================      \o----o/ 
+                \     A   |   A     /    
+                 \        |        /
+                  \       |       /
+                   \      |D     / 
+                    \     |     / 
+                     \  __|__  / 
+                      \/  C  \/
+                       \  |  /
+                        \ | /
+                         \|/
+            
+    A = distanceA
+    B = lengthB
+    C = angle
+    D = radius
+    E = circumference
+    F = robot
+    1 = starting position
+    2 = ending position
+    </pre>
+
+    * @param distanceA
+    * @param lengthB
+    * @return circumference of the linear path / distance of curved path
+    */
+    public double calculateArcOfPath(double distanceA, double lengthB)
     {
-        double radius = calculateCircleRadius(distanceAA, lengthBB);
-        double theta = 2 * (Math.asin((distanceAA/(2 * radius))));
+        double radius = calculateCircleRadius(distanceA, lengthB);
+        double theta = 2 * (Math.asin((distanceA/(2 * radius))));
         return (theta / 360) * (2* (Constants.kPi * radius));
     }
-    public double calculateAngleOfPath(double distanceAA, double lengthBB)
+    /**
+    Calculates a curved autonomous path's angle by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
+    <pre>
+    .
+                         
+                          E
+                      ~~~~~~~~~
+                   ~~     +     ~~     
+  /o----o\       ~~       + B     ~~       /o----o\
+  |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
+  \o----o/      =====================      \o----o/ 
+                \     A   |   A     /    
+                 \        |        /
+                  \       |       /
+                   \      |D     / 
+                    \     |     / 
+                     \  __|__  / 
+                      \/  C  \/
+                       \  |  /
+                        \ | /
+                         \|/
+            
+    A = distanceA
+    B = lengthB
+    C = angle
+    D = radius
+    E = circumference
+    F = robot
+    1 = starting position
+    2 = ending position
+    </pre>
+
+    * @param distanceA
+    * @param lengthB
+    * @return angle of the path (how much the angular motors have to turn in order to acheive this path)
+    */
+    public double calculateAngleOfPath(double distanceA, double lengthB)
     {
-        double radius = calculateCircleRadius(distanceAA, lengthBB);
-        return 2 * (Math.asin((distanceAA/(2 * radius))));
+        double radius = calculateCircleRadius(distanceA, lengthB);
+        return 2 * (Math.asin((distanceA/(2 * radius))));
     }
 
-
+    /**
+    restarts distance
+    */
     public void autoTurnSet()
     {
         currentDistance = 0;
     }
+    /**
+    using the <code> swerveAutonomousEther() </code> and motion magic, an autonomous angled path of motion can be achieved
+    @param totalDistance length of curved path
+    @param thetaTurn angle of curved path
+    @param RCW 1 through -1 for spinny, 0 for no spinny
+    @see {@link #swerveAutonomousEther(double FWD, double STR, double RCW)}
+    @see {@link #updateMagicStraight()}
+    */
     public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW)
     {
         currentDistance = 
@@ -589,13 +758,21 @@ public class Drive {
  */
     }
 
+    /**
+    returns state of auto turn
+    @param  totalDistance length of curved path
+    @return returns true if turning is done
+    */
     public boolean autoTurnIsDone(double totalDistance)
     {
         return Math.abs(totalDistance - currentDistance) < 0.5 && Math.abs(avgVelInches) < 0.1;
     }
 
 
-
+    /**
+    resets drive motors and sets motion magic velocity, acceleration, and distance
+    * @param setpoint distance (inches)
+    */
     public void setMagicStraight(double setpoint)
     {
         resetDrive();
@@ -609,10 +786,11 @@ public class Drive {
         topDriveRight.configMotionAcceleration(DRIVE.magicAccel);
         bottomDriveLeft.configMotionAcceleration(DRIVE.magicAccel);
         bottomDriveRight.configMotionAcceleration(DRIVE.magicAccel);
-
-        //zeroSensors();
     }
 
+    /**
+    updates motors 
+    */
     public void updateMagicStraight()
     {
         topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
@@ -629,13 +807,20 @@ public class Drive {
         SmartDashboard.putNumber("leftout", leftTopOutput);
     }
 
+    /**
+     * returns state of motion magic
+     * @return returns true if motion magic is done
+     */
     public boolean isMagicStraightDone()
     {
         double err = distance - avgDistInches;
         return Math.abs(err) < 0.5 && Math.abs(avgVelInches) < 0.1;
     }
 
-
+    /**
+     * returns state of percent turning
+     * @return returns true if percent turning is done
+     */
     public boolean percentTurnDone()
     {
         return ((topTurnLeft.getMotorOutputPercent() +

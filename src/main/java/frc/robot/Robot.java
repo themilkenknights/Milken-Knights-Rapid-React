@@ -32,8 +32,17 @@ public class Robot extends TimedRobot {
 
    private Drive mDrive = Drive.getInstance();
    private XboxController xbox = new XboxController(0);
+    /**
+     * forward movement axis
+     */ 
    private double one;
+    /**
+     * strafing movement axis
+     */ 
    private double two;
+    /**
+     * rotational movement axis
+     */ 
    private double three;
 
    private Command m_autonomousCommand;
@@ -41,6 +50,9 @@ public class Robot extends TimedRobot {
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
    
+    /**
+     * states of autonomous
+     */ 
    public enum AutoPosition {
      LEFT, NOTHING
    }

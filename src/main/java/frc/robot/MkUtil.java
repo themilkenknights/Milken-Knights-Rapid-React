@@ -24,42 +24,89 @@ public class MkUtil {
   }*/
 
   //new ones with greer ration 
+
+  /**
+   * (Falcon) native units to inches
+   * <p>
+   * specifically made for the driving motors
+   * @param nativeUnits units of native
+   * @return inches
+   */
   public static double nativeToInches(double nativeUnits) {
     return (nativeUnits / (2048.0 * DRIVE.greerRatio)) * DRIVE.kWheelCircumference;
   }
-
+  /**
+   * inches to native units (Falcon)
+   * <p>
+   * specifically made for the driving motors
+   * @param in inches
+   * @return native units
+   */
   public static double inchesToNative(double in) {
     return (in / DRIVE.kWheelCircumference) * (2048.0 * DRIVE.greerRatio);
   }
-
+  /**
+   * native units (1n/100s) to inches (1i/1s)
+   * @param vel motor velocity (native units)
+   * @return velocity of motors in inches
+   */
   public static double nativePer100MstoInchesPerSec(double vel) {
     return 10 * nativeToInches(vel);
   }
-
+  /**
+   * inches (1i/1s) to native (1n/100s)
+   * @param vel motor velocity (inches)
+   * @return velocity of motors in native units
+   */
   public static double inchesPerSecToUnitsPer100Ms(double vel) {
     return inchesToNative(vel) / 10;
   }
-
+  /**
+   * inches to meters
+   * @param inches inches
+   * @return meters
+   */
   public static double inchesToMeters(double inches) {
     return Units.inchesToMeters(inches);
   }
-
+  /** native units to meters
+   * @param nativeUnits units of native
+   * @return meters
+   */
   public static double nativeToMeters(double nativeUnits) {
     return inchesToMeters(nativeToInches(nativeUnits));
   }
-
+  /**
+   * native units (1n/100s) to meters (1m/1s)
+   * @param nativeUnits units of native
+   * @return velocity of motors in meters
+   */
   public static double nativePer100MsToMetersPerSec(double nativeUnits) {
     return inchesToMeters(nativePer100MstoInchesPerSec(nativeUnits));
   }
-
+  /**
+   * meters to inches
+   * @param meters meters
+   * @return inches
+   */
   public static double metersToInches(double meters) {
     return Units.metersToInches(meters);
   }
-
+  /**
+   * meters (1m/1s) to native units (1n/100s)
+   * @param meters meters
+   * @return velocity of motors in native units
+   */
   public static double metersPerSecondToNativeUnitsPer100Ms(double meters) {
     return inchesPerSecToUnitsPer100Ms(metersToInches(meters));
   }
-
+  /**
+   * cheesy drive
+   * @param throttle
+   * @param wheel
+   * @param cubeInputs
+   * @return cheesy drive?
+   */
   public static DriveSignal cheesyDrive(double throttle, double wheel, boolean cubeInputs) {
     double kThrottleDeadband = 0.0;
     double kWheelDeadband = 0.003;
@@ -92,7 +139,13 @@ public class MkUtil {
     }
     return new DriveSignal(leftMotorSpeed, rightMotorSpeed);
   }
-
+  /**
+   * limits a value between min and max
+   * @param value your value
+   * @param min min
+   * @param max max....
+   * @return your value, capped between min and max
+   */
   public static double limit(double value, double min, double max) {
     if (value > max) {
       return max;
@@ -102,15 +155,27 @@ public class MkUtil {
       return value;
     }
   }
-
+  /**
+   * caps a value so its above a deadband or zero if below said deadband
+   * @param val your value
+   * @param deadband desired deadband
+   * @return value or zero depending on deadband
+   */
   private static double deadband(double val, double deadband) {
     return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
   }
-
+  /**
+   * caps a value so its below a max value or it is said max value, with the same sign as the original value
+   * @param a input value
+   * @param max max
+   * @return value or max with the sign of value
+   */
   public static double limitAbsolute(double a, double max) {
     return Math.abs(a) < max ? a : Math.copySign(max, a);
   }
-
+  /**
+   * cheesy drive
+   */
   public static class DriveSignal {
 
     public static DriveSignal STOP = new DriveSignal(0, 0);
@@ -138,22 +203,33 @@ public class MkUtil {
 
   //!     this is ben binders mkutil extension, above is swerdlow code
 
+  /**
+   * (Falcon) native units to degrees
+   * @param gimmeRots rotations of Falcon
+   * @param greerRatio gear ratio 
+   * @return degrees
+   * @author me
+   */
   public static double nativeToDegrees(double gimmeRots, double greerRatio)
   {
     return (gimmeRots * 360) / (greerRatio * Constants.oneEncoderRotation);
   }
-
+  /**
+   * degrees to native (Falcon)
+   * @param gimmeDeg degrees
+   * @param greerRatio gear ratio
+   * @return native units
+   */
   public static double degreesToNative(double gimmeDeg, double greerRatio)
   {
     return (gimmeDeg * Constants.oneEncoderRotation * greerRatio) / 360;
   }
 
-  public static double degreesToRadian(double degrees)
-  {
-    return degrees * (Constants.kPi/180);
-  }
-
-  //idk how to convert bool to double and vice versa
+  /**
+   * double to boolean, since java wont let me
+   * @param bool value
+   * @return true if one, false if zero
+   */
   public static boolean doubleToBoolean(double bool)
   {
     if(bool == 1.0)
@@ -169,7 +245,12 @@ public class MkUtil {
       return false;
     }
   }
-
+  /**
+   * takes in two numbers, and returns the second number with the first one's sign
+   * @param number number whose sign will be checked
+   * @param numberTwo number that will be returned
+   * @return
+   */
   public static double isPositive(double number, double numberTwo)
   {
     if(number < 0.0)
@@ -189,8 +270,12 @@ public class MkUtil {
   //!     stolen from team 6624
   
     /**
- * Get the closest angle between the given angles.
- */
+     * "Get the closest angle between the given angles."
+     * @param a angle a
+     * @param b angle b
+     * @return angle closest between the two angles
+     * @author team 6624
+     */
   public static double closestAngle(double a, double b)
   {
           double dir = (b % 360.0) - (a % 360.0);
@@ -205,13 +290,27 @@ public class MkUtil {
   
 
   //!     also stolen from 6624
+  /**
+   * gives the closest path to a given setpoint based on the Falcon's position
+   * @param talon Falcon that will be moved
+   * @param setpoint angle setpoint
+   * @param greerRatio gear ratio
+   * @return returns a new setpoint for the Falcon to turn to
+   * @author team 6624
+   */
   public static double setDirection(TalonFX talon, double setpoint, double greerRatio)
   {
     // use the fastest way
     double currentAngle = MkUtil.nativeToDegrees((talon.getSelectedSensorPosition()), greerRatio);
     return currentAngle + closestAngle(currentAngle, setpoint);
   }  
-
+  /**
+   * same as setDirection(TalonFX) except this uses a CANCoder
+   * @param coder CANCoder
+   * @param setpoint angle setpoint
+   * @return returns a new setpoint for the Falcon to turn to
+   * @author team 6624
+   */
   public static double setDirection(CANCoder coder, double setpoint)
   {
     // use the fastest way
@@ -221,7 +320,14 @@ public class MkUtil {
 
 
 
-
+  /**
+   * decides whether a driving motor should flip based on where the angular motor's setpoint is, and also returns a new setpoint based on the motors position
+   * @param talon angular motor
+   * @param setpoint setpoint for angular motor
+   * @param pid bogus driving pid thats only used for this, not for actual calculations
+   * @return returns best angle of travel for the angular motor, as well as changing the flip value of the driving motor
+   * @author team 6624
+   */
   public static double setDirection(TalonFX talon, double setpoint, PIDController pid)
     {
         double currentAngle = nativeToDegrees(talon.getSelectedSensorPosition(), TURN.greerRatio);
@@ -245,7 +351,14 @@ public class MkUtil {
         }
     }
 
-
+    /**
+     * same as setDirection(TalonFX) except this uses a CANCoder
+     * @param coder CANCoder
+     * @param setpoint setpoint for angular motor
+     * @param pid bogus driving pid thats only used for this, not for actual calculations
+     * @return returns best angle of travel for the angular motor, as well as changing the flip value of the driving motor
+     * @author team 6624
+     */
     public static double setDirection(CANCoder coder, double setpoint, PIDController pid)
     {
         double currentAngle = coder.getAbsolutePosition();

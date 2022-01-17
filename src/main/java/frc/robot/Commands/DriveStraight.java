@@ -12,6 +12,41 @@ public class DriveStraight extends CommandBase {
   double distanceDrive;
   double angle;
   double RCW;
+  /**
+   * move in a curved path
+    <pre>
+    .
+                         
+                          E
+                      ~~~~~~~~~
+                   ~~     +     ~~     
+  /o----o\       ~~       + B     ~~       /o----o\
+  |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
+  \o----o/      =====================      \o----o/ 
+                \     A   |   A     /    
+                 \        |        /
+                  \       |       /
+                   \      |D     / 
+                    \     |     / 
+                     \  __|__  / 
+                      \/  C  \/
+                       \  |  /
+                        \ | /
+                         \|/
+            
+    A = distanceA
+    B = lengthB
+    C = angle
+    D = radius
+    E = circumference
+    F = robot
+    1 = starting position
+    2 = ending position
+    </pre>
+   * @param distanceA 
+   * @param lengthB
+   * @param rcw 1 through -1 for spinny, 0 for no spinny
+   */
   public DriveStraight(double distanceA, double lengthB, double rcw) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

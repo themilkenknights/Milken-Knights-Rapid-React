@@ -11,9 +11,13 @@ public class Turn extends CommandBase {
   /** Creates a new Turn. */
   private double i;
   private Drive mDrive = Drive.getInstance();
-  public Turn(double j) {
+  /**
+   * turn angular motors to angle
+   * @param angle desired angle
+   */
+  public Turn(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
-    i = j;
+    i = angle;
   }
 
   // Called when the command is initially scheduled.
