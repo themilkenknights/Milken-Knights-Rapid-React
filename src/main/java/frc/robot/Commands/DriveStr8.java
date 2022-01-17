@@ -5,16 +5,25 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Drive;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveStr8 extends SequentialCommandGroup {
   /** Creates a new DriveStr8. */
+  Drive mDrive = Drive.getInstance();
+  double distanceA = 34;
+  double lengthB = 24;
+  double angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
   public DriveStr8() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(deadline(new Turn(90)));
-    addCommands(deadline(new DriveStraight(36,37,24,180,0)));
+
+    //TODO still need to see if angle is either 90 - angle and 90 + angle or -angle and angle
+    //! determining if its a unit circle 0 ordeal or a top y axis = 0 ordeal
+
+    addCommands(deadline(new Turn(-angle)));
+    addCommands(deadline(new DriveStraight(distanceA, lengthB, 0)));
   }
 }

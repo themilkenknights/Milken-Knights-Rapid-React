@@ -469,7 +469,7 @@ public class Drive {
         double ws3 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(D, 2)));      double wa3 = Math.atan2(A,D)*180/Constants.kPi;
         double ws4 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(C, 2)));      double wa4 = Math.atan2(A,C)*180/Constants.kPi; 
 
-        max=ws1; if(ws2>max)max=ws2; if(ws3>max)max=ws3; if(ws4>max)max=ws4;
+        double max=ws1; if(ws2>max)max=ws2; if(ws3>max)max=ws3; if(ws4>max)max=ws4;
         if(max>1){ws1/=max; ws2/=max; ws3/=max; ws4/=max;}
 
 
@@ -505,16 +505,16 @@ public class Drive {
         FWD = temp;
 
 
-        A = STR - RCW*(Constants.L/Constants.R);
-        B = STR + RCW*(Constants.L/Constants.R);
-        C = FWD - RCW*(Constants.W/Constants.R);
-        D = FWD + RCW*(Constants.W/Constants.R);
+        double A = STR - RCW*(Constants.L/Constants.R);
+        double B = STR + RCW*(Constants.L/Constants.R);
+        double C = FWD - RCW*(Constants.W/Constants.R);
+        double D = FWD + RCW*(Constants.W/Constants.R);
         
 
-        wa1 = Math.atan2(B,C)*180/Constants.kPi;
-        wa2 = Math.atan2(B,D)*180/Constants.kPi;
-        wa3 = Math.atan2(A,D)*180/Constants.kPi;
-        wa4 = Math.atan2(A,C)*180/Constants.kPi; 
+        double wa1 = Math.atan2(B,C)*180/Constants.kPi;
+        double wa2 = Math.atan2(B,D)*180/Constants.kPi;
+        double wa3 = Math.atan2(A,D)*180/Constants.kPi;
+        double wa4 = Math.atan2(A,C)*180/Constants.kPi; 
 
 
        
@@ -531,22 +531,6 @@ public class Drive {
     }
 
 
-    public double ws1;
-    public double ws2;
-    public double ws3;
-    public double ws4;
-
-    public double wa1;
-    public double wa2;
-    public double wa3;
-    public double wa4;
-
-    public double A;
-    public double B;
-    public double C;
-    public double D;
-
-    public double max;
 
 
 
@@ -557,9 +541,6 @@ public class Drive {
 
     public double distanceA = 0;
     public double lengthB = 0;
-
-    public double FWDauto;
-    public double STRauto;
 
     //let the math begin
     //in inches
@@ -585,7 +566,7 @@ public class Drive {
     }
 
 
-    public void autoTurnSet(double distanceAA, double lengthBB, double totalDistance)
+    public void autoTurnSet()
     {
         currentDistance = 0;
     }
@@ -597,8 +578,8 @@ public class Drive {
             MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
 
-        FWDauto = Math.sin(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
-        STRauto = Math.cos(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
+        double FWDauto = Math.sin(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
+        double STRauto = Math.cos(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
         swerveAutonomousEther(FWDauto, STRauto, RCW);
 /*
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
