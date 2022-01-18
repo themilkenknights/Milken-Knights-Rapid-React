@@ -24,6 +24,6 @@ public class DriveStr8 extends SequentialCommandGroup {
     //! determining if its a unit circle 0 ordeal or a top y axis = 0 ordeal
 
     addCommands(deadline(new Turn(-angle)));
-    addCommands(deadline(new DriveStraight(distanceA, lengthB, 0)));
+    addCommands(deadline(new DriveStraight(distanceA, lengthB, 0, angle)));
   }
 }

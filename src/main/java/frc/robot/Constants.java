@@ -18,6 +18,9 @@ public final class Constants {
     //trackwidth (distance between the middle of the wheels on the width side)
     public static double W = 17.625; 
 
+    public static double width = 21;
+    public static double height = 32;
+
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
     public static class DRIVE
@@ -29,7 +32,7 @@ public final class Constants {
         public static int topDriveLeftCANID = 9;
         public static int bottomDriveLeftCANID = 6;
 
-        public static double maxNativeVelocity = 21000; 
+        public static double maxNativeVelocity = 21640; 
 
         //use team 3244's slideshow on motion magic to get pidf values
         public static double driveKP = 0.21;
@@ -49,6 +52,9 @@ public final class Constants {
         public static double voltComp = 12;
 
         public static double deadband = 0.1;
+
+        public static double kS = 0.5111;
+        public static double kV = 12/maxNativeVelocity;
     }
 
     public static class TURN
@@ -59,10 +65,6 @@ public final class Constants {
         public static int bottomTurnRightCANCoderCANID = 13;
 
         public static double deadband = 0.1;
-
-        //TODO figure these out
-        public static double maxVel = 2000; 
-        public static double maxAccel = 300; 
 
         public static double greerRatio = 12.8;
 
@@ -86,6 +88,11 @@ public final class Constants {
         //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;
 
+        public static double kS = 0.4969;
+        public static double maxVel = 21420;
+        //TODO get max accel
+        public static double maxAccel = 300; 
+        public static double kV = 12 / maxVel;
     }
 
     public static class LIGHTS

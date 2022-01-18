@@ -4,6 +4,7 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Drive;
 
@@ -46,11 +47,12 @@ public class DriveStraight extends CommandBase {
    * @param distanceA 
    * @param lengthB
    * @param rcw 1 through -1 for spinny, 0 for no spinny
+   * @param angle calculated angle
    */
-  public DriveStraight(double distanceA, double lengthB, double rcw) {
+  public DriveStraight(double distanceA, double lengthB, double rcw, double angle) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
+    this.angle = angle;
     distanceDrive = mDrive.calculateArcOfPath(distanceA, lengthB);
     RCW = rcw;
   }
@@ -67,6 +69,8 @@ public class DriveStraight extends CommandBase {
   public void execute() {
     mDrive.updateMagicStraight();
     mDrive.autoTurnUpdate(distanceDrive, angle, RCW);
+    SmartDashboard.putNumber("distance", distanceDrive);
+    SmartDashboard.putNumber("ang", angle);
   }
 
   // Make this return true when this Command no longer needs to run execute()

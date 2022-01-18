@@ -9,5 +9,12 @@ SWERVE DRIVE:
 
 \
 SWERVE AUTONOMOUS:
-- team 3244 - basic auto structure and pidf config
+- team 3244 - basic auto structure and pidf config  
 
+\
+HOW TO USE:
+- not really user friendly rn, change constants probably
+- also download Better Comments for color coded comments
+
+\
+(everything (most) things are in inches unless stated otherwise)

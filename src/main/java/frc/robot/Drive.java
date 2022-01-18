@@ -24,21 +24,21 @@ import frc.robot.Constants.TURN;
 
 /** Add your docs here. */
 public class Drive {
-    private TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
-    private TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
-    private TalonFX bottomTurnLeft = new TalonFX(TURN.bottomTurnLeftCANID);
-    private TalonFX bottomTurnRight = new TalonFX(TURN.bottomTurnRightCANID);
+    public TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
+    public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
+    public TalonFX bottomTurnLeft = new TalonFX(TURN.bottomTurnLeftCANID);
+    public TalonFX bottomTurnRight = new TalonFX(TURN.bottomTurnRightCANID);
 
-    private TalonFX topDriveLeft = new TalonFX(DRIVE.topDriveLeftCANID);    
-    private TalonFX topDriveRight = new TalonFX(DRIVE.topDriveRightCANID);    
-    private TalonFX bottomDriveLeft = new TalonFX(DRIVE.bottomDriveLeftCANID);
-    private TalonFX bottomDriveRight = new TalonFX(DRIVE.bottomDriveRightCANID);   
+    public TalonFX topDriveLeft = new TalonFX(DRIVE.topDriveLeftCANID);    
+    public TalonFX topDriveRight = new TalonFX(DRIVE.topDriveRightCANID);    
+    public TalonFX bottomDriveLeft = new TalonFX(DRIVE.bottomDriveLeftCANID);
+    public TalonFX bottomDriveRight = new TalonFX(DRIVE.bottomDriveRightCANID);   
 
 
-    private CANCoder topTurnLeftEncoder = new CANCoder(TURN.topTurnLeftCANCoderCANID);
-    private CANCoder topTurnRightEncoder = new CANCoder(TURN.topTurnRightCANCoderCANID);
-    private CANCoder bottomTurnLeftEncoder = new CANCoder(TURN.bottomTurnLeftCANCoderCANID);
-    private CANCoder bottomTurnRightEncoder = new CANCoder(TURN.bottomTurnRightCANCoderCANID);
+    public CANCoder topTurnLeftEncoder = new CANCoder(TURN.topTurnLeftCANCoderCANID);
+    public CANCoder topTurnRightEncoder = new CANCoder(TURN.topTurnRightCANCoderCANID);
+    public CANCoder bottomTurnLeftEncoder = new CANCoder(TURN.bottomTurnLeftCANCoderCANID);
+    public CANCoder bottomTurnRightEncoder = new CANCoder(TURN.bottomTurnRightCANCoderCANID);
 
     private double offsetTopLeftCANCoder;
     private double offsetTopRightCANCoder;
@@ -321,6 +321,8 @@ public class Drive {
 
         SmartDashboard.putNumber("navx", navX.getYaw());
 
+        SmartDashboard.putNumber("top left vel", topDriveLeft.getSelectedSensorVelocity());
+
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
         rightTopVelNative = topDriveRight.getSelectedSensorVelocity();
         leftBottomVelNative = bottomDriveLeft.getSelectedSensorVelocity();
@@ -436,14 +438,38 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
     }
     /**
-    resets navX... so i dont have to type a lot...
+    resets navX
     */
     public void resetNavx()
     {
         navX.reset();
     }
 
-    
+    /**
+     * gets navx yaw
+     * @return returns navx yaw
+     */
+    public double getNavx()
+    {
+        return navX.getYaw();
+    }
+
+    /**
+     * gets top left angular motor's voltage
+     * @return returns the applied voltage to motor in volts. 
+     */
+    public double getTurnVolt()
+    {
+        return topTurnLeft.getMotorOutputVoltage();
+    }
+    /**
+     * gets top left drive motor's voltage
+     * @return returns the applied voltage to motor in volts. 
+     */
+    public double getDriveVolt()
+    {
+        return topDriveLeft.getMotorOutputVoltage();
+    }
 
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
@@ -679,8 +705,8 @@ public class Drive {
     public double calculateArcOfPath(double distanceA, double lengthB)
     {
         double radius = calculateCircleRadius(distanceA, lengthB);
-        double theta = 2 * (Math.asin((distanceA/(2 * radius))));
-        return (theta / 360) * (2* (Constants.kPi * radius));
+        double theta = 2 * (Math.toDegrees((Math.asin((distanceA/(2 * radius))))));
+        return (theta / 360) * (2 * (Constants.kPi * radius));
     }
     /**
     Calculates a curved autonomous path's angle by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
@@ -721,7 +747,7 @@ public class Drive {
     public double calculateAngleOfPath(double distanceA, double lengthB)
     {
         double radius = calculateCircleRadius(distanceA, lengthB);
-        return 2 * (Math.asin((distanceA/(2 * radius))));
+        return 2 * (Math.toDegrees((Math.asin((distanceA/(2 * radius))))));
     }
 
     /**
