@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+
 /** Add your docs here. */
 public final class Constants {
     public static double kPi = 3.14159265359;
@@ -117,8 +120,17 @@ public final class Constants {
         public static double driveKP = 0.0000001;
         public static double driveKI = 0;
         public static double driveKD = 0;
-        public static double magicVel = 0.01; //.75 * DRIVE.maxNativeVelocity;
-        public static double magicAccel = 0.01; //2000;
+        public static double kMaxSpeedMetersPerSecond = 0.01; //.75 * DRIVE.maxNativeVelocity;
+        public static double kMaxAccelerationMetersPerSecondSquared = 0.01; //2000;
+
+        public static double heightMeters = MkUtil.inchesToMeters(heightInch);
+        public static double widthMeters = MkUtil.inchesToMeters(widthInch);
+        public static final SwerveDriveKinematics kDriveKinematics =
+        new SwerveDriveKinematics(
+        new Translation2d(heightMeters, widthMeters),
+        new Translation2d(heightMeters, -widthMeters),
+        new Translation2d(-heightMeters, widthMeters),
+        new Translation2d(-heightMeters, -widthMeters));
     }
 }
 
