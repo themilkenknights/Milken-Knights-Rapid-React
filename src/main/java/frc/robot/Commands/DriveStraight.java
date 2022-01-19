@@ -61,14 +61,16 @@ public class DriveStraight extends CommandBase {
   @Override
   public void initialize() {
     mDrive.setMagicStraight(distanceDrive);
-    mDrive.autoTurnSet();
+    mDrive.setMagicTurn(angle);
+    //mDrive.autoTurnSet();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
     mDrive.updateMagicStraight();
-    mDrive.autoTurnUpdate(distanceDrive, angle, RCW);
+    mDrive.updateMagicTurn(distanceDrive);
+    //mDrive.autoTurnUpdate(distanceDrive, angle, RCW);
     SmartDashboard.putNumber("distance", distanceDrive);
     SmartDashboard.putNumber("ang", angle);
   }

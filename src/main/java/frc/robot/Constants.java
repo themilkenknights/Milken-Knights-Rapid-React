@@ -18,8 +18,8 @@ public final class Constants {
     //trackwidth (distance between the middle of the wheels on the width side)
     public static double W = 17.625; 
 
-    public static double width = 21;
-    public static double height = 32;
+    public static double widthInch = 21;
+    public static double heightInch = 32;
 
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
@@ -79,6 +79,11 @@ public final class Constants {
         public static double turnKD = 0.00000001; 
         public static double turnKF = 0;
 
+        public static double magicturnKP = 0.085;//0.00008
+        public static double magicturnKI = 0;
+        public static double magicturnKD = 0.00000001; 
+        public static double magicturnKF = 0;
+
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = 70.9277343;
         public static double topRightOffset = 107.138671875;
@@ -99,6 +104,21 @@ public final class Constants {
     {
         public static int PWMPORT = 0; 
         public static int bufferNum = 100; 
+    }
+
+    public static class AUTO
+    {
+        public static double turnKP = 0.0000001;
+        public static double turnKI = 0;
+        public static double turnKD = 0.0000000; 
+        public static double turnMaxVelo = 0.001;  //1;
+        public static double turnMaxAccel = 0.001;  //1;
+
+        public static double driveKP = 0.0000001;
+        public static double driveKI = 0;
+        public static double driveKD = 0;
+        public static double magicVel = 0.01; //.75 * DRIVE.maxNativeVelocity;
+        public static double magicAccel = 0.01; //2000;
     }
 }
 

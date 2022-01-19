@@ -23,7 +23,7 @@ public class DriveStr8 extends SequentialCommandGroup {
     //TODO still need to see if angle is either 90 - angle and 90 + angle or -angle and angle
     //! determining if its a unit circle 0 ordeal or a top y axis = 0 ordeal
 
-    addCommands(deadline(new Turn(-angle)));
-    addCommands(deadline(new DriveStraight(distanceA, lengthB, 0, angle)));
+    addCommands(deadline(new Turn(((angle) % 90))).withTimeout(2), 
+                deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90))).withTimeout(5));
   }
 }

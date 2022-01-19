@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
 
@@ -37,14 +38,14 @@ public class SwerveModule {
   private final CANCoder m_turningEncoder;
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
+  private final PIDController m_drivePIDController = new PIDController(AUTO.driveKP, AUTO.driveKI, AUTO.driveKD);
 
   // Gains are for example purposes only - must be determined for your own robot!
   private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
-          TURN.turnKP,
-          TURN.turnKI,
-          TURN.turnKD,
+          AUTO.turnKP,
+          AUTO.turnKI,
+          AUTO.turnKD,
           new TrapezoidProfile.Constraints(
               kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
 

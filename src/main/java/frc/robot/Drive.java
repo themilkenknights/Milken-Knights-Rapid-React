@@ -48,17 +48,19 @@ public class Drive {
     private PIDController turningPID = new PIDController(TURN.turnKP, TURN.turnKI, TURN.turnKD);
     private PIDController drivePID = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     
+    //bogus pid controllers, do nothing, still keep
     private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
 
 
-    private AHRS navX = new AHRS();
+    public AHRS navX = new AHRS();
 
     private double distance;
 
-    private double leftTopPosNative, leftBottomPosNative, 
+    private double 
+    leftTopPosNative, leftBottomPosNative, 
     rightTopPosNative, rightBottomPosNative,
     
     leftTopPosInch, leftBottomPosInch,
@@ -202,6 +204,13 @@ public class Drive {
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+/*
+        topTurnLeft.configMotionSCurveStrength(6);
+        topTurnRight.configMotionSCurveStrength(6);
+        bottomTurnLeft.configMotionSCurveStrength(6);
+        bottomTurnRight.configMotionSCurveStrength(6);
+*/
+
 
 
         topDriveLeft.configFactoryDefault();
@@ -321,7 +330,7 @@ public class Drive {
 
         SmartDashboard.putNumber("navx", navX.getYaw());
 
-        SmartDashboard.putNumber("top left vel", topDriveLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
         rightTopVelNative = topDriveRight.getSelectedSensorVelocity();
@@ -577,8 +586,8 @@ public class Drive {
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
         double yaw = navX.getYaw();
-        double temp = (FWD * Math.cos(yaw)) + (STR* Math.sin(yaw));
-        STR = (-FWD * Math.sin(yaw)) + (STR * Math.cos(yaw));
+        double temp = (FWD * Math.cos(Math.toRadians(yaw))) + (STR* Math.sin(Math.toRadians(yaw)));
+        STR = (-FWD * Math.sin(Math.toRadians(yaw))) + (STR * Math.cos(Math.toRadians(yaw)));
         FWD = temp;
 
 
@@ -814,9 +823,47 @@ public class Drive {
         bottomDriveRight.configMotionAcceleration(DRIVE.magicAccel);
     }
 
+    public double turnDistance;
+
+    public void setMagicTurn(double setpoint)
+    {
+        turnDistance = setpoint;
+        topTurnLeft.configMotionCruiseVelocity(DRIVE.magicVel);
+        topTurnRight.configMotionCruiseVelocity(DRIVE.magicVel);
+        bottomTurnLeft.configMotionCruiseVelocity(DRIVE.magicVel);
+        bottomTurnRight.configMotionCruiseVelocity(DRIVE.magicVel);
+
+        topTurnLeft.configMotionAcceleration(DRIVE.magicAccel);
+        topTurnRight.configMotionAcceleration(DRIVE.magicAccel);
+        bottomTurnLeft.configMotionAcceleration(DRIVE.magicAccel);
+        bottomTurnRight.configMotionAcceleration(DRIVE.magicAccel);
+    }
+
     /**
     updates motors 
     */
+    public void updateMagicTurn(double totalDistance)
+    {
+        currentDistance = 
+        (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
+        MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
+        MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
+        MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
+
+        topTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
+        topTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
+        bottomTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
+        bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
+    }
+
+    public void updateMagicTurnAlone()
+    {
+        topTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
+        topTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
+        bottomTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
+        bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
+    }
+
     public void updateMagicStraight()
     {
         topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
@@ -849,10 +896,8 @@ public class Drive {
      */
     public boolean percentTurnDone()
     {
-        return ((topTurnLeft.getMotorOutputPercent() +
-               topTurnRight.getMotorOutputPercent() +
-               bottomTurnLeft.getMotorOutputPercent() +
-               bottomTurnRight.getMotorOutputPercent()) / 4) < 0.1;
+        double err = turnDistance - ((MkUtil.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), TURN.greerRatio) + MkUtil.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), TURN.greerRatio) + MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio) + MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio)) /4.0);
+        return Math.abs(err) < 0.5;
     }
 
 

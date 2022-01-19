@@ -6,12 +6,19 @@ package frc.robot;
 
 import java.util.List;
 
+import javax.xml.crypto.dsig.keyinfo.KeyInfo;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -25,7 +32,9 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Commands.DriveStr8;
+import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
 
@@ -42,7 +51,6 @@ public class Robot extends TimedRobot {
    */
 
    private Drive mDrive = Drive.getInstance();
-   private Odometry mOdo = Odometry.getInstance();
    private XboxController xbox = new XboxController(0);
     /**
      * forward movement axis
@@ -72,30 +80,21 @@ public class Robot extends TimedRobot {
    private double slider;
    private double volts;
 
-   Trajectory m_trajectory;
-   private Field2d m_field;
 
    @Override
    public void robotInit() {
      
      //Shuffleboard.startRecording();
+
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
 
-     m_trajectory =
-        TrajectoryGenerator.generateTrajectory(
-            new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            new Pose2d(3, 0, Rotation2d.fromDegrees(0)),
-            new TrajectoryConfig(Units.feetToMeters(3.0), Units.feetToMeters(3.0)));
 
-    // Create and push Field2d to SmartDashboard.
-    m_field = new Field2d();
-    SmartDashboard.putData(m_field);
 
-    // Push the trajectory to Field2d.
-    m_field.getObject("traj").setTrajectory(m_trajectory);
+      
+
+
    }
  
    @Override
@@ -129,21 +128,19 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
+     mDrive.encoderZero();
      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();
      }
      mDrive.resetDrive();
      SmartDashboard.putNumber("slider", 0);
-     mOdo.resetPose();
    }
  
  
   @Override
   public void teleopPeriodic() {
     mDrive.driveUpdate();
-    mOdo.updateOdo();
-
      
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
@@ -189,8 +186,8 @@ public class Robot extends TimedRobot {
         mDrive.drivePercent(0,0,0,0);
       }
 
-      SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
-      SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
+      //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
+      //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
   }
 
   @Override
