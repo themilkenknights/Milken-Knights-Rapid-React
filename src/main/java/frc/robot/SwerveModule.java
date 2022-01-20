@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
@@ -90,7 +91,7 @@ public class SwerveModule {
    * @return The current state of the module.
    */
   public SwerveModuleState getState() {
-    return new SwerveModuleState(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
+    return new SwerveModuleState(AUTO.nativeToMetersPerSec * m_driveMotor.getSelectedSensorVelocity(), new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
   }
 
   /**
@@ -105,7 +106,7 @@ public class SwerveModule {
 
     // Calculate the drive output from the drive PID controller.
     final double driveOutput =
-        m_drivePIDController.calculate(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), state.speedMetersPerSecond);
+        m_drivePIDController.calculate(AUTO.nativeToMetersPerSec * m_driveMotor.getSelectedSensorVelocity(), state.speedMetersPerSecond);
 
     final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
 
@@ -118,5 +119,13 @@ public class SwerveModule {
 
     m_driveMotor.set(ControlMode.PercentOutput, driveOutput + driveFeedforward);
     m_turningMotor.set(ControlMode.PercentOutput, turnOutput + turnFeedforward);
+
+    SmartDashboard.putNumber("driving motor", driveOutput);
+    SmartDashboard.putNumber("drive feed motor", driveFeedforward);
+    SmartDashboard.putNumber("turning motor", turnOutput);
+    SmartDashboard.putNumber("turning feed motor", turnFeedforward);
+
+    //TODO use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
+    //also big changes with conversion factors, redthunder7166 maybe
   }
 }

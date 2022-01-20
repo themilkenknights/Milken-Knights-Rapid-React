@@ -124,14 +124,16 @@ public final class Constants {
         public static double kMaxSpeedMetersPerSecond = 0.01; //.75 * DRIVE.maxNativeVelocity;
         public static double kMaxAccelerationMetersPerSecondSquared = 0.01; //2000;
 
-        public static double heightMeters = MkUtil.inchesToMeters(heightInch);
-        public static double widthMeters = MkUtil.inchesToMeters(widthInch);
+        public static double heightMeters = MkUtil.inchesToMeters(L) / 2;
+        public static double widthMeters = MkUtil.inchesToMeters(W) / 2;
+
         public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
         new Translation2d(heightMeters, widthMeters),
         new Translation2d(heightMeters, -widthMeters),
         new Translation2d(-heightMeters, widthMeters),
         new Translation2d(-heightMeters, -widthMeters));
+        //TODO also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
 
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
@@ -139,6 +141,8 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+
+        public static double nativeToMetersPerSec = (10 * (MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches) * kPi))/(DRIVE.greerRatio * 2048);
     }
 }
 
