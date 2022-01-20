@@ -111,7 +111,7 @@ public final class Constants {
     }
 
     public static class AUTO
-    {                                           //with encode thing    without
+    {                               //with encode option    without
         public static double turnKP = 0.0000063403;        //1.6261; //0.0000001;
         public static double turnKI = 0;
         public static double turnKD = 0.000000098857;//0.024918;  //0.0000000; 
