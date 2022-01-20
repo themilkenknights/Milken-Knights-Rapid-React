@@ -87,11 +87,11 @@ public class RobotContainer {
         new SwerveControllerCommand(
             exampleTrajectory,
             m_robotDrive::getPose, // Functional interface to feed supplier
-            DriveConstants.kDriveKinematics,
+            AUTO.kDriveKinematics,
 
             // Position controllers
-            new PIDController(AutoConstants.kPXController, 0, 0),
-            new PIDController(AutoConstants.kPYController, 0, 0),
+            new PIDController(AUTO.driveKP, 0, 0),
+            new PIDController(AUTO.driveKP, 0, 0),
             thetaController,
             m_robotDrive::setModuleStates,
             m_robotDrive);

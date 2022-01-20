@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 /** Add your docs here. */
 public final class Constants {
@@ -96,11 +97,11 @@ public final class Constants {
         //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;
 
-        public static double kS = 0.4969;
+        public static double kS = 0.66294; //0.4969;
         public static double maxVel = 21420;
         //TODO get max accel
         public static double maxAccel = 300; 
-        public static double kV = 12 / maxVel;
+        public static double kV = 0.10986; //12 / maxVel;
     }
 
     public static class LIGHTS
@@ -111,9 +112,9 @@ public final class Constants {
 
     public static class AUTO
     {
-        public static double turnKP = 0.0000001;
+        public static double turnKP = 1.6261; //0.0000001;
         public static double turnKI = 0;
-        public static double turnKD = 0.0000000; 
+        public static double turnKD = 0.024918;  //0.0000000; 
         public static double turnMaxVelo = 0.001;  //1;
         public static double turnMaxAccel = 0.001;  //1;
 
@@ -131,6 +132,13 @@ public final class Constants {
         new Translation2d(heightMeters, -widthMeters),
         new Translation2d(-heightMeters, widthMeters),
         new Translation2d(-heightMeters, -widthMeters));
+
+        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
+        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+
+        public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
+        new TrapezoidProfile.Constraints(
+            kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
 }
 
