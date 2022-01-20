@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
-   
+   private RobotContainer m_robotContainer;
     /**
      * states of autonomous
      */ 
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
    public void robotInit() {
      
      //Shuffleboard.startRecording();
-
+     m_robotContainer = new RobotContainer();
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
@@ -110,7 +110,7 @@ public class Robot extends TimedRobot {
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new DriveStr8();
+         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING:
          

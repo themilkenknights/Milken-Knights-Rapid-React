@@ -111,10 +111,10 @@ public final class Constants {
     }
 
     public static class AUTO
-    {
-        public static double turnKP = 1.6261; //0.0000001;
+    {                                           //with encode thing    without
+        public static double turnKP = 0.0000063403;        //1.6261; //0.0000001;
         public static double turnKI = 0;
-        public static double turnKD = 0.024918;  //0.0000000; 
+        public static double turnKD = 0.000000098857;//0.024918;  //0.0000000; 
         public static double turnMaxVelo = 0.001;  //1;
         public static double turnMaxAccel = 0.001;  //1;
 

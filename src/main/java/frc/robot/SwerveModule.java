@@ -28,7 +28,7 @@ public class SwerveModule {
   private static final double kWheelRadius = MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches/2); //0.0508;
   private static final int kEncoderResolution = 2048;
 
-  private static final double kModuleMaxAngularVelocity = TURN.maxVel;
+  private static final double kModuleMaxAngularVelocity = AUTO.turnMaxVelo;
   private static final double kModuleMaxAngularAcceleration =
       2 * Math.PI; // radians per second squared
 
