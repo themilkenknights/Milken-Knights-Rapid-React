@@ -111,21 +111,21 @@ public final class Constants {
     }
 
     public static class AUTO
-    {                               //with encode option    without
-        public static double turnKP = 0.0000063403;        //1.6261; //0.0000001;
+    {                                                            //with encode option    without
+        public static double turnKP = 0.63403; //0.063403;     //0.0000063403;        //1.6261; //0.0000001;
         public static double turnKI = 0;
-        public static double turnKD = 0.000000098857;//0.024918;  //0.0000000; 
-        public static double turnMaxVelo = 0.001;  //1;
-        public static double turnMaxAccel = 0.001;  //1;
+        public static double turnKD = 0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;  //0.0000000; 
+        public static double turnMaxVelo = 10;  //1;
+        public static double turnMaxAccel = 1;  //1;
 
-        public static double driveKP = 0.0000001;
+        public static double driveKP = 0.1; //0.0000001;
         public static double driveKI = 0;
         public static double driveKD = 0;
-        public static double kMaxSpeedMetersPerSecond = 0.01; //.75 * DRIVE.maxNativeVelocity;
-        public static double kMaxAccelerationMetersPerSecondSquared = 0.01; //2000;
+        public static double kMaxSpeedMetersPerSecond = 1; //.75 * DRIVE.maxNativeVelocity;
+        public static double kMaxAccelerationMetersPerSecondSquared = 1; //2000;
 
-        public static double heightMeters = MkUtil.inchesToMeters(L) / 2;
-        public static double widthMeters = MkUtil.inchesToMeters(W) / 2;
+        public static double heightMeters = MkUtil.inchesToMeters(L / 2);
+        public static double widthMeters = MkUtil.inchesToMeters(W / 2);
 
         public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -135,8 +135,8 @@ public final class Constants {
         new Translation2d(-heightMeters, -widthMeters));
         //TODO also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
 
-        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * turnMaxVelo;
+        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI * 2;
 
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(

@@ -118,7 +118,7 @@ public class SwerveModule {
         m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
     m_driveMotor.set(ControlMode.PercentOutput, driveOutput + driveFeedforward);
-    m_turningMotor.set(ControlMode.PercentOutput, turnOutput + turnFeedforward);
+    m_turningMotor.set(ControlMode.PercentOutput, turnOutput);// + turnFeedforward);
 
     SmartDashboard.putNumber("driving motor", driveOutput);
     SmartDashboard.putNumber("drive feed motor", driveFeedforward);
