@@ -96,7 +96,7 @@ public class DriveSubsystem extends SubsystemBase {
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(
-        swerveModuleStates, AUTO.kMaxSpeedMetersPerSecond);
+        swerveModuleStates, AUTO.maxDriveVelo);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_rearLeft.setDesiredState(swerveModuleStates[2]);
@@ -110,7 +110,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void setModuleStates(SwerveModuleState[] desiredStates) {
     SwerveDriveKinematics.desaturateWheelSpeeds(
-        desiredStates, AUTO.kMaxSpeedMetersPerSecond);
+        desiredStates, AUTO.maxDriveVelo);
     m_frontLeft.setDesiredState(desiredStates[0]);
     m_frontRight.setDesiredState(desiredStates[1]);
     m_rearLeft.setDesiredState(desiredStates[2]);
@@ -146,5 +146,13 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getTurnRate() {
     return m_gyro.getRate();
+  }
+
+  public void resetPID()
+  {
+    m_frontLeft.resetPID();
+    m_frontRight.resetPID();
+    m_rearLeft.resetPID();
+    m_rearRight.resetPID();
   }
 }

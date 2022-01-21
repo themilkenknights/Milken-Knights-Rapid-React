@@ -106,6 +106,7 @@ public class Robot extends TimedRobot {
    @Override
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
+     m_robotContainer.resetPID();
      mDrive.resetDrive();
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
@@ -123,7 +124,7 @@ public class Robot extends TimedRobot {
  
    @Override
    public void autonomousPeriodic() {
-     mDrive.driveUpdate();
+     //mDrive.driveUpdate();
    }
  
    @Override
@@ -170,7 +171,7 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getBButton())
       {
-        mDrive.turnCalcPercent(180, 180, 180, 180);
+        mDrive.resetDrive();
       }
       else if(xbox.getXButton())
       {

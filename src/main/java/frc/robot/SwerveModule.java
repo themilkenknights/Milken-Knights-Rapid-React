@@ -29,9 +29,8 @@ public class SwerveModule {
   private static final double kWheelRadius = MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches/2); //0.0508;
   private static final int kEncoderResolution = 2048;
 
-  private static final double kModuleMaxAngularVelocity = AUTO.turnMaxVelo;
-  private static final double kModuleMaxAngularAcceleration =
-      2 * Math.PI; // radians per second squared
+  private static final double kModuleMaxAngularVelocity = AUTO.maxModuleTurnVelo;
+  private static final double kModuleMaxAngularAcceleration = AUTO.maxModuleTurnAccel;
 
   private final TalonFX m_driveMotor;
   private final TalonFX m_turningMotor;
@@ -39,14 +38,14 @@ public class SwerveModule {
   private final CANCoder m_turningEncoder;
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(AUTO.driveKP, AUTO.driveKI, AUTO.driveKD);
+  private final PIDController m_drivePIDController = new PIDController(AUTO.moduleDriveKP, AUTO.moduleDriveKI, AUTO.moduleDriveKD);
 
   // Gains are for example purposes only - must be determined for your own robot!
   private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
-          AUTO.turnKP,
-          AUTO.turnKI,
-          AUTO.turnKD,
+          AUTO.moduleTurnKP,
+          AUTO.moduleTurnKI,
+          AUTO.moduleTurnKD,
           new TrapezoidProfile.Constraints(
               kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
 
@@ -91,7 +90,7 @@ public class SwerveModule {
    * @return The current state of the module.
    */
   public SwerveModuleState getState() {
-    return new SwerveModuleState(AUTO.nativeToMetersPerSec * m_driveMotor.getSelectedSensorVelocity(), new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
+    return new SwerveModuleState(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
   }
 
   /**
@@ -106,7 +105,7 @@ public class SwerveModule {
 
     // Calculate the drive output from the drive PID controller.
     final double driveOutput =
-        m_drivePIDController.calculate(AUTO.nativeToMetersPerSec * m_driveMotor.getSelectedSensorVelocity(), state.speedMetersPerSecond);
+        m_drivePIDController.calculate(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), state.speedMetersPerSecond);
 
     final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
 
@@ -117,15 +116,25 @@ public class SwerveModule {
     final double turnFeedforward =
         m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
-    m_driveMotor.set(ControlMode.PercentOutput, driveOutput + driveFeedforward);
-    m_turningMotor.set(ControlMode.PercentOutput, turnOutput);// + turnFeedforward);
+    m_driveMotor.set(ControlMode.PercentOutput, driveOutput);  // + driveFeedforward);
+    m_turningMotor.set(ControlMode.PercentOutput, turnOutput);  // + turnFeedforward);
 
     SmartDashboard.putNumber("driving motor", driveOutput);
     SmartDashboard.putNumber("drive feed motor", driveFeedforward);
     SmartDashboard.putNumber("turning motor", turnOutput);
     SmartDashboard.putNumber("turning feed motor", turnFeedforward);
 
+    SmartDashboard.putNumber("turn set", m_turningPIDController.getSetpoint().position);
+    SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
+
+
     //TODO use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
     //also big changes with conversion factors, redthunder7166 maybe
+  }
+
+  public void resetPID()
+  {
+    m_drivePIDController.reset();
+    m_turningPIDController.reset(Math.toRadians(m_turningEncoder.getAbsolutePosition()));
   }
 }

@@ -152,17 +152,17 @@ public class Drive {
         bottomTurnRight.enableVoltageCompensation(true);
 
 
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
 
         topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -283,17 +283,17 @@ public class Drive {
         bottomDriveRight.enableVoltageCompensation(true);
 
 
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
 
         topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

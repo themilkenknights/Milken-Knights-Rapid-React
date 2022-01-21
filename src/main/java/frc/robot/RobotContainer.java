@@ -62,8 +62,8 @@ public class RobotContainer {
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
-                AUTO.kMaxSpeedMetersPerSecond,
-                AUTO.kMaxAccelerationMetersPerSecondSquared)
+                AUTO.maxAutoDriveVelo,
+                AUTO.maxAutoDriveAccel)
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(AUTO.kDriveKinematics);
 
@@ -80,7 +80,7 @@ public class RobotContainer {
 
     var thetaController =
         new ProfiledPIDController(
-            AUTO.turnKP, AUTO.turnKI, AUTO.turnKD, AUTO.kThetaControllerConstraints);
+            AUTO.turnSwerveControlKp, 0, 0, AUTO.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
     SwerveControllerCommand swerveControllerCommand =
@@ -90,8 +90,8 @@ public class RobotContainer {
             AUTO.kDriveKinematics,
 
             // Position controllers
-            new PIDController(AUTO.driveKP, 0, 0),
-            new PIDController(AUTO.driveKP, 0, 0),
+            new PIDController(AUTO.driveSwerveControlKpX, 0, 0),
+            new PIDController(AUTO.driveSwerveControlKpY, 0, 0),
             thetaController,
             m_robotDrive::setModuleStates,
             m_robotDrive);
@@ -101,5 +101,10 @@ public class RobotContainer {
 
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+  }
+
+  public void resetPID()
+  {
+    m_robotDrive.resetPID();
   }
 }

@@ -111,18 +111,18 @@ public final class Constants {
     }
 
     public static class AUTO
-    {                                                            //with encode option    without
-        public static double turnKP = 0.63403; //0.063403;     //0.0000063403;        //1.6261; //0.0000001;
-        public static double turnKI = 0;
-        public static double turnKD = 0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;  //0.0000000; 
-        public static double turnMaxVelo = 10;  //1;
-        public static double turnMaxAccel = 1;  //1;
+    {                                                                                   //with encode option    without
+        public static double moduleTurnKP = 0.063403; //0.63403; //0.063403;            //0.0000063403;        //1.6261;      //0.0000001;
+        public static double moduleTurnKI = 0;
+        public static double moduleTurnKD = 0.00098857; //0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;       //0.0000000; 
 
-        public static double driveKP = 0.1; //0.0000001;
-        public static double driveKI = 0;
-        public static double driveKD = 0;
-        public static double kMaxSpeedMetersPerSecond = 1; //.75 * DRIVE.maxNativeVelocity;
-        public static double kMaxAccelerationMetersPerSecondSquared = 1; //2000;
+        public static double moduleDriveKP = 0.05; //0.0000001;
+        public static double moduleDriveKI = 0;
+        public static double moduleDriveKD = 0;
+
+        public static double turnSwerveControlKp = 0.2;
+        public static double driveSwerveControlKpY = 0.2;
+        public static double driveSwerveControlKpX = 0.2;
 
         public static double heightMeters = MkUtil.inchesToMeters(L / 2);
         public static double widthMeters = MkUtil.inchesToMeters(W / 2);
@@ -135,12 +135,30 @@ public final class Constants {
         new Translation2d(-heightMeters, -widthMeters));
         //TODO also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
 
-        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * turnMaxVelo;
-        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI * 2;
+        
+        
+        public static final double maxModuleTurnVelo = kPi * 2;
+        public static final double maxModuleTurnAccel = kPi * 2;
+        
+        public static final double maxModuleDriveVelo = 2;
+        public static final double maxModuleDriveAccel = 2;
+        
 
+
+        public static final double maxAutoTurnVelo = kPi;
+        public static final double maxAutoTurnAccel = kPi;
+        
+        public static final double maxAutoDriveVelo = 2;
+        public static final double maxAutoDriveAccel = 2;
+
+
+        public static final double maxDriveVelo = 3.0;
+
+
+        
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
-            kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+            maxAutoTurnVelo, maxAutoTurnAccel);
 
         public static double nativeToMetersPerSec = (10 * (MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches) * kPi))/(DRIVE.greerRatio * 2048);
     }
