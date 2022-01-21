@@ -118,7 +118,7 @@ public final class Constants {
 
         public static double moduleDriveKP = 0.05; //0.0000001;
         public static double moduleDriveKI = 0;
-        public static double moduleDriveKD = 0;
+        public static double moduleDriveKD = 0.001;
 
         public static double turnSwerveControlKp = 0.2;
         public static double driveSwerveControlKpY = 0.2;
@@ -140,19 +140,19 @@ public final class Constants {
         public static final double maxModuleTurnVelo = kPi * 2;
         public static final double maxModuleTurnAccel = kPi * 2;
         
-        public static final double maxModuleDriveVelo = 2;
-        public static final double maxModuleDriveAccel = 2;
+        public static final double maxModuleDriveVelo = 2; //2;
+        public static final double maxModuleDriveAccel = 2; //2;
         
 
 
-        public static final double maxAutoTurnVelo = kPi;
-        public static final double maxAutoTurnAccel = kPi;
+        public static final double maxAutoTurnVelo = kPi * 2;
+        public static final double maxAutoTurnAccel = kPi * 2;
         
-        public static final double maxAutoDriveVelo = 2;
-        public static final double maxAutoDriveAccel = 2;
+        public static final double maxAutoDriveVelo = 2; //2;
+        public static final double maxAutoDriveAccel = 2; //2;
 
 
-        public static final double maxDriveVelo = 3.0;
+        public static final double maxDriveVelo = 5.0;
 
 
         
