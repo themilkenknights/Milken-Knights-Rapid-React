@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -104,34 +105,38 @@ public class SwerveModule {
         SwerveModuleState.optimize(desiredState, new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
 
     // Calculate the drive output from the drive PID controller.
-    final double driveOutput =
-        m_drivePIDController.calculate(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), state.speedMetersPerSecond);
+    //!final double driveOutput =
+    //!    m_drivePIDController.calculate(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), state.speedMetersPerSecond);
 
     final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
 
     // Calculate the turning motor output from the turning PID controller.
-    final double turnOutput =
-        m_turningPIDController.calculate(Math.toRadians(m_turningEncoder.getAbsolutePosition()), state.angle.getRadians());
+    //!final double turnOutput =
+    //!    m_turningPIDController.calculate(Math.toRadians(m_turningEncoder.getAbsolutePosition()), state.angle.getRadians());
 
     final double turnFeedforward =
         m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
-    m_driveMotor.set(ControlMode.PercentOutput, driveOutput);  // + driveFeedforward);
-    m_turningMotor.set(ControlMode.PercentOutput, turnOutput);  // + turnFeedforward);
+    m_driveMotor.set(ControlMode.Velocity, MkUtil.metersPerSecondToNativeUnitsPer100Ms(state.speedMetersPerSecond));  // + driveFeedforward);
+    m_turningMotor.set(ControlMode.Position, MkUtil.degreesToNative(state.angle.getDegrees(), TURN.greerRatio));  // + turnFeedforward);
 
-    SmartDashboard.putNumber("driving motor", driveOutput);
+    //SmartDashboard.putNumber("driving motor", driveOutput);
     SmartDashboard.putNumber("drive feed motor", driveFeedforward);
-    SmartDashboard.putNumber("turning motor", turnOutput);
+    //SmartDashboard.putNumber("turning motor", turnOutput);
     SmartDashboard.putNumber("turning feed motor", turnFeedforward);
 
-    SmartDashboard.putNumber("turn set", m_turningPIDController.getSetpoint().position);
-    SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
+    //SmartDashboard.putNumber("turn set", m_turningPIDController.getSetpoint().position);
+    //SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
 
 
     //TODO use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
     //also big changes with conversion factors, redthunder7166 maybe
   }
 
+  /**
+   * resets PIDs
+   * @return returns fresh PIDs
+   */
   public void resetPID()
   {
     m_drivePIDController.reset();

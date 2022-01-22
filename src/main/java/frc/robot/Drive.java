@@ -152,17 +152,17 @@ public class Drive {
         bottomTurnRight.enableVoltageCompensation(true);
 
 
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
 
         topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -283,17 +283,17 @@ public class Drive {
         bottomDriveRight.enableVoltageCompensation(true);
 
 
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
 
         topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -309,6 +309,7 @@ public class Drive {
 
     public void driveUpdate()
     {
+        /*
         SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
         SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -316,20 +317,20 @@ public class Drive {
         SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
         SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
-       
+       */
        /* SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
-*/
+*//*
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
 
         SmartDashboard.putNumber("currentDistance", currentDistance);
-
+*/
         SmartDashboard.putNumber("navx", navX.getYaw());
 
-        SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
+       // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
         rightTopVelNative = topDriveRight.getSelectedSensorVelocity();
