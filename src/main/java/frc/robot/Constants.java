@@ -154,6 +154,12 @@ public final class Constants {
 
         public static final double maxDriveVelo = 5.0;
 
+        //TODO test these for velocity 
+        public static double autoVeloDriveKP = 0.21;
+        public static double autoVeloDriveKI = 0;
+        public static double autoVeloDriveKD = 0 * autoVeloDriveKI; 
+        public static double autoVeloDriveKF = 1023.0 / DRIVE.maxNativeVelocity;
+
 
         
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =

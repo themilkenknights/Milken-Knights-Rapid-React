@@ -39,20 +39,20 @@ public class SwerveModule {
   private final CANCoder m_turningEncoder;
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(AUTO.moduleDriveKP, AUTO.moduleDriveKI, AUTO.moduleDriveKD);
+  //private final PIDController m_drivePIDController = new PIDController(AUTO.moduleDriveKP, AUTO.moduleDriveKI, AUTO.moduleDriveKD);
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final ProfiledPIDController m_turningPIDController =
+  /*private final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
           AUTO.moduleTurnKP,
           AUTO.moduleTurnKI,
           AUTO.moduleTurnKD,
           new TrapezoidProfile.Constraints(
-              kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
+              kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));*/
 
   // Gains are for example purposes only - must be determined for your own robot!
-  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(DRIVE.kS, DRIVE.kV);
-  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(TURN.kS, TURN.kV);
+  //private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(DRIVE.kS, DRIVE.kV);
+  //private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(TURN.kS, TURN.kV);
 
   /**
    * Constructs a SwerveModule with a drive motor, turning motor, drive encoder and turning encoder.
@@ -70,6 +70,13 @@ public class SwerveModule {
 
     m_turningEncoder = turningEncoderChannel;
 
+    //TODO test kp first, then see if using p gets us setpoint in time on ground. if ocilation, add d. when it works on ground, add f 
+    m_driveMotor.config_kP(0, AUTO.autoVeloDriveKP);
+    m_driveMotor.config_kI(0, AUTO.autoVeloDriveKI);
+    m_driveMotor.config_kD(0, 0);//AUTO.autoVeloDriveKD);
+    m_driveMotor.config_kF(0, 0);//AUTO.autoVeloDriveKP);
+
+
     // Set the distance per pulse for the drive encoder. We can simply use the
     // distance traveled for one rotation of the wheel divided by the encoder
     // resolution.
@@ -82,7 +89,7 @@ public class SwerveModule {
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
-    m_turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
+    //m_turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
   }
 
   /**
@@ -108,28 +115,30 @@ public class SwerveModule {
     //!final double driveOutput =
     //!    m_drivePIDController.calculate(MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()), state.speedMetersPerSecond);
 
-    final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
+    //final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
 
     // Calculate the turning motor output from the turning PID controller.
     //!final double turnOutput =
     //!    m_turningPIDController.calculate(Math.toRadians(m_turningEncoder.getAbsolutePosition()), state.angle.getRadians());
 
-    final double turnFeedforward =
-        m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
+    //final double turnFeedforward =
+    //    m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
     m_driveMotor.set(ControlMode.Velocity, MkUtil.metersPerSecondToNativeUnitsPer100Ms(state.speedMetersPerSecond));  // + driveFeedforward);
     m_turningMotor.set(ControlMode.Position, MkUtil.degreesToNative(state.angle.getDegrees(), TURN.greerRatio));  // + turnFeedforward);
 
-    //SmartDashboard.putNumber("driving motor", driveOutput);
-    SmartDashboard.putNumber("drive feed motor", driveFeedforward);
+    //TODO could use integrated pid, but doesnt have continuous input. need to think about it
+
+    SmartDashboard.putNumber("driving motor", MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()));
+    SmartDashboard.putNumber("drive setpoint", state.speedMetersPerSecond);
     //SmartDashboard.putNumber("turning motor", turnOutput);
-    SmartDashboard.putNumber("turning feed motor", turnFeedforward);
+    //SmartDashboard.putNumber("turning feed motor", turnFeedforward);
 
     //SmartDashboard.putNumber("turn set", m_turningPIDController.getSetpoint().position);
     //SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
 
 
-    //TODO use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
+    //// use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
     //also big changes with conversion factors, redthunder7166 maybe
   }
 
@@ -139,7 +148,7 @@ public class SwerveModule {
    */
   public void resetPID()
   {
-    m_drivePIDController.reset();
-    m_turningPIDController.reset(Math.toRadians(m_turningEncoder.getAbsolutePosition()));
+    //m_drivePIDController.reset();
+    //m_turningPIDController.reset(Math.toRadians(m_turningEncoder.getAbsolutePosition()));
   }
 }
