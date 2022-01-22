@@ -8,7 +8,7 @@
 
 #### SWERVE AUTONOMOUS:
 - team 3244 - basic auto structure and pidf config
-- team 7166 - orginization of auto and they had a similar auto
+- team 7166 - organization of auto and they had a similar auto
 <br/>
 
 ## HOW TO USE:
