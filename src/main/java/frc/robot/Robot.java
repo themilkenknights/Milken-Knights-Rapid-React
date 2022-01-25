@@ -141,7 +141,7 @@ public class Robot extends TimedRobot {
  
   @Override
   public void teleopPeriodic() {
-    mDrive.driveUpdate();
+    //mDrive.driveUpdate();
      
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);

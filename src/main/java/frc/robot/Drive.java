@@ -6,6 +6,8 @@ package frc.robot;
 
 
 
+import javax.swing.border.Border;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -139,6 +141,16 @@ public class Drive {
         bottomTurnRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
         bottomTurnRight.configVelocityMeasurementWindow(16);
 
+
+        topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+
+        topTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
+      
+        bottomTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+        
+        bottomTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
+
+
         topTurnLeft.configVoltageCompSaturation(TURN.voltComp);
         topTurnLeft.enableVoltageCompensation(true);
 
@@ -151,7 +163,7 @@ public class Drive {
         bottomTurnRight.configVoltageCompSaturation(TURN.voltComp);
         bottomTurnRight.enableVoltageCompensation(true);
 
-
+/*
         topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
@@ -163,7 +175,7 @@ public class Drive {
 
         bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
-
+*/
 
         topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         topTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -270,6 +282,15 @@ public class Drive {
         bottomDriveRight.configVelocityMeasurementWindow(16);
 
 
+        topDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+
+        topDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
+      
+        bottomDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+        
+        bottomDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
+
+
         topDriveLeft.configVoltageCompSaturation(DRIVE.voltComp);
         topDriveLeft.enableVoltageCompensation(true);
         
@@ -282,7 +303,7 @@ public class Drive {
         bottomDriveRight.configVoltageCompSaturation(DRIVE.voltComp);
         bottomDriveRight.enableVoltageCompensation(true);
 
-
+/*
         topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
@@ -295,7 +316,7 @@ public class Drive {
         bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-
+*/
         topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         topDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         bottomDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

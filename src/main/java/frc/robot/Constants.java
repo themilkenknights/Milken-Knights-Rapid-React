@@ -17,13 +17,13 @@ public final class Constants {
     //                        (Derivation of Inverse Kinematics for Swerve, page 4)
 
     //wheelbase (distance between the middle of the wheels on the length side)
-    public static double L = 29;
+    public static double L = 22.57; //29;
 
     //trackwidth (distance between the middle of the wheels on the width side)
-    public static double W = 17.625; 
+    public static double W = 22.57; //17.625; 
 
-    public static double widthInch = 21;
-    public static double heightInch = 32;
+    public static double widthInch = 29; //21;
+    public static double heightInch = 29; //32;
 
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
@@ -31,10 +31,10 @@ public final class Constants {
     {
         public static double greerRatio = 6.75;
 
-        public static int topDriveRightCANID = 12;
-        public static int bottomDriveRightCANID = 3;
-        public static int topDriveLeftCANID = 9;
-        public static int bottomDriveLeftCANID = 6;
+        public static int topDriveRightCANID = 5; //12;
+        public static int bottomDriveRightCANID = 7; //3;
+        public static int topDriveLeftCANID = 3; //9;
+        public static int bottomDriveLeftCANID = 2; //6;
 
         public static double maxNativeVelocity = 21640; 
 
@@ -63,19 +63,19 @@ public final class Constants {
 
     public static class TURN
     {
-        public static int topTurnLeftCANCoderCANID = 16;
-        public static int topTurnRightCANCoderCANID = 14;
-        public static int bottomTurnLeftCANCoderCANID = 15;
-        public static int bottomTurnRightCANCoderCANID = 13;
+        public static int topTurnLeftCANCoderCANID = 16; //16;
+        public static int topTurnRightCANCoderCANID = 18; //14;
+        public static int bottomTurnLeftCANCoderCANID = 15; //15;
+        public static int bottomTurnRightCANCoderCANID = 17; //13;
 
         public static double deadband = 0.1;
 
         public static double greerRatio = 12.8;
 
-        public static int topTurnLeftCANID = 4; 
-        public static int topTurnRightCANID = 7;
-        public static int bottomTurnLeftCANID = 2;
-        public static int bottomTurnRightCANID = 1;
+        public static int topTurnLeftCANID = 4; //4; 
+        public static int topTurnRightCANID = 6; //7;
+        public static int bottomTurnLeftCANID = 8; //2;
+        public static int bottomTurnRightCANID = 1; //1;
 
         //got these values by guessing and praying
         public static double turnKP = 0.00008;//0.00008
@@ -102,6 +102,32 @@ public final class Constants {
         //TODO get max accel
         public static double maxAccel = 300; 
         public static double kV = 0.10986; //12 / maxVel;
+    }
+
+    public static class SHOOT
+    {
+        public static int shootLeftCANID = 0;
+        public static int shootRightCANID = 0;
+        public static int beltCANID = 0;
+
+        public static int shootKP = 0;
+        public static int shootKI = 0;
+        public static int shootKD = 0;
+        public static int shootKF = 0;
+
+        public static double beltGreerRatio = 0;
+
+        public static double maxVelo = 0;
+
+        public static double voltComp = 12;
+    }
+
+    public static class LIMELIGHT
+    {
+        public static double angleAboveHorizontal = 0;
+        public static double height = 0;
+        public static double lowerGoalHeight = 0;
+        public static double upperGoalHeight = 0;
     }
 
     public static class LIGHTS
