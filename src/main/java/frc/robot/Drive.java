@@ -163,7 +163,7 @@ public class Drive {
         bottomTurnRight.configVoltageCompSaturation(TURN.voltComp);
         bottomTurnRight.enableVoltageCompensation(true);
 
-/*
+
         topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
@@ -175,7 +175,7 @@ public class Drive {
 
         bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
-*/
+
 
         topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         topTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -303,7 +303,7 @@ public class Drive {
         bottomDriveRight.configVoltageCompSaturation(DRIVE.voltComp);
         bottomDriveRight.enableVoltageCompensation(true);
 
-/*
+
         topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
@@ -316,7 +316,7 @@ public class Drive {
         bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
         bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
 
-*/
+
         topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         topDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         bottomDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
