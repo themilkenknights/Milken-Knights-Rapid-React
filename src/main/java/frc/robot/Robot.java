@@ -129,7 +129,8 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
-     mDrive.encoderZero();
+     //mDrive.encoderZero();
+     //TODO need to see if drive initiated with code runned, problem if not runned
      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();

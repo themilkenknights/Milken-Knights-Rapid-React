@@ -96,6 +96,14 @@ public class Drive {
         topTurnRight.configFactoryDefault();
         bottomTurnRight.configFactoryDefault();
 
+
+        topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        topTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+
+
         topTurnLeft.setNeutralMode(NeutralMode.Brake);
         topTurnRight.setNeutralMode(NeutralMode.Brake);
         bottomTurnLeft.setNeutralMode(NeutralMode.Brake);
@@ -130,26 +138,26 @@ public class Drive {
 
 
         topTurnLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        topTurnLeft.configVelocityMeasurementWindow(16);
+        topTurnLeft.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
         topTurnRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        topTurnRight.configVelocityMeasurementWindow(16);
+        topTurnRight.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
         bottomTurnLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        bottomTurnLeft.configVelocityMeasurementWindow(16);
+        bottomTurnLeft.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
         bottomTurnRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        bottomTurnRight.configVelocityMeasurementWindow(16);
+        bottomTurnRight.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
 
-        topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+        /*topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
 
         topTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
       
         bottomTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
         
         bottomTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
-
+*/
 
         topTurnLeft.configVoltageCompSaturation(TURN.voltComp);
         topTurnLeft.enableVoltageCompensation(true);
@@ -164,23 +172,17 @@ public class Drive {
         bottomTurnRight.enableVoltageCompensation(true);
 
 
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, TURN.statusOneMeas);
+        topTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TURN.statusTwoMeas);
 
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, TURN.statusOneMeas);
+        topTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TURN.statusTwoMeas);
 
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, TURN.statusOneMeas);
+        bottomTurnLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TURN.statusTwoMeas);
 
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
-
-
-        topTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        topTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        bottomTurnLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        bottomTurnRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, TURN.statusOneMeas);
+        bottomTurnRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TURN.statusTwoMeas);
 
 
 
@@ -236,16 +238,22 @@ public class Drive {
         bottomDriveRight.setNeutralMode(NeutralMode.Brake);
 
 
+        topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        topDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+
         topDriveLeft.setInverted(false);
         topDriveRight.setInverted(false);
         bottomDriveLeft.setInverted(false);
         bottomDriveRight.setInverted(false);
 
 
-        topDriveLeft.configMotionSCurveStrength(6);
-        topDriveRight.configMotionSCurveStrength(6);
-        bottomDriveLeft.configMotionSCurveStrength(6);
-        bottomDriveRight.configMotionSCurveStrength(6);
+        topDriveLeft.configMotionSCurveStrength(DRIVE.magicSCurve);
+        topDriveRight.configMotionSCurveStrength(DRIVE.magicSCurve);
+        bottomDriveLeft.configMotionSCurveStrength(DRIVE.magicSCurve);
+        bottomDriveRight.configMotionSCurveStrength(DRIVE.magicSCurve);
 
 
         topDriveLeft.config_kP(0, DRIVE.driveKP);
@@ -270,19 +278,19 @@ public class Drive {
 
 
         topDriveLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        topDriveLeft.configVelocityMeasurementWindow(16);
+        topDriveLeft.configVelocityMeasurementWindow(DRIVE.velocityMeasAmount);
 
         topDriveRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        topDriveRight.configVelocityMeasurementWindow(16);
+        topDriveRight.configVelocityMeasurementWindow(DRIVE.velocityMeasAmount);
 
         bottomDriveLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        bottomDriveLeft.configVelocityMeasurementWindow(16);
+        bottomDriveLeft.configVelocityMeasurementWindow(DRIVE.velocityMeasAmount);
 
         bottomDriveRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        bottomDriveRight.configVelocityMeasurementWindow(16);
+        bottomDriveRight.configVelocityMeasurementWindow(DRIVE.velocityMeasAmount);
 
 
-        topDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
+   /*     topDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
 
         topDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
       
@@ -290,7 +298,7 @@ public class Drive {
         
         bottomDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
 
-
+*/
         topDriveLeft.configVoltageCompSaturation(DRIVE.voltComp);
         topDriveLeft.enableVoltageCompensation(true);
         
@@ -304,23 +312,17 @@ public class Drive {
         bottomDriveRight.enableVoltageCompensation(true);
 
 
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, DRIVE.statusOneMeas);
+        topDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, DRIVE.statusTwoMeas);
 
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, DRIVE.statusOneMeas);
+        topDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, DRIVE.statusTwoMeas);
 
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, DRIVE.statusOneMeas);
+        bottomDriveLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, DRIVE.statusTwoMeas);
 
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 10);
-        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
-
-
-        topDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        topDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        bottomDriveLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        bottomDriveRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, DRIVE.statusOneMeas);
+        bottomDriveRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, DRIVE.statusTwoMeas);
     }
 
     public static Drive getInstance()
@@ -350,6 +352,7 @@ public class Drive {
         SmartDashboard.putNumber("currentDistance", currentDistance);
 */
         SmartDashboard.putNumber("navx", navX.getYaw());
+        SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
 
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 

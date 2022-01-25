@@ -15,37 +15,44 @@ import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
 public class Shooter {
-    TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
+   /* TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
     TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
+    */
     private Shooter()
     {
+        /*
         shootLeft.configFactoryDefault();
         shootLeft.setNeutralMode(NeutralMode.Coast);
         shootLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        shootLeft.setInverted(true);
+        shootLeft.setInverted(SHOOT.leftFlipped);
         shootLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        shootLeft.configVelocityMeasurementWindow(16);
+        shootLeft.configVelocityMeasurementWindow(SHOOT.velocityMeasAmount);
         shootLeft.enableVoltageCompensation(true);
         shootLeft.configVoltageCompSaturation(SHOOT.voltComp);
         shootLeft.config_kP(0, SHOOT.shootKP);
         shootLeft.config_kI(0, SHOOT.shootKI);
         shootLeft.config_kD(0, SHOOT.shootKD);
         shootLeft.config_kF(0, SHOOT.shootKF);
+        shootLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, SHOOT.statusOneMeas);
+        shootLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, SHOOT.statusTwoMeas);
+
         
 
         shootRight.configFactoryDefault();
         shootRight.setNeutralMode(NeutralMode.Coast);
         shootRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        shootRight.setInverted(true);
+        shootRight.setInverted(!SHOOT.leftFlipped);
         shootRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        shootRight.configVelocityMeasurementWindow(16);
+        shootRight.configVelocityMeasurementWindow(SHOOT.velocityMeasAmount);
         shootRight.enableVoltageCompensation(true);
         shootRight.configVoltageCompSaturation(SHOOT.voltComp);
         shootRight.config_kP(0, SHOOT.shootKP);
         shootRight.config_kI(0, SHOOT.shootKI);
         shootRight.config_kD(0, SHOOT.shootKD);
         shootRight.config_kF(0, SHOOT.shootKF);
+        shootRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, SHOOT.statusOneMeas);
+        shootRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, SHOOT.statusTwoMeas);
 
 
         belt.configFactoryDefault();
@@ -54,6 +61,7 @@ public class Shooter {
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
     }
+    */
 
     public static Shooter getInstance()
     {

@@ -29,6 +29,11 @@ public final class Constants {
 
     public static class DRIVE
     {
+        public static int magicSCurve = 6;
+        public static int velocityMeasAmount = 16;
+        public static int statusOneMeas = 25;
+        public static int statusTwoMeas = 25;
+
         public static double greerRatio = 6.75;
 
         public static int topDriveRightCANID = 5; //12;
@@ -63,6 +68,10 @@ public final class Constants {
 
     public static class TURN
     {
+        public static int velocityMeasAmount = 16;
+        public static int statusOneMeas = 25;
+        public static int statusTwoMeas = 25;
+
         public static int topTurnLeftCANCoderCANID = 16; //16;
         public static int topTurnRightCANCoderCANID = 18; //14;
         public static int bottomTurnLeftCANCoderCANID = 15; //15;
@@ -106,6 +115,11 @@ public final class Constants {
 
     public static class SHOOT
     {
+        public static boolean leftFlipped = false;
+        public static int velocityMeasAmount = 16;
+        public static int statusOneMeas = 25;
+        public static int statusTwoMeas = 25;
+
         public static int shootLeftCANID = 0;
         public static int shootRightCANID = 0;
         public static int beltCANID = 0;
