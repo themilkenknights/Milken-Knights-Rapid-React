@@ -60,8 +60,9 @@ public class Shooter {
         belt.setInverted(false);
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
+        */
     }
-    */
+    
 
     public static Shooter getInstance()
     {

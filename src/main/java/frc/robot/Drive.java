@@ -332,7 +332,7 @@ public class Drive {
 
     public void driveUpdate()
     {
-        /*
+        
         SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
         SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -340,19 +340,19 @@ public class Drive {
         SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
         SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
-       */
-       /* SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
+       
+        SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
-*//*
+
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
 
-        SmartDashboard.putNumber("currentDistance", currentDistance);
-*/
-        SmartDashboard.putNumber("navx", navX.getYaw());
-        SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
+      //  SmartDashboard.putNumber("currentDistance", currentDistance);
+
+        SmartDashboard.putNumber("navx", getNavx());
+       // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
 
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 
@@ -484,7 +484,7 @@ public class Drive {
      */
     public double getNavx()
     {
-        return navX.getYaw();
+        return -navX.getYaw();
     }
 
     /**
@@ -557,8 +557,8 @@ public class Drive {
     */
     public void etherSwerve(double FWD, double STR, double RCW)
     {
-        double yaw = navX.getYaw();
-        double temp = FWD * Math.cos(Math.toRadians(yaw)) + STR* Math.sin(Math.toRadians(yaw));
+        double yaw = getNavx();
+        double temp = FWD * Math.cos(Math.toRadians(yaw)) + STR * Math.sin(Math.toRadians(yaw));
         STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
 
@@ -609,7 +609,7 @@ public class Drive {
     */
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
-        double yaw = navX.getYaw();
+        double yaw = getNavx();
         double temp = (FWD * Math.cos(Math.toRadians(yaw))) + (STR* Math.sin(Math.toRadians(yaw)));
         STR = (-FWD * Math.sin(Math.toRadians(yaw))) + (STR * Math.cos(Math.toRadians(yaw)));
         FWD = temp;

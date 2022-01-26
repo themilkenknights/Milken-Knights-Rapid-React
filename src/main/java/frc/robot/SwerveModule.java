@@ -71,10 +71,15 @@ public class SwerveModule {
     m_turningEncoder = turningEncoderChannel;
 
     //TODO test kp first, then see if using p gets us setpoint in time on ground. if ocilation, add d. when it works on ground, add f 
-    m_driveMotor.config_kP(0, AUTO.autoVeloDriveKP);
-    m_driveMotor.config_kI(0, AUTO.autoVeloDriveKI);
-    m_driveMotor.config_kD(0, 0);//AUTO.autoVeloDriveKD);
-    m_driveMotor.config_kF(0, 0);//AUTO.autoVeloDriveKP);
+    m_driveMotor.config_kP(0, AUTO.moduleDriveKP);
+    m_driveMotor.config_kI(0, AUTO.moduleDriveKI);
+    m_driveMotor.config_kD(0, AUTO.moduleDriveKD);
+    m_driveMotor.config_kF(0, 0);
+
+    m_turningMotor.config_kP(0, AUTO.moduleTurnKP);
+    m_turningMotor.config_kI(0, AUTO.moduleTurnKI);
+    m_turningMotor.config_kD(0, AUTO.moduleTurnKD);
+    m_turningMotor.config_kF(0, 0);
 
 
     // Set the distance per pulse for the drive encoder. We can simply use the
