@@ -131,6 +131,7 @@ public class Robot extends TimedRobot {
    public void teleopInit() {
      mDrive.encoderZero();
      //TODO need to see if drive initiated with code runned, problem if not runned
+     //TODO it runs everything except encoder reset i guess, but also need to set offsets back negative see if work
      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();
