@@ -71,6 +71,7 @@ public class SwerveModule {
     m_turningEncoder = turningEncoderChannel;
 
     //TODO test kp first, then see if using p gets us setpoint in time on ground. if ocilation, add d. when it works on ground, add f 
+    //TODO ask swerd or shalit how to choose falcon pid
     m_driveMotor.config_kP(0, AUTO.moduleDriveKP);
     m_driveMotor.config_kI(0, AUTO.moduleDriveKI);
     m_driveMotor.config_kD(0, AUTO.moduleDriveKD);
@@ -136,8 +137,8 @@ public class SwerveModule {
 
     SmartDashboard.putNumber("driving motor", MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("drive setpoint", state.speedMetersPerSecond);
-    //SmartDashboard.putNumber("turning motor", turnOutput);
-    //SmartDashboard.putNumber("turning feed motor", turnFeedforward);
+    //!SmartDashboard.putNumber("turning motor", turnOutput);
+    //!SmartDashboard.putNumber("turning feed motor", turnFeedforward);
 
     //SmartDashboard.putNumber("turn set", m_turningPIDController.getSetpoint().position);
     //SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
