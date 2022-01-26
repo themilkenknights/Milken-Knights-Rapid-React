@@ -100,6 +100,7 @@ public final class Constants {
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = 70.9277343;
         public static double topRightOffset = 107.138671875;
+        //TODO negative offset?
         public static double bottomLeftOffset = 117.94921875;
         public static double bottomRightOffset = -47.109375;
 
