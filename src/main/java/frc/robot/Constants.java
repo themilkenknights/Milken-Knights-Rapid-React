@@ -83,8 +83,8 @@ public final class Constants {
 
         public static int topTurnLeftCANID = 4; //4; 
         public static int topTurnRightCANID = 6; //7;
-        public static int bottomTurnLeftCANID = 8; //2;
-        public static int bottomTurnRightCANID = 1; //1;
+        public static int bottomTurnLeftCANID = 1; //2;
+        public static int bottomTurnRightCANID = 8; //1;
 
         //got these values by guessing and praying
         public static double turnKP = 0.00008;//0.00008
@@ -101,8 +101,8 @@ public final class Constants {
         public static double topLeftOffset = 70.9277343;
         public static double topRightOffset = 107.138671875;
         //TODO negative offset?
-        public static double bottomLeftOffset = 117.94921875;
-        public static double bottomRightOffset = -47.109375;
+        public static double bottomLeftOffset = -117.94921875; //+
+        public static double bottomRightOffset = 47.109375;  //-
 
         //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;

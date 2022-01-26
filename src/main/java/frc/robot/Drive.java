@@ -211,8 +211,8 @@ public class Drive {
         */
         topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
         topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
-        bottomTurnLeftEncoder.configMagnetOffset(-TURN.bottomLeftOffset);
-        bottomTurnRightEncoder.configMagnetOffset(-TURN.bottomRightOffset);
+        bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
+        bottomTurnRightEncoder.configMagnetOffset(TURN.bottomRightOffset);
 
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -582,10 +582,10 @@ public class Drive {
         wa4 = MkUtil.setDirection(bottomTurnRight, wa4, driveBotRightEther);
 
 
-        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
-        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
-        bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
-        bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
+        topTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa1, TURN.greerRatio)); // ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
+        topTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa2, TURN.greerRatio)); //ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
+        bottomTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa3, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
+        bottomTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa4, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
 
         ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1);
         ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
