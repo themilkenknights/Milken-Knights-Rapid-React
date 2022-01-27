@@ -33,13 +33,33 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
   // The driver's controller
+  XboxController m_driverController = new XboxController(1);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     
+   
+    // The driver's controller
+   
+  
+    /** The container for the robot. Contains subsystems, OI devices, and commands. */
+      // Configure the button bindings
 
+  
+      // Configure default commands
+      m_robotDrive.setDefaultCommand(
+          // The left stick controls translation of the robot.
+          // Turning is controlled by the X axis of the right stick.
+          new RunCommand(
+              () ->
+                  m_robotDrive.drive(
+                      m_driverController.getLeftY(),
+                      m_driverController.getLeftX(),
+                      m_driverController.getRightX(),
+                      true),
+              m_robotDrive));
     // Configure default commands
     // Set the default drive command to split-stick arcade drive
    
