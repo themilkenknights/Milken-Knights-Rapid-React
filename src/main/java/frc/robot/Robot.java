@@ -81,8 +81,11 @@ public class Robot extends TimedRobot {
    private double slider;
    private double volts;
 
-   private boolean toggleOn = false;
-   private boolean togglePressed = false;
+   private boolean toggleFastOn = false;
+   private boolean toggleFastPressed = false;
+
+   private boolean toggleSlowOn = false;
+   private boolean toggleSlowPressed = false;
 
    private double spee = 3;
 
@@ -149,7 +152,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     mDrive.driveUpdate();
-    updateToggle();
+    updateFastToggle();
+    updateSlowToggle();
      
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
@@ -196,10 +200,14 @@ public class Robot extends TimedRobot {
       }
 
 
-      if(toggleOn){
+      if(toggleFastOn){
         // Do something when toggled on
         spee = 1;
-      }else{
+      }
+      else if(toggleSlowOn){
+        spee = 7;
+      }
+      else{
           // Do something when toggled off
         spee = 3;
       }
@@ -220,16 +228,29 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
-  public void updateToggle()
+  public void updateFastToggle()
   {
       if(xbox.getPOV() == 0){
-          if(!togglePressed){
-              toggleOn = !toggleOn;
-              togglePressed = true;
+          if(!toggleFastPressed){
+              toggleFastOn = !toggleFastOn;
+              toggleFastPressed = true;
           }
       }
       else{
-          togglePressed = false;
+          toggleFastPressed = false;
+      }
+  }
+
+  public void updateSlowToggle()
+  {
+      if(xbox.getPOV() == 180){
+          if(!toggleSlowPressed){
+              toggleSlowOn = !toggleSlowOn;
+              toggleSlowPressed = true;
+          }
+      }
+      else{
+          toggleSlowPressed = false;
       }
   }
 }
