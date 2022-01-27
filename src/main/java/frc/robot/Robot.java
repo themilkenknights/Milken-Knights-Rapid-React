@@ -22,6 +22,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -80,6 +81,10 @@ public class Robot extends TimedRobot {
    private double slider;
    private double volts;
 
+   private boolean toggleOn = false;
+   private boolean togglePressed = false;
+
+   private double spee = 3;
 
    @Override
    public void robotInit() {
@@ -144,6 +149,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     mDrive.driveUpdate();
+    updateToggle();
      
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
@@ -165,7 +171,7 @@ public class Robot extends TimedRobot {
 
       if(one != 0 || two != 0 || three != 0)
       {
-        mDrive.etherSwerve(-one/3,two/3,three/3);
+        mDrive.etherSwerve(-one/spee,two/spee,three/spee);
       }
       else if(xbox.getAButton())
       {
@@ -189,6 +195,15 @@ public class Robot extends TimedRobot {
         mDrive.drivePercent(0,0,0,0);
       }
 
+
+      if(toggleOn){
+        // Do something when toggled on
+        spee = 1;
+      }else{
+          // Do something when toggled off
+        spee = 3;
+      }
+
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
   }
@@ -204,4 +219,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {}
+
+  public void updateToggle()
+  {
+      if(xbox.getPOV() == 0){
+          if(!togglePressed){
+              toggleOn = !toggleOn;
+              togglePressed = true;
+          }
+      }
+      else{
+          togglePressed = false;
+      }
+  }
 }

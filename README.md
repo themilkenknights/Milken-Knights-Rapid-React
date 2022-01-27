@@ -11,6 +11,10 @@
 - team 7166 - organization of auto and they had a similar auto
 <br/>
 
+#### MISC:
+- Programming Done Right - toggle button
+<br/>
+
 ## HOW TO USE:
 - not really user friendly rn, all you need to do is change the constants (i think)
 - also download the Better Comments extension for color coded comments
