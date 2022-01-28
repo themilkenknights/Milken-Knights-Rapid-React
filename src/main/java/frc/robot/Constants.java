@@ -130,19 +130,46 @@ public final class Constants {
         public static int shootKD = 0;
         public static int shootKF = 0;
 
+        public static double kS = 0;
+        public static double kV = 0;
+        public static double kA = 0;
+
         public static double beltGreerRatio = 0;
 
         public static double maxVelo = 0;
+        public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;
+    }
+
+    public static class INTAKE 
+    {
+        public static double voltComp = 12;
+
+        public static int intakeCANID = 0;
+        public static int rollersCANID = 0;
+
+        public static double intakeGreerRatio = 0;
+        public static double rollersGreerRatio = 0;
+
+        public static double intakeKP = 0;
+        public static double intakeKI = 0;
+        public static double intakeKD = 0;
+        public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
     }
 
     public static class LIMELIGHT
     {
         public static double angleAboveHorizontal = 0;
-        public static double height = 0;
+        public static double heightLime = 0;
         public static double lowerGoalHeight = 0;
         public static double upperGoalHeight = 0;
+
+        public static double closestDistanceHoodAngleLow = 0;
+        public static double closestDistanceRPMLow = 0;
+        
+        public static double closestDistanceHoodAngleHigh = 0;
+        public static double closestDistanceRPMHigh = 0;
     }
 
     public static class LIGHTS

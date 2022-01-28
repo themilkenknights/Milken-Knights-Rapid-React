@@ -33,7 +33,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
   // The driver's controller
-  XboxController m_driverController = new XboxController(1);
+  XboxController m_driverController = new XboxController(0);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
