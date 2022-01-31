@@ -149,7 +149,7 @@ public final class Constants {
         public static double voltComp = 12;
 
         public static int INTAKECANID = 14; 
-        public static int INTAKEROLLERID = 13; 
+        public static int INTAKEROLLERCANID = 13; 
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;

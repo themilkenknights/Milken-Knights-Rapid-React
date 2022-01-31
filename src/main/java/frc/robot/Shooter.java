@@ -61,7 +61,7 @@ public class Shooter {
         belt.setInverted(false);
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
-     
+    
     }
     
 
@@ -72,7 +72,7 @@ public class Shooter {
 
     private static class InstanceHolder
     {
-        private static final Shooter mInstance = new Shooter();  }
+      private static final Shooter mInstance = new Shooter();      
     } 
-    */
+    
 }
