@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
      m_robotContainer = new RobotContainer();
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
-     positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
+     positionChooser.setDefaultOption("MOVE", AutoPosition.LEFT);
 
 
 
@@ -154,7 +154,7 @@ public class Robot extends TimedRobot {
  
   @Override
   public void teleopPeriodic() {
-    /*
+    
     mDrive.driveUpdate();
     updateFastToggle();
     updateSlowToggle();
@@ -218,7 +218,7 @@ public class Robot extends TimedRobot {
 
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
- */
+ 
     }
 
   @Override
