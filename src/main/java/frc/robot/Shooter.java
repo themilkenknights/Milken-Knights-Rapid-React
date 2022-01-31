@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -12,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
@@ -93,18 +91,6 @@ public class Shooter {
     public static Shooter getInstance()
     {
         return InstanceHolder.mInstance;
-    }
-
-    public void setVelocity(double percent)
-    {
-        shootLeft.set(ControlMode.PercentOutput, percent);
-        shootRight.set(ControlMode.PercentOutput, percent);
-    }
-
-    public void updateShoot()
-    {
-        SmartDashboard.putNumber("veloleft", shootLeft.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("veloright", shootRight.getSelectedSensorVelocity());
     }
 
     private static class InstanceHolder
