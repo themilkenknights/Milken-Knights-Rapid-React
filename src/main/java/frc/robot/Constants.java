@@ -121,9 +121,9 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
 
-        public static int shootLeftCANID = 19;
-        public static int shootRightCANID = 20;
-        public static int beltCANID = 11;
+        public static int shootLeftCANID = 0;
+        public static int shootRightCANID = 0;
+        public static int beltCANID = 0;
 
         public static int shootKP = 0;
         public static int shootKI = 0;
@@ -141,13 +141,13 @@ public final class Constants {
 
         public static double voltComp = 12;
     }
-//test slack
+
     public static class INTAKE 
     {
         public static double voltComp = 12;
 
-        public static int intakeCANID = 14;
-        public static int rollersCANID = 13;
+        public static int intakeCANID = 0;
+        public static int rollersCANID = 0;
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
@@ -237,3 +237,4 @@ public final class Constants {
         public static double nativeToMetersPerSec = (10 * (MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches) * kPi))/(DRIVE.greerRatio * 2048);
     }
 }
+

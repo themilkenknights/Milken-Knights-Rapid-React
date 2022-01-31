@@ -15,13 +15,13 @@ import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
 public class Shooter {
-   /* TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
+    /*
+    TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
     TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
-    */
+    
     private Shooter()
     {
-        /*
         shootLeft.configFactoryDefault();
         shootLeft.setNeutralMode(NeutralMode.Coast);
         shootLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -55,15 +55,13 @@ public class Shooter {
         shootRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, SHOOT.statusTwoMeas);
 
 
+
         belt.configFactoryDefault();
         belt.setNeutralMode(NeutralMode.Brake);
         belt.setInverted(false);
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
-
-
-        */
-
+        
     }
     
 
@@ -74,7 +72,7 @@ public class Shooter {
 
     private static class InstanceHolder
     {
-      private static final Shooter mInstance = new Shooter();      
+        private static final Shooter mInstance = new Shooter();
     } 
-
+    */
 }
