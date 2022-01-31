@@ -151,7 +151,7 @@ public class Robot extends TimedRobot {
  
   @Override
   public void teleopPeriodic() {
-    /*
+    
     mDrive.driveUpdate();
     updateFastToggle();
     updateSlowToggle();
@@ -215,7 +215,7 @@ public class Robot extends TimedRobot {
 
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
- */
+ 
     }
 
   @Override
