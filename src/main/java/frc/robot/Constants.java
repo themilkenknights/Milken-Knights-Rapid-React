@@ -140,6 +140,7 @@ public final class Constants {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static class INTAKE 
     {
         public static double voltComp = 12;
@@ -158,6 +159,8 @@ public final class Constants {
 
     }
 
+=======
+>>>>>>> parent of 417e8ac (added intake and shooter class)
 =======
 >>>>>>> parent of 417e8ac (added intake and shooter class)
     public static class LIMELIGHT
