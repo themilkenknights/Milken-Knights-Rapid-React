@@ -13,9 +13,9 @@ import frc.robot.Constants.INTAKE;
 
 /** Add your docs here. */
 public class Intake {
-    
-    TalonSRX intake = new TalonSRX(INTAKE.INTAKECANID);
-    TalonSRX rollers = new TalonSRX(INTAKE.INTAKEROLLERCANID);
+    /*
+    TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
+    TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
     
     private Intake()
     {
@@ -43,5 +43,5 @@ public class Intake {
     {
         private static final Intake mInstance = new Intake();
     } 
-    
+    */
 }
