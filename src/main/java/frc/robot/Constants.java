@@ -154,10 +154,10 @@ public final class Constants {
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
 
-        public static double intakeKP = 0;
+        public static double intakeKP = .002;
         public static double intakeKI = 0;
-        public static double intakeKD = 0;
-        public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
+        public static double intakeKD = 0.001;
+        public static double intakeKF = 1; //TODO may not need pid if bang bang limit swtich
 
 
     }
