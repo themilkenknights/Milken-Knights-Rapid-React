@@ -121,9 +121,9 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
 
-        public static int shootLeftCANID = 0;
-        public static int shootRightCANID = 0;
-        public static int beltCANID = 0;
+        public static int shootleftCANID = 19; //;
+        public static int shootrightCANID = 20; //;
+        public static int beltCANID = 11; //
 
         public static int shootKP = 0;
         public static int shootKI = 0;
@@ -140,22 +140,26 @@ public final class Constants {
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;
+;
+     
     }
 
     public static class INTAKE 
     {
         public static double voltComp = 12;
 
-        public static int intakeCANID = 0;
-        public static int rollersCANID = 0;
+        public static int INTAKECANID = 14; 
+        public static int INTAKEROLLERCANID = 13; 
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
 
-        public static double intakeKP = 0;
+        public static double intakeKP = .002;
         public static double intakeKI = 0;
-        public static double intakeKD = 0;
-        public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
+        public static double intakeKD = 0.001;
+        public static double intakeKF = 1; //TODO may not need pid if bang bang limit swtich
+
+
     }
 
     public static class LIMELIGHT

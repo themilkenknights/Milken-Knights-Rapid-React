@@ -38,6 +38,7 @@ import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
+import io.github.oblarg.oblog.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -91,12 +92,13 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
+    Logger.configureLoggingAndConfig(this, false);
      
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
-     positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
+     positionChooser.setDefaultOption("MOVE", AutoPosition.LEFT);
 
 
 
@@ -109,6 +111,7 @@ public class Robot extends TimedRobot {
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
      Shuffle.getInstance().update();
+     Logger.updateEntries();
    }
  
    @Override
@@ -151,7 +154,7 @@ public class Robot extends TimedRobot {
  
   @Override
   public void teleopPeriodic() {
-    /*
+    
     mDrive.driveUpdate();
     updateFastToggle();
     updateSlowToggle();
@@ -215,7 +218,7 @@ public class Robot extends TimedRobot {
 
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
- */
+ 
     }
 
   @Override

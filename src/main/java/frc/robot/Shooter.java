@@ -17,9 +17,9 @@ import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
 public class Shooter {
-    /*
-    TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
-    TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
+    
+    TalonFX shootLeft = new TalonFX(SHOOT.shootleftCANID);
+    TalonFX shootRight = new TalonFX(SHOOT.shootrightCANID);
     TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
     
     private Shooter()
@@ -63,7 +63,7 @@ public class Shooter {
         belt.setInverted(false);
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
-        
+    
     }
     
 
@@ -86,7 +86,7 @@ public class Shooter {
 
     private static class InstanceHolder
     {
-        private static final Shooter mInstance = new Shooter();
+      private static final Shooter mInstance = new Shooter();      
     } 
-    */
+    
 }
