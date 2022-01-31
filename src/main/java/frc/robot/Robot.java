@@ -38,6 +38,7 @@ import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
+import io.github.oblarg.oblog.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -91,6 +92,7 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
+    Logger.configureLoggingAndConfig(this, false);
      
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
@@ -109,6 +111,7 @@ public class Robot extends TimedRobot {
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
      Shuffle.getInstance().update();
+     Logger.updateEntries();
    }
  
    @Override
