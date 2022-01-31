@@ -140,6 +140,10 @@ public final class Constants {
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;
+        public static int shootleftCANID = 19; //;
+        public static int shootrightCANID = 20; //;
+        public static int beltCANID = 11; //;
+     
     }
 
     public static class INTAKE 
@@ -156,6 +160,9 @@ public final class Constants {
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
+        public static int INTAKECANID = 14; //12;
+        public static int INTAKEROLLERID = 13; //3;
+
     }
 
     public static class LIMELIGHT

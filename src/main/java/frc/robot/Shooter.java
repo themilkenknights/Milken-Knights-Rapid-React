@@ -15,7 +15,7 @@ import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
 public class Shooter {
-    /*
+    
     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
     TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
