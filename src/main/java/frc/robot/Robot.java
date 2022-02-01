@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
    */
 
    private Drive mDrive = Drive.getInstance();
+   private Shooter mShoot = Shooter.getInstance();
    private XboxController xbox = new XboxController(0);
     /**
      * forward movement axis
@@ -194,9 +195,14 @@ public class Robot extends TimedRobot {
       {
         mDrive.encoderZero();
       }
+      else if(xbox.getRawAxis(2) > 0)
+      {
+        mShoot.setShooterPercent(xbox.getRawAxis(2));
+      }
       else
       {
         mDrive.turnPercent(0,0,0,0);
+        mShoot.setShooterPercent(0);
         mDrive.drivePercent(0,0,0,0);
       }
 

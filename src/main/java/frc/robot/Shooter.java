@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -15,7 +16,7 @@ import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
 public class Shooter {
-    /*
+    
     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
     TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
@@ -70,9 +71,15 @@ public class Shooter {
         return InstanceHolder.mInstance;
     }
 
+    public void setShooterPercent(double percent)
+    {
+        shootLeft.set(ControlMode.PercentOutput, percent);
+        shootRight.set(ControlMode.PercentOutput, percent);
+    }
+
     private static class InstanceHolder
     {
         private static final Shooter mInstance = new Shooter();
     } 
-    */
+    
 }
