@@ -382,6 +382,15 @@ public class MkUtil {
         }
     }
 
+    //TODO hope these work
+    public static double nativePer100MstoDegreesPerSec(double gimmeRots, double greerRatio)
+    {
+      return (gimmeRots * 1000 * 360) / (greerRatio * 2048);
+    }
 
+    public static double degreesPerSectoNativePer100Ms(double gimmeDeg, double greerRatio)
+    {
+      return (gimmeDeg * 2048 * greerRatio) / (360 * 100);
+    }
 
 }
