@@ -24,8 +24,8 @@ public class Intake {
         intake.setInverted(false);
         intake.enableVoltageCompensation(true);
         intake.configVoltageCompSaturation(INTAKE.voltComp);
-        intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        //intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
         rollers.configFactoryDefault();
         rollers.setNeutralMode(NeutralMode.Brake);

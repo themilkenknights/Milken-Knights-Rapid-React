@@ -160,6 +160,39 @@ public final class Constants {
         public static double timeIntake = 0; //TODO may not need if bang bang limit switch
     }
 
+    public static class CLIMBER
+    {
+        public static int velocityMeasAmount = 16;
+        public static int statusOneMeas = 25;
+        public static int statusTwoMeas = 25;
+
+        public static int telescopeArmLeftCANID = 0;
+        public static int telescopeArmRightCANID = 0;
+
+        public static int rotateArmLeftCANID = 0;
+        public static int rotateArmRightCANID = 0;
+
+        public static double rotateGreerRatio = 0;
+
+        public static double telescopeKP = 0;
+        public static double telescopeKI = 0;
+        public static double telescopeKD = 0;
+        public static double telescopeKF = 0;
+
+        public static double rotateKP = 0;
+        public static double rotateKI = 0;
+        public static double rotateKD = 0;
+        public static double rotateKF = 0;
+
+        public static double voltComp = 12;
+
+        public static boolean telescopeLeftFlipped = false;
+        public static boolean rotateLeftFlipped = false;
+
+        public static int rotateMagicSCurve = 0;
+        public static int telescopeMagicSCurve = 0;
+    }
+
     public static class LIMELIGHT
     {
         public static double angleAboveHorizontal = 0;
