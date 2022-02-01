@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.SHOOT;
 
 /** Add your docs here. */
@@ -70,11 +71,23 @@ public class Shooter {
     {
         return InstanceHolder.mInstance;
     }
+    
+    public void shootUpdate()
+    {
+        SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
+    }
 
     public void setShooterPercent(double percent)
     {
         shootLeft.set(ControlMode.PercentOutput, percent);
         shootRight.set(ControlMode.PercentOutput, percent);
+    }
+
+    public void setShooterNativeVeloctiy(double setpoint)
+    {
+        shootLeft.set(ControlMode.Velocity, setpoint);
+        shootRight.set(ControlMode.Velocity, setpoint);
     }
 
     private static class InstanceHolder

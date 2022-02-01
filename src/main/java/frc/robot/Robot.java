@@ -154,6 +154,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     mDrive.driveUpdate();
+    mShoot.shootUpdate();
     updateFastToggle();
     updateSlowToggle();
      
@@ -197,7 +198,8 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getRawAxis(2) > 0)
       {
-        mShoot.setShooterPercent(xbox.getRawAxis(2));
+        mShoot.setShooterNativeVeloctiy(slider);
+        //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else
       {
@@ -222,6 +224,7 @@ public class Robot extends TimedRobot {
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
+      slider = SmartDashboard.getNumber("slider", 0);
     }
 
   @Override

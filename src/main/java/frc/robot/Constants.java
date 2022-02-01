@@ -156,6 +156,8 @@ public final class Constants {
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
+
+        public static double timeIntake = 0; //TODO may not need if bang bang limit switch
     }
 
     public static class LIMELIGHT
@@ -183,6 +185,7 @@ public final class Constants {
         public static double moduleTurnKP = 0.063403; //0.63403; //0.063403;            //0.0000063403;        //1.6261;      //0.0000001;
         public static double moduleTurnKI = 0;
         public static double moduleTurnKD = 0.00098857; //0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;       //0.0000000; 
+        //TODO why is making pid values a god damn guessing game
 
         public static double moduleDriveKP = 0.03; //0.0000001;
         public static double moduleDriveKI = 0;
@@ -201,8 +204,8 @@ public final class Constants {
         new Translation2d(heightMeters, -widthMeters),
         new Translation2d(-heightMeters, widthMeters),
         new Translation2d(-heightMeters, -widthMeters));
-        //TODO also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
-
+        //// also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
+        //i think it works?
         
         
         public static final double maxModuleTurnVelo = kPi * 2;
