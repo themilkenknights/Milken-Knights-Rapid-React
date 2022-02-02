@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -93,7 +94,22 @@ public class Climber {
         return InstanceHolder.mInstance;
     }
 
+    public void climberUpdate()
+    {
 
+    }
+
+    public void telescopePercent(double percentleft, double percentright)
+    {
+        telescopeArmLeft.set(ControlMode.PercentOutput, percentleft);
+        telescopeArmRight.set(ControlMode.PercentOutput, percentright);
+    }
+
+    public void rotatePercent(double percentleft, double percentright)
+    {
+        rotateArmLeft.set(ControlMode.PercentOutput, percentleft);
+        rotateArmRight.set(ControlMode.PercentOutput, percentright);
+    }
 
     private static class InstanceHolder
     {

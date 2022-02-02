@@ -72,7 +72,7 @@ public class Shooter {
         return InstanceHolder.mInstance;
     }
     
-    public void shootUpdate()
+    public void shooterUpdate()
     {
         SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
         SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());

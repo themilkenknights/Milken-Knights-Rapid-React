@@ -43,6 +43,7 @@ public class DriveStraight extends CommandBase {
     F = robot
     1 = starting position
     2 = ending position
+    (this isnt a hot air balloon fyi)
     </pre>
    * @param distanceA 
    * @param lengthB

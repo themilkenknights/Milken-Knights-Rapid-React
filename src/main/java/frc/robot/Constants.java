@@ -189,8 +189,11 @@ public final class Constants {
         public static boolean telescopeLeftFlipped = false;
         public static boolean rotateLeftFlipped = false;
 
-        public static int rotateMagicSCurve = 0;
         public static int telescopeMagicSCurve = 0;
+        public static int rotateMagicSCurve = 0;
+
+        public static double telescopeHighPoint = 0;
+        public static double rotateHighPoint = 0;
     }
 
     public static class LIMELIGHT

@@ -330,6 +330,10 @@ public class Drive {
         return InstanceHolder.mInstance;
     }
 
+    /**
+     * periodically updates values
+     * @return displays values and updates values
+     */
     public void driveUpdate()
     {
         
@@ -400,7 +404,7 @@ public class Drive {
 
 
     /**
-    powers all angular motors at varying speeds
+    powers all angular motors at varying speeds [1, -1]
     */
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
@@ -410,7 +414,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, botright);
     }
     /**
-    powers all angular motors to turn to specific angles
+    powers all angular motors to turn to specific angles (use degrees)
     */
     public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
     {
@@ -420,7 +424,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
     /**
-    powers all drive motors at varying speeds
+    powers all drive motors at varying speeds [1, -1]
     */
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
@@ -430,7 +434,7 @@ public class Drive {
         bottomDriveRight.set(ControlMode.PercentOutput, botright);
     }
     /**
-    sets angular motors' integrated encoder's position to {@code setpoint}
+    sets all angular motors' integrated encoder's position to {@code setpoint}
     @param setpoint angle that the positions will be set to
     */
     public void setPosTurn(double setpoint)
@@ -479,7 +483,7 @@ public class Drive {
     }
 
     /**
-     * gets navx yaw
+     * gets navx yaw (negative because of navx placement)
      * @return returns navx yaw
      */
     public double getNavx()
@@ -648,6 +652,7 @@ public class Drive {
 
 
     public double currentDistance = 0;
+    public double turnDistance = 0;
     public double distanceA = 0;
     public double lengthB = 0;
 
@@ -684,6 +689,7 @@ public class Drive {
     F = robot
     1 = starting position
     2 = ending position
+    (this isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA
@@ -729,6 +735,7 @@ public class Drive {
     F = robot
     1 = starting position
     2 = ending position
+    (this isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA
@@ -771,6 +778,7 @@ public class Drive {
     F = robot
     1 = starting position
     2 = ending position
+    (this isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA
@@ -819,8 +827,9 @@ public class Drive {
 
     /**
     returns state of auto turn
-    @param  totalDistance length of curved path
+    @param  totalDistance length of curved path (the same distance set in the <code> setMagicStraight()</code> function)
     @return returns true if turning is done
+    @see {@link #setMagicStraight(double setpoint)}
     */
     public boolean autoTurnIsDone(double totalDistance)
     {
@@ -847,8 +856,11 @@ public class Drive {
         bottomDriveRight.configMotionAcceleration(DRIVE.magicAccel);
     }
 
-    public double turnDistance;
-
+    /**
+     * resets turn motors and sets motion magic velocity, acceleration, and distance
+     * @param setpoint distance (inches, and the same distance set in the <code> setMagicStraight()</code> function). however, if you are turning without driving, use native units instead of inches
+     * @see {@link #setMagicStraight(double setpoint)}
+     */
     public void setMagicTurn(double setpoint)
     {
         turnDistance = setpoint;
@@ -864,7 +876,9 @@ public class Drive {
     }
 
     /**
-    updates motors 
+    updates turn motors with magic
+    @param totalDistance the same distance set in the <code> setMagicStraight() </code> function
+    @see {@link #setMagicStraight(double setpoint)}
     */
     public void updateMagicTurn(double totalDistance)
     {
@@ -880,6 +894,10 @@ public class Drive {
         bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
     }
 
+    /**
+     * updates turn motors with magic if you arent turning while driving and have set the setpoint in <code> setMagicTurn() </code> to native units instead of a distance (inches)
+     * @see {@link #setMagicTurn(double setpoint)}
+     */
     public void updateMagicTurnAlone()
     {
         topTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
@@ -888,6 +906,9 @@ public class Drive {
         bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
     }
 
+    /**
+     * updates drive motors with magic
+     */
     public void updateMagicStraight()
     {
         topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
@@ -915,8 +936,10 @@ public class Drive {
     }
 
     /**
-     * returns state of percent turning
+     * returns the state of percent turning (use if using <code> updateMagicTurnAlone() </code> and using native units instead of inches in <code> setMagicTurn() </code>)
      * @return returns true if percent turning is done
+     * @see {@link #updateMagicTurnAlone()}
+     * @see {@link #setMagicTurn(double setpoint)}
      */
     public boolean percentTurnDone()
     {

@@ -154,7 +154,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     mDrive.driveUpdate();
-    mShoot.shootUpdate();
+    mShoot.shooterUpdate();
     updateFastToggle();
     updateSlowToggle();
      
