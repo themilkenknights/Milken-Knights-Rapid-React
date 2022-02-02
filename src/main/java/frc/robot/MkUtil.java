@@ -383,11 +383,25 @@ public class MkUtil {
     }
 
     //TODO hope these work
+    /**
+     * converts native velocity (1n/100ms) into degree velocity (1d/1s)
+     * @param gimmeRots velocity (1n/100ms)
+     * @param greerRatio gear ratio
+     * @return velocity (degrees per second)
+     * @apiNote i dont know if these are correct
+     */
     public static double nativePer100MstoDegreesPerSec(double gimmeRots, double greerRatio)
     {
       return (gimmeRots * 1000 * 360) / (greerRatio * 2048);
     }
 
+    /**
+     * converts degree velocity (1d/1s) into native velocity (1n/100ms)
+     * @param gimmeDeg velocity (1d/1s)
+     * @param greerRatio gear ratio
+     * @return velocity (native per 100ms)
+     * @apiNote i dont know if these are correct
+     */
     public static double degreesPerSectoNativePer100Ms(double gimmeDeg, double greerRatio)
     {
       return (gimmeDeg * 2048 * greerRatio) / (360 * 100);
