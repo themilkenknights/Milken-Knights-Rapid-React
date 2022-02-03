@@ -136,7 +136,7 @@ public final class Constants {
 
         public static double beltGreerRatio = 0;
 
-        public static double maxVelo = 0;
+        public static double maxVelo = 17800; //16600;
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;

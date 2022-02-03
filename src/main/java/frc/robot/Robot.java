@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
+   private SendableChooser<Integer> autoChooser = new SendableChooser<>();
    private RobotContainer m_robotContainer;
     /**
      * states of autonomous
@@ -90,6 +91,8 @@ public class Robot extends TimedRobot {
 
    private double spee = 3;
 
+   private int velo = 0;
+
    @Override
    public void robotInit() {
      
@@ -98,6 +101,10 @@ public class Robot extends TimedRobot {
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
+     autoChooser.addOption("spee1", 10000);
+    autoChooser.addOption("spee2", 14000);
+      // etc.
+    SmartDashboard.putData("spee", autoChooser);
 
 
 
@@ -198,8 +205,8 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getRawAxis(2) > 0)
       {
-        mShoot.setShooterNativeVeloctiy(slider);
-        //mShoot.setShooterPercent(xbox.getRawAxis(2));
+        //mShoot.setShooterNativeVeloctiy(slider);
+        mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else
       {
@@ -225,6 +232,7 @@ public class Robot extends TimedRobot {
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
       slider = SmartDashboard.getNumber("slider", 0);
+      velo = autoChooser.getSelected();
     }
 
   @Override
