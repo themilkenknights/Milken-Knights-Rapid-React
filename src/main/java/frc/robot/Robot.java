@@ -71,13 +71,18 @@ public class Robot extends TimedRobot {
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
-   private SendableChooser<Integer> autoChooser = new SendableChooser<>();
+   private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
    private RobotContainer m_robotContainer;
     /**
      * states of autonomous
      */ 
    public enum AutoPosition {
      LEFT, NOTHING
+   }
+
+   public enum veloch
+   {
+     veloOne, veloTwo, veloThree
    }
 
    private double slider;
@@ -89,8 +94,7 @@ public class Robot extends TimedRobot {
    private boolean toggleSlowOn = false;
    private boolean toggleSlowPressed = false;
 
-   private double spee = 3;
-
+   private double spee = 0;
    private int velo = 0;
 
    @Override
@@ -98,13 +102,16 @@ public class Robot extends TimedRobot {
      
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
+     mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
-     autoChooser.addOption("spee1", 10000);
-    autoChooser.addOption("spee2", 14000);
+     veloshufflething.addOption("spee1", veloch.veloOne);
+     veloshufflething.addOption("spee2", veloch.veloTwo);
+     veloshufflething.addOption("spee3", veloch.veloThree);
+     veloshufflething.setDefaultOption("spee1", veloch.veloOne);
       // etc.
-    SmartDashboard.putData("spee", autoChooser);
+    
 
 
 
@@ -154,6 +161,18 @@ public class Robot extends TimedRobot {
      }
      mDrive.resetDrive();
      SmartDashboard.putNumber("slider", 0);
+     switch (veloshufflething.getSelected()) {
+      case veloOne:
+        velo = 0;
+        break;
+      case veloTwo:
+        velo = 10000;
+        break;
+       
+      case veloThree:
+        velo = 14000;
+        break;
+    }
    }
  
  
@@ -232,7 +251,8 @@ public class Robot extends TimedRobot {
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
       slider = SmartDashboard.getNumber("slider", 0);
-      velo = autoChooser.getSelected();
+      SmartDashboard.putNumber("spee", spee);
+      SmartDashboard.putNumber("velo", velo);
     }
 
   @Override
