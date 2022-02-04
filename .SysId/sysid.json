@@ -1,8 +1,11 @@
 {
   "SysId": {
     "Analysis Type": "General Mechanism",
+    "AnalyzerJSONLocation": "C:\\Users\\bossMaster\\Downloads\\sysid_data20220204-145000.json",
     "NetworkTables Settings": {
       "serverTeam": "1836"
-    }
+    },
+    "mode": "Client",
+    "serverTeam": "1836"
   }
 }

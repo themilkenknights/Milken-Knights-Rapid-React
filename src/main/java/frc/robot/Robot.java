@@ -4,9 +4,15 @@
 
 package frc.robot;
 
+import java.awt.MouseInfo;
 import java.util.List;
 
+import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.basic.BasicDesktopIconUI.MouseInputHandler;
+import javax.swing.plaf.basic.BasicTabbedPaneUI.MouseHandler;
 import javax.xml.crypto.dsig.keyinfo.KeyInfo;
+
+import org.w3c.dom.events.MouseEvent;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -183,7 +189,8 @@ public class Robot extends TimedRobot {
     mShoot.shooterUpdate();
     updateFastToggle();
     updateSlowToggle();
-     
+    //MouseInfo.getPointerInfo();
+    //TODO do something with mouse?
     one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
     two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
     three = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
@@ -224,8 +231,8 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getRawAxis(2) > 0)
       {
-        //mShoot.setShooterNativeVeloctiy(slider);
-        mShoot.setShooterPercent(xbox.getRawAxis(2));
+        mShoot.setShooterNativeVeloctiy(velo);
+        //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else
       {

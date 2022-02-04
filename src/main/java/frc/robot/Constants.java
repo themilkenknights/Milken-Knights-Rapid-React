@@ -125,10 +125,10 @@ public final class Constants {
         public static int shootRightCANID = 20;
         public static int beltCANID = 11;
 
-        public static int shootKP = 0;
-        public static int shootKI = 0;
-        public static int shootKD = 0;
-        public static int shootKF = 0;
+        public static double shootKP = 0.29559; //0.19559;
+        public static double shootKI = 0;
+        public static double shootKD = 0;
+        public static double shootKF = 0;
 
         public static double kS = 0;
         public static double kV = 0;
