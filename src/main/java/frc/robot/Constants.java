@@ -140,6 +140,8 @@ public final class Constants {
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;
+
+        public static double maxError = 0;
     }
 
     public static class INTAKE 

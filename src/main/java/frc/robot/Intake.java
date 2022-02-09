@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -37,6 +38,11 @@ public class Intake {
     public static Intake getInstance()
     {
         return InstanceHolder.mInstance;
+    }
+
+    public void setIntakePercent(double setpoint)
+    {
+        intake.set(ControlMode.PercentOutput, setpoint);
     }
 
     private static class InstanceHolder

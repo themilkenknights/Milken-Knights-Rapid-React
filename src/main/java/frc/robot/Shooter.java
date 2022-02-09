@@ -63,7 +63,6 @@ public class Shooter {
         belt.setInverted(false);
         belt.enableVoltageCompensation(true);
         belt.configVoltageCompSaturation(SHOOT.voltComp);
-        
     }
     
 
@@ -88,6 +87,17 @@ public class Shooter {
     {
         shootLeft.set(ControlMode.Velocity, setpoint);
         shootRight.set(ControlMode.Velocity, setpoint);
+    }
+
+    public void setShooterNativeVeloCalc(double setpoint)
+    {
+         shootLeft.set(ControlMode.Velocity, setpoint + shooterFeedForward(setpoint));
+         shootRight.set(ControlMode.Velocity, setpoint + shooterFeedForward(setpoint));
+    }
+
+    public double shooterFeedForward(double setpoint)
+    {
+        return -SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (setpoint / SHOOT.maxVelo)));
     }
 
     private static class InstanceHolder

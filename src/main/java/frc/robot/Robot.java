@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+//!                   sigma grindset rule #29534 - always keep your accidental imports, even if you never use them
+
 import java.awt.MouseInfo;
 import java.util.List;
 
@@ -60,6 +62,8 @@ public class Robot extends TimedRobot {
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
    private XboxController xbox = new XboxController(0);
+
+
     /**
      * forward movement axis
      */ 
@@ -77,8 +81,14 @@ public class Robot extends TimedRobot {
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
+   
    private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
+   
+   /**
+    * for wpi swerve and auto
+    */
    private RobotContainer m_robotContainer;
+   
     /**
      * states of autonomous
      */ 
@@ -86,21 +96,53 @@ public class Robot extends TimedRobot {
      LEFT, NOTHING
    }
 
+   /**
+    * states of shooter speed
+    */
    public enum veloch
    {
      veloOne, veloTwo, veloThree
    }
 
+   /**
+    * for slider widget
+    */
    private double slider;
+
+   /**
+    * for motor volt testing
+    */
    private double volts;
 
+   /**
+    * baby toggle fast
+    */
    private boolean toggleFastOn = false;
+
+   /**
+    * baby pressed fast
+    */
    private boolean toggleFastPressed = false;
 
+
+   /**
+    * baby toggle slow
+    */
    private boolean toggleSlowOn = false;
+
+   /**
+    * baby pressed slow
+    */
    private boolean toggleSlowPressed = false;
 
+   /**
+    * constant that divides speed (baby control)
+    */
    private double spee = 0;
+
+   /**
+    * setpoint variable for shooting
+    */
    private int velo = 0;
 
    @Override
@@ -274,11 +316,16 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
+  /**
+   * updates state of fast toggle for driving
+   */
   public void updateFastToggle()
   {
       if(xbox.getPOV() == 0){
           if(!toggleFastPressed){
               toggleFastOn = !toggleFastOn;
+              toggleSlowOn = false;
+              //TODO ^^ might not work
               toggleFastPressed = true;
           }
       }
@@ -287,11 +334,16 @@ public class Robot extends TimedRobot {
       }
   }
 
+  /**
+   * updates state of slow toggle for driving
+   */
   public void updateSlowToggle()
   {
       if(xbox.getPOV() == 180){
           if(!toggleSlowPressed){
               toggleSlowOn = !toggleSlowOn;
+              toggleFastOn = false;
+              //TODO ^^ might not work
               toggleSlowPressed = true;
           }
       }

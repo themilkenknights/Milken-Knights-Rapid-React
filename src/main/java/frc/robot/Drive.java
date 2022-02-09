@@ -454,7 +454,7 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(0);
         bottomTurnRight.setSelectedSensorPosition(0);
     }
-    /***
+    /**
     sets all drive motors' integrated encoder's positions to zero
     */
     public void resetDrive()
@@ -464,7 +464,7 @@ public class Drive {
         bottomDriveLeft.setSelectedSensorPosition(0);
         bottomDriveRight.setSelectedSensorPosition(0);
     }
-    /***
+    /**
     sets all angular motors' integrated encoder's positions to their respective CANCoder's position
     */
     public void encoderZero()
@@ -473,6 +473,18 @@ public class Drive {
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+    }
+    //TODO test to see if solves problem of continuous bullshit rotaty thingy (zoom zoom when at 0 continuous thing)
+    /**
+     * powers all angular motors to turn to 0 based on their respective CANCoder's position (hopefully)
+     */
+    public void encoderMoveToZero()
+    {   
+        topTurnLeft.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio),0));
+        topTurnRight.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio),0));
+        bottomTurnLeft.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio),0));
+        bottomTurnRight.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio),0));
+   
     }
     /**
     resets navX
