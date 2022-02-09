@@ -20,7 +20,6 @@ public class Shooter {
     
     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
-    TalonSRX belt = new TalonSRX(SHOOT.beltCANID);
     
     private Shooter()
     {
@@ -55,14 +54,6 @@ public class Shooter {
         shootRight.config_kF(0, SHOOT.shootKF);
         shootRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, SHOOT.statusOneMeas);
         shootRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, SHOOT.statusTwoMeas);
-
-
-
-        belt.configFactoryDefault();
-        belt.setNeutralMode(NeutralMode.Brake);
-        belt.setInverted(false);
-        belt.enableVoltageCompensation(true);
-        belt.configVoltageCompSaturation(SHOOT.voltComp);
     }
     
 

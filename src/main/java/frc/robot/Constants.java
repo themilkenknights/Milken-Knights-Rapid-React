@@ -123,8 +123,7 @@ public final class Constants {
 
         public static int shootLeftCANID = 19;
         public static int shootRightCANID = 20;
-        public static int beltCANID = 11;
-
+        
         public static double shootKP = 0.29559; //0.19559;
         public static double shootKI = 0;
         public static double shootKD = 0;
@@ -133,8 +132,7 @@ public final class Constants {
         public static double kS = 0;
         public static double kV = 0;
         public static double kA = 0;
-
-        public static double beltGreerRatio = 0;
+        //TODO may not need or use since sysid is kinda shit ngl
 
         public static double maxVelo = 17800; //16600;
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
@@ -144,10 +142,20 @@ public final class Constants {
         public static double maxError = 0;
     }
 
+    public static class ELEVATOR 
+    {
+        public static double voltComp = 12;
+        
+        public static int elevatorCANID = 11;
+
+        public static double elevatorGreerRatio = 0;
+    }
+
     public static class INTAKE 
     {
         public static double voltComp = 12;
 
+        //TODO wait till rubin makes up his mind about how many motors there are, no offense rubin
         public static int intakeCANID = 14;
         public static int rollersCANID = 13;
 
@@ -160,6 +168,8 @@ public final class Constants {
         public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
 
         public static double timeIntake = 0; //TODO may not need if bang bang limit switch
+
+        public static double rotationsInIntakeNative = 0;
     }
 
     public static class CLIMBER
@@ -170,10 +180,10 @@ public final class Constants {
 
         public static int telescopeArmLeftCANID = 0;
         public static int telescopeArmRightCANID = 0;
-
         public static int rotateArmLeftCANID = 0;
         public static int rotateArmRightCANID = 0;
 
+        public static double telescopeGreerRatio = 0;
         public static double rotateGreerRatio = 0;
 
         public static double telescopeKP = 0;
@@ -194,8 +204,12 @@ public final class Constants {
         public static int telescopeMagicSCurve = 0;
         public static int rotateMagicSCurve = 0;
 
-        public static double telescopeHighPoint = 0;
-        public static double rotateHighPoint = 0;
+        public static double telescopeHighPointNative = 0;
+        public static double rotateHighPointNative = 0;
+
+        public static double telescopeTimeHighPoint = 0;
+        public static double rotateTimeHighPoint = 0;
+        //TODO find after finding total rotations to high and testing, then time for extra precaution
     }
 
     public static class LIMELIGHT
