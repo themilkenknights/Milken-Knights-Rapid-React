@@ -6,8 +6,19 @@ package frc.robot;
 
 /** Add your docs here. */
 public class Limelight {
+    
     private Limelight()
     {
-        
+
     }
+
+    public static Limelight getInstance()
+    {
+        return InstanceHolder.mInstance;
+    }
+
+    private static class InstanceHolder
+    {
+        private static final Limelight mInstance = new Limelight();
+    } 
 }

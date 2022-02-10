@@ -10,16 +10,25 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 /** Add your docs here. */
 public final class Constants {
+
     public static double kPi = 3.14159265359;
+    
+    /**
+     * falcon encoder rotation
+     */
     public static double oneEncoderRotation = 2048;
 
     // see link for more info https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383 
     //                        (Derivation of Inverse Kinematics for Swerve, page 4)
 
-    //wheelbase (distance between the middle of the wheels on the length side)
+    /**
+     * wheelbase (distance between the middle of the wheels on the length side)
+     */
     public static double L = 22.57; //29;
 
-    //trackwidth (distance between the middle of the wheels on the width side)
+    /**
+     * trackwidth (distance between the middle of the wheels on the width side)
+     */
     public static double W = 22.57; //17.625; 
 
     public static double widthInch = 29; //21;
@@ -30,6 +39,8 @@ public final class Constants {
     public static class DRIVE
     {
         public static int magicSCurve = 6;
+
+        //need to research these, might be eating cpu like chrome eats ram
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
@@ -60,8 +71,10 @@ public final class Constants {
         //can be used to keep motors at a steady rate of power consumption
         public static double voltComp = 12;
 
+        //xbox controllers be hella sensative
         public static double deadband = 0.1;
 
+        //see sysid and stuff documentation
         public static double kS = 0.5111;
         public static double kV = 12/maxNativeVelocity;
     }
@@ -100,7 +113,8 @@ public final class Constants {
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = 70.9277343;
         public static double topRightOffset = 107.138671875;
-        //TODO negative offset?
+        //// negative offset?
+        //i dont think so? idk
         public static double bottomLeftOffset = -117.94921875; //+
         public static double bottomRightOffset = 47.109375;  //-
 
@@ -117,6 +131,7 @@ public final class Constants {
     public static class SHOOT
     {
         public static boolean leftFlipped = false;
+
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
@@ -169,7 +184,8 @@ public final class Constants {
 
         public static double timeIntake = 0; //TODO may not need if bang bang limit switch
 
-        public static double rotationsInIntakeNative = 0;
+        //how much it needs to rotate to move into out position
+        public static double intakeInRotationsNative = 0;
     }
 
     public static class CLIMBER
@@ -204,8 +220,12 @@ public final class Constants {
         public static int telescopeMagicSCurve = 0;
         public static int rotateMagicSCurve = 0;
 
+        //how many rotations native until high point
         public static double telescopeHighPointNative = 0;
         public static double rotateHighPointNative = 0;
+
+        public static double telescopeNativePerInch = 0;
+        //TODO try to find constant of slope of native per inch?
 
         public static double telescopeTimeHighPoint = 0;
         public static double rotateTimeHighPoint = 0;
