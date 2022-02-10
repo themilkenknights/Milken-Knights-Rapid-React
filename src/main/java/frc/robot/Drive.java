@@ -24,7 +24,9 @@ import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
 
 
-/** Add your docs here. */
+/**
+ * The Drive class contains all functions for anything related to DIY swerve drive (ether drive, DIY auto, etc)
+ */
 public class Drive {
     public TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
     public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
@@ -36,26 +38,20 @@ public class Drive {
     public TalonFX bottomDriveLeft = new TalonFX(DRIVE.bottomDriveLeftCANID);
     public TalonFX bottomDriveRight = new TalonFX(DRIVE.bottomDriveRightCANID);   
 
-
     public CANCoder topTurnLeftEncoder = new CANCoder(TURN.topTurnLeftCANCoderCANID);
     public CANCoder topTurnRightEncoder = new CANCoder(TURN.topTurnRightCANCoderCANID);
     public CANCoder bottomTurnLeftEncoder = new CANCoder(TURN.bottomTurnLeftCANCoderCANID);
     public CANCoder bottomTurnRightEncoder = new CANCoder(TURN.bottomTurnRightCANCoderCANID);
 
-    private double offsetTopLeftCANCoder;
-    private double offsetTopRightCANCoder;
-    private double offsetBottomLeftCANCoder;
-    private double offsetBottomRightCANCoder;
-
     private PIDController turningPID = new PIDController(TURN.turnKP, TURN.turnKI, TURN.turnKD);
     private PIDController drivePID = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     
     //bogus pid controllers, do nothing, still keep
+    //too scared to change and edit since comp is soon and i dont want to ruin anything
     private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
-
 
     public AHRS navX = new AHRS();
 
@@ -151,13 +147,9 @@ public class Drive {
 
 
         /*topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
-
         topTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
-      
         bottomTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
-        
-        bottomTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
-*/
+        bottomTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);*/
 
         topTurnLeft.configVoltageCompSaturation(TURN.voltComp);
         topTurnLeft.enableVoltageCompensation(true);
@@ -197,8 +189,9 @@ public class Drive {
         topTurnRightEncoder.configSensorDirection(true);
         bottomTurnLeftEncoder.configSensorDirection(true);
         bottomTurnRightEncoder.configSensorDirection(true);
-/*
-        offsetTopLeftCANCoder = ((topTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.topLeftOffset;//-107.050781;//78.75;
+
+
+/*      offsetTopLeftCANCoder = ((topTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.topLeftOffset;//-107.050781;//78.75;
         offsetTopRightCANCoder = ((topTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.topRightOffset;//-67.3242187;//115.224;
         offsetBottomLeftCANCoder = ((bottomTurnLeftEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomLeftOffset;//-63.89648437; //117.0703125;//121.289;
         offsetBottomRightCANCoder = ((bottomTurnRightEncoder.getAbsolutePosition() + 360) % 360) - TURN.bottomRightOffset;//134.1210937;//320.361;
@@ -206,9 +199,9 @@ public class Drive {
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopLeftCANCoder, TURN.greerRatio));
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetTopRightCANCoder, TURN.greerRatio));
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomLeftCANCoder, TURN.greerRatio));
-        bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));
+        bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));*/
 
-        */
+
         topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
         topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
         bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
@@ -218,12 +211,12 @@ public class Drive {
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
-/*
-        topTurnLeft.configMotionSCurveStrength(6);
+
+
+        /*      topTurnLeft.configMotionSCurveStrength(6);
         topTurnRight.configMotionSCurveStrength(6);
         bottomTurnLeft.configMotionSCurveStrength(6);
-        bottomTurnRight.configMotionSCurveStrength(6);
-*/
+        bottomTurnRight.configMotionSCurveStrength(6);*/
 
 
         topDriveLeft.configFactoryDefault();
@@ -290,15 +283,12 @@ public class Drive {
         bottomDriveRight.configVelocityMeasurementWindow(DRIVE.velocityMeasAmount);
 
 
-   /*     topDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
-
+   /*   topDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
         topDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
-      
         bottomDriveLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
-        
-        bottomDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
+        bottomDriveRight.configSelectedFeedbackCoefficient(1.0 / 10.75);*/
 
-*/
+
         topDriveLeft.configVoltageCompSaturation(DRIVE.voltComp);
         topDriveLeft.enableVoltageCompensation(true);
         
@@ -681,8 +671,8 @@ public class Drive {
                    ~~     +     ~~     
   /o----o\       ~~       + B     ~~       /o----o\
   |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
-  \o----o/      =====================      \o----o/ 
-                \     A   |   A     /    
+  \o----o/      ==========A==========      \o----o/ 
+                \         |         /    
                  \        |        /
                   \       |       /
                    \      |D     / 
@@ -693,15 +683,15 @@ public class Drive {
                         \ | /
                          \|/
             
-    A = distanceA
-    B = lengthB
+    A = distanceA / =
+    B = lengthB / +
     C = angle
-    D = radius
-    E = circumference
+    D = radius / |
+    E = circumference / ~
     F = robot
     1 = starting position
     2 = ending position
-    (this isnt a hot air balloon fyi)
+    (diagram above isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA
@@ -727,8 +717,8 @@ public class Drive {
                    ~~     +     ~~     
   /o----o\       ~~       + B     ~~       /o----o\
   |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
-  \o----o/      =====================      \o----o/ 
-                \     A   |   A     /    
+  \o----o/      ==========A==========      \o----o/ 
+                \         |         /    
                  \        |        /
                   \       |       /
                    \      |D     / 
@@ -739,15 +729,15 @@ public class Drive {
                         \ | /
                          \|/
             
-    A = distanceA
-    B = lengthB
+    A = distanceA / =
+    B = lengthB / +
     C = angle
-    D = radius
-    E = circumference
+    D = radius / |
+    E = circumference / ~
     F = robot
     1 = starting position
     2 = ending position
-    (this isnt a hot air balloon fyi)
+    (diagram above isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA
@@ -770,8 +760,8 @@ public class Drive {
                    ~~     +     ~~     
   /o----o\       ~~       + B     ~~       /o----o\
   |  (F) |  (2) ~~        +        ~~ (1)  |  (F) |
-  \o----o/      =====================      \o----o/ 
-                \     A   |   A     /    
+  \o----o/      ==========A==========      \o----o/ 
+                \         |         /    
                  \        |        /
                   \       |       /
                    \      |D     / 
@@ -782,15 +772,15 @@ public class Drive {
                         \ | /
                          \|/
             
-    A = distanceA
-    B = lengthB
+    A = distanceA / =
+    B = lengthB / +
     C = angle
-    D = radius
-    E = circumference
+    D = radius / |
+    E = circumference / ~
     F = robot
     1 = starting position
     2 = ending position
-    (this isnt a hot air balloon fyi)
+    (diagram above isnt a hot air balloon fyi)
     </pre>
 
     * @param distanceA

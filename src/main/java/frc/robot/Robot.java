@@ -67,15 +67,15 @@ public class Robot extends TimedRobot {
     /**
      * forward movement axis
      */ 
-   private double one;
+   private double fwd;
     /**
      * strafing movement axis
      */ 
-   private double two;
+   private double str;
     /**
      * rotational movement axis
      */ 
-   private double three;
+   private double rcw;
 
    private Command m_autonomousCommand;
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
@@ -231,29 +231,31 @@ public class Robot extends TimedRobot {
     mShoot.shooterUpdate();
     updateFastToggle();
     updateSlowToggle();
+
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
-    one = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
-    two = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
-    three = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
+
+    fwd = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    str = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    rcw = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
       
       if(Math.abs(xbox.getRawAxis(1)) < 0.1)
       {
-        one = 0;
+        fwd = 0;
       }
       if(Math.abs(xbox.getRawAxis(0)) < 0.1)
       {
-        two = 0;
+        str = 0;
       }
       if(Math.abs(xbox.getRawAxis(4)) < 0.1)
       {
-        three = 0;
+        rcw = 0;
       }
 
 
-      if(one != 0 || two != 0 || three != 0)
+      if(fwd != 0 || str != 0 || rcw != 0)
       {
-        mDrive.etherSwerve(-one/spee,two/spee,three/spee);
+        mDrive.etherSwerve(-fwd/spee,str/spee,rcw/spee);
       }
       else if(xbox.getAButton())
       {
@@ -273,8 +275,8 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getRawAxis(2) > 0)
       {
-        mShoot.setShooterNativeVeloctiy(velo);
-        //mShoot.setShooterPercent(xbox.getRawAxis(2));
+        //mShoot.setShooterNativeVeloctiy(velo);
+        mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else
       {
