@@ -16,7 +16,13 @@ public class Limelight {
     {
         return InstanceHolder.mInstance;
     }
-
+/*
+    a2 = y component of limelight   
+    public double getInchesDistance(double a2)
+    {
+        //return = (h2-h1) / tan(a1+a2)
+    }
+*/
     private static class InstanceHolder
     {
         private static final Limelight mInstance = new Limelight();
