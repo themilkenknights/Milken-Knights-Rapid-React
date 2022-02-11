@@ -6,7 +6,17 @@ package frc.robot;
 
 /** Add your docs here. */
 public class Limelight {
-    
+    /*
+         _____________________________
+        [         ___________         ]
+        |    .   /           \   .    |
+        |   ::  /             \  ::   |
+        |  ::: |     ( 0 )     | :::  |
+        |   ::  \             /  ::   |
+        |    .   \___________/   .    |
+        [_____________________________]
+                 eye of sauron
+    */
     private Limelight()
     {
 
@@ -17,10 +27,11 @@ public class Limelight {
         return InstanceHolder.mInstance;
     }
 /*
-    a2 = y component of limelight   
-    public double getInchesDistance(double a2)
+https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fixed-angle-camera
+    public double getInchesDistance(double ty)
     {
         //return = (h2-h1) / tan(a1+a2)
+        return (LIMELIGHT.upperGoalHeight - LIMELIGHT.heightLime) / (Math.tan(LIMELIGHT.angleAboveHorizontal + ty));
     }
 */
     private static class InstanceHolder

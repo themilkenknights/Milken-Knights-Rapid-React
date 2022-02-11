@@ -235,9 +235,11 @@ public final class Constants {
 
     public static class LIMELIGHT
     {
+        //              inches
+        
         public static double angleAboveHorizontal = 0;
         public static double heightLime = 0;
-        public static double lowerGoalHeight = 0;
+        //public static double lowerGoalHeight = 0; lime cant see when low goal
         public static double upperGoalHeight = 0;
 
         public static double closestDistanceHoodAngleLow = 0;
