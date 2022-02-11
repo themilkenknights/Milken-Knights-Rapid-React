@@ -304,7 +304,7 @@ public class Robot extends TimedRobot {
       slider = SmartDashboard.getNumber("slider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putNumber("velo", velo);
-      SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
+      SmartDashboard.putNumber("feedf", slider + mShoot.shooterFeedForward(slider));
     }
 
   @Override
