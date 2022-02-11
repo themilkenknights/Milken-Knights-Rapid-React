@@ -82,14 +82,14 @@ public class Shooter {
 
     public void setShooterNativeVeloCalc(double setpoint)
     {
-         shootLeft.set(ControlMode.Velocity, setpoint + shooterFeedForward(setpoint));
-         shootRight.set(ControlMode.Velocity, setpoint + shooterFeedForward(setpoint));
+         shootLeft.set(ControlMode.Velocity, setpoint);
+         shootRight.set(ControlMode.Velocity, setpoint);
     }
 
     public double shooterFeedForward(double setpoint)
     {
-        //return SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (setpoint / SHOOT.maxVelo)));
-        return ((SHOOT.maxError * setpoint) / SHOOT.maxVelo);
+        return SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (1+(setpoint / SHOOT.maxVelo))));
+        //return ((SHOOT.maxError * setpoint) / SHOOT.maxVelo);
     }
 
     private static class InstanceHolder

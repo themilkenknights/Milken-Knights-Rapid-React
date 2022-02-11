@@ -28,6 +28,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -45,6 +46,7 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.TURN;
 
 /**
@@ -61,7 +63,9 @@ public class Robot extends TimedRobot {
 
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
+   private Elevator mElevator = Elevator.getInstance();
    private XboxController xbox = new XboxController(0);
+   private Joystick mDriverJoystick = new Joystick(1);
 
 
     /**
@@ -144,6 +148,8 @@ public class Robot extends TimedRobot {
     * setpoint variable for shooting
     */
    private int velo = 0;
+
+   private double ffcalc = 0;
 
    @Override
    public void robotInit() {
@@ -273,15 +279,21 @@ public class Robot extends TimedRobot {
       {
         mDrive.encoderZero();
       }
-      else if(xbox.getRawAxis(2) > 0)
+      else if(mDriverJoystick.getRawButton(1))
       {
-        mShoot.setShooterNativeVeloctiy(slider);
+        ffcalc = mShoot.shooterFeedForward(slider) + slider;
+        mShoot.setShooterNativeVeloctiy(ffcalc);
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
+      }
+      else if(mDriverJoystick.getRawButton(7))
+      {
+        mElevator.setElevatorPercent(-.5);
       }
       else
       {
         mDrive.turnPercent(0,0,0,0);
         mShoot.setShooterPercent(0);
+        mElevator.setElevatorPercent(0);
         mDrive.drivePercent(0,0,0,0);
       }
 
@@ -304,7 +316,7 @@ public class Robot extends TimedRobot {
       slider = SmartDashboard.getNumber("slider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putNumber("velo", velo);
-      SmartDashboard.putNumber("feedf", slider + mShoot.shooterFeedForward(slider));
+      SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
     }
 
   @Override
