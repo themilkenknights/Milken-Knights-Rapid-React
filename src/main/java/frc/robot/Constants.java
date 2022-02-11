@@ -139,7 +139,7 @@ public final class Constants {
         public static int shootLeftCANID = 19;
         public static int shootRightCANID = 20;
         
-        public static double shootKP = 0.29559; //0.19559;
+        public static double shootKP = 0.55; //0.64; //0.29559; //0.19559;
         public static double shootKI = 0;
         public static double shootKD = 0;
         public static double shootKF = 0;
@@ -149,12 +149,13 @@ public final class Constants {
         public static double kA = 0;
         //TODO may not need or use since sysid is kinda shit ngl
 
-        public static double maxVelo = 17800; //16600;
+        //need to account for battery and shit, battery affects max rpm
+        public static double maxVelo = 18900; //17800; //16600;
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
         public static double voltComp = 12;
 
-        public static double maxError = 0;
+        public static double maxError = 1580;
     }
 
     public static class ELEVATOR 

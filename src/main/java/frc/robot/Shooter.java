@@ -88,7 +88,8 @@ public class Shooter {
 
     public double shooterFeedForward(double setpoint)
     {
-        return -SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (setpoint / SHOOT.maxVelo)));
+        //return SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (setpoint / SHOOT.maxVelo)));
+        return ((SHOOT.maxError * setpoint) / SHOOT.maxVelo);
     }
 
     private static class InstanceHolder

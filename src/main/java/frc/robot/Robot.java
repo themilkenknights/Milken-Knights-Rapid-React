@@ -214,11 +214,11 @@ public class Robot extends TimedRobot {
         velo = 0;
         break;
       case veloTwo:
-        velo = 10000;
+        velo = 2000;
         break;
        
       case veloThree:
-        velo = 14000;
+        velo = 4000;
         break;
     }
    }
@@ -275,8 +275,8 @@ public class Robot extends TimedRobot {
       }
       else if(xbox.getRawAxis(2) > 0)
       {
-        //mShoot.setShooterNativeVeloctiy(velo);
-        mShoot.setShooterPercent(xbox.getRawAxis(2));
+        mShoot.setShooterNativeVeloctiy(slider);
+        //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else
       {
@@ -304,6 +304,7 @@ public class Robot extends TimedRobot {
       slider = SmartDashboard.getNumber("slider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putNumber("velo", velo);
+      SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
     }
 
   @Override
