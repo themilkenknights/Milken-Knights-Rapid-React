@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
    private Elevator mElevator = Elevator.getInstance();
+   private Intake mIntake = Intake.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -294,7 +295,7 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(7))
+      if(mDriverJoystick.getRawButton(2))
       {
         mElevator.setElevatorPercent(-.5);
       }
@@ -304,6 +305,28 @@ public class Robot extends TimedRobot {
       }
 
 
+
+      if(mDriverJoystick.getRawButton(8))
+      {
+        mIntake.setRollersPercent(0.5);
+      }
+      else
+      {
+        mIntake.setRollersPercent(0);
+      }
+
+
+
+      if(mDriverJoystick.getRawAxis(1) < -0.1)
+      {
+        mIntake.setIntakePercent(mDriverJoystick.getRawAxis(1) / 10);
+      }
+      else
+      {
+        mIntake.setIntakePercent(0);
+      }
+
+//haha you're bad at coding - Levi
 //TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
       if(toggleFastOn){
         // Do something when toggled on
