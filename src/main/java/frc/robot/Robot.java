@@ -326,7 +326,7 @@ public class Robot extends TimedRobot {
         mIntake.setIntakePercent(0);
       }
 
-//haha you're bad at coding - Levi
+
 //TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
       if(toggleFastOn){
         // Do something when toggled on
