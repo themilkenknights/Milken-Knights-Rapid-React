@@ -14,7 +14,7 @@ import frc.robot.Constants.INTAKE;
 
 /** Add your docs here. */
 public class Intake {
-    /*
+    
     TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
     TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
     
@@ -45,9 +45,13 @@ public class Intake {
         intake.set(ControlMode.PercentOutput, setpoint);
     }
 
+    public void setRollersPercent(double setpoint)
+    {
+        rollers.set(ControlMode.PercentOutput, setpoint);
+    }
+
     private static class InstanceHolder
     {
         private static final Intake mInstance = new Intake();
     } 
-    */
 }

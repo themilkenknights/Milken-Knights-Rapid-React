@@ -149,7 +149,7 @@ public final class Constants {
         public static double kA = 0;
         //TODO may not need or use since sysid is kinda shit ngl
 
-        //need to account for battery and shit, battery affects max rpm
+        //TODO need to account for battery and shit, battery affects max rpm
         public static double maxVelo = 18900; //17800; //16600;
         public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
 
@@ -171,7 +171,6 @@ public final class Constants {
     {
         public static double voltComp = 12;
 
-        //TODO wait till rubin makes up his mind about how many motors there are, no offense rubin
         public static int intakeCANID = 14;
         public static int rollersCANID = 13;
 
@@ -260,7 +259,8 @@ public final class Constants {
         public static double moduleTurnKP = 0.063403; //0.63403; //0.063403;            //0.0000063403;        //1.6261;      //0.0000001;
         public static double moduleTurnKI = 0;
         public static double moduleTurnKD = 0.00098857; //0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;       //0.0000000; 
-        //TODO why is making pid values a god damn guessing game
+        //TODO fix pids if using wpi auto
+        // why is making pid values a god damn guessing game
 
         public static double moduleDriveKP = 0.03; //0.0000001;
         public static double moduleDriveKI = 0;

@@ -128,7 +128,6 @@ public class Robot extends TimedRobot {
     */
    private boolean toggleFastPressed = false;
 
-
    /**
     * baby toggle slow
     */
@@ -153,7 +152,6 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
-     
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
@@ -165,13 +163,6 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee3", veloch.veloThree);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
       // etc.
-    
-
-
-
-      
-
-
    }
  
    @Override
@@ -190,8 +181,7 @@ public class Robot extends TimedRobot {
        case LEFT:
          m_autonomousCommand = m_robotContainer.getAutonomousCommand();
          break;
-       case NOTHING:
-         
+       case NOTHING: //might break idk prob not
          break;
      }
      if (m_autonomousCommand != null) {
@@ -207,8 +197,8 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopInit() {
      mDrive.encoderZero();
-     //TODO need to see if drive initiated with code runned, problem if not runned
-     //TODO it runs everything except encoder reset i guess, but also need to set offsets back negative see if work
+     //// need to see if drive initiated with code runned, problem if not runned
+     //it runs everything except encoder reset i guess, but also need to set offsets back negative see if work
      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();
@@ -219,6 +209,7 @@ public class Robot extends TimedRobot {
       case veloOne:
         velo = 0;
         break;
+        
       case veloTwo:
         velo = 2000;
         break;
@@ -245,6 +236,8 @@ public class Robot extends TimedRobot {
     str = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
     rcw = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
       
+
+
       if(Math.abs(xbox.getRawAxis(1)) < 0.1)
       {
         fwd = 0;
@@ -257,6 +250,7 @@ public class Robot extends TimedRobot {
       {
         rcw = 0;
       }
+
 
 
       if(fwd != 0 || str != 0 || rcw != 0)
@@ -279,31 +273,44 @@ public class Robot extends TimedRobot {
       {
         mDrive.encoderZero();
       }
-      else if(mDriverJoystick.getRawButton(1))
+      else
+      {
+        mDrive.turnPercent(0,0,0,0);
+        mDrive.drivePercent(0,0,0,0);
+      }
+
+
+
+      if(mDriverJoystick.getRawButton(1))
       {
         ffcalc = mShoot.shooterFeedForward(slider) + slider;
         mShoot.setShooterNativeVeloctiy(ffcalc);
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
-      else if(mDriverJoystick.getRawButton(7))
+      else
+      {
+        mShoot.setShooterPercent(0);
+      }
+
+
+
+      if(mDriverJoystick.getRawButton(7))
       {
         mElevator.setElevatorPercent(-.5);
       }
       else
       {
-        mDrive.turnPercent(0,0,0,0);
-        mShoot.setShooterPercent(0);
         mElevator.setElevatorPercent(0);
-        mDrive.drivePercent(0,0,0,0);
       }
 
 
+//TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
       if(toggleFastOn){
         // Do something when toggled on
-        spee = 1;
+        spee = 7;
       }
       else if(toggleSlowOn){
-        spee = 7;
+        spee = 1;
       }
       else{
           // Do something when toggled off

@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-/** Add your docs here. */
+/** class containing calculations of the lime fruit when shooting */
 public class Limelight {
     /*
          _____________________________

@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import frc.robot.Constants.ELEVATOR;
 
-/** Add your docs here. */
+/** going up... */
 public class Elevator {
     TalonSRX elevator = new TalonSRX(ELEVATOR.elevatorCANID);
     private Elevator()
