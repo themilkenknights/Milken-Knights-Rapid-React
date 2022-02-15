@@ -311,6 +311,10 @@ public class Robot extends TimedRobot {
         //mIntake.setRollersPercent(0.5);
         mIntake.setIntakePercent(0.5);
       }
+      else if(mDriverJoystick.getRawButton(7))
+      {
+        mIntake.setIntakePercent(-0.5);
+      }
       else
       {
         //mIntake.setRollersPercent(0);
