@@ -5,11 +5,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.INTAKE;
 
 /** Add your docs here. */
@@ -25,6 +27,7 @@ public class Intake {
         intake.setInverted(false);
         intake.enableVoltageCompensation(true);
         intake.configVoltageCompSaturation(INTAKE.voltComp);
+        intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         //intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
@@ -38,6 +41,11 @@ public class Intake {
     public static Intake getInstance()
     {
         return InstanceHolder.mInstance;
+    }
+
+    public void updateIntake()
+    {
+        SmartDashboard.putNumber("magenc", intake.getSelectedSensorPosition());
     }
 
     public void setIntakePercent(double setpoint)
