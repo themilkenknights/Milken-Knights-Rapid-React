@@ -308,24 +308,26 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(8))
       {
-        mIntake.setRollersPercent(0.5);
+        //mIntake.setRollersPercent(0.5);
+        mIntake.setIntakePercent(0.5);
       }
       else
       {
-        mIntake.setRollersPercent(0);
+        //mIntake.setRollersPercent(0);
+        mIntake.setIntakePercent(0);
       }
 
 
 
-      if(mDriverJoystick.getRawAxis(1) < -0.1)
+     /* if(mDriverJoystick.getRawButton(7))
       {
-        mIntake.setIntakePercent(mDriverJoystick.getRawAxis(1) / 10);
+        mIntake.setIntakePercent(1);
       }
       else
       {
         mIntake.setIntakePercent(0);
       }
-
+*/
 
 //TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
       if(toggleFastOn){

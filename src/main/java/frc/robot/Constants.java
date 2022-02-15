@@ -171,8 +171,8 @@ public final class Constants {
     {
         public static double voltComp = 12;
 
-        public static int intakeCANID = 14;
-        public static int rollersCANID = 13;
+        public static int intakeCANID = 9; //14;
+        public static int rollersCANID = 13; //13;
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
