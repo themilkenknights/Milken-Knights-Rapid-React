@@ -21,7 +21,7 @@ public class Intake {
     private Intake()
     {
         intake.configFactoryDefault();
-        intake.setNeutralMode(NeutralMode.Brake);
+        intake.setNeutralMode(NeutralMode.Coast);
         intake.setInverted(false);
         intake.enableVoltageCompensation(true);
         intake.configVoltageCompSaturation(INTAKE.voltComp);

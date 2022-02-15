@@ -9,6 +9,7 @@ package frc.robot;
 import java.awt.MouseInfo;
 import java.util.List;
 
+import javax.lang.model.util.ElementScanner6;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.basic.BasicDesktopIconUI.MouseInputHandler;
 import javax.swing.plaf.basic.BasicTabbedPaneUI.MouseHandler;
@@ -306,12 +307,12 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(8))
+      if(mDriverJoystick.getRawButton(5))
       {
         //mIntake.setRollersPercent(0.5);
         mIntake.setIntakePercent(0.5);
       }
-      else if(mDriverJoystick.getRawButton(7))
+      else if(mDriverJoystick.getRawButton(3))
       {
         mIntake.setIntakePercent(-0.5);
       }
@@ -319,6 +320,19 @@ public class Robot extends TimedRobot {
       {
         //mIntake.setRollersPercent(0);
         mIntake.setIntakePercent(0);
+      }
+
+      if(mDriverJoystick.getRawButton(4))
+      {
+        mIntake.setRollersPercent(0.5);
+      }
+      else if(mDriverJoystick.getRawButton(6))
+      {
+        mIntake.setRollersPercent(-0.5);
+      }
+      else
+      {
+        mIntake.setRollersPercent(0);
       }
 
 
