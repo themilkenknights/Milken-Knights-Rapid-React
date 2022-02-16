@@ -58,6 +58,11 @@ public class Intake {
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 
+    public void setMagPosition(double setpoint)
+    {
+        intake.setSelectedSensorPosition(setpoint);
+    }
+
     private static class InstanceHolder
     {
         private static final Intake mInstance = new Intake();
