@@ -208,7 +208,6 @@ public class MkUtil {
    * @param gimmeRots rotations of Falcon
    * @param greerRatio gear ratio 
    * @return degrees
-   * @author me
    */
   public static double nativeToDegrees(double gimmeRots, double greerRatio)
   {
