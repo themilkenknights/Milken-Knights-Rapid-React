@@ -228,6 +228,7 @@ public class Robot extends TimedRobot {
     
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
+    mIntake.updateIntake();
     updateFastToggle();
     updateSlowToggle();
 

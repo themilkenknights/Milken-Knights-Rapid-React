@@ -934,7 +934,7 @@ public class Drive {
     public boolean isMagicStraightDone()
     {
         double err = distance - avgDistInches;
-        return Math.abs(err) < 0.5 && Math.abs(avgVelInches) < 0.1;
+        return Math.abs(err) < 0.5 && Math.abs(avgVelInches) < 0.5;
     }
 
     /**

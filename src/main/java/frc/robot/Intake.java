@@ -27,7 +27,8 @@ public class Intake {
         intake.setInverted(false);
         intake.enableVoltageCompensation(true);
         intake.configVoltageCompSaturation(INTAKE.voltComp);
-        intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        
         //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         //intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
