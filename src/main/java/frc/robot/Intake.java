@@ -16,10 +16,13 @@ import frc.robot.Constants.INTAKE;
 
 /** Add your docs here. */
 public class Intake {
-    
-    TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
-    TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
-    
+    //TODO add another intake motor
+    private TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
+    private TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
+
+    //private boolean isOut = false;
+    //private boolean move = false;
+
     private Intake()
     {
         intake.configFactoryDefault();
@@ -63,6 +66,43 @@ public class Intake {
     {
         intake.setSelectedSensorPosition(setpoint);
     }
+
+    public void bangBangIntake(boolean button) //TODO need to test to see if it works
+    {
+        if(intake.getSelectedSensorPosition() <= INTAKE.intakeInMaxError)
+        {
+            if(button)
+            {
+                setIntakePercent(INTAKE.intakeBangBangSpeed);
+            }
+            else
+            {
+                setIntakePercent(0);
+            }
+        }
+        else if(intake.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intake.getSelectedSensorPosition() < INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
+        {
+            if(button)
+            {
+                setIntakePercent(INTAKE.intakeBangBangSpeed);
+            }
+            else
+            {
+                setIntakePercent(-INTAKE.intakeBangBangSpeed);
+            }
+        }
+        else if(intake.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intake.getSelectedSensorPosition() >= INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
+        {
+            if(button)
+            {
+                setIntakePercent(0);
+            }
+            else
+            {
+                setIntakePercent(-INTAKE.intakeBangBangSpeed);
+            }
+        }
+    }   
 
     private static class InstanceHolder
     {
