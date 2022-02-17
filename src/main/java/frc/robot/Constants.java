@@ -178,7 +178,8 @@ public final class Constants {
 
         public static boolean leftFlipped = true; //TODO see if this works
 
-        public static int intakeCANID = 9; //14;
+        public static int intakeLeftCANID = 9; //14;
+        public static int intakeRightCANID = 696969;
         public static int rollersCANID = 13; //13;
 
         public static double intakeGreerRatio = 0;

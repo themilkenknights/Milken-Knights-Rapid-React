@@ -17,7 +17,8 @@ import frc.robot.Constants.INTAKE;
 /** Add your docs here. */
 public class Intake {
     //TODO add another intake motor
-    private TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
+    private TalonSRX intakeLeft = new TalonSRX(INTAKE.intakeLeftCANID);
+    private TalonSRX intakeRight = new TalonSRX(INTAKE.intakeRightCANID);
     private TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
 
     //private boolean isOut = false;
@@ -25,12 +26,20 @@ public class Intake {
 
     private Intake()
     {
-        intake.configFactoryDefault();
-        intake.setNeutralMode(NeutralMode.Coast);
-        intake.setInverted(false);
-        intake.enableVoltageCompensation(true);
-        intake.configVoltageCompSaturation(INTAKE.voltComp);
-        intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        intakeLeft.configFactoryDefault();
+        intakeLeft.setNeutralMode(NeutralMode.Brake);
+        intakeLeft.setInverted(INTAKE.leftFlipped);
+        intakeLeft.enableVoltageCompensation(true);
+        intakeLeft.configVoltageCompSaturation(INTAKE.voltComp);
+        intakeLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
+        intakeRight.configFactoryDefault();
+        intakeRight.setNeutralMode(NeutralMode.Brake);
+        intakeRight.setInverted(!INTAKE.leftFlipped);
+        intakeRight.enableVoltageCompensation(true);
+        intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
+        intakeRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        intakeRight.follow(intakeLeft);
         
         //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         //intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -49,12 +58,13 @@ public class Intake {
 
     public void updateIntake()
     {
-        SmartDashboard.putNumber("magenc", intake.getSelectedSensorPosition());
+        SmartDashboard.putNumber("magencLeft", intakeLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 
     public void setIntakePercent(double setpoint)
     {
-        intake.set(ControlMode.PercentOutput, setpoint);
+        intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
     public void setRollersPercent(double setpoint)
@@ -64,12 +74,12 @@ public class Intake {
 
     public void setMagPosition(double setpoint)
     {
-        intake.setSelectedSensorPosition(setpoint);
+        intakeLeft.setSelectedSensorPosition(setpoint);
     }
 
     public void bangBangIntake(boolean button) //TODO need to test to see if it works
     {
-        if(intake.getSelectedSensorPosition() <= INTAKE.intakeInMaxError)
+        if(intakeLeft.getSelectedSensorPosition() <= INTAKE.intakeInMaxError)
         {
             if(button)
             {
@@ -80,7 +90,7 @@ public class Intake {
                 setIntakePercent(0);
             }
         }
-        else if(intake.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intake.getSelectedSensorPosition() < INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
+        else if(intakeLeft.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intakeLeft.getSelectedSensorPosition() < INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
         {
             if(button)
             {
@@ -91,7 +101,7 @@ public class Intake {
                 setIntakePercent(-INTAKE.intakeBangBangSpeed);
             }
         }
-        else if(intake.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intake.getSelectedSensorPosition() >= INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
+        else if(intakeLeft.getSelectedSensorPosition() > INTAKE.intakeInMaxError && intakeLeft.getSelectedSensorPosition() >= INTAKE.intakeRotationsNative - INTAKE.intakeOutThreshold)
         {
             if(button)
             {
