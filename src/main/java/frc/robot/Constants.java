@@ -8,27 +8,32 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
-/** Add your docs here. */
+/** 
+ * @param voltComp voltage compensation value, usually 12 but user can define their own voltage compensation for each mechanism
+ * @param velocityMeasAmount (I use 16, but user can define their own velocity window amount in each mechanism) windowSize Number of samples in the rolling average of velocity measurement. Valid values are 1,2,4,8,16,32. If another value is specified, it will truncate to nearest support value.
+ * @param greerRatio gear ratio, pun intended
+ * <h2> Status Measurments <h2/>
+ * @param statusOneMeas
+ * @param statusTwoMeas Feedback for selected sensor on primary PID[0].
+ * <h2> SYSID Values <h2/>
+ * @param kS  is the voltage needed to overcome the motor’s static friction, or in other words to just barely get it moving; it turns out that this static friction (because it’s, well, static) has the same effect regardless of velocity or acceleration. That is, no matter what speed you’re going or how fast you’re accelerating, some constant portion of the voltage you’ve applied to your motor (depending on the specific mechanism assembly) will be going towards overcoming the static friction in your gears, bearings, etc; this value is your kS. Note the presence of the signum function, because friction force always opposes the direction-of-motion.
+ * @param kV describes how much voltage is needed to hold (or “cruise”) at a given constant velocity while overcoming the electromagnetic resistance in the motor and any additional friction that increases with speed (known as viscous drag). The relationship between speed and voltage (at constant acceleration) is almost entirely linear (with FRC® components, anyway) because of how permanent-magnet DC motors work.
+ * @param kA describes the voltage needed to induce a given acceleration in the motor shaft. As with kV, the relationship between voltage and acceleration (at constant velocity) is almost perfectly linear for FRC components.
+ */
 public final class Constants {
 
     public static double kPi = 3.14159265359;
     
-    /**
-     * falcon encoder rotation
-     */
+    /*** falcon encoder rotation*/
     public static double oneEncoderRotation = 2048;
 
     // see link for more info https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383 
     //                        (Derivation of Inverse Kinematics for Swerve, page 4)
 
-    /**
-     * wheelbase (distance between the middle of the wheels on the length side)
-     */
+    /*** wheelbase (distance between the middle of the wheels on the length side)*/
     public static double L = 22.57; //29;
 
-    /**
-     * trackwidth (distance between the middle of the wheels on the width side)
-     */
+    /*** trackwidth (distance between the middle of the wheels on the width side)*/
     public static double W = 22.57; //17.625; 
 
     public static double widthInch = 29; //21;
@@ -171,6 +176,8 @@ public final class Constants {
     {
         public static double voltComp = 12;
 
+        public static boolean leftFlipped = true; //TODO see if this works
+
         public static int intakeCANID = 9; //14;
         public static int rollersCANID = 13; //13;
 
@@ -180,12 +187,20 @@ public final class Constants {
         public static double intakeKP = 0;
         public static double intakeKI = 0;
         public static double intakeKD = 0;
-        public static double intakeKF = 0; //TODO may not need pid if bang bang limit swtich
+        public static double intakeKF = 0; //// may not need pid if bang bang limit swtich
+                                           //not enough time to tune pidf for intake, bang bang is faster
 
-        public static double timeIntake = 0; //TODO may not need if bang bang limit switch
+        public static double timeIntake = 0; //// may not need if bang bang limit switch 
+                                             //limit switches are a no go, not enough time
 
-        //how much it needs to rotate to move into out position
-        public static double intakeInRotationsNative = 0;
+        /***how much it needs to rotate to move into out position*/
+        public static double intakeRotationsNative = 0;
+        /***threshold for intake rotations, since it wont be accurate*/
+        public static double intakeOutThreshold = 0;
+        /***if its less than this then stop rotating bang bang*/
+        public static double intakeInMaxError = 0;
+
+        public static double intakeBangBangSpeed = 0.5; //TODO may need to tune this if its too fast/slow
     }
 
     public static class CLIMBER
