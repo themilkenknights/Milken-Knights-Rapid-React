@@ -282,16 +282,19 @@ public final class Constants {
 
     public static class AUTO
     {                                                                                   //with encode option    without
+        //actual module pid
         public static double moduleTurnKP = 0.063403; //0.63403; //0.063403;            //0.0000063403;        //1.6261;      //0.0000001;
         public static double moduleTurnKI = 0;
         public static double moduleTurnKD = 0.00098857; //0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;       //0.0000000; 
         //TODO fix pids if using wpi auto
         // why is making pid values a god damn guessing game
 
+        //actual drive module pid
         public static double moduleDriveKP = 0.03; //0.0000001;
         public static double moduleDriveKI = 0;
         public static double moduleDriveKD = 0.001;
 
+        //auto controlling pid
         public static double turnSwerveControlKp = 0.2;
         public static double driveSwerveControlKpY = 0.2;
         public static double driveSwerveControlKpX = 0.2;
@@ -308,18 +311,20 @@ public final class Constants {
         //// also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
         //i think it works?
         
-        
+        //actual drive module stats
         public static final double maxModuleTurnVelo = kPi * 2;
         public static final double maxModuleTurnAccel = kPi * 2;
         
+        //actual drive module stats
         public static final double maxModuleDriveVelo = 2; //2;
         public static final double maxModuleDriveAccel = 2; //2;
         
 
-
+        //for turning constraints
         public static final double maxAutoTurnVelo = kPi * 2;
         public static final double maxAutoTurnAccel = kPi * 2;
         
+        //for trajectory config
         public static final double maxAutoDriveVelo = 5; //2;
         public static final double maxAutoDriveAccel = 5; //2;
 
