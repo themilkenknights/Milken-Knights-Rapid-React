@@ -14,7 +14,17 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.INTAKE;
 
-/** Add your docs here. */
+/*
+*░██████╗░░█████╗░░██████╗  ░██████╗██╗░░██╗░█████╗░░█████╗░██╗░░██╗░██████╗██╗
+!██╔════╝░██╔══██╗██╔════╝  ██╔════╝██║░░██║██╔══██╗██╔══██╗██║░██╔╝██╔════╝██║
+?██║░░██╗░███████║╚█████╗░  ╚█████╗░███████║██║░░██║██║░░╚═╝█████═╝░╚█████╗░██║
+*██║░░╚██╗██╔══██║░╚═══██╗  ░╚═══██╗██╔══██║██║░░██║██║░░██╗██╔═██╗░░╚═══██╗╚═╝
+!╚██████╔╝██║░░██║██████╔╝  ██████╔╝██║░░██║╚█████╔╝╚█████╔╝██║░╚██╗██████╔╝██╗
+?░╚═════╝░╚═╝░░╚═╝╚═════╝░  ╚═════╝░╚═╝░░╚═╝░╚════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝
+*/
+/**
+ * 
+ */
 public class Intake {
     //TODO add another intake motor
     private TalonSRX intakeLeft = new TalonSRX(INTAKE.intakeLeftCANID);

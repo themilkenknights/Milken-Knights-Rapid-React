@@ -6,17 +6,21 @@ package frc.robot;
 
 /** class containing calculations of the lime fruit when shooting */
 public class Limelight {
-    /*
-         _____________________________
-        [         ___________         ]
-        |    .   /           \   .    |
-        |   ::  /             \  ::   |
-        |  ::: |     ( 0 )     | :::  |
-        |   ::  \             /  ::   |
-        |    .   \___________/   .    |
-        [_____________________________]
-                 eye of sauron
-    */
+/** <pre>".
+        ███████████████████████████████        
+        █         ___________         █        
+        █    .   /           \   .    █        
+        █   ::  /             \  ::   █        
+        █  ::: |     ( 0 )     | :::  █        
+        █   ::  \             /  ::   █        
+        █    .   \___________/   .    █        
+        █                             █        
+        ███████████████████████████████   
+ 
+                 Eye Of Sauron
+           He's looking for his bearing
+</pre>
+*/
     private Limelight()
     {
 
