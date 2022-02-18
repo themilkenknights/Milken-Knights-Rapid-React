@@ -15,7 +15,7 @@ import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.SHOOT;
 
-/** Add your docs here. */
+/** bang */
 public class Shooter {
     
     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);

@@ -163,6 +163,16 @@ public final class Constants {
         public static double maxError = 1580;
     }
 
+    public static class HOOD
+    {
+        public static double voltComp = 12;
+        
+        public static int hoodCANID = 0;
+
+        public static double maxOutput = 0.25;
+        public static double hoodKP = 0.15;
+    }
+
     public static class ELEVATOR 
     {
         public static double voltComp = 12;
