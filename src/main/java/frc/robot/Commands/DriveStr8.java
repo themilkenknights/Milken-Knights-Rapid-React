@@ -26,5 +26,8 @@ public class DriveStr8 extends SequentialCommandGroup {
 
     addCommands(deadline(new Turn(((angle) % 90))).withTimeout(2), 
                 deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90))).withTimeout(5));
+
+                //TODO see if above still works, then do this
+      //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }
 }

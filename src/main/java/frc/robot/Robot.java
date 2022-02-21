@@ -46,6 +46,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.AUTO;
+import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.TURN;
@@ -387,7 +388,7 @@ public class Robot extends TimedRobot {
    */
   public void updateFastToggle()
   {
-      if(xbox.getPOV() == 0){
+      if(xbox.getPOV() == BUTTONS.babySpeedFastAngle){
           if(!toggleFastPressed){
               toggleFastOn = !toggleFastOn;
               toggleSlowOn = false;
@@ -405,7 +406,7 @@ public class Robot extends TimedRobot {
    */
   public void updateSlowToggle()
   {
-      if(xbox.getPOV() == 180){
+      if(xbox.getPOV() == BUTTONS.babySpeedToddlerAngle){
           if(!toggleSlowPressed){
               toggleSlowOn = !toggleSlowOn;
               toggleFastOn = false;

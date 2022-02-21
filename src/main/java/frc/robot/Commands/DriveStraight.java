@@ -80,6 +80,9 @@ public class DriveStraight extends CommandBase {
   @Override
   public boolean isFinished() {
     return mDrive.isMagicStraightDone();
+
+    //TODO see if this still works, if not then add this, i still have hope curvy turny worky
+    //mDrive.percentTurnDone();
   }
 
   // Called once after isFinished returns true

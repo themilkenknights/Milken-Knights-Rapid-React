@@ -280,6 +280,27 @@ public final class Constants {
         public static int bufferNum = 100; 
     }
 
+    public static class BUTTONS 
+    {
+        public static int forwardAxis = 0;
+        public static int strafeAxis = 0;
+        public static int spinAxis = 0;
+        public static int intakeButton = 0;
+        public static int hoodFowardButton = 0;
+        public static int hoodBackwardButton = 0;
+        public static int rollersForwardButton = 0;
+        public static int rollersBackwardButton = 0;
+        public static int elevatorForwardButton = 0;
+        public static int elevatorBackwardButton = 0;
+        public static int shooterButton = 0;
+        public static int limelightButton = 0;
+
+        //add climber when climber gets added
+
+        public static int babySpeedFastAngle = 0;
+        public static int babySpeedToddlerAngle = 180;
+    }
+
     public static class AUTO
     {                                                                                   //with encode option    without
         //actual module pid
