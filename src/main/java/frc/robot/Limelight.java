@@ -4,8 +4,19 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 /** class containing calculations of the lime fruit when shooting */
 public class Limelight {
+
+  private final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  private final NetworkTableEntry tx = table.getEntry("tx");
+  private final NetworkTableEntry ty = table.getEntry("ty");
+  private final NetworkTableEntry led = table.getEntry("ledMode");
+  private final NetworkTableEntry tv = table.getEntry("tv");
+  private final NetworkTableEntry pipeline = table.getEntry("UR_MUM");
 /** <pre>".
         ███████████████████████████████        
         █         ___________         █        
@@ -23,7 +34,8 @@ public class Limelight {
 */
     private Limelight()
     {
-
+        table.getEntry("UR_MOM").setValue(0);
+        //table.getEntry("ledMode").setValue(3);
     }
 
     public static Limelight getInstance()
@@ -38,6 +50,18 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
         return (LIMELIGHT.upperGoalHeight - LIMELIGHT.heightLime) / (Math.tan(LIMELIGHT.angleAboveHorizontal + ty));
     }
 */
+
+    public void limelightToggle()
+    {
+        if (led.getDouble(0.0) == 1) {
+            table.getEntry("ledMode").setValue(3);
+          } else {
+            table.getEntry("ledMode").setValue(1);
+          }    
+
+        
+    }
+
     private static class InstanceHolder
     {
         private static final Limelight mInstance = new Limelight();

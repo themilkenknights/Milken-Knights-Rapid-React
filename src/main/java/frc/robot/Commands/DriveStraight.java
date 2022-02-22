@@ -61,6 +61,7 @@ public class DriveStraight extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    mDrive.resetDrive();
     mDrive.setMagicStraight(distanceDrive);
     mDrive.setMagicTurn(angle);
     //mDrive.autoTurnSet();

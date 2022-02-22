@@ -890,10 +890,12 @@ public class Drive {
         MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
         MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
 
-        topTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
-        topTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
-        bottomTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
-        bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((currentDistance/totalDistance)*turnDistance, TURN.greerRatio));
+        topTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
+        topTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
+        bottomTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
+        bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
+        SmartDashboard.putNumber("currentdist", currentDistance);
+        SmartDashboard.putNumber("WORK", (-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)));
     }
 
     /**
@@ -933,8 +935,8 @@ public class Drive {
      */
     public boolean isMagicStraightDone()
     {
-        double err = distance - avgDistInches;
-        return Math.abs(err) < 0.5 && Math.abs(avgVelInches) < 0.5;
+        double err = distance - avgDistInches;              //TODO 0.1?? 
+        return Math.abs(err) < 0.1 && Math.abs(avgVelInches) < 0.1; //0.5, 0.5
     }
 
     /**

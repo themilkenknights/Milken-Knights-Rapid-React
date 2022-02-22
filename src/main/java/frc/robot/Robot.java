@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
    private Shooter mShoot = Shooter.getInstance();
    private Elevator mElevator = Elevator.getInstance();
    private Intake mIntake = Intake.getInstance();
+   private Limelight mLime = Limelight.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -182,7 +183,7 @@ public class Robot extends TimedRobot {
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: //might break idk prob not
          break;
@@ -259,7 +260,9 @@ public class Robot extends TimedRobot {
 
       if(fwd != 0 || str != 0 || rcw != 0)
       {
-        mDrive.etherSwerve(-fwd/spee,str/spee,rcw/spee);
+        //weird negative cuz robot is weird. should be negative fwd positive str rcw, 
+        //but cuz of weird reasons i dont know of its just like this so yeah
+        mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee);
       }
       else if(xbox.getAButton())
       {
@@ -287,16 +290,23 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(1))
       {
-        ffcalc = mShoot.shooterFeedForward(slider) + slider;
+        ffcalc = -mShoot.shooterFeedForward(slider) + slider;
         mShoot.setShooterNativeVeloctiy(ffcalc);
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
+      }
+      else if(xbox.getStartButton())
+      {
+        mShoot.setShooterPercent(1);
       }
       else
       {
         mShoot.setShooterPercent(0);
       }
 
-
+      if(xbox.getRawButtonPressed(7))
+      {
+        mLime.limelightToggle();
+      }
 
       if(mDriverJoystick.getRawButton(2))
       {
@@ -369,6 +379,7 @@ public class Robot extends TimedRobot {
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putNumber("velo", velo);
       SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
+      SmartDashboard.putNumber("ffcalc", ffcalc);
     }
 
   @Override

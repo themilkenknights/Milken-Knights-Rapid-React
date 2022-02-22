@@ -26,7 +26,7 @@ public class Climber {
     private Climber()
     {
         telescopeArmLeft.configFactoryDefault();
-        telescopeArmLeft.setNeutralMode(NeutralMode.Coast);
+        telescopeArmLeft.setNeutralMode(NeutralMode.Brake);
         telescopeArmLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         telescopeArmLeft.setInverted(CLIMBER.telescopeLeftFlipped);
         telescopeArmLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
@@ -42,7 +42,7 @@ public class Climber {
         telescopeArmLeft.configMotionSCurveStrength(CLIMBER.telescopeMagicSCurve);
       
         telescopeArmRight.configFactoryDefault();
-        telescopeArmRight.setNeutralMode(NeutralMode.Coast);
+        telescopeArmRight.setNeutralMode(NeutralMode.Brake);
         telescopeArmRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         telescopeArmRight.setInverted(!CLIMBER.telescopeLeftFlipped);
         telescopeArmRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);

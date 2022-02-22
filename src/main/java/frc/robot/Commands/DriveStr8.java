@@ -25,7 +25,7 @@ public class DriveStr8 extends SequentialCommandGroup {
     //sticking with wpi swervecommandcontroller for now, if that doesnt work then try and fix homemade auto
 
     addCommands(deadline(new Turn(((angle) % 90))).withTimeout(2), 
-                deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90))).withTimeout(5));
+                deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90))).withTimeout(6));
 
                 //TODO see if above still works, then do this
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
