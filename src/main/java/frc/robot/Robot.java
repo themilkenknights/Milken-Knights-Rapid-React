@@ -237,21 +237,21 @@ public class Robot extends TimedRobot {
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
-    fwd = (xbox.getRawAxis(1) - DRIVE.deadband) / (1 - DRIVE.deadband);
-    str = (xbox.getRawAxis(0) - DRIVE.deadband) / (1 - DRIVE.deadband);
-    rcw = (xbox.getRawAxis(4) - TURN.deadband) / (1 - TURN.deadband);
+    fwd = (xbox.getRawAxis(BUTTONS.forwardAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    str = (xbox.getRawAxis(BUTTONS.strafeAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
+    rcw = (xbox.getRawAxis(BUTTONS.spinAxis) - TURN.deadband) / (1 - TURN.deadband);
       
 
 
-      if(Math.abs(xbox.getRawAxis(1)) < 0.1)
+      if(Math.abs(xbox.getRawAxis(BUTTONS.forwardAxis)) < 0.1)
       {
         fwd = 0;
       }
-      if(Math.abs(xbox.getRawAxis(0)) < 0.1)
+      if(Math.abs(xbox.getRawAxis(BUTTONS.strafeAxis)) < 0.1)
       {
         str = 0;
       }
-      if(Math.abs(xbox.getRawAxis(4)) < 0.1)
+      if(Math.abs(xbox.getRawAxis(BUTTONS.spinAxis)) < 0.1)
       {
         rcw = 0;
       }
@@ -288,7 +288,7 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(1))
+      if(mDriverJoystick.getRawButton(BUTTONS.shooterButton))
       {
         ffcalc = -mShoot.shooterFeedForward(slider) + slider;
         mShoot.setShooterNativeVeloctiy(ffcalc);
@@ -303,12 +303,12 @@ public class Robot extends TimedRobot {
         mShoot.setShooterPercent(0);
       }
 
-      if(xbox.getRawButtonPressed(7))
+      if(xbox.getRawButtonPressed(BUTTONS.limelightButton))
       {
         mLime.limelightToggle();
       }
 
-      if(mDriverJoystick.getRawButton(2))
+      if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
         mElevator.setElevatorPercent(-.5);
       }
@@ -319,12 +319,12 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(5))
+      if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
         mIntake.setIntakePercent(0.5);
       }
-      else if(mDriverJoystick.getRawButton(3))
+      else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
         mIntake.setIntakePercent(-0.5);
       }
@@ -334,11 +334,11 @@ public class Robot extends TimedRobot {
         mIntake.setIntakePercent(0);
       }
 
-      if(mDriverJoystick.getRawButton(4))
+      if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
         mIntake.setRollersPercent(0.5);
       }
-      else if(mDriverJoystick.getRawButton(6))
+      else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
       {
         mIntake.setRollersPercent(-0.5);
       }

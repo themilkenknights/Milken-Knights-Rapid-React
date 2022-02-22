@@ -282,10 +282,11 @@ public final class Constants {
 
     public static class BUTTONS 
     {
-        public static int forwardAxis = 0;
+        public static int forwardAxis = 1;
         public static int strafeAxis = 0;
-        public static int spinAxis = 0;
-        public static int intakeButton = 2;
+        public static int spinAxis = 4;
+        public static int intakeup = 2;
+        public static int intakedown = 7;
         public static int hoodFowardButton = 90; //POV 90
         public static int hoodBackwardButton = 270; //POV 180
         public static int rollersForwardButton = 5;
