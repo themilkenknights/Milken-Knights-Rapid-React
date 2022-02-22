@@ -563,7 +563,7 @@ public class Drive {
     */
     public void etherSwerve(double FWD, double STR, double RCW)
     {
-        double yaw = 0;// getNavx();
+        double yaw = getNavx();
         double temp = FWD * Math.cos(Math.toRadians(yaw)) + STR * Math.sin(Math.toRadians(yaw));
         STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
