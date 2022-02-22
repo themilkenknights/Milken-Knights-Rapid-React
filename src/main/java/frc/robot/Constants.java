@@ -107,7 +107,7 @@ public final class Constants {
         //got these values by guessing and praying
         public static double turnKP = 0.00008;//0.00008;//0.00008
         public static double turnKI = 0;
-        public static double turnKD = 0.00000001; 
+        public static double turnKD = 0.00000001; // turnKP * 0.001; 
         public static double turnKF = 0;
 
         public static double magicturnKP = 0.085;//0.00008
