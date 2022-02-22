@@ -285,15 +285,15 @@ public final class Constants {
         public static int forwardAxis = 0;
         public static int strafeAxis = 0;
         public static int spinAxis = 0;
-        public static int intakeButton = 0;
-        public static int hoodFowardButton = 0;
-        public static int hoodBackwardButton = 0;
-        public static int rollersForwardButton = 0;
-        public static int rollersBackwardButton = 0;
-        public static int elevatorForwardButton = 0;
-        public static int elevatorBackwardButton = 0;
-        public static int shooterButton = 0;
-        public static int limelightButton = 0;
+        public static int intakeButton = 2;
+        public static int hoodFowardButton = 90; //POV 90
+        public static int hoodBackwardButton = 270; //POV 180
+        public static int rollersForwardButton = 5;
+        public static int rollersBackwardButton = 3;
+        public static int elevatorForwardButton = 4;
+        public static int elevatorBackwardButton = 6;
+        public static int shooterButton = 1;
+        public static int limelightButton = 8;
 
         //add climber when climber gets added
 
