@@ -256,7 +256,7 @@ public class Robot extends TimedRobot {
         rcw = 0;
       }
 
-
+      
 
       if(fwd != 0 || str != 0 || rcw != 0)
       {
