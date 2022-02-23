@@ -8,6 +8,7 @@ package frc.robot;
 
 import java.awt.MouseInfo;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import javax.lang.model.util.ElementScanner6;
 import javax.swing.event.MouseInputListener;
@@ -17,6 +18,7 @@ import javax.xml.crypto.dsig.keyinfo.KeyInfo;
 
 import org.w3c.dom.events.MouseEvent;
 
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -31,6 +33,8 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
