@@ -112,6 +112,11 @@ public final class Constants {
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
         public static double turnKF = 0;
 
+        public static double turnTopLeftKF = 0;
+        public static double turnTopRightKF = 0;
+        public static double turnBottomLeftKF = 0;
+        public static double turnBottomRightKF = 0;
+
         public static double magicturnKP = 0.085;//0.00008
         public static double magicturnKI = 0;
         public static double magicturnKD = 0.00000001; 
