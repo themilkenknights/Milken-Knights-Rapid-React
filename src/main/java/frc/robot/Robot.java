@@ -6,54 +6,25 @@ package frc.robot;
 
 //!                   sigma grindset rule #29534 - always keep your accidental imports, even if you never use them
 
-import java.awt.MouseInfo;
-import java.util.List;
-import java.util.prefs.Preferences;
 
-import javax.lang.model.util.ElementScanner6;
-import javax.swing.event.MouseInputListener;
-import javax.swing.plaf.basic.BasicDesktopIconUI.MouseInputHandler;
-import javax.swing.plaf.basic.BasicTabbedPaneUI.MouseHandler;
-import javax.xml.crypto.dsig.keyinfo.KeyInfo;
 
-import org.w3c.dom.events.MouseEvent;
 
-import edu.wpi.first.hal.simulation.RoboRioDataJNI;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Commands.DriveStr8;
-import frc.robot.Constants.AUTO;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
-import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.TURN;
 
 /**

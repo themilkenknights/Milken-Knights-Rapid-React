@@ -6,7 +6,6 @@ package frc.robot;
 
 
 
-import javax.swing.border.Border;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
