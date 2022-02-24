@@ -17,7 +17,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  * @param statusTwoMeas Feedback for selected sensor on primary PID[0].
  * <h2> SYSID Values <h2/>
  * @param kS  is the voltage needed to overcome the motor’s static friction, or in other words to just barely get it moving; it turns out that this static friction (because it’s, well, static) has the same effect regardless of velocity or acceleration. That is, no matter what speed you’re going or how fast you’re accelerating, some constant portion of the voltage you’ve applied to your motor (depending on the specific mechanism assembly) will be going towards overcoming the static friction in your gears, bearings, etc; this value is your kS. Note the presence of the signum function, because friction force always opposes the direction-of-motion.
- * @param kV describes how much voltage is needed to hold (or “cruise”) at a given constant velocity while overcoming the electromagnetic resistance in the motor and any additional friction that increases with speed (known as viscous drag). The relationship between speed and voltage (at constant acceleration) is almost entirely linear (with FRC® components, anyway) because of how permanent-magnet DC motors work.
+ * @param kV describes how much voltage is needed to hold (or “cruise”) at a given constant velocity while overcoming the electromagnetic resistance in the motor and any additional friction that increases with speed (known as viscous drag). The relationship between speed and voltage (at constant acceleration) is almost entirely linear (with FRC components, anyway) because of how permanent-magnet DC motors work.
  * @param kA describes the voltage needed to induce a given acceleration in the motor shaft. As with kV, the relationship between voltage and acceleration (at constant velocity) is almost perfectly linear for FRC components.
  */
 public final class Constants {
@@ -59,11 +59,22 @@ public final class Constants {
 
         public static double maxNativeVelocity = 21640; 
 
+        public static double topLeftMaxNativeVelocity = 0;
+        public static double topRightMaxNativeVelocity = 0;
+        public static double bottomLeftMaxNativeVelocity = 0;
+        public static double bottomRightMaxNativeVelocity = 0;
+
         //use team 3244's slideshow on motion magic to get pidf values
         public static double driveKP = 0.21;
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
+        //..... this actually works?
         public static double driveKF = 1023.0 / maxNativeVelocity;
+
+        public static double driveTopLeftKF = 1023.0 / topLeftMaxNativeVelocity;
+        public static double driveTopRightKF = 1023.0 / topRightMaxNativeVelocity;
+        public static double driveBottomLeftKF = 1023.0 / bottomLeftMaxNativeVelocity;
+        public static double driveBottomRightKF = 1023.0 / bottomRightMaxNativeVelocity;
 
         public static double maxInchesVelocity = MkUtil.nativeToInches(maxNativeVelocity);
 
@@ -111,11 +122,6 @@ public final class Constants {
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
         public static double turnKF = 0;
-
-        public static double turnTopLeftKF = 0;
-        public static double turnTopRightKF = 0;
-        public static double turnBottomLeftKF = 0;
-        public static double turnBottomRightKF = 0;
 
         public static double magicturnKP = 0.085;//0.00008
         public static double magicturnKI = 0;
