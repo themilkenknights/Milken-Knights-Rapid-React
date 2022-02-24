@@ -313,6 +313,7 @@ public final class Constants {
         public static int elevatorBackwardButton = 6;
         public static int shooterButton = 1;
         public static int limelightButton = 8;
+        public static int driveHundredButton = 9;
 
         //add climber when climber gets added
     }

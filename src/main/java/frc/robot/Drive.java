@@ -325,24 +325,12 @@ public class Drive {
      */
     public void driveUpdate()
     {
-        
-        SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
-        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
-
-        SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
-        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
-       
-        SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
-
-        SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
-
-      //  SmartDashboard.putNumber("currentDistance", currentDistance);
+        //updateDriveDriveVelocity();
+        //updateDriveTurn();
+        //updateDriveTurnEncoder();
+      
+      
+        //  SmartDashboard.putNumber("currentDistance", currentDistance);
 
         SmartDashboard.putNumber("navx", getNavx());
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
@@ -389,11 +377,49 @@ public class Drive {
 
     }
 
+    /**
+     * updates drive velocity values in shuffleboard
+     */
+    public void updateDriveDriveVelocity()
+    {
+        SmartDashboard.putNumber("topleftvelocity", topDriveLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("toprightvelocity", topDriveRight.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("bottomleftvelocity", bottomDriveLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("bottomrightvelocity", bottomDriveRight.getSelectedSensorVelocity());
+    }
+
+    /** 
+     * updates some turn values in shuffleboard
+    */
+    public void updateDriveTurn()
+    {
+        SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
+
+        SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+       
+        SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
+    }
+
+    /**
+     * updates turn encoder values in shuffleboard
+     */
+    public void updateDriveTurnEncoder()
+    {
+        SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
+    }
 
 
 
     /**
-    powers all angular motors at varying speeds [1, -1]
+     * powers all angular motors at varying speeds [1, -1]
     */
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {

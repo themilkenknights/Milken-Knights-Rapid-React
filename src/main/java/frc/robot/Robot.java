@@ -207,6 +207,8 @@ public class Robot extends TimedRobot {
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
     mIntake.updateIntake();
+    
+    //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
 
@@ -244,22 +246,28 @@ public class Robot extends TimedRobot {
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
       }
-      else if(xbox.getBButton())
+      else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
       {
-        mDrive.resetDrive();
-      }
-      else if(xbox.getXButton())
-      {
-        mDrive.resetNavx();
-      }
-      else if(xbox.getYButton())
-      {
-        mDrive.encoderZero();
+        mDrive.drivePercent(1, 1, 1, 1);
+        mDrive.updateDriveDriveVelocity();
       }
       else
       {
         mDrive.turnPercent(0,0,0,0);
         mDrive.drivePercent(0,0,0,0);
+      }
+
+      if(xbox.getBButton())
+      {
+        mDrive.resetDrive();
+      }
+      if(xbox.getXButton())
+      {
+        mDrive.resetNavx();
+      }
+      if(xbox.getYButton())
+      {
+        mDrive.encoderZero();
       }
 
 
@@ -309,6 +317,8 @@ public class Robot extends TimedRobot {
         //mIntake.setRollersPercent(0);
         mIntake.setIntakePercent(0);
       }
+
+
 
       if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
