@@ -17,21 +17,7 @@ public class Limelight {
   private final NetworkTableEntry led = table.getEntry("ledMode");
   private final NetworkTableEntry tv = table.getEntry("tv");
   private final NetworkTableEntry pipeline = table.getEntry("UR_MUM");
-/** <pre>".
-        ███████████████████████████████        
-        █         ___________         █        
-        █    .   /           \   .    █        
-        █   ::  /             \  ::   █        
-        █  ::: |     ( 0 )     | :::  █        
-        █   ::  \             /  ::   █        
-        █    .   \___________/   .    █        
-        █                             █        
-        ███████████████████████████████   
- 
-                 Eye Of Sauron
-           He's looking for his bearing
-</pre>
-*/
+
     private Limelight()
     {
         table.getEntry("UR_MOM").setValue(0);
@@ -66,4 +52,20 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
     {
         private static final Limelight mInstance = new Limelight();
     } 
+
+
+/*
+        ███████████████████████████████        
+        █         ___________         █        
+        █    .   /           \   .    █        
+        █   ::  /             \  ::   █        
+        █  ::: |     ( 0 )     | :::  █        
+        █   ::  \             /  ::   █        
+        █    .   \___________/   .    █        
+        █                             █        
+        ███████████████████████████████   
+ 
+                 Eye Of Sauron
+           He's looking for his bearing
+*/
 }
