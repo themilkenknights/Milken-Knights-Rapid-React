@@ -6,16 +6,21 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
+import frc.robot.Commands.Commandments.DriveStraight;
+import frc.robot.Commands.Commandments.Turn;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveStr8 extends SequentialCommandGroup {
-  /** Creates a new DriveStr8. */
   Drive mDrive = Drive.getInstance();
   double distanceA = 34;
   double lengthB = 24;
   double angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
+
+  /**
+   * curved drive sequential command
+   */
   public DriveStr8() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

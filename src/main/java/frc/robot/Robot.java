@@ -34,11 +34,7 @@ import frc.robot.Constants.TURN;
  * project.
  */
 public class Robot extends TimedRobot {
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
-
+  
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
    private Elevator mElevator = Elevator.getInstance();
