@@ -70,6 +70,7 @@ public class Intake {
 
     public void setRollersPercent(double setpoint)
     {
+        SmartDashboard.putNumber("hbhbrgfhbgrhbilsrfg", setpoint);
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 

@@ -298,11 +298,11 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
-        mIntake.setIntakePercent(0.5);
+        mIntake.setIntakePercent(1);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
-        mIntake.setIntakePercent(-0.5);
+        mIntake.setIntakePercent(-1);
       }
       else
       {
@@ -312,11 +312,11 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
-        mIntake.setRollersPercent(0.5);
+        mIntake.setRollersPercent(1);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
       {
-        mIntake.setRollersPercent(-0.5);
+        mIntake.setRollersPercent(-1);
       }
       else
       {

@@ -194,10 +194,10 @@ public final class Constants {
         public static double voltComp = 12;
 
         public static boolean leftFlipped = true; //TODO see if this works
-
-        public static int intakeLeftCANID = 9; //14;
-        public static int intakeRightCANID = 696969;
-        public static int rollersCANID = 13; //13;
+            //TODO FIND THESE IDS
+        public static int intakeLeftCANID = 0;// 9; //14;
+        public static int intakeRightCANID = 13;
+        public static int rollersCANID = 14;//13; //13;
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
@@ -289,13 +289,20 @@ public final class Constants {
 
     public static class BUTTONS 
     {
+        //xbox
         public static int forwardAxis = 1;
         public static int strafeAxis = 0;
         public static int spinAxis = 4;
+        
+        //joystick
         public static int intakeup = 2;
         public static int intakedown = 7;
+
+        //xbox
         public static int hoodFowardButton = 90; //POV 90
         public static int hoodBackwardButton = 270; //POV 180
+
+        //joystick
         public static int rollersForwardButton = 5;
         public static int rollersBackwardButton = 3;
         public static int elevatorForwardButton = 4;
@@ -305,6 +312,7 @@ public final class Constants {
 
         //add climber when climber gets added
 
+        //xbox
         public static int babySpeedFastAngle = 0;
         public static int babySpeedToddlerAngle = 180;
     }
