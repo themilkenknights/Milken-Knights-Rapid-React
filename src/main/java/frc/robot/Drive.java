@@ -377,6 +377,9 @@ public class Drive {
 
     }
 
+    /**
+     * values for putting up highest velocity for drive motors
+     */
     double topLeft = 0;
     double topRight = 0;
     double botLeft = 0;
@@ -409,7 +412,7 @@ public class Drive {
     }
 
     /**
-     * real
+     * updates raw drive velocity values to shuffleboard
      */
     public void updateDriveDriveRaw()
     {

@@ -345,7 +345,8 @@ public class Robot extends TimedRobot {
       }
 */
 
-//TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
+//// had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
+//works
       if(toggleFastOn){
         // Do something when toggled on
         spee = 7;
