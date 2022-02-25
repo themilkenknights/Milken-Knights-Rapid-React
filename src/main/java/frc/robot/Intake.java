@@ -40,7 +40,7 @@ public class Intake {
         intakeRight.enableVoltageCompensation(true);
         intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
         intakeRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-        intakeRight.follow(intakeLeft);
+        //intakeRight.follow(intakeLeft);
         
         //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         //intake.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -65,6 +65,7 @@ public class Intake {
 
     public void setIntakePercent(double setpoint)
     {
+        intakeRight.set(ControlMode.PercentOutput, setpoint);
         intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
