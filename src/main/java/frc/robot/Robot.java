@@ -290,7 +290,7 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
-        mElevator.setElevatorPercent(-.5);
+        mElevator.setElevatorPercent(-1);
       }
       else
       {
