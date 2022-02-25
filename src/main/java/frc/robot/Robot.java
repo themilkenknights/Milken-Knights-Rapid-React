@@ -88,6 +88,7 @@ public class Robot extends TimedRobot {
     * for slider widget
     */
    private double slider;
+   private double driveSlider;
 
    /**
     * for motor volt testing
@@ -181,6 +182,7 @@ public class Robot extends TimedRobot {
      }
      mDrive.resetDrive();
      SmartDashboard.putNumber("slider", 0);
+     SmartDashboard.putNumber("driveSlider", 0);
      switch (veloshufflething.getSelected()) {
       case veloOne:
         velo = 0;
@@ -237,6 +239,7 @@ public class Robot extends TimedRobot {
         //weird negative cuz robot is weird. should be negative fwd positive str rcw, 
         //but cuz of weird reasons i dont know of its just like this so yeah
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee);
+        mDrive.updateDriveDriveRaw();
       }
       else if(xbox.getAButton())
       {
@@ -244,8 +247,9 @@ public class Robot extends TimedRobot {
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
       {
-        mDrive.drivePercent(1, 1, 1, 1);
-        mDrive.updateDriveDriveVelocity();
+        //mDrive.drivePercent(1, 1, 1, 1);
+        mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
+        mDrive.updateDriveDriveRaw();
       }
       else
       {
@@ -341,7 +345,8 @@ public class Robot extends TimedRobot {
       }
 */
 
-//TODO had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
+//// had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
+//works
       if(toggleFastOn){
         // Do something when toggled on
         spee = 7;
@@ -358,6 +363,7 @@ public class Robot extends TimedRobot {
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
       slider = SmartDashboard.getNumber("slider", 0);
+      driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putNumber("velo", velo);
       SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
