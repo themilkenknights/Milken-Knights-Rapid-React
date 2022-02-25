@@ -251,22 +251,22 @@ public class Drive {
         topDriveLeft.config_kP(0, DRIVE.driveKP);
         topDriveLeft.config_kI(0, DRIVE.driveKI);
         topDriveLeft.config_kD(0, DRIVE.driveKD);
-        topDriveLeft.config_kF(0, DRIVE.driveKF);
+        topDriveLeft.config_kF(0, DRIVE.driveTopLeftKF);
 
         topDriveRight.config_kP(0, DRIVE.driveKP);
         topDriveRight.config_kI(0, DRIVE.driveKI);
         topDriveRight.config_kD(0, DRIVE.driveKD);
-        topDriveRight.config_kF(0, DRIVE.driveKF);
+        topDriveRight.config_kF(0, DRIVE.driveTopRightKF);
 
         bottomDriveLeft.config_kP(0, DRIVE.driveKP);
         bottomDriveLeft.config_kI(0, DRIVE.driveKI);
         bottomDriveLeft.config_kD(0, DRIVE.driveKD);
-        bottomDriveLeft.config_kF(0, DRIVE.driveKF);
+        bottomDriveLeft.config_kF(0, DRIVE.driveBottomLeftKF);
 
         bottomDriveRight.config_kP(0, DRIVE.driveKP);
         bottomDriveRight.config_kI(0, DRIVE.driveKI);
         bottomDriveRight.config_kD(0, DRIVE.driveKD);
-        bottomDriveRight.config_kF(0, DRIVE.driveKF);
+        bottomDriveRight.config_kF(0, DRIVE.driveBottomRightKF);
 
 
         topDriveLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
@@ -377,10 +377,41 @@ public class Drive {
 
     }
 
+    double topLeft = 0;
+    double topRight = 0;
+    double botLeft = 0;
+    double botRight = 0;
     /**
      * updates drive velocity values in shuffleboard
      */
     public void updateDriveDriveVelocity()
+    {
+        SmartDashboard.putNumber("topleftvelocity", topLeft);
+        if(topDriveLeft.getSelectedSensorVelocity() > topLeft)
+        {
+            topLeft = topDriveLeft.getSelectedSensorVelocity();
+        }
+        SmartDashboard.putNumber("toprightvelocity", topRight);
+        if(topDriveRight.getSelectedSensorVelocity() > topRight)
+        {
+            topRight = topDriveRight.getSelectedSensorVelocity();
+        }
+        SmartDashboard.putNumber("bottomleftvelocity", botLeft);
+        if(bottomDriveLeft.getSelectedSensorVelocity() > botLeft)
+        {
+            botLeft = bottomDriveLeft.getSelectedSensorVelocity();
+        }
+        SmartDashboard.putNumber("bottomrightvelocity", botRight);
+        if(bottomDriveRight.getSelectedSensorVelocity() > botRight)
+        {
+            botRight = bottomDriveRight.getSelectedSensorVelocity();
+        }
+    }
+
+    /**
+     * real
+     */
+    public void updateDriveDriveRaw()
     {
         SmartDashboard.putNumber("topleftvelocity", topDriveLeft.getSelectedSensorVelocity());
         SmartDashboard.putNumber("toprightvelocity", topDriveRight.getSelectedSensorVelocity());
@@ -448,6 +479,25 @@ public class Drive {
         bottomDriveLeft.set(ControlMode.PercentOutput, botleft);
         bottomDriveRight.set(ControlMode.PercentOutput, botright);
     }
+
+    /**
+     * powers all drive motors at varying speeds [velocity in native units]
+     */
+    public void driveVelocity(double topleft, double topright, double botleft, double botright)
+    {
+        topDriveLeft.set(ControlMode.Velocity, topleft + ((6* topleft * 1023 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
+        topDriveRight.set(ControlMode.Velocity, topright + ((7*topright * 1023* DRIVE.greerRatio)/DRIVE.topRightMaxNativeVelocity));
+        bottomDriveLeft.set(ControlMode.Velocity, botleft + ((6*botleft * 1023* DRIVE.greerRatio)/DRIVE.bottomLeftMaxNativeVelocity));
+        bottomDriveRight.set(ControlMode.Velocity, botright + ((6*botright * 1023* DRIVE.greerRatio)/DRIVE.bottomRightMaxNativeVelocity));
+  /*
+        topDriveLeft.set(ControlMode.PercentOutput, topDriveLeftCalculateNative(topleft));
+        topDriveRight.set(ControlMode.PercentOutput, topDriveRightCalculateNative(topright));
+        bottomDriveLeft.set(ControlMode.PercentOutput, bottomDriveLeftCalculateNative(botleft));
+        bottomDriveRight.set(ControlMode.PercentOutput, bottomDriveRightCalculateNative(botright));
+   */
+    }
+
+
     /**
     sets all angular motors' integrated encoder's position to {@code setpoint}
     @param setpoint angle that the positions will be set to
@@ -575,6 +625,59 @@ public class Drive {
 
 
 
+
+
+
+
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the top left angular motor
+    @return returns a speed for the motor
+    */
+    public double topDriveLeftCalculateNative(double setpoint)
+    {
+        return drivePID.calculate(topDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
+    }
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the top right angular motor
+    @return returns a speed for the motor
+    */
+    public double topDriveRightCalculateNative(double setpoint)
+    {
+        return drivePID.calculate(topDriveRight.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topRightMaxNativeVelocity));
+    }
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for the bottom left angular motor
+    @return returns a speed for the motor
+    */
+    public double bottomDriveLeftCalculateNative(double setpoint)
+    {
+        return drivePID.calculate(bottomDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.bottomLeftMaxNativeVelocity));
+    }
+    /**
+    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+    @param setpoint The setpoint for bottom right angular motor
+    @return returns a speed for the motor
+    */
+    public double bottomDriveRightCalculateNative(double setpoint)
+    {
+        return drivePID.calculate(bottomDriveRight.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.bottomRightMaxNativeVelocity));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
     See <a href="https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this thread</a>
     for more information 
@@ -622,11 +725,14 @@ public class Drive {
         ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
         ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
         ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
-
+/*
         topDriveRight.set(ControlMode.PercentOutput, ws1);
         topDriveLeft.set(ControlMode.PercentOutput, ws2);
         bottomDriveLeft.set(ControlMode.PercentOutput, ws3);
         bottomDriveRight.set(ControlMode.PercentOutput, ws4);
+    */
+
+    driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
     }
 
 

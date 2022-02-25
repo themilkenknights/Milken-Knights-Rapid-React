@@ -57,24 +57,24 @@ public final class Constants {
         public static int topDriveLeftCANID = 3; //9;
         public static int bottomDriveLeftCANID = 2; //6;
 
-        public static double maxNativeVelocity = 21640; 
+        public static double maxNativeVelocity = 21600; 
 
-        public static double topLeftMaxNativeVelocity = 0;
-        public static double topRightMaxNativeVelocity = 0;
-        public static double bottomLeftMaxNativeVelocity = 0;
-        public static double bottomRightMaxNativeVelocity = 0;
+        public static double topLeftMaxNativeVelocity = 21880;
+        public static double topRightMaxNativeVelocity = 21980;
+        public static double bottomLeftMaxNativeVelocity = 22000;
+        public static double bottomRightMaxNativeVelocity = 21936;
 
         //use team 3244's slideshow on motion magic to get pidf values
-        public static double driveKP = 0.21;
+        public static double driveKP = 0.21;//0.9;//0.21; //<-- og works with auto
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
         //..... this actually works?
         public static double driveKF = 1023.0 / maxNativeVelocity;
 
-        public static double driveTopLeftKF = 1023.0 / topLeftMaxNativeVelocity;
-        public static double driveTopRightKF = 1023.0 / topRightMaxNativeVelocity;
-        public static double driveBottomLeftKF = 1023.0 / bottomLeftMaxNativeVelocity;
-        public static double driveBottomRightKF = 1023.0 / bottomRightMaxNativeVelocity;
+        public static double driveTopLeftKF = oneEncoderRotation / topLeftMaxNativeVelocity;
+        public static double driveTopRightKF = oneEncoderRotation / topRightMaxNativeVelocity;
+        public static double driveBottomLeftKF = oneEncoderRotation / bottomLeftMaxNativeVelocity;
+        public static double driveBottomRightKF = oneEncoderRotation / bottomRightMaxNativeVelocity;
 
         public static double maxInchesVelocity = MkUtil.nativeToInches(maxNativeVelocity);
 
