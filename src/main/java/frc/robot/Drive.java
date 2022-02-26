@@ -326,7 +326,7 @@ public class Drive {
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
-        //updateDriveTurn();
+        updateDriveTurn();
         //updateDriveTurnEncoder();
       
       
@@ -378,12 +378,10 @@ public class Drive {
     }
 
     /**
-     * values for putting up highest velocity for drive motors
+     * value for putting up highest velocity for drive motors
      */
-    double topLeft = 0;
-    double topRight = 0;
-    double botLeft = 0;
-    double botRight = 0;
+    double topLeft = 0, topRight = 0, botLeft = 0, botRight = 0;
+    
     /**
      * updates drive velocity values in shuffleboard
      */
@@ -728,6 +726,11 @@ public class Drive {
         ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
         ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
         ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
+
+        SmartDashboard.putNumber("wa1",wa1);
+        SmartDashboard.putNumber("wa2",wa2);
+        SmartDashboard.putNumber("wa3",wa3);
+        SmartDashboard.putNumber("wa4",wa4);
 /*
         topDriveRight.set(ControlMode.PercentOutput, ws1);
         topDriveLeft.set(ControlMode.PercentOutput, ws2);
@@ -1086,6 +1089,8 @@ public class Drive {
     }
 
 
+
+    
 
 
 
