@@ -305,14 +305,14 @@ public final class Constants {
         public static int babySpeedToddlerAngle = 180;
 
         //joystick
-        public static int intakeup = 2;
+        public static int intakeup = 8;
         public static int intakedown = 7;
         public static int rollersForwardButton = 5;
         public static int rollersBackwardButton = 3;
         public static int elevatorForwardButton = 4;
         public static int elevatorBackwardButton = 6;
         public static int shooterButton = 1;
-        public static int limelightButton = 8;
+        public static int limelightButton = 11;
         public static int driveHundredButton = 9;
 
         //add climber when climber gets added

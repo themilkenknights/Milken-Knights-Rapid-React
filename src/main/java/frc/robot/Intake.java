@@ -36,7 +36,7 @@ public class Intake {
 
         intakeRight.configFactoryDefault();
         intakeRight.setNeutralMode(NeutralMode.Brake);
-        intakeRight.setInverted(!INTAKE.leftFlipped);
+        intakeRight.setInverted(INTAKE.leftFlipped);
         intakeRight.enableVoltageCompensation(true);
         intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
         intakeRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
