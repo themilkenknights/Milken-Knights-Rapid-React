@@ -36,7 +36,7 @@ public class Intake {
 
         intakeRight.configFactoryDefault();
         intakeRight.setNeutralMode(NeutralMode.Brake);
-        intakeRight.setInverted(INTAKE.leftFlipped); // <-- not inverse of left because wiring is bad and/or motor broken
+        intakeRight.setInverted(INTAKE.leftFlipped); // <-- not inverse of left because wiring is bad
         intakeRight.enableVoltageCompensation(true);
         intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
         intakeRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);

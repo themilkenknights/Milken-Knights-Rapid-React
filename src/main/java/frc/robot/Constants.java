@@ -41,6 +41,9 @@ public final class Constants {
 
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
+    /**
+     * class containing variables that relate to driving
+     */
     public static class DRIVE
     {
         public static int magicSCurve = 6;
@@ -95,6 +98,9 @@ public final class Constants {
         public static double kV = 12/maxNativeVelocity;
     }
 
+    /**
+     * class containing variables that relate to turning
+     */
     public static class TURN
     {
         public static int velocityMeasAmount = 16;
@@ -146,6 +152,9 @@ public final class Constants {
         public static double kV = 0.10986; //12 / maxVel;
     }
 
+    /**
+     * class containing variables that relate to shooting
+     */
     public static class SHOOT
     {
         public static boolean leftFlipped = false;
@@ -176,6 +185,9 @@ public final class Constants {
         public static double maxError = 1580;
     }
 
+    /**
+     * class containing variables that relate to hood
+     */
     public static class HOOD
     {
         public static double voltComp = 12;
@@ -186,6 +198,9 @@ public final class Constants {
         public static double hoodKP = 0.15;
     }
 
+    /**
+     * class containing variables that relate to elevator
+     */
     public static class ELEVATOR 
     {
         public static double voltComp = 12;
@@ -195,6 +210,9 @@ public final class Constants {
         public static double elevatorGreerRatio = 0;
     }
 
+    /**
+     * class containing variables that relate to intaking
+     */
     public static class INTAKE 
     {
         public static double voltComp = 12;
@@ -227,6 +245,9 @@ public final class Constants {
         public static double intakeBangBangSpeed = 0.5; //TODO may need to tune this if its too fast/slow
     }
 
+    /**
+     * class containing variables that relate to climbing
+     */
     public static class CLIMBER
     {
         public static int velocityMeasAmount = 16;
@@ -271,6 +292,9 @@ public final class Constants {
         //TODO find after finding total rotations to high and testing, then time for extra precaution
     }
 
+    /**
+     * class containing variables that relate to limelight
+     */
     public static class LIMELIGHT
     {
         //              inches
@@ -287,12 +311,18 @@ public final class Constants {
         public static double closestDistanceRPMHigh = 0;
     }
 
+    /**
+     * class containing variables that relate to leds
+     */
     public static class LIGHTS
     {
         public static int PWMPORT = 0; 
         public static int bufferNum = 100; 
     }
 
+    /**
+     * class containing variables that relate to button mapping
+     */
     public static class BUTTONS 
     {
         //xbox
@@ -315,9 +345,17 @@ public final class Constants {
         public static int limelightButton = 11;
         public static int driveHundredButton = 9;
 
-        //add climber when climber gets added
+        //*if climb is maunual
+        public static int climbUpButton = 999;
+        public static int climbDownButton = 999;
+
+        //*if climb is automatic
+        public static int climbToggleButton = 999;
     }
 
+    /**
+     * class containing variables that relate to autonomous
+     */
     public static class AUTO
     {                                                                                   //with encode option    without
         //actual module pid
