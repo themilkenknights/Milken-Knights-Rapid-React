@@ -248,7 +248,7 @@ public class Robot extends TimedRobot {
       else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
       {
         //mDrive.drivePercent(1, 1, 1, 1);
-        mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
+       // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
         mDrive.updateDriveDriveRaw();
       }
       else
@@ -287,7 +287,7 @@ public class Robot extends TimedRobot {
         mShoot.setShooterPercent(0);
       }
 
-      if(xbox.getRawButtonPressed(BUTTONS.limelightButton))
+      if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
       {
         mLime.limelightToggle();
       }

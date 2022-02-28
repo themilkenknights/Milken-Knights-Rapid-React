@@ -21,7 +21,7 @@ public class Limelight {
     private Limelight()
     {
         table.getEntry("UR_MOM").setValue(0);
-        //table.getEntry("ledMode").setValue(3);
+        table.getEntry("ledMode").setValue(3);
     }
 
     public static Limelight getInstance()
