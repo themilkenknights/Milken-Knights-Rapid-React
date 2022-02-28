@@ -326,7 +326,7 @@ public class Drive {
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
-        updateDriveTurn();
+        //updateDriveTurn();
         //updateDriveTurnEncoder();
       
       
