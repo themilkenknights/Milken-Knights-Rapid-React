@@ -222,11 +222,11 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomLeftCANCoder, TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));*/
 
-
-        topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
-        topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
-        bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
-        bottomTurnRightEncoder.configMagnetOffset(TURN.bottomRightOffset);
+        //TODO ujncomment these when zeroing is done
+        //topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
+        //topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
+        //bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
+        //bottomTurnRightEncoder.configMagnetOffset(TURN.bottomRightOffset);
 
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -350,7 +350,7 @@ public class Drive {
     {
         //updateDriveDriveVelocity();
         //updateDriveTurn();
-        //updateDriveTurnEncoder();
+        updateDriveTurnEncoder();
       
       
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
