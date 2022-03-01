@@ -47,6 +47,7 @@ public class Drive {
     
     //bogus pid controllers, do nothing, still keep
     //too scared to change and edit since comp is soon and i dont want to ruin anything
+    //will change after comp
     private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
@@ -54,34 +55,54 @@ public class Drive {
 
     public AHRS navX = new AHRS();
 
+    /**distance variable for driving in autonomous*/
     private double distance;
 
+    /**position of the driving motor in native units*/
     private double 
     leftTopPosNative, leftBottomPosNative, 
-    rightTopPosNative, rightBottomPosNative,
+    rightTopPosNative, rightBottomPosNative;
     
+    /**position of the driving motor in inches*/
+    private double
     leftTopPosInch, leftBottomPosInch,
-    rightTopPosInch, rightBottomPosInch,
+    rightTopPosInch, rightBottomPosInch;
 
+    /**position of the driving motor in meters*/
+    private double
     leftTopPosMeters, leftBottomPosMeters,
-    rightTopPosMeters, rightBottomPosMeters,
+    rightTopPosMeters, rightBottomPosMeters;
     
+    /**velocity of the driving motor in inches*/
+    private double
     leftTopVelInch, leftBottomVelInch,
-    rightTopVelInch, rightBottomVelInch,
+    rightTopVelInch, rightBottomVelInch;
 
+    /**velocity of the driving motor in native units*/
+    private double
     leftTopVelNative, leftBottomVelNative,
-    rightTopVelNative, rightBottomVelNative,
+    rightTopVelNative, rightBottomVelNative;
     
+    /**velocity of the driving motor in meters*/
+    private double
     leftTopVelMeters, leftBottomVelMeters,
-    rightTopVelMeters, rightBottomVelMeters,
-    
-    avgVelInches, avgDistInches,
+    rightTopVelMeters, rightBottomVelMeters;
 
+    /**position of the turning motor in degrees*/
+    private double
     leftTopDeg, leftBottomDeg,
-    rightTopDeg, rightBottomDeg,
+    rightTopDeg, rightBottomDeg;
 
+    /**driving motor values for autonomous*/
+    private double
     leftTopOutput, leftBottomOutput,
     rightTopOutput, rightBottomOutput;
+
+    /**average velocity of driving motors in inches*/
+    private double avgVelInches;
+
+    /**average distance of driving motors in inches*/
+    private double avgDistInches;
 
 
     private Drive()
@@ -145,6 +166,7 @@ public class Drive {
         bottomTurnRight.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
 
+        //idk what this does so im not gonna use it
         /*topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
         topTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
         bottomTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
@@ -212,6 +234,7 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
 
 
+        //not gonna use motion magic for turn motors (right now im not, idk if im going to)
         /*      topTurnLeft.configMotionSCurveStrength(6);
         topTurnRight.configMotionSCurveStrength(6);
         bottomTurnLeft.configMotionSCurveStrength(6);
@@ -451,7 +474,7 @@ public class Drive {
 
 
     /**
-     * powers all angular motors at varying speeds [1, -1]
+     * powers all angular motors at varying speeds [-1, 1]
     */
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
@@ -471,7 +494,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
     /**
-    powers all drive motors at varying speeds [1, -1]
+    powers all drive motors at varying speeds [-1, 1]
     */
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {

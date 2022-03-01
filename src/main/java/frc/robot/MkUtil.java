@@ -106,6 +106,7 @@ public class MkUtil {
    * @param wheel
    * @param cubeInputs
    * @return cheesy drive?
+   * @author 254 i believe
    */
   public static DriveSignal cheesyDrive(double throttle, double wheel, boolean cubeInputs) {
     double kThrottleDeadband = 0.0;
@@ -174,7 +175,8 @@ public class MkUtil {
     return Math.abs(a) < max ? a : Math.copySign(max, a);
   }
   /**
-   * cheesy drive
+   * cheesy drive thing
+   * @author team 254 i believe
    */
   public static class DriveSignal {
 

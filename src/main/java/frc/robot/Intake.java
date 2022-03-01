@@ -14,7 +14,7 @@ import frc.robot.Constants.INTAKE;
 
 
 /**
- * 
+ * The intake class contains everything related to the intake, including deployers and rollers
  */
 public class Intake {
     //TODO add another intake motor
