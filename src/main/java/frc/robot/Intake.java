@@ -13,9 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.INTAKE;
 
 
-/**
- * The intake class contains everything related to the intake, including deployers and rollers
- */
+/**The intake class contains everything related to the intake, including deployers and rollers*/
 public class Intake {
     //TODO add another intake motor
     private TalonSRX intakeLeft = new TalonSRX(INTAKE.intakeLeftCANID);
@@ -57,29 +55,40 @@ public class Intake {
         return InstanceHolder.mInstance;
     }
 
+ /**Updates intake values in shuffleboard*/
     public void updateIntake()
     {
         SmartDashboard.putNumber("magencLeft", intakeLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 
+ /**Powers the intake motors at varying speeds [-1, 1]*/
     public void setIntakePercent(double setpoint)
     {
         intakeRight.set(ControlMode.PercentOutput, setpoint);
         intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
+ /**Powers the roller motor at varying speeds [-1, 1]*/
     public void setRollersPercent(double setpoint)
     {
         SmartDashboard.putNumber("Rollers", setpoint);
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 
+/**
+ * Sets the intake motors mag encoders position
+ * @param setpoint in units (idk yet)
+ */
     public void setMagPosition(double setpoint)
     {
         intakeLeft.setSelectedSensorPosition(setpoint);
     }
 
+/**
+ * diy intake
+ * @param button toggle button
+ */
     public void bangBangIntake(boolean button) //TODO need to test to see if it works
     {
         if(intakeLeft.getSelectedSensorPosition() <= INTAKE.intakeInMaxError)

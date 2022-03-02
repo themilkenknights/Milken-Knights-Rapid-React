@@ -14,7 +14,7 @@ import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.SHOOT;
 
-/** bang */
+/**bang */
 public class Shooter {
     
     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
@@ -61,30 +61,41 @@ public class Shooter {
         return InstanceHolder.mInstance;
     }
     
+ /**Updates shooter values in shuffleboard*/
     public void shooterUpdate()
     {
         SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
         SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
     }
 
+ /**Powers shooter motors at varying speeds [-1, 1] */
     public void setShooterPercent(double percent)
     {
         shootLeft.set(ControlMode.PercentOutput, percent);
         shootRight.set(ControlMode.PercentOutput, percent);
     }
 
+ /**Powers shooter motors to run at varying speeds using the integrated velocity closed loop function [-18000, 18000]*/
     public void setShooterNativeVeloctiy(double setpoint)
     {
         shootLeft.set(ControlMode.Velocity, setpoint);
         shootRight.set(ControlMode.Velocity, setpoint);
     }
 
+    /*
     public void setShooterNativeVeloCalc(double setpoint)
     {
          shootLeft.set(ControlMode.Velocity, setpoint);
          shootRight.set(ControlMode.Velocity, setpoint);
     }
+    */
 
+/**
+ * calculates feedforward for the shooter
+ * @param setpoint native velocity setpoint in the <code> setShooterNativeVelocity() </code> function
+ * @return feedforward that should be added when setting a setpoint
+ * @see {@link #setShooterNativeVeloctiy(double setpoint)}
+ */
     public double shooterFeedForward(double setpoint)
     {
         return SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (1+(setpoint / SHOOT.maxVelo))));

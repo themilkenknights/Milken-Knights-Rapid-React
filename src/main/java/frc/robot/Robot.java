@@ -44,17 +44,13 @@ public class Robot extends TimedRobot {
    private Joystick mDriverJoystick = new Joystick(1);
 
 
-    /**
-     * forward movement axis
-     */ 
+/**forward movement axis*/ 
    private double fwd;
-    /**
-     * strafing movement axis
-     */ 
+
+/**strafing movement axis*/ 
    private double str;
-    /**
-     * rotational movement axis
-     */ 
+  
+/**rotational movement axis*/ 
    private double rcw;
 
    private Command m_autonomousCommand;
@@ -64,65 +60,43 @@ public class Robot extends TimedRobot {
    
    private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
    
-   /**
-    * for wpi swerve and auto
-    */
+/**for wpi swerve and auto*/
    private RobotContainer m_robotContainer;
    
-    /**
-     * states of autonomous
-     */ 
+/**states of autonomous*/ 
    public enum AutoPosition {
      LEFT, NOTHING
    }
 
-   /**
-    * states of shooter speed
-    */
+/**states of shooter speed*/
    public enum veloch
    {
      veloOne, veloTwo, veloThree
    }
 
-   /**
-    * for slider widget
-    */
+/**for slider widget*/
    private double slider;
    private double driveSlider;
 
-   /**
-    * for motor volt testing
-    */
+/**for motor volt testing*/
    private double volts;
 
-   /**
-    * baby toggle fast
-    */
+/**baby toggle fast*/
    private boolean toggleFastOn = false;
 
-   /**
-    * baby pressed fast
-    */
+/**baby pressed fast*/
    private boolean toggleFastPressed = false;
 
-   /**
-    * baby toggle slow
-    */
+/**baby toggle slow*/
    private boolean toggleSlowOn = false;
 
-   /**
-    * baby pressed slow
-    */
+/**baby pressed slow*/
    private boolean toggleSlowPressed = false;
 
-   /**
-    * constant that divides speed (baby control)
-    */
+/**constant that divides speed (baby control)*/
    private double spee = 0;
 
-   /**
-    * setpoint variable for shooting
-    */
+/**setpoint variable for shooting*/
    private int velo = 0;
 
    private double ffcalc = 0;
@@ -139,7 +113,7 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.addOption("spee3", veloch.veloThree);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
-      // etc.
+     //etc.
    }
  
    @Override
@@ -158,7 +132,7 @@ public class Robot extends TimedRobot {
        case LEFT:
          m_autonomousCommand = new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
-       case NOTHING: //might break idk prob not
+       case NOTHING: // might break idk prob not
          break;
      }
      if (m_autonomousCommand != null) {
@@ -239,7 +213,7 @@ public class Robot extends TimedRobot {
         //weird negative cuz robot is weird. should be negative fwd positive str rcw, 
         //but cuz of weird reasons i dont know of its just like this so yeah
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee);
-        mDrive.updateDriveDriveRaw();
+        //mDrive.updateDriveDriveRaw();
       }
       else if(xbox.getAButton())
       {
@@ -249,7 +223,7 @@ public class Robot extends TimedRobot {
       {
         //mDrive.drivePercent(1, 1, 1, 1);
        // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
-        mDrive.updateDriveDriveRaw();
+        //mDrive.updateDriveDriveRaw();
       }
       else
       {
@@ -380,29 +354,24 @@ public class Robot extends TimedRobot {
   public void testInit() {}
 
   @Override
-  public void testPeriodic() {}
-
-  /**
-   * updates state of fast toggle for driving
-   */
-  public void updateFastToggle()
-  {
-      if(xbox.getPOV() == BUTTONS.babySpeedFastAngle){
-          if(!toggleFastPressed){
-              toggleFastOn = !toggleFastOn;
-              toggleSlowOn = false;
-              //TODO ^^ might not work
-              toggleFastPressed = true;
-          }
-      }
-      else{
-          toggleFastPressed = false;
-      }
+  public void testPeriodic() {
   }
 
-  /**
-   * updates state of slow toggle for driving
-   */
+/**updates state of fast toggle for driving */
+  public void updateFastToggle() {
+    if (xbox.getPOV() == BUTTONS.babySpeedFastAngle) {
+      if (!toggleFastPressed) {
+        toggleFastOn = !toggleFastOn;
+        toggleSlowOn = false;
+        // TODO ^^ might not work
+        toggleFastPressed = true;
+      }
+    } else {
+      toggleFastPressed = false;
+    }
+  }
+
+/**updates state of slow toggle for driving*/
   public void updateSlowToggle()
   {
       if(xbox.getPOV() == BUTTONS.babySpeedToddlerAngle){

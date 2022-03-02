@@ -8,14 +8,23 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-/** class containing calculations of the lime fruit when shooting */
+/**Class containing calculations of the lime fruit when shooting */
 public class Limelight {
 
   private final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
+/**Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8 to 29.8 degrees)*/
   private final NetworkTableEntry tx = table.getEntry("tx");
+
+/**Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)*/
   private final NetworkTableEntry ty = table.getEntry("ty");
+
+/**Sets limelight’s LED state*/
   private final NetworkTableEntry led = table.getEntry("ledMode");
+
+/**Whether the limelight has any valid targets (0 or 1)*/
   private final NetworkTableEntry tv = table.getEntry("tv");
+
   private final NetworkTableEntry pipeline = table.getEntry("UR_MUM");
 
     private Limelight()
@@ -37,6 +46,7 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
     }
 */
 
+ /**Toggles limelight on and off*/
     public void limelightToggle()
     {
         if (led.getDouble(0.0) == 1) {
@@ -54,6 +64,25 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
     } 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
         ███████████████████████████████        
         █         ___________         █        
@@ -66,6 +95,6 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
         ███████████████████████████████   
  
                  Eye Of Sauron
-           He's looking for his bearing
+          He's looking for his bearing  
 */
 }

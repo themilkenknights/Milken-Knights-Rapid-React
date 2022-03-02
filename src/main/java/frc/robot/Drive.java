@@ -23,9 +23,7 @@ import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
 
 
-/**
- * The Drive class contains all functions for anything related to DIY swerve drive (ether drive, DIY auto, etc)
- */
+/**The Drive class contains all functions for anything related to DIY swerve drive (ether drive, DIY auto, etc)*/
 public class Drive {
     public TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
     public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
@@ -342,10 +340,7 @@ public class Drive {
         return InstanceHolder.mInstance;
     }
 
-    /**
-     * periodically updates values
-     * @return displays values and updates values
-     */
+ /**periodically updates values*/
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
@@ -400,14 +395,10 @@ public class Drive {
 
     }
 
-    /**
-     * value for putting up highest velocity for drive motors
-     */
+ /**value for putting up highest velocity for drive motors*/
     double topLeft = 0, topRight = 0, botLeft = 0, botRight = 0;
     
-    /**
-     * updates drive velocity values in shuffleboard
-     */
+ /**updates drive velocity values in shuffleboard*/
     public void updateDriveDriveVelocity()
     {
         SmartDashboard.putNumber("topleftvelocity", topLeft);
@@ -432,9 +423,7 @@ public class Drive {
         }
     }
 
-    /**
-     * updates raw drive velocity values to shuffleboard
-     */
+ /**updates raw drive velocity values to shuffleboard*/
     public void updateDriveDriveRaw()
     {
         SmartDashboard.putNumber("topleftvelocity", topDriveLeft.getSelectedSensorVelocity());
@@ -443,9 +432,7 @@ public class Drive {
         SmartDashboard.putNumber("bottomrightvelocity", bottomDriveRight.getSelectedSensorVelocity());
     }
 
-    /** 
-     * updates some turn values in shuffleboard
-    */
+ /**updates some turn values in shuffleboard*/
     public void updateDriveTurn()
     {
         SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
@@ -460,9 +447,7 @@ public class Drive {
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
     }
 
-    /**
-     * updates turn encoder values in shuffleboard
-     */
+ /**updates turn encoder values in shuffleboard*/
     public void updateDriveTurnEncoder()
     {
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
@@ -473,9 +458,7 @@ public class Drive {
 
 
 
-    /**
-     * powers all angular motors at varying speeds [-1, 1]
-    */
+ /**powers all angular motors at varying speeds [-1, 1]*/
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topleft);
@@ -483,9 +466,7 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, botleft);
         bottomTurnRight.set(ControlMode.PercentOutput, botright);
     }
-    /**
-    powers all angular motors to turn to specific angles (use degrees)
-    */
+ /**powers all angular motors to turn to specific angles (use degrees)*/
     public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(topleft, TURN.greerRatio)));
@@ -493,9 +474,7 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(botleft, TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
-    /**
-    powers all drive motors at varying speeds [-1, 1]
-    */
+ /**powers all drive motors at varying speeds [-1, 1]*/
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.PercentOutput, topleft);
@@ -504,9 +483,7 @@ public class Drive {
         bottomDriveRight.set(ControlMode.PercentOutput, botright);
     }
 
-    /**
-     * powers all drive motors at varying speeds [velocity in native units]
-     */
+ /**powers all drive motors at varying speeds [velocity in native units]*/
     public void driveVelocity(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.Velocity, topleft + ((6* topleft * 1023 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
@@ -533,9 +510,8 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(setpoint);
         bottomTurnRight.setSelectedSensorPosition(setpoint);
     }
-    /**
-    sets all angular motors' integrated encoder's positions to zero
-    */
+
+ /**sets all angular motors' integrated encoder's positions to zero*/
     public void resetTurn()
     {
         topTurnLeft.setSelectedSensorPosition(0);
@@ -543,9 +519,8 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(0);
         bottomTurnRight.setSelectedSensorPosition(0);
     }
-    /**
-    sets all drive motors' integrated encoder's positions to zero
-    */
+
+ /**sets all drive motors' integrated encoder's positions to zero*/
     public void resetDrive()
     {
         topDriveLeft.setSelectedSensorPosition(0);
@@ -553,9 +528,8 @@ public class Drive {
         bottomDriveLeft.setSelectedSensorPosition(0);
         bottomDriveRight.setSelectedSensorPosition(0);
     }
-    /**
-    sets all angular motors' integrated encoder's positions to their respective CANCoder's position
-    */
+    
+ /**sets all angular motors' integrated encoder's positions to their respective CANCoder's position*/
     public void encoderZero()
     {
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -564,9 +538,8 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
     }
     //TODO test to see if solves problem of continuous bullshit rotaty thingy (zoom zoom when at 0 continuous thing)
-    /**
-     * powers all angular motors to turn to 0 based on their respective CANCoder's position (hopefully)
-     */
+    
+ /**powers all angular motors to turn to 0 based on their respective CANCoder's position (hopefully)*/
     public void encoderMoveToZero()
     {   
         topTurnLeft.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio),0));
@@ -575,9 +548,8 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio),0));
    
     }
-    /**
-    resets navX
-    */
+
+ /**resets navX*/
     public void resetNavx()
     {
         navX.reset();
@@ -1070,9 +1042,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
     }
 
-    /**
-     * updates drive motors with magic
-     */
+ /**updates drive motors with magic*/
     public void updateMagicStraight()
     {
         topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));

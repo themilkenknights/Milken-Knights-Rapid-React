@@ -9,15 +9,18 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants.LIGHTS;
 
-/**
- * Lights class contains everything relating to ergabled
-*/
+/**Lights class contains everything relating to ergabled*/
 public class Lights {
+ /**so i dont have to create a new variable every time */
     private double navXRot = 0;
+
+ /**so i dont have to create a new variable every time */
+    private int offset;
+
+
     private AddressableLED LEDS = new AddressableLED(LIGHTS.PWMPORT);
     private AddressableLEDBuffer buffer = new AddressableLEDBuffer(LIGHTS.bufferNum);
     private Drive mDrive = Drive.getInstance();
-    private int offset;
     private Timer timer = new Timer();
 
     private Lights()
@@ -32,7 +35,7 @@ public class Lights {
         return InstanceHolder.mInstance;
     }
     
-
+ /**oui oui*/
     public void french() {
         // For every pixel
         for (var i = 0; i < LIGHTS.bufferNum; i++) 
@@ -60,7 +63,7 @@ public class Lights {
         }
       }
 
-      //me version
+   /**me version*/
       public void lilNavX()
       {
           navXRot = (((mDrive.getNavx() + 360) % 360) * LIGHTS.bufferNum/360);
@@ -83,7 +86,7 @@ public class Lights {
           LEDS.setData(buffer);
       }
 
-      //setphan version
+   /**setphan version*/
       public void lilNavXTWO()
       {
         navXRot = (((mDrive.getNavx() + 360) % 360) * LIGHTS.bufferNum/360);
@@ -101,7 +104,10 @@ public class Lights {
         LEDS.setData(buffer);
       }
 
-
+/**
+ * displays voltage on the leds
+ * @param volts volt value from driver station
+ */
       public void voltage(double volts)
       {
           for(int i = 0; i < LIGHTS.bufferNum; i++)
