@@ -18,7 +18,7 @@
 ## HOW TO USE:
 - not really user friendly rn, all you need to do is change the constants (i think)
 - also download the Better Comments extension for color coded comments
-- all functions should have javadocs. if they dont, they are either not mine and more info about them can be found on there own documentation page, or its mine and i forgot to add a javadoc
+- all functions and most variables should have javadocs. if they dont, they are either not mine and more info about them can be found on there own documentation page, or its mine and i forgot to add a javadoc
 <br/>
 
 ## MILKEN KNIGHTS WEBSITE
