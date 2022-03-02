@@ -11,12 +11,9 @@ import frc.robot.Constants.LIGHTS;
 
 /**Lights class contains everything relating to ergabled*/
 public class Lights {
- /**so i dont have to create a new variable every time */
+//navx vlaue thing and light offset values so i dont have to create a new variable every time the function runs
     private double navXRot = 0;
-
- /**so i dont have to create a new variable every time */
     private int offset;
-
 
     private AddressableLED LEDS = new AddressableLED(LIGHTS.PWMPORT);
     private AddressableLEDBuffer buffer = new AddressableLEDBuffer(LIGHTS.bufferNum);

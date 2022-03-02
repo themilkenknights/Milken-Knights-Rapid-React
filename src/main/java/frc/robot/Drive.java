@@ -466,6 +466,7 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, botleft);
         bottomTurnRight.set(ControlMode.PercentOutput, botright);
     }
+
  /**powers all angular motors to turn to specific angles (use degrees)*/
     public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
     {
@@ -474,6 +475,7 @@ public class Drive {
         bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(botleft, TURN.greerRatio)));
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
+    
  /**powers all drive motors at varying speeds [-1, 1]*/
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
@@ -572,6 +574,7 @@ public class Drive {
     {
         return topTurnLeft.getMotorOutputVoltage();
     }
+
     /**
      * gets top left drive motor's voltage
      * @return returns the applied voltage to motor in volts. 
@@ -590,6 +593,7 @@ public class Drive {
     {
         return turningPID.calculate(topTurnLeft.getSelectedSensorPosition(), setpoint);
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for the top right angular motor
@@ -599,6 +603,7 @@ public class Drive {
     {
         return turningPID.calculate(topTurnRight.getSelectedSensorPosition(), setpoint);
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for the bottom left angular motor
@@ -608,6 +613,7 @@ public class Drive {
     {
         return turningPID.calculate(bottomTurnLeft.getSelectedSensorPosition(), setpoint);
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for bottom right angular motor
@@ -634,6 +640,7 @@ public class Drive {
     {
         return drivePID.calculate(topDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for the top right angular motor
@@ -643,6 +650,7 @@ public class Drive {
     {
         return drivePID.calculate(topDriveRight.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topRightMaxNativeVelocity));
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for the bottom left angular motor
@@ -652,6 +660,7 @@ public class Drive {
     {
         return drivePID.calculate(bottomDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.bottomLeftMaxNativeVelocity));
     }
+
     /**
     Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
     @param setpoint The setpoint for bottom right angular motor
@@ -733,7 +742,7 @@ public class Drive {
         bottomDriveRight.set(ControlMode.PercentOutput, ws4);
     */
 
-    driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
+        driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
     }
 
 
@@ -784,7 +793,7 @@ public class Drive {
 
 
 
-
+//for autonomous, so i dont have to make new variables
     public double currentDistance = 0;
     public double turnDistance = 0;
     public double distanceA = 0;
@@ -834,6 +843,7 @@ public class Drive {
     {
         return ((Math.pow(distanceA, 2)/4) + Math.pow(lengthB, 2)) * (1 / (2 * lengthB));
     }
+    
     /*public double calculateAngularVelocity(double distanceA, double lengthB)
     {
         double radius = calculateCircleRadius(distanceA, lengthB);
@@ -882,6 +892,7 @@ public class Drive {
         double theta = 2 * (Math.toDegrees((Math.asin((distanceA/(2 * radius))))));
         return (theta / 360) * (2 * (Constants.kPi * radius));
     }
+
     /**
     Calculates a curved autonomous path's angle by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
     <pre>
@@ -925,13 +936,12 @@ public class Drive {
         return 2 * (Math.toDegrees((Math.asin((distanceA/(2 * radius))))));
     }
 
-    /**
-    restarts distance
-    */
+ /**restarts distance*/
     public void autoTurnSet()
     {
         currentDistance = 0;
     }
+
     /**
     using the <code> swerveAutonomousEther() </code> and motion magic, an autonomous angled path of motion can be achieved
     @param totalDistance length of curved path
