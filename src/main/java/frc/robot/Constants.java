@@ -183,7 +183,7 @@ public final class Constants {
     {
         public static double voltComp = 12;
         
-        public static int hoodCANID = 0;
+        public static int hoodCANID = 11;
 
         public static double maxOutput = 0.25;
         public static double hoodKP = 0.15;
