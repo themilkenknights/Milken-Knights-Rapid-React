@@ -16,9 +16,9 @@ import frc.robot.Constants.CLIMBER;
 
 /** Add your docs here. */
 public class Climber {
-    /*
-    TalonFX telescopeArmLeft = new TalonFX(CLIMBER.telescopeArmLeftCANID);
-    TalonFX telescopeArmRight = new TalonFX(CLIMBER.telescopeArmRightCANID);
+    
+    TalonFX telescopeArmLeft = new TalonFX(CLIMBER.telescopeArmLeftCANID = 22);
+    TalonFX telescopeArmRight = new TalonFX(CLIMBER.telescopeArmRightCANID = 23);
 
     TalonSRX rotateArmLeft = new TalonSRX(CLIMBER.rotateArmLeftCANID);
     TalonSRX rotateArmRight = new TalonSRX(CLIMBER.rotateArmRightCANID);
@@ -115,5 +115,5 @@ public class Climber {
     {
         private static final Climber mInstance = new Climber();
     } 
-    */
+    
 }

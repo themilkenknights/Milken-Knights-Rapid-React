@@ -330,8 +330,8 @@ public final class Constants {
         public static int driveHundredButton = 9;
 
         //*if climb is maunual
-        public static int climbUpButton = 999;
-        public static int climbDownButton = 999;
+        public static int climbUpButton = 2;
+        public static int climbDownButton = 3;
 
         //*if climb is automatic
         public static int climbToggleButton = 999;

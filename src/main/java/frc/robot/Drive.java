@@ -563,7 +563,7 @@ public class Drive {
      */
     public double getNavx()
     {
-        return navX.getYaw();
+        return 180+navX.getYaw();
     }
 
     /**
