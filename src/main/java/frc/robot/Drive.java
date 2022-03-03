@@ -221,10 +221,10 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));*/
 
         //TODO ujncomment these when zeroing is done
-        //topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
-        //topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
-        //bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
-        //bottomTurnRightEncoder.configMagnetOffset(TURN.bottomRightOffset);
+        topTurnLeftEncoder.configMagnetOffset(-TURN.topLeftOffset);
+        topTurnRightEncoder.configMagnetOffset(-TURN.topRightOffset);
+        bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);
+        bottomTurnRightEncoder.configMagnetOffset(TURN.bottomRightOffset);
 
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
         topTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -558,12 +558,12 @@ public class Drive {
     }
 
     /**
-     * gets navx yaw (negative because of navx placement)
+     * gets navx yaw (minus 180 because of navx placement)
      * @return returns navx yaw
      */
     public double getNavx()
     {
-        return 180+navX.getYaw();
+        return  180-navX.getYaw();
     }
 
     /**
