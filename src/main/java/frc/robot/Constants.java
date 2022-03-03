@@ -131,12 +131,12 @@ public final class Constants {
         public static double magicturnKF = 0;
 
         // (CANCoder) in degrees, 180 to -180 
-        public static double topLeftOffset = 70.9277343;
-        public static double topRightOffset = 107.138671875;
+        public static double topLeftOffset = -72.685546875;// 70.9277343;
+        public static double topRightOffset = -105.8203125;//107.138671875;
         //// negative offset?
         //i dont think so? idk
-        public static double bottomLeftOffset = -117.94921875; //+
-        public static double bottomRightOffset = 47.109375;  //-
+        public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
+        public static double bottomRightOffset = 46.0546875;//47.109375;  //-
 
         public static double voltComp = 12;
 
