@@ -20,9 +20,6 @@ public class Climber {
     TalonFX telescopeArmLeft = new TalonFX(CLIMBER.telescopeArmLeftCANID = 22);
     TalonFX telescopeArmRight = new TalonFX(CLIMBER.telescopeArmRightCANID = 23);
 
-    TalonSRX rotateArmLeft = new TalonSRX(CLIMBER.rotateArmLeftCANID);
-    TalonSRX rotateArmRight = new TalonSRX(CLIMBER.rotateArmRightCANID);
-
     private Climber()
     {
         telescopeArmLeft.configFactoryDefault();
@@ -56,37 +53,6 @@ public class Climber {
         telescopeArmRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, CLIMBER.statusOneMeas);
         telescopeArmRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, CLIMBER.statusTwoMeas);
         telescopeArmRight.configMotionSCurveStrength(CLIMBER.telescopeMagicSCurve);
-        
-
-        rotateArmLeft.configFactoryDefault();
-        rotateArmLeft.setNeutralMode(NeutralMode.Brake);
-        rotateArmLeft.setInverted(CLIMBER.rotateLeftFlipped);
-        rotateArmLeft.enableVoltageCompensation(true);
-        rotateArmLeft.configVoltageCompSaturation(CLIMBER.voltComp);
-        rotateArmLeft.config_kP(0, CLIMBER.rotateKP);
-        rotateArmLeft.config_kI(0, CLIMBER.rotateKI);
-        rotateArmLeft.config_kD(0, CLIMBER.rotateKD);
-        rotateArmLeft.config_kF(0, CLIMBER.rotateKF);
-        rotateArmLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, CLIMBER.statusOneMeas);
-        rotateArmLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, CLIMBER.statusTwoMeas);
-        rotateArmLeft.configMotionSCurveStrength(CLIMBER.rotateMagicSCurve);
-        rotateArmLeft.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        rotateArmLeft.configVelocityMeasurementWindow(CLIMBER.velocityMeasAmount);
-        
-        rotateArmRight.configFactoryDefault();
-        rotateArmRight.setNeutralMode(NeutralMode.Brake);
-        rotateArmRight.setInverted(!CLIMBER.rotateLeftFlipped);
-        rotateArmRight.enableVoltageCompensation(true);
-        rotateArmRight.configVoltageCompSaturation(CLIMBER.voltComp);
-        rotateArmRight.config_kP(0, CLIMBER.rotateKP);
-        rotateArmRight.config_kI(0, CLIMBER.rotateKI);
-        rotateArmRight.config_kD(0, CLIMBER.rotateKD);
-        rotateArmRight.config_kF(0, CLIMBER.rotateKF);
-        rotateArmRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, CLIMBER.statusOneMeas);
-        rotateArmRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, CLIMBER.statusTwoMeas);
-        rotateArmRight.configMotionSCurveStrength(CLIMBER.rotateMagicSCurve);
-        rotateArmRight.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_25Ms);
-        rotateArmRight.configVelocityMeasurementWindow(CLIMBER.velocityMeasAmount);
     }
 
     public static Climber getInstance()
@@ -103,12 +69,6 @@ public class Climber {
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, percentleft);
         telescopeArmRight.set(ControlMode.PercentOutput, percentright);
-    }
-
-    public void rotatePercent(double percentleft, double percentright)
-    {
-        rotateArmLeft.set(ControlMode.PercentOutput, percentleft);
-        rotateArmRight.set(ControlMode.PercentOutput, percentright);
     }
 
     private static class InstanceHolder

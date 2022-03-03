@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.lang.model.util.ElementScanner6;
+
 //!                   sigma grindset rule #29534 - always keep your accidental imports, even if you never use them
 
 
@@ -40,6 +42,7 @@ public class Robot extends TimedRobot {
    private Elevator mElevator = Elevator.getInstance();
    private Intake mIntake = Intake.getInstance();
    private Limelight mLime = Limelight.getInstance();
+   private Climber mClimb = Climber.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -308,6 +311,18 @@ public class Robot extends TimedRobot {
       }
 
 
+      if(xbox.getRawButton(BUTTONS.climbUpButton))
+      {
+        mClimb.telescopePercent(1, 1);
+      }
+      else if(xbox.getRawButton(BUTTONS.climbDownButton))
+      {
+        mClimb.telescopePercent(-1, -1);
+      }
+      else
+      {
+        mClimb.telescopePercent(0, 0);
+      }
 
      /* if(mDriverJoystick.getRawButton(7))
       {

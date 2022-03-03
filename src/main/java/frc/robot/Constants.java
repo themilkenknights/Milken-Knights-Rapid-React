@@ -246,39 +246,27 @@ public final class Constants {
 
         public static int telescopeArmLeftCANID = 0;
         public static int telescopeArmRightCANID = 0;
-        public static int rotateArmLeftCANID = 0;
-        public static int rotateArmRightCANID = 0;
-
+     
         public static double telescopeGreerRatio = 0;
-        public static double rotateGreerRatio = 0;
 
         public static double telescopeKP = 0;
         public static double telescopeKI = 0;
         public static double telescopeKD = 0;
         public static double telescopeKF = 0;
 
-        public static double rotateKP = 0;
-        public static double rotateKI = 0;
-        public static double rotateKD = 0;
-        public static double rotateKF = 0;
-
         public static double voltComp = 12;
 
         public static boolean telescopeLeftFlipped = false;
-        public static boolean rotateLeftFlipped = false;
 
         public static int telescopeMagicSCurve = 0;
-        public static int rotateMagicSCurve = 0;
 
         //how many rotations native until high point
         public static double telescopeHighPointNative = 0;
-        public static double rotateHighPointNative = 0;
 
         public static double telescopeNativePerInch = 0;
         //TODO try to find constant of slope of native per inch?
 
         public static double telescopeTimeHighPoint = 0;
-        public static double rotateTimeHighPoint = 0;
         //TODO find after finding total rotations to high and testing, then time for extra precaution
     }
 
@@ -317,6 +305,8 @@ public final class Constants {
         public static int hoodBackwardButton = 270; //POV 180
         public static int babySpeedFastAngle = 0;
         public static int babySpeedToddlerAngle = 180;
+        public static int climbUpButton = 5;
+        public static int climbDownButton = 6;
 
         //joystick
         public static int intakeup = 8;
@@ -330,8 +320,7 @@ public final class Constants {
         public static int driveHundredButton = 9;
 
         //*if climb is maunual
-        public static int climbUpButton = 2;
-        public static int climbDownButton = 3;
+        
 
         //*if climb is automatic
         public static int climbToggleButton = 999;
