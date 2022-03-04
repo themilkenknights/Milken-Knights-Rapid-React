@@ -315,11 +315,11 @@ public class Robot extends TimedRobot {
 
       if(xbox.getRawButton(BUTTONS.climbUpButton))
       {
-        mClimb.telescopePercent(1, 1);
+        mClimb.telescopePercent(0.5, 0.5);
       }
       else if(xbox.getRawButton(BUTTONS.climbDownButton))
       {
-        mClimb.telescopePercent(-1, -1);
+        mClimb.telescopePercent(-0.5, -0.5);
       }
       else
       {
