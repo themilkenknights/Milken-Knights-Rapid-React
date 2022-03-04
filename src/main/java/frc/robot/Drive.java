@@ -53,53 +53,53 @@ public class Drive {
 
     public AHRS navX = new AHRS();
 
- /**distance variable for driving in autonomous*/
+ /**Distance variable for driving in autonomous*/
     private double distance;
 
- /**position of the driving motor in native units*/
+ /**Position of the driving motor in native units*/
     private double 
     leftTopPosNative, leftBottomPosNative, 
     rightTopPosNative, rightBottomPosNative;
     
- /**position of the driving motor in inches*/
+ /**Position of the driving motor in inches*/
     private double
     leftTopPosInch, leftBottomPosInch,
     rightTopPosInch, rightBottomPosInch;
 
- /**position of the driving motor in meters*/
+ /**Position of the driving motor in meters*/
     private double
     leftTopPosMeters, leftBottomPosMeters,
     rightTopPosMeters, rightBottomPosMeters;
     
- /**velocity of the driving motor in inches*/
+ /**Velocity of the driving motor in inches*/
     private double
     leftTopVelInch, leftBottomVelInch,
     rightTopVelInch, rightBottomVelInch;
 
- /**velocity of the driving motor in native units*/
+ /**Velocity of the driving motor in native units*/
     private double
     leftTopVelNative, leftBottomVelNative,
     rightTopVelNative, rightBottomVelNative;
     
- /**velocity of the driving motor in meters*/
+ /**Velocity of the driving motor in meters*/
     private double
     leftTopVelMeters, leftBottomVelMeters,
     rightTopVelMeters, rightBottomVelMeters;
 
- /**position of the turning motor in degrees*/
+ /**Position of the turning motor in degrees*/
     private double
     leftTopDeg, leftBottomDeg,
     rightTopDeg, rightBottomDeg;
 
- /**driving motor values for autonomous*/
+ /**Driving motor values for autonomous*/
     private double
     leftTopOutput, leftBottomOutput,
     rightTopOutput, rightBottomOutput;
 
- /**average velocity of driving motors in inches*/
+ /**Average velocity of driving motors in inches*/
     private double avgVelInches;
 
- /**average distance of driving motors in inches*/
+ /**Average distance of driving motors in inches*/
     private double avgDistInches;
 
 
@@ -340,7 +340,7 @@ public class Drive {
         return InstanceHolder.mInstance;
     }
 
- /**periodically updates values*/
+ /**Periodically updates values*/
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
@@ -395,10 +395,10 @@ public class Drive {
 
     }
 
- /**value for putting up highest velocity for drive motors*/
+ /**Value for putting up highest velocity for drive motors*/
     double topLeft = 0, topRight = 0, botLeft = 0, botRight = 0;
     
- /**updates drive velocity values in shuffleboard*/
+ /**Updates drive velocity values in shuffleboard*/
     public void updateDriveDriveVelocity()
     {
         SmartDashboard.putNumber("topleftvelocity", topLeft);
@@ -423,7 +423,7 @@ public class Drive {
         }
     }
 
- /**updates raw drive velocity values to shuffleboard*/
+ /**Updates raw drive velocity values to shuffleboard*/
     public void updateDriveDriveRaw()
     {
         SmartDashboard.putNumber("topleftvelocity", topDriveLeft.getSelectedSensorVelocity());
@@ -432,7 +432,7 @@ public class Drive {
         SmartDashboard.putNumber("bottomrightvelocity", bottomDriveRight.getSelectedSensorVelocity());
     }
 
- /**updates some turn values in shuffleboard*/
+ /**Updates some turn values in shuffleboard*/
     public void updateDriveTurn()
     {
         SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
@@ -447,7 +447,7 @@ public class Drive {
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
     }
 
- /**updates turn encoder values in shuffleboard*/
+ /**Updates turn encoder values in shuffleboard*/
     public void updateDriveTurnEncoder()
     {
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
@@ -458,7 +458,7 @@ public class Drive {
 
 
 
- /**powers all angular motors at varying speeds [-1, 1]*/
+ /**Powers all angular motors at varying speeds [-1, 1]*/
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topleft);
@@ -467,7 +467,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, botright);
     }
 
- /**powers all angular motors to turn to specific angles (use degrees)*/
+ /**Powers all angular motors to turn to specific angles (use degrees)*/
     public void turnCalcPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(topleft, TURN.greerRatio)));
@@ -476,7 +476,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
     
- /**powers all drive motors at varying speeds [-1, 1]*/
+ /**Powers all drive motors at varying speeds [-1, 1]*/
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.PercentOutput, topleft);
@@ -485,7 +485,7 @@ public class Drive {
         bottomDriveRight.set(ControlMode.PercentOutput, botright);
     }
 
- /**powers all drive motors at varying speeds [velocity in native units]*/
+ /**Powers all drive motors at varying speeds [velocity in native units]*/
     public void driveVelocity(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.Velocity, topleft + ((6* topleft * 1023 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
@@ -502,9 +502,10 @@ public class Drive {
 
 
     /**
-    sets all angular motors' integrated encoder's position to {@code setpoint}
-    @param setpoint angle that the positions will be set to
-    */
+     * Sets all angular motors' integrated encoder's position to {@code setpoint}
+     * @param setpoint Angular setpoint
+     */
+    
     public void setPosTurn(double setpoint)
     {
         topTurnLeft.setSelectedSensorPosition(setpoint);
@@ -513,7 +514,7 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(setpoint);
     }
 
- /**sets all angular motors' integrated encoder's positions to zero*/
+ /**Sets all angular motors' integrated encoder's positions to zero*/
     public void resetTurn()
     {
         topTurnLeft.setSelectedSensorPosition(0);
@@ -522,7 +523,7 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(0);
     }
 
- /**sets all drive motors' integrated encoder's positions to zero*/
+ /**Sets all drive motors' integrated encoder's positions to zero*/
     public void resetDrive()
     {
         topDriveLeft.setSelectedSensorPosition(0);
@@ -531,7 +532,7 @@ public class Drive {
         bottomDriveRight.setSelectedSensorPosition(0);
     }
     
- /**sets all angular motors' integrated encoder's positions to their respective CANCoder's position*/
+ /**Sets all angular motors' integrated encoder's positions to their respective CANCoder's position*/
     public void encoderZero()
     {
         topTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
@@ -541,7 +542,7 @@ public class Drive {
     }
     //TODO test to see if solves problem of continuous bullshit rotaty thingy (zoom zoom when at 0 continuous thing)
     
- /**powers all angular motors to turn to 0 based on their respective CANCoder's position (hopefully)*/
+ /**Powers all angular motors to turn to 0 based on their respective CANCoder's position (hopefully)*/
     public void encoderMoveToZero()
     {   
         topTurnLeft.set(ControlMode.PercentOutput,  turningPID.calculate(MkUtil.degreesToNative(topTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio),0));
@@ -551,15 +552,15 @@ public class Drive {
    
     }
 
- /**resets navX*/
+ /**Resets navX*/
     public void resetNavx()
     {
         navX.reset();
     }
 
     /**
-     * gets navx yaw (minus 180 because of navx placement)
-     * @return returns navx yaw
+     * Gets navx yaw (minus 180 because of navx placement)
+     * @return Returns navx yaw
      */
     public double getNavx()
     {
@@ -567,8 +568,8 @@ public class Drive {
     }
 
     /**
-     * gets top left angular motor's voltage
-     * @return returns the applied voltage to motor in volts. 
+     * Gets the top left angular motor's voltage
+     * @return Returns the applied voltage to the motor in volts. 
      */
     public double getTurnVolt()
     {
@@ -576,8 +577,8 @@ public class Drive {
     }
 
     /**
-     * gets top left drive motor's voltage
-     * @return returns the applied voltage to motor in volts. 
+     * Gets top left drive motor's voltage
+     * @return Returns the applied voltage to the motor in volts. 
      */
     public double getDriveVolt()
     {
@@ -585,40 +586,40 @@ public class Drive {
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the top left angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the top left angular motor
+     * @return Returns a speed for the motor
+     */
     public double topTurnLeftCalculateNative(double setpoint)
     {
         return turningPID.calculate(topTurnLeft.getSelectedSensorPosition(), setpoint);
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the top right angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the top right angular motor
+     * @return Returns a speed for the motor
+     */
     public double topTurnRightCalculateNative(double setpoint)
     {
         return turningPID.calculate(topTurnRight.getSelectedSensorPosition(), setpoint);
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the bottom left angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the bottom left angular motor
+     * @return Returns a speed for the motor
+     */
     public double bottomTurnLeftCalculateNative(double setpoint)
     {
         return turningPID.calculate(bottomTurnLeft.getSelectedSensorPosition(), setpoint);
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for bottom right angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the bottom right angular motor
+     * @return Returns a speed for the motor
+     */
     public double bottomTurnRightCalculateNative(double setpoint)
     {
         return turningPID.calculate(bottomTurnRight.getSelectedSensorPosition(), setpoint);
@@ -632,40 +633,40 @@ public class Drive {
 
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the top left angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the top left angular motor
+     * @return Returns a speed for the motor
+     */
     public double topDriveLeftCalculateNative(double setpoint)
     {
         return drivePID.calculate(topDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topLeftMaxNativeVelocity));
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the top right angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the top right angular motor
+     * @return Returns a speed for the motor
+     */
     public double topDriveRightCalculateNative(double setpoint)
     {
         return drivePID.calculate(topDriveRight.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.topRightMaxNativeVelocity));
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for the bottom left angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the bottom left angular motor
+     * @return Returns a speed for the motor
+     */
     public double bottomDriveLeftCalculateNative(double setpoint)
     {
         return drivePID.calculate(bottomDriveLeft.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.bottomLeftMaxNativeVelocity));
     }
 
     /**
-    Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
-    @param setpoint The setpoint for bottom right angular motor
-    @return returns a speed for the motor
-    */
+     * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
+     * @param setpoint Setpoint for the bottom right angular motor
+     * @return Returns a speed for the motor
+     */
     public double bottomDriveRightCalculateNative(double setpoint)
     {
         return drivePID.calculate(bottomDriveRight.getSelectedSensorVelocity(), setpoint + ((setpoint * 2048 * DRIVE.greerRatio)/DRIVE.bottomRightMaxNativeVelocity));
@@ -684,16 +685,16 @@ public class Drive {
 
 
     /**
-    See <a href="https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this thread</a>
-    for more information 
-    <p>
-    Note - this function uses yaw due to the positioning of our navX.
-    @param FWD forward axis of controller
-    @param STR strafe axis of controller
-    @param RCW rotational axis of controller
-    @return performs swerve movement in both linear and rotational movement
-    @author ether (?)
-    */
+     * See <a href="https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this thread</a>
+     * for more information 
+     * <p>
+     * Note - this function uses 180 minus yaw due to the positioning of our navX.
+     * @param FWD Forward axis of controller
+     * @param STR Strafe axis of controller
+     * @param RCW Rotational axis of controller
+     * @author Ether (?)
+     * @see {@link #getNavx()}
+     */
     public void etherSwerve(double FWD, double STR, double RCW)
     {
         double yaw = getNavx();
@@ -780,13 +781,16 @@ public class Drive {
 
 
     /**
-    same as <code> etherSwerve() </code>, but it only powers the angular motors
-    @param FWD forward input
-    @param STR strafe input
-    @param RCW rotational input
-    @return performs swerve with only the angular wheels
-    @author ether (?)
-    */
+     * same as {@link #etherSwerve}, but it only powers the angular motors
+     * <p>
+     * Note - this function uses 180 minus yaw due to the positioning of our navX.
+     * @param FWD forward input
+     * @param STR strafe input
+     * @param RCW rotational input
+     * @author ether (?)
+     * @see {@link #etherSwerve(FWD, STR, RCW)}
+     * @see {@link #getNavx()}
+     */
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
         double yaw = getNavx();
@@ -870,7 +874,7 @@ public class Drive {
 
     * @param distanceA
     * @param lengthB
-    * @return radius of the path
+    * @return Radius of the path
     */
     public double calculateCircleRadius(double distanceA, double lengthB)
     {
@@ -914,10 +918,10 @@ public class Drive {
     2 = ending position
     (diagram above isnt a hot air balloon fyi)
     </pre>
-
     * @param distanceA
     * @param lengthB
-    * @return circumference of the linear path / distance of curved path
+    * @return Circumference of the linear path / distance of curved path
+    * @see {@link #calculateCircleRadius(distanceA, lengthB)}
     */
     public double calculateArcOfPath(double distanceA, double lengthB)
     {
@@ -961,7 +965,8 @@ public class Drive {
 
     * @param distanceA
     * @param lengthB
-    * @return angle of the path (how much the angular motors have to turn in order to acheive this path)
+    * @return Angle of the path (how much the angular motors have to turn in order to acheive this path)
+    * @see {@link #calculateCircleRadius(distanceA, lengthB)}
     */
     public double calculateAngleOfPath(double distanceA, double lengthB)
     {
@@ -969,19 +974,19 @@ public class Drive {
         return 2 * (Math.toDegrees((Math.asin((distanceA/(2 * radius))))));
     }
 
- /**restarts distance*/
+ /**Restarts distance*/
     public void autoTurnSet()
     {
         currentDistance = 0;
     }
 
     /**
-    using the <code> swerveAutonomousEther() </code> and motion magic, an autonomous angled path of motion can be achieved
-    @param totalDistance length of curved path
-    @param thetaTurn angle of curved path
-    @param RCW 1 through -1 for spinny, 0 for no spinny
-    @see {@link #swerveAutonomousEther(double FWD, double STR, double RCW)}
-    @see {@link #updateMagicStraight()}
+     * Using the {@link #swerveAutonomousEther} and motion magic, an autonomous angled path of motion can be achieved
+     * @param totalDistance Length of curved path
+     * @param thetaTurn Angle of curved path
+     * @param RCW [-1, 1] For spinny, 0 for no spinny
+     * @see {@link #swerveAutonomousEther(FWD, STR, RCW)}
+     * @see {@link #updateMagicStraight()}
     */
     public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW)
     {
@@ -1003,11 +1008,11 @@ public class Drive {
     }
 
     /**
-    returns state of auto turn
-    @param  totalDistance length of curved path (the same distance set in the <code> setMagicStraight()</code> function)
-    @return returns true if turning is done
-    @see {@link #setMagicStraight(double setpoint)}
-    */
+     * Returns state of auto turn
+     * @param  totalDistance Length of curved path (the same distance set in the {@link #setMagicStraight} function)
+     * @return True if turning is done
+     * @see {@link #setMagicStraight(setpoint)}
+     */
     public boolean autoTurnIsDone(double totalDistance)
     {
         return Math.abs(totalDistance - currentDistance) < 0.5 && Math.abs(avgVelInches) < 0.1;
@@ -1015,9 +1020,9 @@ public class Drive {
 
 
     /**
-    resets drive motors and sets motion magic velocity, acceleration, and distance
-    * @param setpoint distance (inches)
-    */
+     * Resets drive motors and sets motion magic velocity, acceleration, and distance
+     * @param setpoint Distance (inches)
+     */
     public void setMagicStraight(double setpoint)
     {
         resetDrive();
@@ -1034,9 +1039,9 @@ public class Drive {
     }
 
     /**
-     * resets turn motors and sets motion magic velocity, acceleration, and distance
-     * @param setpoint distance (inches, and the same distance set in the <code> setMagicStraight()</code> function). however, if you are turning without driving, use native units instead of inches
-     * @see {@link #setMagicStraight(double setpoint)}
+     * Resets turn motors and sets motion magic velocity, acceleration, and distance
+     * @param setpoint Distance (inches, and the same distance set in the {@link #setMagicStraight} function). however, if you are turning without driving, use native units instead of inches
+     * @see {@link #setMagicStraight(setpoint)}
      */
     public void setMagicTurn(double setpoint)
     {
@@ -1053,10 +1058,10 @@ public class Drive {
     }
 
     /**
-    updates turn motors with magic
-    @param totalDistance the same distance set in the <code> setMagicStraight() </code> function
-    @see {@link #setMagicStraight(double setpoint)}
-    */
+     * Updates turn motors with magic
+     * @param totalDistance The same distance set in the {@link #setMagicStraight} function
+     * @see {@link #setMagicStraight(setpoint)}
+     */
     public void updateMagicTurn(double totalDistance)
     {
         currentDistance = 
@@ -1074,8 +1079,8 @@ public class Drive {
     }
 
     /**
-     * updates turn motors with magic if you arent turning while driving and have set the setpoint in <code> setMagicTurn() </code> to native units instead of a distance (inches)
-     * @see {@link #setMagicTurn(double setpoint)}
+     * Updates turn motors with magic if you arent turning while driving and have set the setpoint in {@link #setMagicTurn} to native units instead of a distance (inches)
+     * @see {@link #setMagicTurn(setpoint)}
      */
     public void updateMagicTurnAlone()
     {
@@ -1085,7 +1090,7 @@ public class Drive {
         bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative(turnDistance, TURN.greerRatio));
     }
 
- /**updates drive motors with magic*/
+ /**Updates drive motors with magic*/
     public void updateMagicStraight()
     {
         topDriveLeft.set(ControlMode.MotionMagic, MkUtil.inchesToNative(distance));
@@ -1103,8 +1108,8 @@ public class Drive {
     }
 
     /**
-     * returns state of motion magic
-     * @return returns true if motion magic is done
+     * Returns state of motion magic
+     * @return True if motion magic is done
      */
     public boolean isMagicStraightDone()
     {
@@ -1113,10 +1118,10 @@ public class Drive {
     }
 
     /**
-     * returns the state of percent turning (use if using <code> updateMagicTurnAlone() </code> and using native units instead of inches in <code> setMagicTurn() </code>)
-     * @return returns true if percent turning is done
+     * Returns the state of percent turning (use if using {@link #updateMagicTurnAlone} and using native units instead of inches in {@link #setMagicTurn})
+     * @return True if percent turning is done
      * @see {@link #updateMagicTurnAlone()}
-     * @see {@link #setMagicTurn(double setpoint)}
+     * @see {@link #setMagicTurn(setpoint)}
      */
     public boolean percentTurnDone()
     {

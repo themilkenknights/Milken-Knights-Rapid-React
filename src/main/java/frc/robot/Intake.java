@@ -64,7 +64,7 @@ public class Intake {
 
 /**
  * Powers the intake motors at varying speeds [-1, 1]
- * @param setpoint setpoint of the motor
+ * @param setpoint Setpoint of the motor
  */
     public void setIntakePercent(double setpoint)
     {
@@ -74,7 +74,7 @@ public class Intake {
 
 /**
  * Powers the roller motor at varying speeds [-1, 1]
- * @param setpoint setpoint of the motor
+ * @param setpoint Setpoint of the motor
  */
     public void setRollersPercent(double setpoint)
     {
@@ -84,7 +84,7 @@ public class Intake {
 
 /**
  * Sets the intake motors mag encoders position
- * @param setpoint in units (idk yet)
+ * @param setpoint In units (idk yet)
  */
     public void setMagPosition(double setpoint)
     {
@@ -92,8 +92,8 @@ public class Intake {
     }
 
 /**
- * diy intake
- * @param button toggle button
+ * Diy intake
+ * @param button Toggle button
  */
     public void bangBangIntake(boolean button) //TODO need to test to see if it works
     {

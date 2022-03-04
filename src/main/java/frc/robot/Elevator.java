@@ -29,7 +29,7 @@ public class Elevator {
 
 /**
  * Powers the elevator motor at varying speeds [-1, 1]
- * @param setpoint setpoint of the motor
+ * @param setpoint Setpoint of the motor
  */
     public void setElevatorPercent(double setpoint)
     {

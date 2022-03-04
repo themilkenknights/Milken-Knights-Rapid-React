@@ -70,7 +70,7 @@ public class Shooter {
 
 /**
  * Powers the shooter motors at varying speeds [-1, 1] 
- * @param setpoint setpoint of the motors
+ * @param setpoint Setpoint of the motors
  */
     public void setShooterPercent(double setpoint)
     {
@@ -80,7 +80,7 @@ public class Shooter {
 
 /**
  * Powers the shooter motors to run at varying speeds using the integrated velocity closed loop function [-18000, 18000]
- * @param setpoint setpoint of the motors
+ * @param setpoint Setpoint of the motors
  */
     public void setShooterNativeVeloctiy(double setpoint)
     {
@@ -97,10 +97,10 @@ public class Shooter {
     */
 
 /**
- * calculates feedforward for the shooter
- * @param setpoint native velocity setpoint in the <code> setShooterNativeVelocity() </code> function
- * @return feedforward that should be added when setting a setpoint
- * @see {@link #setShooterNativeVeloctiy(double setpoint)}
+ * Calculates feedforward for the shooter
+ * @param setpoint Native velocity setpoint in the {@link #setShooterNativeVelocity} function
+ * @return Feedforward that should be added when setting a setpoint
+ * @see {@link #setShooterNativeVeloctiy(setpoint)}
  */
     public double shooterFeedForward(double setpoint)
     {
