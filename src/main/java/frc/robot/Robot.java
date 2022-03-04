@@ -225,12 +225,12 @@ public class Robot extends TimedRobot {
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
+      /*else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
       {
         //mDrive.drivePercent(1, 1, 1, 1);
        // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
         //mDrive.updateDriveDriveRaw();
-      }
+      }*/
       else
       {
         mDrive.turnPercent(0,0,0,0);
