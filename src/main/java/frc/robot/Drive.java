@@ -29,7 +29,7 @@ public class Drive {
     public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
     public TalonFX bottomTurnLeft = new TalonFX(TURN.bottomTurnLeftCANID);
     public TalonFX bottomTurnRight = new TalonFX(TURN.bottomTurnRightCANID);
-
+    
     public TalonFX topDriveLeft = new TalonFX(DRIVE.topDriveLeftCANID);    
     public TalonFX topDriveRight = new TalonFX(DRIVE.topDriveRightCANID);    
     public TalonFX bottomDriveLeft = new TalonFX(DRIVE.bottomDriveLeftCANID);
@@ -53,53 +53,53 @@ public class Drive {
 
     public AHRS navX = new AHRS();
 
-    /**distance variable for driving in autonomous*/
+ /**distance variable for driving in autonomous*/
     private double distance;
 
-    /**position of the driving motor in native units*/
+ /**position of the driving motor in native units*/
     private double 
     leftTopPosNative, leftBottomPosNative, 
     rightTopPosNative, rightBottomPosNative;
     
-    /**position of the driving motor in inches*/
+ /**position of the driving motor in inches*/
     private double
     leftTopPosInch, leftBottomPosInch,
     rightTopPosInch, rightBottomPosInch;
 
-    /**position of the driving motor in meters*/
+ /**position of the driving motor in meters*/
     private double
     leftTopPosMeters, leftBottomPosMeters,
     rightTopPosMeters, rightBottomPosMeters;
     
-    /**velocity of the driving motor in inches*/
+ /**velocity of the driving motor in inches*/
     private double
     leftTopVelInch, leftBottomVelInch,
     rightTopVelInch, rightBottomVelInch;
 
-    /**velocity of the driving motor in native units*/
+ /**velocity of the driving motor in native units*/
     private double
     leftTopVelNative, leftBottomVelNative,
     rightTopVelNative, rightBottomVelNative;
     
-    /**velocity of the driving motor in meters*/
+ /**velocity of the driving motor in meters*/
     private double
     leftTopVelMeters, leftBottomVelMeters,
     rightTopVelMeters, rightBottomVelMeters;
 
-    /**position of the turning motor in degrees*/
+ /**position of the turning motor in degrees*/
     private double
     leftTopDeg, leftBottomDeg,
     rightTopDeg, rightBottomDeg;
 
-    /**driving motor values for autonomous*/
+ /**driving motor values for autonomous*/
     private double
     leftTopOutput, leftBottomOutput,
     rightTopOutput, rightBottomOutput;
 
-    /**average velocity of driving motors in inches*/
+ /**average velocity of driving motors in inches*/
     private double avgVelInches;
 
-    /**average distance of driving motors in inches*/
+ /**average distance of driving motors in inches*/
     private double avgDistInches;
 
 
@@ -350,7 +350,7 @@ public class Drive {
       
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
 
-        SmartDashboard.putNumber("navx", getNavx());
+        //SmartDashboard.putNumber("navx", getNavx());
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
 
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
@@ -701,6 +701,9 @@ public class Drive {
         STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
 
+        SmartDashboard.putNumber("frd", FWD);
+        SmartDashboard.putNumber("str", STR);
+
         double A = STR - RCW*(Constants.L/Constants.R);
         double B = STR + RCW*(Constants.L/Constants.R);
         double C = FWD - RCW*(Constants.W/Constants.R);
@@ -743,7 +746,37 @@ public class Drive {
     */
 
         driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
+
+
     }
+
+
+
+
+
+    double hP, hI, hD = 1;
+    double hIntegral, hDerivative, hPreviousError, hError;
+
+    //programming done right
+    public double headerStraighter(double hSetpoint)
+    {
+        hError = hSetpoint -  getNavx();// Error = Target - Actual
+        hIntegral += (hError*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
+        hDerivative = (hError - this.hPreviousError) / .02;
+        return hP*hError + hI*this.hIntegral + hD*hDerivative;
+    }
+
+    public void updateHeaderFix(double hAngle)
+    {
+        SmartDashboard.putNumber("header return", headerStraighter(hAngle));
+    }
+
+
+
+
+
+
+
 
 
     /**
