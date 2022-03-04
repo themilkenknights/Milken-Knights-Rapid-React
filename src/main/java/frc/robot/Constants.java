@@ -186,7 +186,7 @@ public final class Constants {
     {
         public static double voltComp = 12;
         
-        public static int hoodCANID = 11;
+        public static int hoodCANID = 21;
 
         public static double maxOutput = 0.25;
         public static double hoodKP = 0.15;
@@ -214,7 +214,7 @@ public final class Constants {
             //facing ask me about my robot sticker, left is left and right is right
         public static int intakeLeftCANID = 9;//0;// 9; //14;
         public static int intakeRightCANID = 13;
-        public static int rollersCANID = 99;//14;//13; //13;
+        public static int rollersCANID = 12;//14;//13; //13;
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
@@ -327,13 +327,16 @@ public final class Constants {
         //joystick
         public static int intakeup = 8;
         public static int intakedown = 7;
-        public static int rollersForwardButton = 5;
-        public static int rollersBackwardButton = 3;
+        public static int rollersForwardButton = 3;
+        public static int rollersBackwardButton = 5;
         public static int elevatorForwardButton = 4;
         public static int elevatorBackwardButton = 6;
         public static int shooterButton = 1;
         public static int limelightButton = 11;
         public static int driveHundredButton = 9;
+
+        public static int hoodUpAngle = 9999;
+        public static int hoodDownAngle = 9999;
 
         //*if climb is maunual
         
