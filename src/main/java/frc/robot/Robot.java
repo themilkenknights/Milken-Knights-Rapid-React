@@ -173,6 +173,8 @@ public class Robot extends TimedRobot {
         velo = 4000;
         break;
     }
+    SmartDashboard.putNumber("velo", velo);
+    //TODO do i even need velocity control in another tab?
    }
  
  
@@ -354,9 +356,8 @@ public class Robot extends TimedRobot {
       slider = SmartDashboard.getNumber("slider", 0);
       driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
-      SmartDashboard.putNumber("velo", velo);
-      SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
-      SmartDashboard.putNumber("ffcalc", ffcalc);
+      //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
+      //SmartDashboard.putNumber("ffcalc", ffcalc);
     }
 
   @Override
@@ -378,7 +379,8 @@ public class Robot extends TimedRobot {
       if (!toggleFastPressed) {
         toggleFastOn = !toggleFastOn;
         toggleSlowOn = false;
-        // TODO ^^ might not work
+        //// ^^ might not work
+        //works
         toggleFastPressed = true;
       }
     } else {
@@ -393,7 +395,8 @@ public class Robot extends TimedRobot {
           if(!toggleSlowPressed){
               toggleSlowOn = !toggleSlowOn;
               toggleFastOn = false;
-              //TODO ^^ might not work
+              //// ^^ might not work
+              //works
               toggleSlowPressed = true;
           }
       }

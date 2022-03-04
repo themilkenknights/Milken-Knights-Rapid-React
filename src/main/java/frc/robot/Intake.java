@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.INTAKE;
 
 
-/**The intake class contains everything related to the intake, including deployers and rollers*/
+/**The Intake class contains everything related to the intake, including deployers and rollers*/
 public class Intake {
-    //TODO add another intake motor
+    //// add another intake motor
     private TalonSRX intakeLeft = new TalonSRX(INTAKE.intakeLeftCANID);
     private TalonSRX intakeRight = new TalonSRX(INTAKE.intakeRightCANID);
     private TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);

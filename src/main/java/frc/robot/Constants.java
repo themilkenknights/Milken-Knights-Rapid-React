@@ -118,8 +118,9 @@ public final class Constants {
         public static int bottomTurnRightCANID = 8; //1;
 
         //got these values by guessing and praying
-        //TODO set all to 0, find kF, then find kP
-        //TODO or dont use motor control loop, rather use calculation methods
+        //// set all to 0, find kF, then find kP
+        //// or dont use motor control loop, rather use calculation methods
+        //idk how to fix drifiting, and literally no time to fix it rn. will ask people at comp how they combat it
         public static double turnKP = 0.00008;//0.00008;//0.00008
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
