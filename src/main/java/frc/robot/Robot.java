@@ -203,7 +203,7 @@ public class Robot extends TimedRobot {
     updateFastToggle();
     updateSlowToggle();
     updateClimbToggle();
-
+//i <3 MILFZ and Steven Hawking
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
@@ -290,6 +290,10 @@ public class Robot extends TimedRobot {
       {
         mElevator.setElevatorPercent(-1);
       }
+      else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
+{
+      mElevator.setElevatorPercent(1);
+      }
       else
       {
         mElevator.setElevatorPercent(0);
@@ -336,11 +340,11 @@ public class Robot extends TimedRobot {
     {
       if(xbox.getRawButton(BUTTONS.climbUpButton))
       {
-        mClimb.telescopePercent(0.5, 0.5);
+        mClimb.telescopePercent(0.5, -0.5);
       }
       else if(xbox.getRawButton(BUTTONS.climbDownButton))
       {
-        mClimb.telescopePercent(-0.5, -0.5);
+        mClimb.telescopePercent(-0.5, 0.5);
       }
       else
       {
@@ -367,11 +371,11 @@ public class Robot extends TimedRobot {
 
       if(xbox.getRawButton(BUTTONS.climbLeftUpButton))
       {
-        mClimb.telescopePercentLeft(0.5);
+        mClimb.telescopePercentLeft(-0.5);
       }
       else if(xbox.getRawAxis(BUTTONS.climbLeftDownAxis) > 0.2)
       {
-        mClimb.telescopePercentLeft(-0.5);
+        mClimb.telescopePercentLeft(0.5);
       }
       else
       {
@@ -411,6 +415,8 @@ public class Robot extends TimedRobot {
       driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putBoolean("is", toggleClimbOn);
+      SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
+      SmartDashboard.putNumber("povx", xbox.getPOV());
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
       //SmartDashboard.putNumber("ffcalc", ffcalc);
     }
