@@ -97,6 +97,9 @@ public class Robot extends TimedRobot {
 /**baby pressed slow*/
    private boolean toggleSlowPressed = false;
 
+   private boolean toggleClimbOn = false;
+   private boolean toggleClimbPressed = false;
+
 /**constant that divides speed (baby control)*/
    private double spee = 0;
 
@@ -189,6 +192,7 @@ public class Robot extends TimedRobot {
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
+    updateClimbToggle();
 
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
@@ -314,6 +318,12 @@ public class Robot extends TimedRobot {
       }
 
 
+
+
+
+
+    if(toggleClimbOn == false)
+    {
       if(xbox.getRawButton(BUTTONS.climbUpButton))
       {
         mClimb.telescopePercent(0.5, 0.5);
@@ -326,6 +336,38 @@ public class Robot extends TimedRobot {
       {
         mClimb.telescopePercent(0, 0);
       }
+    }
+
+    else
+    {
+      if(xbox.getRawButton(BUTTONS.climbRightUpButton))
+      {
+        mClimb.telescopePercentRight(0.5);
+      }
+      else if(xbox.getRawAxis(BUTTONS.climbRightDownAxis) > 0.2)
+      {
+        mClimb.telescopePercentRight(-0.5);
+      }
+      else
+      {
+        mClimb.telescopePercentRight(0);
+      }
+
+
+
+      if(xbox.getRawButton(BUTTONS.climbLeftUpButton))
+      {
+        mClimb.telescopePercentLeft(0.5);
+      }
+      else if(xbox.getRawAxis(BUTTONS.climbLeftDownAxis) > 0.2)
+      {
+        mClimb.telescopePercentLeft(-0.5);
+      }
+      else
+      {
+        mClimb.telescopePercentLeft(0);
+      }
+    }
 
      /* if(mDriverJoystick.getRawButton(7))
       {
@@ -403,6 +445,23 @@ public class Robot extends TimedRobot {
       }
       else{
           toggleSlowPressed = false;
+      }
+  }
+
+
+
+  public void updateClimbToggle()
+  {
+      if(xbox.getRawButton(BUTTONS.climbModeButton)){
+          if(!toggleClimbPressed){
+              toggleClimbOn = !toggleClimbOn;
+              //// ^^ might not work
+              //works
+              toggleClimbPressed = true;
+          }
+      }
+      else{
+          toggleClimbPressed = false;
       }
   }
 }

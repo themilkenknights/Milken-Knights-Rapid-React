@@ -306,8 +306,18 @@ public final class Constants {
         public static int hoodBackwardButton = 270; //POV 180
         public static int babySpeedFastAngle = 0;
         public static int babySpeedToddlerAngle = 180;
-        public static int climbUpButton = 5;
-        public static int climbDownButton = 6;
+        public static int climbUpButton = 5; //left
+        public static int climbDownButton = 6; //right
+
+        //when mode is enabled
+        public static int climbModeButton = 7; // left of xbox button
+
+        public static int climbLeftUpButton = 5; //left bumper
+        public static int climbLeftDownAxis = 2; //left trigger
+
+        public static int climbRightUpButton  = 6; //riht bumper
+        public static int climbRightDownAxis = 3; //right trigger
+
 
         //joystick
         public static int intakeup = 8;
