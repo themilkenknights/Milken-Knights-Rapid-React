@@ -76,6 +76,24 @@ public class Climber {
         telescopeArmRight.set(ControlMode.PercentOutput, percentright);
     }
 
+    /**
+     * Powers right telescoping arm at varying speeds [-1, 1]
+     * @param setpoint setpoint of the motor
+     */
+    public void telescopePercentRight(double setpoint)
+    {
+        telescopeArmRight.set(ControlMode.PercentOutput, setpoint);
+    }
+
+    /**
+     * Powers left telescoping arm at varying speeds [-1, 1]
+     * @param setpoint setpoint of the motor
+     */
+    public void telescopePercentLeft(double setpoint)
+    {
+        telescopeArmLeft.set(ControlMode.PercentOutput, setpoint);
+    }
+
     private static class InstanceHolder
     {
         private static final Climber mInstance = new Climber();
