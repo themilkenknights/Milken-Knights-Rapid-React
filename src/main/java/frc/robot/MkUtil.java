@@ -9,6 +9,7 @@ import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
 
@@ -408,4 +409,13 @@ public class MkUtil {
       return (gimmeDeg * 2048 * greerRatio) / (360 * 100);
     }
 
+    /**
+     * Its easier this way (i think, idk if this is bad tho but its easier)
+     * @param name name of the value
+     * @param value the value
+     */
+    public static void shuffleboardDouble(String name, double value)
+    {
+      SmartDashboard.putNumber("name", value);
+    }
 }
