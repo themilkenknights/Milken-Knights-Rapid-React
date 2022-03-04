@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
@@ -133,7 +134,7 @@ public class Robot extends TimedRobot {
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new DriveComp();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: // might break idk prob not
          break;
