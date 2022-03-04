@@ -26,14 +26,14 @@ public class Intake {
     private Intake()
     {
         intakeLeft.configFactoryDefault();
-        intakeLeft.setNeutralMode(NeutralMode.Brake);
+        intakeLeft.setNeutralMode(NeutralMode.Coast);
         intakeLeft.setInverted(INTAKE.leftFlipped);
         intakeLeft.enableVoltageCompensation(true);
         intakeLeft.configVoltageCompSaturation(INTAKE.voltComp);
         intakeLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         intakeRight.configFactoryDefault();
-        intakeRight.setNeutralMode(NeutralMode.Brake);
+        intakeRight.setNeutralMode(NeutralMode.Coast);
         intakeRight.setInverted(INTAKE.leftFlipped); // <-- not inverse of left because wiring is bad
         intakeRight.enableVoltageCompensation(true);
         intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
