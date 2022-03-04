@@ -77,7 +77,7 @@ public class Climber {
     }
 
     /**
-     * Powers right telescoping arm at varying speeds [-1, 1]
+     * Powers the right telescoping arm at varying speeds [-1, 1]
      * @param setpoint setpoint of the motor
      */
     public void telescopePercentRight(double setpoint)
@@ -86,7 +86,7 @@ public class Climber {
     }
 
     /**
-     * Powers left telescoping arm at varying speeds [-1, 1]
+     * Powers the left telescoping arm at varying speeds [-1, 1]
      * @param setpoint setpoint of the motor
      */
     public void telescopePercentLeft(double setpoint)

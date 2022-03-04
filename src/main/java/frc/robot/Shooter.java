@@ -68,14 +68,20 @@ public class Shooter {
         SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
     }
 
- /**Powers shooter motors at varying speeds [-1, 1] */
-    public void setShooterPercent(double percent)
+/**
+ * Powers the shooter motors at varying speeds [-1, 1] 
+ * @param setpoint setpoint of the motors
+ */
+    public void setShooterPercent(double setpoint)
     {
-        shootLeft.set(ControlMode.PercentOutput, percent);
-        shootRight.set(ControlMode.PercentOutput, percent);
+        shootLeft.set(ControlMode.PercentOutput, setpoint);
+        shootRight.set(ControlMode.PercentOutput, setpoint);
     }
 
- /**Powers shooter motors to run at varying speeds using the integrated velocity closed loop function [-18000, 18000]*/
+/**
+ * Powers the shooter motors to run at varying speeds using the integrated velocity closed loop function [-18000, 18000]
+ * @param setpoint setpoint of the motors
+ */
     public void setShooterNativeVeloctiy(double setpoint)
     {
         shootLeft.set(ControlMode.Velocity, setpoint);

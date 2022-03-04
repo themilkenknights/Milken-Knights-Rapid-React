@@ -62,14 +62,20 @@ public class Intake {
         SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 
- /**Powers the intake motors at varying speeds [-1, 1]*/
+/**
+ * Powers the intake motors at varying speeds [-1, 1]
+ * @param setpoint setpoint of the motor
+ */
     public void setIntakePercent(double setpoint)
     {
         intakeRight.set(ControlMode.PercentOutput, setpoint);
         intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
- /**Powers the roller motor at varying speeds [-1, 1]*/
+/**
+ * Powers the roller motor at varying speeds [-1, 1]
+ * @param setpoint setpoint of the motor
+ */
     public void setRollersPercent(double setpoint)
     {
         SmartDashboard.putNumber("Rollers", setpoint);

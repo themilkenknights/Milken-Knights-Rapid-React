@@ -27,7 +27,10 @@ public class Elevator {
         return InstanceHolder.mInstance;
     }
 
- /**powers the elevator motor at varying speeds [-1, 1]*/
+/**
+ * Powers the elevator motor at varying speeds [-1, 1]
+ * @param setpoint setpoint of the motor
+ */
     public void setElevatorPercent(double setpoint)
     {
         elevator.set(ControlMode.PercentOutput, setpoint);
