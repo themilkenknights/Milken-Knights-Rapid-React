@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CLIMBER;
 
 /**The Climber class contains everything relating to the climbing mechanism*/
@@ -61,7 +62,8 @@ public class Climber {
 
     public void climberUpdate()
     {
-
+        SmartDashboard.putNumber("right climb", telescopeArmRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("left climb", telescopeArmLeft.getSelectedSensorPosition());
     }
 
     /**
@@ -91,6 +93,12 @@ public class Climber {
     public void telescopePercentLeft(double setpoint)
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, setpoint);
+    }
+
+    public void zeroVClimbb()
+    {
+        telescopeArmRight.setSelectedSensorPosition(0);
+        telescopeArmLeft.setSelectedSensorPosition(0);
     }
 
     private static class InstanceHolder

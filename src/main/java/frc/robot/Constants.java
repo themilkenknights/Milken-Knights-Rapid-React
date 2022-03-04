@@ -151,6 +151,8 @@ public final class Constants {
  /**class containing variables that relate to shooting*/
     public static class SHOOT
     {
+                   //facing ask me about my robot sticker, left is left and right is right
+
         public static boolean leftFlipped = false;
 
         public static int velocityMeasAmount = 16;
@@ -195,7 +197,7 @@ public final class Constants {
     {
         public static double voltComp = 12;
         
-        public static int elevatorCANID = 12;//11;
+        public static int elevatorCANID = 10;//11;
 
         public static double elevatorGreerRatio = 0;
     }
@@ -209,9 +211,10 @@ public final class Constants {
                                                     //wiring is bad, so this isnt doing anything rn lol
             //// FIND THESE IDS
             //found them
+            //facing ask me about my robot sticker, left is left and right is right
         public static int intakeLeftCANID = 9;//0;// 9; //14;
         public static int intakeRightCANID = 13;
-        public static int rollersCANID = 10;//14;//13; //13;
+        public static int rollersCANID = 99;//14;//13; //13;
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
@@ -241,6 +244,8 @@ public final class Constants {
  /**class containing variables that relate to climbing*/
     public static class CLIMBER
     {
+                   //facing ask me about my robot sticker, left is left and right is right
+
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
