@@ -14,7 +14,7 @@ import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
 import frc.robot.Constants.CLIMBER;
 
-/** Add your docs here. */
+/**The Climber class contains everything relating to the climbing mechanism*/
 public class Climber {
     
     TalonFX telescopeArmLeft = new TalonFX(CLIMBER.telescopeArmLeftCANID = 22);
@@ -65,6 +65,11 @@ public class Climber {
 
     }
 
+    /**
+     * Powers the telescoping arms at varying speeds [-1, 1]
+     * @param percentleft setpoint of the left motor
+     * @param percentright setpoint of the right motor
+     */
     public void telescopePercent(double percentleft, double percentright)
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, percentleft);
