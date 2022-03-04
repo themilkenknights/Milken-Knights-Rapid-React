@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
    private Intake mIntake = Intake.getInstance();
    private Limelight mLime = Limelight.getInstance();
    private Climber mClimb = Climber.getInstance();
+   private Lights mLights = Lights.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -154,7 +155,15 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
+     toggleClimbOn = false;
+     toggleClimbPressed = false;
+     toggleFastOn = false;
+     toggleFastPressed = false;
+     toggleSlowOn = false;
+     toggleSlowPressed = false;
+     spee = 3;
      mDrive.encoderZero();
+     //mClimb.zeroVClimbb();
      //// need to see if drive initiated with code runned, problem if not runned
      //it runs everything except encoder reset i guess, but also need to set offsets back negative see if work
      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -188,6 +197,7 @@ public class Robot extends TimedRobot {
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
     mIntake.updateIntake();
+    mClimb.climberUpdate();
     
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
@@ -387,6 +397,7 @@ public class Robot extends TimedRobot {
       }
       else if(toggleSlowOn){
         spee = 1;
+        mLights.french();
       }
       else{
           // Do something when toggled off
@@ -399,6 +410,7 @@ public class Robot extends TimedRobot {
       slider = SmartDashboard.getNumber("slider", 0);
       driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
+      SmartDashboard.putBoolean("is", toggleClimbOn);
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
       //SmartDashboard.putNumber("ffcalc", ffcalc);
     }
