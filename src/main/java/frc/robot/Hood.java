@@ -12,7 +12,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.HOOD;
 
-/** Add your docs here. */
+/**The Hood class contains everything related to the hood*/
 public class Hood {
     /*
     private CANSparkMax hood = new CANSparkMax(HOOD.hoodCANID, MotorType.kBrushless);

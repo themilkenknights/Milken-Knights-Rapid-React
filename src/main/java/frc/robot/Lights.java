@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants.LIGHTS;
 
-/**Lights class contains everything relating to ergabled*/
+/**The Lights class contains everything relating to ergabled*/
 public class Lights {
 //navx vlaue thing and light offset values so i dont have to create a new variable every time the function runs
     private double navXRot = 0;
