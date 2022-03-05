@@ -186,7 +186,7 @@ public final class Constants {
     {
         public static double voltComp = 12;
         
-        public static int hoodCANID = 22;
+        public static int hoodCANID = 9999;  //23; //21; //22;
 
         public static double maxOutput = 0.25;
         public static double hoodKP = 0.15;
@@ -314,8 +314,8 @@ public final class Constants {
 
 
         //when mode is enabled
-        /*public static int climbModeButton = 7; // left of xbox button
-
+        public static int climbModeButton = 7; // left of xbox button
+/*
         public static int climbLeftUpButton = 5; //left bumper
         public static int climbLeftDownAxis = 2; //left trigger
 

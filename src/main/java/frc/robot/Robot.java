@@ -204,7 +204,7 @@ public class Robot extends TimedRobot {
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
-   // updateClimbToggle();
+   updateClimbToggle();
 //i <3 MILFZ and Steven Hawking
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
@@ -408,6 +408,23 @@ public class Robot extends TimedRobot {
     }
 */
 
+if(mDriverJoystick.getRawButton(2))
+{
+  if(toggleClimbOn)
+  {
+    mHood.setHoodPercent(0.1);
+  }
+  else
+  {
+    mHood.setHoodPercent(-0.1);
+  }
+}
+else
+{
+  mHood.setHoodPercent(0);
+}
+
+
 if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 {
   mClimb.telescopePercent(0.5, 0.5);
@@ -525,7 +542,7 @@ if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
   }
 
 
-/*
+
   public void updateClimbToggle()
   {
       if(xbox.getRawButton(BUTTONS.climbModeButton)){
@@ -540,5 +557,5 @@ if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
           toggleClimbPressed = false;
       }
   }
-  */
+  
 }
