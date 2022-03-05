@@ -186,7 +186,7 @@ public final class Constants {
     {
         public static double voltComp = 12;
         
-        public static int hoodCANID = 21;
+        public static int hoodCANID = 22;
 
         public static double maxOutput = 0.25;
         public static double hoodKP = 0.15;
@@ -311,38 +311,44 @@ public final class Constants {
         public static int hoodBackwardButton = 270; //POV 180
         public static int babySpeedFastAngle = 0;
         public static int babySpeedToddlerAngle = 180;
-        public static int climbUpButton = 5; //left
-        public static int climbDownButton = 6; //right
+
 
         //when mode is enabled
-        public static int climbModeButton = 7; // left of xbox button
+        /*public static int climbModeButton = 7; // left of xbox button
 
         public static int climbLeftUpButton = 5; //left bumper
         public static int climbLeftDownAxis = 2; //left trigger
 
         public static int climbRightUpButton  = 6; //riht bumper
         public static int climbRightDownAxis = 3; //right trigger
-
+*/
 
         //joystick
         public static int intakeup = 8;
         public static int intakedown = 7;
-        public static int rollersForwardButton = 3;
-        public static int rollersBackwardButton = 5;
-        public static int elevatorForwardButton = 4;
-        public static int elevatorBackwardButton = 6;
+        public static int rollersForwardButton = 11;
+        public static int rollersBackwardButton = 12;
+        public static int elevatorForwardButton = 9;
+        public static int elevatorBackwardButton = 10;
         public static int shooterButton = 1;
-        public static int limelightButton = 11;
-        public static int driveHundredButton = 9;
+        public static int climbUpAxis = 0; //left
+        public static int climbDownAxis = 180; //right
 
-        public static int hoodUpAngle = 9999;
-        public static int hoodDownAngle = 9999;
+        public static int climbLeftUpButton = 5; 
+        public static int climbLeftDownButton = 3; 
+        public static int climbRightUpButton = 6; 
+        public static int climbRightDownButton = 4; 
+        
+
+
+       // public static int hoodUpAngle = 0;
+        // public static int hoodDownAngle = 180;
 
         //*if climb is maunual
         
 
         //*if climb is automatic
-        public static int climbToggleButton = 999;
+        //public static int climbToggleButton = 999;
     }
 
  /**class containing variables that relate to autonomous*/
