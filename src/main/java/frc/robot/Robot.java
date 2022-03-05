@@ -28,6 +28,7 @@ import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 
 /**
@@ -270,13 +271,14 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(BUTTONS.shooterButton))
       {
-        ffcalc = -mShoot.shooterFeedForward(slider) + slider;
+        ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc);
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else if(xbox.getStartButton())
       {
-        mShoot.setShooterPercent(1);
+        ffcalc = -mShoot.shooterFeedForward(slider) + slider;
+        mShoot.setShooterNativeVeloctiy(ffcalc);
       }
       else
       {
