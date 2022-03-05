@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
    private Limelight mLime = Limelight.getInstance();
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
+   private Hood mHood = Hood.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -134,6 +135,7 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
+     mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
@@ -202,7 +204,7 @@ public class Robot extends TimedRobot {
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
-    updateClimbToggle();
+   // updateClimbToggle();
 //i <3 MILFZ and Steven Hawking
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
@@ -281,18 +283,18 @@ public class Robot extends TimedRobot {
         mShoot.setShooterPercent(0);
       }
 
-      if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
-      {
+      /*if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
+    {
         mLime.limelightToggle();
       }
-
+*/
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
-        mElevator.setElevatorPercent(-1);
+        mElevator.setElevatorPercent(-.8);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
 {
-      mElevator.setElevatorPercent(1);
+      mElevator.setElevatorPercent(.8);
       }
       else
       {
@@ -336,13 +338,35 @@ public class Robot extends TimedRobot {
 
 
 
+
+      if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+      {
+        mClimb.telescopePercentRight(0.5);
+      }
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
+      {
+        mClimb.telescopePercentRight(-0.5);
+      }
+
+
+
+      if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
+      {
+        mClimb.telescopePercentLeft(0.5);
+      }
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
+      {
+        mClimb.telescopePercentLeft(-0.5);
+      }
+
+/*
     if(toggleClimbOn == false)
     {
-      if(xbox.getRawButton(BUTTONS.climbUpButton))
+      if(mDriverJoystick.getRawButton(BUTTONS.climbUpButton))
       {
         mClimb.telescopePercent(0.5, -0.5);
       }
-      else if(xbox.getRawButton(BUTTONS.climbDownButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbDownButton))
       {
         mClimb.telescopePercent(-0.5, 0.5);
       }
@@ -382,6 +406,40 @@ public class Robot extends TimedRobot {
         mClimb.telescopePercentLeft(0);
       }
     }
+*/
+
+if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
+{
+  mClimb.telescopePercent(0.5, 0.5);
+}
+else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
+{
+  mClimb.telescopePercent(-0.5, -0.5);
+}
+
+if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+{
+  mClimb.telescopePercent(0,0);
+}
+/*
+    if(mDriverJoystick.getPOV() == 0)
+    {
+      mHood.setHoodPercent(0.1);
+    }
+    else if(mDriverJoystick.getPOV() == 180)
+    {
+      mHood.setHoodPercent(-0.1);
+    }
+    else
+    {
+      mHood.setHoodPercent(0);
+    }
+    */
 
      /* if(mDriverJoystick.getRawButton(7))
       {
@@ -467,7 +525,7 @@ public class Robot extends TimedRobot {
   }
 
 
-
+/*
   public void updateClimbToggle()
   {
       if(xbox.getRawButton(BUTTONS.climbModeButton)){
@@ -482,4 +540,5 @@ public class Robot extends TimedRobot {
           toggleClimbPressed = false;
       }
   }
+  */
 }
