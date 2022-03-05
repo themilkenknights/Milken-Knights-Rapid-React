@@ -408,7 +408,7 @@ public class Robot extends TimedRobot {
     }
 */
 
-if(mDriverJoystick.getRawButton(2))
+if(mDriverJoystick.getRawButton(BUTTONS.hoodButton))
 {
   if(toggleClimbOn)
   {
@@ -542,10 +542,10 @@ if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
   }
 
 
-
+//idk yet
   public void updateClimbToggle()
   {
-      if(xbox.getRawButton(BUTTONS.climbModeButton)){
+      if(xbox.getRawButton(BUTTONS.hoodModeToggle)){
           if(!toggleClimbPressed){
               toggleClimbOn = !toggleClimbOn;
               //// ^^ might not work

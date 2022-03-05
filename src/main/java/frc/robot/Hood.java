@@ -28,21 +28,24 @@ public class Hood {
         return InstanceHolder.mInstance;
     }
 
+ /**Updates Hood values in shuffleboard*/
     public void updateHood()
     {
         SmartDashboard.putNumber("hood", getHoodPosition());
     }
 
+/**Powers the hood motor at varying speeeds [-1, 1]*/
     public void setHoodPercent(double setpoint)
     {
         hood.set(setpoint);
     }
-
+/**DIY PID */
     public void setHoodPosition(double setpoint)
     {
         hood.set(MkUtil.limitAbsolute((setpoint - hoodEncoder.getPosition()) * HOOD.hoodKP, HOOD.maxOutput));
     }
 
+ /**Sets the hood motor's integrated encoder's position*/
     public double getHoodPosition()
     {
         return hoodEncoder.getPosition();

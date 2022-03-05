@@ -17,9 +17,7 @@ public class DriveComp extends SequentialCommandGroup {
   double distanceA = -120;
   double angle = 0;
 
-  /**
-   * curved drive sequential command
-   */
+
   public DriveComp() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

@@ -314,7 +314,7 @@ public final class Constants {
 
 
         //when mode is enabled
-        public static int climbModeButton = 7; // left of xbox button
+        public static int hoodModeToggle = 7; // left of xbox button
 /*
         public static int climbLeftUpButton = 5; //left bumper
         public static int climbLeftDownAxis = 2; //left trigger
@@ -333,6 +333,7 @@ public final class Constants {
         public static int shooterButton = 1;
         public static int climbUpAxis = 0; //left
         public static int climbDownAxis = 180; //right
+        public static int hoodButton = 2;
 
         public static int climbLeftUpButton = 5; 
         public static int climbLeftDownButton = 3; 

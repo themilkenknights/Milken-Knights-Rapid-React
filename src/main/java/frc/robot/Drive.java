@@ -505,7 +505,6 @@ public class Drive {
      * Sets all angular motors' integrated encoder's position to {@code setpoint}
      * @param setpoint Angular setpoint
      */
-    
     public void setPosTurn(double setpoint)
     {
         topTurnLeft.setSelectedSensorPosition(setpoint);
@@ -560,7 +559,7 @@ public class Drive {
 
     /**
      * Gets navx yaw (minus 180 because of navx placement)
-     * @return Returns navx yaw
+     * @return Navx yaw
      */
     public double getNavx()
     {
@@ -569,7 +568,7 @@ public class Drive {
 
     /**
      * Gets the top left angular motor's voltage
-     * @return Returns the applied voltage to the motor in volts. 
+     * @return The applied voltage to the motor in volts. 
      */
     public double getTurnVolt()
     {
@@ -578,7 +577,7 @@ public class Drive {
 
     /**
      * Gets top left drive motor's voltage
-     * @return Returns the applied voltage to the motor in volts. 
+     * @return The applied voltage to the motor in volts. 
      */
     public double getDriveVolt()
     {
@@ -588,7 +587,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the top left angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double topTurnLeftCalculateNative(double setpoint)
     {
@@ -598,7 +597,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the top right angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double topTurnRightCalculateNative(double setpoint)
     {
@@ -608,7 +607,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the bottom left angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double bottomTurnLeftCalculateNative(double setpoint)
     {
@@ -618,7 +617,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the bottom right angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double bottomTurnRightCalculateNative(double setpoint)
     {
@@ -635,7 +634,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the top left angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double topDriveLeftCalculateNative(double setpoint)
     {
@@ -645,7 +644,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the top right angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double topDriveRightCalculateNative(double setpoint)
     {
@@ -655,7 +654,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the bottom left angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double bottomDriveLeftCalculateNative(double setpoint)
     {
@@ -665,7 +664,7 @@ public class Drive {
     /**
      * Takes a setpoint, and based on where the motor is, a PID controller calculates how fast the motor should move in order to reach said setpoint
      * @param setpoint Setpoint for the bottom right angular motor
-     * @return Returns a speed for the motor
+     * @return A speed for the motor
      */
     public double bottomDriveRightCalculateNative(double setpoint)
     {
@@ -787,7 +786,7 @@ public class Drive {
      * @param FWD forward input
      * @param STR strafe input
      * @param RCW rotational input
-     * @author ether (?)
+     * @author Ether (?)
      * @see {@link #etherSwerve(FWD, STR, RCW)}
      * @see {@link #getNavx()}
      */

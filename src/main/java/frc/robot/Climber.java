@@ -60,6 +60,7 @@ public class Climber {
         return InstanceHolder.mInstance;
     }
 
+ /**Updates Climber values in shuffleboard*/
     public void climberUpdate()
     {
         SmartDashboard.putNumber("right climb", telescopeArmRight.getSelectedSensorPosition());
@@ -95,6 +96,7 @@ public class Climber {
         telescopeArmLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
+    /**Zeros the telescoping arms' integrated encoder*/
     public void zeroVClimbb()
     {
         telescopeArmRight.setSelectedSensorPosition(0);

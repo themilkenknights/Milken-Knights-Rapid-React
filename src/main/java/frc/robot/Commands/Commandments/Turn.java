@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Drive;
 
 public class Turn extends CommandBase {
-  /** Creates a new Turn. */
+  /**Creates a new Turn command. */
   private double angle;
   private Drive mDrive = Drive.getInstance();
   /**

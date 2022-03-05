@@ -18,9 +18,7 @@ public class DriveStr8 extends SequentialCommandGroup {
   double lengthB = 24;
   double angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
 
-  /**
-   * curved drive sequential command
-   */
+/**Curved drive sequential command*/
   public DriveStr8() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
