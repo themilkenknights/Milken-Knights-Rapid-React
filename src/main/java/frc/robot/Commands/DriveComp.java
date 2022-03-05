@@ -14,7 +14,7 @@ import frc.robot.Commands.Commandments.Turn;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveComp extends SequentialCommandGroup {
   Drive mDrive = Drive.getInstance();
-  double distanceA = 34;
+  double distanceA = -120;
   double angle = 0;
 
   /**
@@ -28,7 +28,7 @@ public class DriveComp extends SequentialCommandGroup {
     //// determining if its a unit circle 0 ordeal or a top y axis = 0 ordeal
     //sticking with wpi swervecommandcontroller for now, if that doesnt work then try and fix homemade auto
 
-    addCommands(deadline(new Turn(0).withTimeout(2)), 
+    addCommands(deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREALSUPERREAL(distanceA, angle).withTimeout(6)));
 
                 //TODO see if above still works, then do this
