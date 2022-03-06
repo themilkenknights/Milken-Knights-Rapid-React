@@ -26,10 +26,6 @@ public class DriveStr8 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    //// still need to see if angle is either 90 - angle and 90 + angle or -angle and angle
-    //// determining if its a unit circle 0 ordeal or a top y axis = 0 ordeal
-    //sticking with wpi swervecommandcontroller for now, if that doesnt work then try and fix homemade auto
-
     addCommands(deadline(new Turn(((angle) % 90))).withTimeout(1), 
                 deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90), DRIVE.magicVelo, DRIVE.magicAccel)).withTimeout(6));
 
