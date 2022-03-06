@@ -167,7 +167,7 @@ public class MkUtil {
     return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
   }
   /**
-   * caps a value so its below a max value or it is said max value, with the same sign as the original value
+   * caps a value so its below a max value or it is said max value, with the same sign as the original value (i think, dik)
    * @param a input value
    * @param max max
    * @return value or max with the sign of value
@@ -417,5 +417,12 @@ public class MkUtil {
     public static void shuffleboardDouble(String name, double value)
     {
       SmartDashboard.putNumber("name", value);
+    }
+
+
+
+    public static double hoodPIDPercent(double setpoint, double hoodPosition, double maxPosition, double HoodKP)
+    {
+      return (limitAbsolute((setpoint - hoodPosition) * HoodKP, maxPosition));
     }
 }
