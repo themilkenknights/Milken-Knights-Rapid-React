@@ -47,7 +47,6 @@ public final class Constants {
     {
         public static int magicSCurve = 6;
 
-        //need to research these, might be eating cpu like chrome eats ram
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
@@ -70,7 +69,6 @@ public final class Constants {
         public static double driveKP = 0.21;//0.9;//0.21; //<-- og works with auto
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
-        //..... this actually works?
         public static double driveKF = 1023.0 / maxNativeVelocity;
 
         public static double driveTopLeftKF = oneEncoderRotation / topLeftMaxNativeVelocity;
@@ -88,7 +86,6 @@ public final class Constants {
 
         public static double voltComp = 12;
 
-        //xbox controllers be hella sensative
         public static double deadband = 0.1;
 
         public static double kS = 0.5111;
@@ -118,9 +115,6 @@ public final class Constants {
         public static int bottomTurnRightCANID = 8; //1;
 
         //got these values by guessing and praying
-        //// set all to 0, find kF, then find kP
-        //// or dont use motor control loop, rather use calculation methods
-        //idk how to fix drifiting, and literally no time to fix it rn. will ask people at comp how they combat it
         public static double turnKP = 0.00008;//0.00008;//0.00008
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
@@ -134,8 +128,7 @@ public final class Constants {
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = -72.685546875;// 70.9277343;
         public static double topRightOffset = -105.8203125;//107.138671875;
-        //// negative offset?
-        //i dont think so? idk
+
         public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
         public static double bottomRightOffset = 46.0546875;//47.109375;  //-
 
@@ -143,6 +136,7 @@ public final class Constants {
 
         public static double kS = 0.66294; //0.4969;
         public static double maxVel = 21420;
+      
         //TODO get max accel
         public static double maxAccel = 300; 
         public static double kV = 0.10986; //12 / maxVel;
@@ -170,17 +164,16 @@ public final class Constants {
         public static double kS = 0;
         public static double kV = 0;
         public static double kA = 0;
-        //TODO may not need or use since sysid is kinda shit ngl
 
         //TODO need to account for battery and shit, battery affects max rpm
         public static double maxVelo = 18900; //17800; //16600;
-        public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
+        public static double minVelo = 0; 
 
         public static double voltComp = 12;
 
         public static double maxError = 1580;
 
-        public static double wackyShooterVelocity = 11661.97; // <-- wacky wednsday idk
+        public static double wackyShooterVelocity = 11661.97; 
     }
 
  /**class containing variables that relate to hood*/
@@ -209,10 +202,8 @@ public final class Constants {
     {
         public static double voltComp = 12;
 
-        public static boolean leftFlipped = true; //// see if this works
-                                                    //wiring is bad, so this isnt doing anything rn lol
-            //// FIND THESE IDS
-            //found them
+        public static boolean leftFlipped = true; 
+
             //facing ask me about my robot sticker, left is left and right is right
         public static int intakeLeftCANID = 9;//0;// 9; //14;
         public static int intakeRightCANID = 13;
@@ -224,11 +215,9 @@ public final class Constants {
         public static double intakeKP = 0;
         public static double intakeKI = 0;
         public static double intakeKD = 0;
-        public static double intakeKF = 0; //// may not need pid if bang bang limit swtich
-                                           //not enough time to tune pidf for intake, bang bang is faster
+        public static double intakeKF = 0; 
 
-        public static double timeIntake = 0; //// may not need if bang bang limit switch 
-                                             //limit switches are a no go, not enough time
+        public static double timeIntake = 0;
 
      /**how much it needs to rotate to move into out position*/
         public static double intakeRotationsNative = 0;
@@ -285,7 +274,7 @@ public final class Constants {
         
         public static double angleAboveHorizontal = 0;
         public static double heightLime = 0;
-        //public static double lowerGoalHeight = 0; lime cant see when low goal
+        //public static double lowerGoalHeight = 0; 
         public static double upperGoalHeight = 0;
 
         public static double closestDistanceHoodAngleLow = 0;
@@ -362,7 +351,6 @@ public final class Constants {
         public static double moduleTurnKI = 0;
         public static double moduleTurnKD = 0.00098857; //0.0098857;// 0.00098857;     //0.000000098857;     //0.024918;       //0.0000000; 
         //TODO fix pids if using wpi auto
-        // why is making pid values a god damn guessing game
 
         //actual drive module pid
         public static double moduleDriveKP = 0.03; //0.0000001;
@@ -383,8 +371,7 @@ public final class Constants {
         new Translation2d(heightMeters, -widthMeters),
         new Translation2d(-heightMeters, widthMeters),
         new Translation2d(-heightMeters, -widthMeters));
-        //// also see if dividing by two helps and setting it to the actual wheelbase and trackwdith
-        //i think it works?
+      
         
         //actual drive module stats
         public static final double maxModuleTurnVelo = kPi * 2;
@@ -423,26 +410,3 @@ public final class Constants {
     }
 }
 
-//idk why this is still here
-/** 
-can id 1= 
-can id 2=
-can id 3=
-can id 4=
-can id 5=
-can id 6=
-can id 7=
-can id 8=
-can id 9=
-can id 10=
-can id 11=
-can id12=
-can id 13=
-can id 14=
-can id 15=
-can id 16=
-can id 17=
-can id 18=
-can id 19=
-can id 20= 
-*/

@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
        case LEFT:
          m_autonomousCommand = new DriveComp();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
-       case NOTHING: // might break idk prob not
+       case NOTHING: 
          break;
      }
      if (m_autonomousCommand != null) {
@@ -167,9 +167,7 @@ public class Robot extends TimedRobot {
      spee = 3;
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
-     //// need to see if drive initiated with code runned, problem if not runned
-     //it runs everything except encoder reset i guess, but also need to set offsets back negative see if work
-     Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
+      Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();
      }
@@ -206,7 +204,7 @@ public class Robot extends TimedRobot {
     updateFastToggle();
     updateSlowToggle();
    updateClimbToggle();
-//i <3 MILFZ and Steven Hawking
+//i <3 MILFZ and Steven Hawking 
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
@@ -233,8 +231,7 @@ public class Robot extends TimedRobot {
 
       if(fwd != 0 || str != 0 || rcw != 0)
       {
-        //weird negative cuz robot is weird. should be negative fwd positive str rcw, 
-        //but cuz of weird reasons i dont know of its just like this so yeah
+        //weird negative cuz robot is weird. should be negative fwd positive str rcw
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee); //+,-,+
         //mDrive.updateDriveDriveRaw();
       }
@@ -485,8 +482,6 @@ if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelecte
       }
 */
 
-//// had them as tog fast = 1 and tog slow = 7, see if switching them made it better since it didnt work before
-//works
       if(toggleFastOn){
         // Do something when toggled on
         spee = 7;
@@ -532,8 +527,7 @@ if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelecte
       if (!toggleFastPressed) {
         toggleFastOn = !toggleFastOn;
         toggleSlowOn = false;
-        //// ^^ might not work
-        //works
+ 
         toggleFastPressed = true;
       }
     } else {
@@ -548,8 +542,7 @@ if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelecte
           if(!toggleSlowPressed){
               toggleSlowOn = !toggleSlowOn;
               toggleFastOn = false;
-              //// ^^ might not work
-              //works
+       
               toggleSlowPressed = true;
           }
       }
@@ -559,14 +552,12 @@ if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelecte
   }
 
 
-//idk yet
   public void updateClimbToggle()
   {
       if(xbox.getRawButton(BUTTONS.hoodModeToggle)){
           if(!toggleClimbPressed){
               toggleClimbOn = !toggleClimbOn;
-              //// ^^ might not work
-              //works
+         
               toggleClimbPressed = true;
           }
       }

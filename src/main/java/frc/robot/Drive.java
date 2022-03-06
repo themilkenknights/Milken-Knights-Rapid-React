@@ -44,8 +44,6 @@ public class Drive {
     private PIDController drivePID = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     
     //bogus pid controllers, do nothing, still keep
-    //too scared to change and edit since comp is soon and i dont want to ruin anything
-    //will change after comp
     private PIDController driveTopLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveTopRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
@@ -164,7 +162,6 @@ public class Drive {
         bottomTurnRight.configVelocityMeasurementWindow(TURN.velocityMeasAmount);
 
 
-        //idk what this does so im not gonna use it
         /*topTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
         topTurnRight.configSelectedFeedbackCoefficient(1.0 / 10.75);
         bottomTurnLeft.configSelectedFeedbackCoefficient(1.0 / 10.75);
@@ -232,7 +229,6 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
 
 
-        //not gonna use motion magic for turn motors (right now im not, idk if im going to)
         /*      topTurnLeft.configMotionSCurveStrength(6);
         topTurnRight.configMotionSCurveStrength(6);
         bottomTurnLeft.configMotionSCurveStrength(6);
@@ -723,7 +719,6 @@ public class Drive {
         wa3 = MkUtil.setDirection(bottomTurnLeft, wa3, driveBotLeftEther);
         wa4 = MkUtil.setDirection(bottomTurnRight, wa4, driveBotRightEther);
 
-        //TODO test calculations first
         topTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa1, TURN.greerRatio)); // ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
         topTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa2, TURN.greerRatio)); //ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
         bottomTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa3, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
@@ -834,9 +829,6 @@ public class Drive {
     public double turnDistance = 0;
     public double distanceA = 0;
     public double lengthB = 0;
-
-    //let the math begin
-    //in inches
 
     /**
     Calculates a curved autonomous path's radius by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path

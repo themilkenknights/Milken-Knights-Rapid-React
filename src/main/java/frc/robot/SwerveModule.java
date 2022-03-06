@@ -132,7 +132,6 @@ public class SwerveModule {
     //SmartDashboard.putNumber("drive set", m_drivePIDController.getSetpoint());
 
 
-    //// use cancoder for sysid testing, and multiply cancoder by ((2*Math.PI)/360) ------ nvm thats just pi/180 same thing
     //also big changes with conversion factors, redthunder7166 maybe
   }
 
