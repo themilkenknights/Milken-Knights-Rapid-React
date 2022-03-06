@@ -273,6 +273,11 @@ public class Robot extends TimedRobot {
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc);
+        if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
+        {
+          mElevator.setElevatorPercent(-0.8);
+          mIntake.setRollersPercent(1);
+        }
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else if(xbox.getStartButton())
@@ -298,11 +303,12 @@ public class Robot extends TimedRobot {
 {
       mElevator.setElevatorPercent(.8);
       }
-      else
+      /*else
       {
         mElevator.setElevatorPercent(0);
-      }
+      }*/
 
+      
 
 
       if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
@@ -330,12 +336,11 @@ public class Robot extends TimedRobot {
       {
         mIntake.setRollersPercent(-1);
       }
-      else
+      /*else
       {
         mIntake.setRollersPercent(0);
-      }
-
-
+      }*/
+ 
 
 
 
@@ -429,7 +434,7 @@ else
 
 if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 {
-  mClimb.telescopePercent(0.5, 0.5);
+  mClimb.telescopePercent(0.75, 0.75);
 }
 else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
 {
@@ -444,6 +449,16 @@ if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
 {
   mClimb.telescopePercent(0,0);
+}
+
+if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 < SHOOT.wackyShooterVelocity) &&
+!(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton)))
+{
+  mIntake.setRollersPercent(0);
+  mElevator.setElevatorPercent(0);
 }
 /*
     if(mDriverJoystick.getPOV() == 0)
