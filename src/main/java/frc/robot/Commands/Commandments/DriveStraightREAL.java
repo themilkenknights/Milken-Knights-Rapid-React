@@ -11,6 +11,8 @@ public class DriveStraightREAL extends CommandBase {
   private double inches;
   private int FWD;
   private int STR;
+  private double maxVelo;
+  private double maxAccel;
   Drive mDrive = Drive.getInstance();
   /**
    * a true drive straight command for autonomous (uses motion magic for drive and ether for turn)
@@ -18,17 +20,19 @@ public class DriveStraightREAL extends CommandBase {
    * @param FWD y value as if it was from the xbox controller [-1, 1]
    * @param STR x value as if it was from the xbox controller [-1, 1]
    */
-  public DriveStraightREAL(double inches, int FWD, int STR) {
+  public DriveStraightREAL(double inches, int FWD, int STR, double maxVelo, double maxAccel) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.inches = inches;
     this.FWD = FWD;
     this.STR = STR;
+    this.maxVelo = maxVelo;
+    this.maxAccel = maxAccel;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    mDrive.setMagicStraight(inches);
+    mDrive.setMagicStraight(inches, maxVelo, maxAccel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

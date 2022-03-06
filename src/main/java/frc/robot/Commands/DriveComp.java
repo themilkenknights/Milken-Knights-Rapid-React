@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
 import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
 import frc.robot.Commands.Commandments.Turn;
+import frc.robot.Constants.DRIVE;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -27,7 +28,7 @@ public class DriveComp extends SequentialCommandGroup {
     //sticking with wpi swervecommandcontroller for now, if that doesnt work then try and fix homemade auto
 
     addCommands(deadline(new Turn(0).withTimeout(1)), 
-                deadline(new DriveStraightREALSUPERREAL(distanceA, angle).withTimeout(6)));
+                deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
 
                 //TODO see if above still works, then do this
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));

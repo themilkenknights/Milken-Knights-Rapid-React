@@ -80,7 +80,7 @@ public final class Constants {
 
         public static double maxInchesVelocity = MkUtil.nativeToInches(maxNativeVelocity);
 
-        public static double magicVel = .75 * maxNativeVelocity;
+        public static double magicVelo = .75 * maxNativeVelocity;
         public static double magicAccel = 2000;
 
         public static double kWheelDiameterInches = 4; 

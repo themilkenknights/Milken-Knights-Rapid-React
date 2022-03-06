@@ -10,6 +10,8 @@ import frc.robot.Drive;
 public class DriveStraightREALSUPERREAL extends CommandBase {
   private double inches;
   private double angle;
+  private double maxVelo;
+  private double maxAccel;
 
   private Drive mDrive = Drive.getInstance();
   /**
@@ -17,9 +19,11 @@ public class DriveStraightREALSUPERREAL extends CommandBase {
    * @param inches how far you want to go
    * @param angle at what constant angle should the turn motors be at
    */
-  public DriveStraightREALSUPERREAL(double inches, double angle) {
+  public DriveStraightREALSUPERREAL(double inches, double angle, double maxVelo, double maxAccel) {
     this.inches = inches;
     this.angle = angle;
+    this.maxVelo = maxVelo;
+    this.maxAccel = maxAccel;
 
   }
 
@@ -27,7 +31,7 @@ public class DriveStraightREALSUPERREAL extends CommandBase {
   @Override
   public void initialize() {
     mDrive.resetDrive();
-    mDrive.setMagicStraight(inches);
+    mDrive.setMagicStraight(inches, maxVelo, maxAccel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

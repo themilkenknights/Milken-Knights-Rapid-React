@@ -10,9 +10,13 @@ import frc.robot.Drive;
 
 public class DriveStraight extends CommandBase {
   private Drive mDrive = Drive.getInstance();
-  double distanceDrive;
-  double angle;
-  double RCW;
+  private double distanceDrive;
+  private double angle;
+  private double RCW;
+
+  private double maxVelo;
+  private double maxAccel;
+
   /**
    * a curved path command for autonomous (uses motion magic for drive and motion magic for turn)
     <pre>
@@ -50,19 +54,21 @@ public class DriveStraight extends CommandBase {
    * @param rcw 1 through -1 for spinny, 0 for no spinny
    * @param angle calculated angle
    */
-  public DriveStraight(double distanceA, double lengthB, double rcw, double angle) {
+  public DriveStraight(double distanceA, double lengthB, double rcw, double angle, double maxVelo, double maxAccel) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.angle = angle;
     distanceDrive = mDrive.calculateArcOfPath(distanceA, lengthB);
     RCW = rcw;
+    this.maxVelo = maxVelo;
+    this.maxAccel = maxAccel;
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
     mDrive.resetDrive();
-    mDrive.setMagicStraight(distanceDrive);
+    mDrive.setMagicStraight(distanceDrive, maxVelo, maxAccel);
     mDrive.setMagicTurn(angle);
     //mDrive.autoTurnSet();
   }

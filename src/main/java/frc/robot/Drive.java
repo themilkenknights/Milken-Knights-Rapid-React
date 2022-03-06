@@ -1021,20 +1021,22 @@ public class Drive {
     /**
      * Resets drive motors and sets motion magic velocity, acceleration, and distance
      * @param setpoint Distance (inches)
+     * @param magicVelo Motion magic maximum velocity
+     * @param magicAccel Motion magic maximum acceleration
      */
-    public void setMagicStraight(double setpoint)
+    public void setMagicStraight(double setpoint, double magicVelo, double magicAccel)
     {
         resetDrive();
         distance = setpoint;
-        topDriveLeft.configMotionCruiseVelocity(DRIVE.magicVel);
-        topDriveRight.configMotionCruiseVelocity(DRIVE.magicVel);
-        bottomDriveLeft.configMotionCruiseVelocity(DRIVE.magicVel);
-        bottomDriveRight.configMotionCruiseVelocity(DRIVE.magicVel);
+        topDriveLeft.configMotionCruiseVelocity(magicVelo);
+        topDriveRight.configMotionCruiseVelocity(magicVelo);
+        bottomDriveLeft.configMotionCruiseVelocity(magicVelo);
+        bottomDriveRight.configMotionCruiseVelocity(magicVelo);
 
-        topDriveLeft.configMotionAcceleration(DRIVE.magicAccel);
-        topDriveRight.configMotionAcceleration(DRIVE.magicAccel);
-        bottomDriveLeft.configMotionAcceleration(DRIVE.magicAccel);
-        bottomDriveRight.configMotionAcceleration(DRIVE.magicAccel);
+        topDriveLeft.configMotionAcceleration(magicAccel);
+        topDriveRight.configMotionAcceleration(magicAccel);
+        bottomDriveLeft.configMotionAcceleration(magicAccel);
+        bottomDriveRight.configMotionAcceleration(magicAccel);
     }
 
     /**
@@ -1045,10 +1047,10 @@ public class Drive {
     public void setMagicTurn(double setpoint)
     {
         turnDistance = setpoint;
-        topTurnLeft.configMotionCruiseVelocity(DRIVE.magicVel);
-        topTurnRight.configMotionCruiseVelocity(DRIVE.magicVel);
-        bottomTurnLeft.configMotionCruiseVelocity(DRIVE.magicVel);
-        bottomTurnRight.configMotionCruiseVelocity(DRIVE.magicVel);
+        topTurnLeft.configMotionCruiseVelocity(DRIVE.magicVelo);
+        topTurnRight.configMotionCruiseVelocity(DRIVE.magicVelo);
+        bottomTurnLeft.configMotionCruiseVelocity(DRIVE.magicVelo);
+        bottomTurnRight.configMotionCruiseVelocity(DRIVE.magicVelo);
 
         topTurnLeft.configMotionAcceleration(DRIVE.magicAccel);
         topTurnRight.configMotionAcceleration(DRIVE.magicAccel);
