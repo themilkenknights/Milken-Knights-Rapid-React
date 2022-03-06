@@ -1,6 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+
 
 package frc.robot;
 
@@ -22,7 +20,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  */
 public final class Constants {
 
- /**apple pie */
+ //pi
     public static double kPi = 3.14159265359;
     
  /**falcon encoder rotation*/
@@ -32,32 +30,32 @@ public final class Constants {
     //                        (Derivation of Inverse Kinematics for Swerve, page 4)
 
  /**wheelbase (distance between the middle of the wheels on the length side)*/
-    public static double L = 22.57; //29;
+    public static double L = 22.57; 
 
  /**trackwidth (distance between the middle of the wheels on the width side)*/
     public static double W = 22.57; //17.625; 
 
-    public static double widthInch = 29; //21;
-    public static double heightInch = 29; //32;
+    public static double widthInch = 29; 
+    public static double heightInch = 29; 
 
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
- /**class containing variables that relate to driving*/
+//class for driving var
     public static class DRIVE
     {
         public static int magicSCurve = 6;
 
-        //need to research these, might be eating cpu like chrome eats ram
+  
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
 
         public static double greerRatio = 6.75;
 
-        public static int topDriveRightCANID = 5; //12;
-        public static int bottomDriveRightCANID = 7; //3;
-        public static int topDriveLeftCANID = 3; //9;
-        public static int bottomDriveLeftCANID = 2; //6;
+        public static int topDriveRightCANID = 5; 
+        public static int bottomDriveRightCANID = 7; 
+        public static int topDriveLeftCANID = 3; 
+        public static int bottomDriveLeftCANID = 2; 
 
         public static double maxNativeVelocity = 21600; 
 
@@ -67,7 +65,7 @@ public final class Constants {
         public static double bottomRightMaxNativeVelocity = 21936;
 
         //use team 3244's slideshow on motion magic to get pidf values
-        public static double driveKP = 0.21;//0.9;//0.21; //<-- og works with auto
+        public static double driveKP = 0.21;//0.9;0.21; <-- Orginal pid works great for auto
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
         //..... this actually works?
@@ -88,7 +86,6 @@ public final class Constants {
 
         public static double voltComp = 12;
 
-        //xbox controllers be hella sensative
         public static double deadband = 0.1;
 
         public static double kS = 0.5111;
@@ -103,24 +100,24 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;
 
-        public static int topTurnLeftCANCoderCANID = 16; //16;
-        public static int topTurnRightCANCoderCANID = 18; //14;
-        public static int bottomTurnLeftCANCoderCANID = 15; //15;
-        public static int bottomTurnRightCANCoderCANID = 17; //13;
+        public static int topTurnLeftCANCoderCANID = 16; 
+        public static int topTurnRightCANCoderCANID = 18; 
+        public static int bottomTurnLeftCANCoderCANID = 15; 
+        public static int bottomTurnRightCANCoderCANID = 17; 
 
         public static double deadband = 0.1;
 
         public static double greerRatio = 12.8;
 
-        public static int topTurnLeftCANID = 4; //4; 
-        public static int topTurnRightCANID = 6; //7;
-        public static int bottomTurnLeftCANID = 1; //2;
-        public static int bottomTurnRightCANID = 8; //1;
+        public static int topTurnLeftCANID = 4;  
+        public static int topTurnRightCANID = 6; 
+        public static int bottomTurnLeftCANID = 1; 
+        public static int bottomTurnRightCANID = 8; 
 
         //got these values by guessing and praying
         //// set all to 0, find kF, then find kP
         //// or dont use motor control loop, rather use calculation methods
-        //idk how to fix drifiting, and literally no time to fix it rn. will ask people at comp how they combat it
+        
         public static double turnKP = 0.00008;//0.00008;//0.00008
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
@@ -134,8 +131,7 @@ public final class Constants {
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = -72.685546875;// 70.9277343;
         public static double topRightOffset = -105.8203125;//107.138671875;
-        //// negative offset?
-        //i dont think so? idk
+
         public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
         public static double bottomRightOffset = 46.0546875;//47.109375;  //-
 
@@ -148,10 +144,10 @@ public final class Constants {
         public static double kV = 0.10986; //12 / maxVel;
     }
 
- /**class containing variables that relate to shooting*/
+ //class containing variables that relate to shooting
     public static class SHOOT
     {
-                   //facing ask me about my robot sticker, left is left and right is right
+                   
 
         public static boolean leftFlipped = false;
 
@@ -174,7 +170,7 @@ public final class Constants {
 
         //TODO need to account for battery and shit, battery affects max rpm
         public static double maxVelo = 18900; //17800; //16600;
-        public static double minVelo = 0; //TODO may not need this if using sysid and integrated pid
+        public static double minVelo = 0; 
 
         public static double voltComp = 12;
 
