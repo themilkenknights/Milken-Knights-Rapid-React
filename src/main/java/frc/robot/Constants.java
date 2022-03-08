@@ -42,7 +42,7 @@ public final class Constants {
 
     public static double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
- /**class containing variables that relate to drivng*/
+ /**class containing variables that relate to driving*/
     public static class DRIVE
     {
         public static int magicSCurve = 6;
