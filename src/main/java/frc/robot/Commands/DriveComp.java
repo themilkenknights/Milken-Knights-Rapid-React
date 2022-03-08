@@ -7,8 +7,10 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
 import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
+import frc.robot.Commands.Commandments.Shoot;
 import frc.robot.Commands.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.SHOOT;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -24,7 +26,8 @@ public class DriveComp extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
  
-    addCommands(deadline(new Turn(0).withTimeout(1)), 
+    addCommands(deadline(new Shoot(-0.5, 0.5, SHOOT.wackyShooterVelocity).withTimeout(5)),
+                deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
 
                 //TODO see if above still works, then do this

@@ -157,6 +157,7 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
+     mTab.add("davx",mDrive.getNavx());
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
@@ -360,11 +361,11 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
-        mIntake.setIntakePercent(.5);
+        mIntake.setIntakePercent(.9);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
-        mIntake.setIntakePercent(-.5);
+        mIntake.setIntakePercent(-.9);
       }
       else
       {
@@ -497,7 +498,7 @@ if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
   mClimb.telescopePercent(0,0);
 }
 
-if(((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 < SHOOT.wackyShooterVelocity) &&
+if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&

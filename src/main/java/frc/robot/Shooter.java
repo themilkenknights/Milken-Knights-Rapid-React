@@ -17,8 +17,8 @@ import frc.robot.Constants.SHOOT;
 /**bang*/
 public class Shooter {
     
-    TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
-    TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
+     TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
+     TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
     
     private Shooter()
     {
@@ -106,6 +106,16 @@ public class Shooter {
     {
         return SHOOT.maxError * (Math.cos((Constants.kPi / 2) * (1+(setpoint / SHOOT.maxVelo))));
         //return ((SHOOT.maxError * setpoint) / SHOOT.maxVelo);
+    }
+
+    public double getShootLeftVelocity()
+    {
+        return shootLeft.getSelectedSensorVelocity();
+    }
+
+    public double getShootRightVelocity()
+    {
+        return shootRight.getSelectedSensorVelocity();
     }
 
     private static class InstanceHolder
