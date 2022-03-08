@@ -15,6 +15,26 @@
 - Programming Done Right - toggle button
 <br/>
 
+## ROBOT MECHANISMS
+- ### Drivetrain
+     - 4 Swerve modules, 2 Faclons per module
+     - It can go unicorn drive mode
+     - Baby mode for optimum safety
+- ### Shooter
+     - Big fat shooter with inertia wheel
+     - 2 Faclons control le shooty bang bang
+     - very fast, over 10 rpm
+- ### Intake
+     - Has 2 motors that move le intake
+     - Has roller motor that goes zoomie zoomie
+- ### Climber
+     - Ingenious climber using 2 telescope arms, 1 Faclon per arm
+     - Uses physics and magic to work. Very cool
+- ### Bumpers
+     - Secure and safe bumpers
+     - Made of pool noodle and fabric
+     - Can withstand up to 20000 Newtons of force
+
 ## HOW TO USE:
 - not really user friendly rn, all you need to do is change the constants (i think)
 - also download the Better Comments extension for color coded comments
