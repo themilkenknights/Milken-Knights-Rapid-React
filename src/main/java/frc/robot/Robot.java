@@ -253,7 +253,11 @@ public class Robot extends TimedRobot {
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
     mIntake.updateIntake();
+<<<<<<< HEAD
     //mClimb.climberUpdate(); 
+=======
+    mClimb.climberUpdate();
+>>>>>>> parent of 84fb78a (button climber)
     
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
@@ -394,10 +398,14 @@ public class Robot extends TimedRobot {
       }
  
 
+<<<<<<< HEAD
       if(guitarController.getPOV() == BUTTONS.resetClimbPOV)
       {
         mClimb.zeroVClimbb();
       }
+=======
+
+>>>>>>> parent of 84fb78a (button climber)
 
 
 // joystick

@@ -325,9 +325,13 @@ public final class Constants {
         public static int shooterButton = 5;
         public static int climbUpAxis = 0; //left
         public static int climbDownAxis = 180; //right
+<<<<<<< HEAD
         public static int resetClimbPOV = 90;
         public static int climbAutoButton = 7;
         public static int climbAutoPOV = 270;
+=======
+        public static int hoodButton = 2;
+>>>>>>> parent of 84fb78a (button climber)
 
         public static int climbLeftUpButton = 1;
         public static int climbLeftUpButton2 = 9; //5
