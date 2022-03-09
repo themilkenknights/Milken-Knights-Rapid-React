@@ -324,6 +324,7 @@ public final class Constants {
         public static int shooterButton = 1;
         public static int climbUpAxis = 0; //left
         public static int climbDownAxis = 180; //right
+        public static int resetClimbPOV = 90;
         public static int hoodButton = 2;
 
         public static int climbLeftUpButton = 8; //5

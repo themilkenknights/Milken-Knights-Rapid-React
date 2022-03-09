@@ -248,7 +248,7 @@ public class Robot extends TimedRobot {
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
     mIntake.updateIntake();
-    mClimb.climberUpdate();
+    mClimb.climberUpdate(); 
     
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
@@ -389,7 +389,10 @@ public class Robot extends TimedRobot {
       }*/
  
 
-
+      if(mDriverJoystick.getPOV() == BUTTONS.resetClimbPOV)
+      {
+        mClimb.zeroVClimbb();
+      }
 
 
 
