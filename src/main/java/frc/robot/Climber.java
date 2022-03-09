@@ -54,12 +54,12 @@ public class Climber {
         telescopeArmRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, CLIMBER.statusTwoMeas);
         telescopeArmRight.configMotionSCurveStrength(CLIMBER.telescopeMagicSCurve);
     }
-
+/*
     public static Climber getInstance()
     {
         return InstanceHolder.mInstance;
     }
-
+*/
  /**Updates Climber values in shuffleboard*/
     public void climberUpdate()
     {
@@ -102,10 +102,61 @@ public class Climber {
         telescopeArmRight.setSelectedSensorPosition(0);
         telescopeArmLeft.setSelectedSensorPosition(0);
     }
+/*
+    public void climbAuto(boolean button)
+    {
+        if(button)
+        {
+            if(isLeftBelow())
+            {
+                telescopePercentLeft(0.3);
+            }
+            if(isRightBelow())
+            {
+                telescopePercentRight(0.3);
+            }
+        }
+        else
+        {
+            if(isLeftAbove())
+            {
+                telescopePercentLeft(-0.3);
+            }
+            if(isRightAbove())
+            {
+                telescopePercentRight(-0.3);
+            }
+        }
+    }
+
+    public boolean isRightAbove()
+    {
+        return telescopeArmRight.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
+    }
+    public boolean isRightBelow()
+    {
+        return telescopeArmRight.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
+    }
+    public boolean isLeftAbove()
+    {
+        return telescopeArmLeft.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
+    }
+    public boolean isLeftBelow()
+    {
+        return telescopeArmLeft.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
+    }
+    public boolean isBelow()
+    {
+        return isLeftBelow() && isRightBelow();
+    }
+    public boolean isAbove()
+    {
+        return isLeftAbove() && isRightAbove();
+    }
 
     private static class InstanceHolder
     {
         private static final Climber mInstance = new Climber();
     } 
-    
+    */
 }

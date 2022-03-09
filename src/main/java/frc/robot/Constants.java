@@ -258,7 +258,8 @@ public final class Constants {
         public static int telescopeMagicSCurve = 0;
 
         //how many rotations native until high point
-        public static double telescopeHighPointNative = 0;
+        public static double telescopeHighPointNative = 290000;
+        public static double telescopeLowPointNative = 1000;
 
         public static double telescopeNativePerInch = 0;
         //TODO try to find constant of slope of native per inch?
@@ -315,22 +316,30 @@ public final class Constants {
 */
 
         //joystick
-        public static int intakeup = 12; //8
-        public static int intakedown = 11; //7
-        public static int rollersForwardButton = 3; //11
-        public static int rollersBackwardButton = 5; //12
-        public static int elevatorForwardButton = 4; //9
-        public static int elevatorBackwardButton = 6; //1
-        public static int shooterButton = 1;
+        public static int intakeup = 1; //8
+        public static int intakedown = 2; //7
+        public static int rollersForwardButton = 8; //11
+        public static int rollersBackwardButton = 7; //12
+        public static int elevatorForwardButton = 3; //9
+        public static int elevatorBackwardButton = 4; //1
+        public static int shooterButton = 5;
         public static int climbUpAxis = 0; //left
         public static int climbDownAxis = 180; //right
         public static int resetClimbPOV = 90;
-        public static int hoodButton = 2;
+        public static int climbAutoButton = 7;
+        public static int climbAutoPOV = 270;
 
-        public static int climbLeftUpButton = 8; //5
-        public static int climbLeftDownButton = 7; //3
-        public static int climbRightUpButton = 10; //6
-        public static int climbRightDownButton = 9; //4
+        public static int climbLeftUpButton = 1;
+        public static int climbLeftUpButton2 = 9; //5
+
+        public static int climbLeftDownButton = 2;
+        public static int climbLeftDownButton2 = 9;
+         
+        public static int climbRightUpButton = 4;
+        public static int climbRightUpButton2 = 9;
+
+        public static int climbRightDownButton = 3; //4
+        public static int climbRightDownButton2 = 9;
         
 
 
