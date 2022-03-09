@@ -44,12 +44,11 @@ public class Robot extends TimedRobot {
    private Elevator mElevator = Elevator.getInstance();
    private Intake mIntake = Intake.getInstance();
    private Limelight mLime = Limelight.getInstance();
-   //private Climber mClimb = Climber.getInstance();
+   private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
    private XboxController xbox = new XboxController(0);
-   private Joystick mJoystick = new Joystick(1);
-   private XboxController guitarController = new XboxController(2);
+   private Joystick mDriverJoystick = new Joystick(1);
 
 
 /**forward movement axis*/ 
@@ -113,7 +112,6 @@ public class Robot extends TimedRobot {
    private boolean toggleClimbOn = false;
    private boolean toggleClimbPressed = false;
 
-
 /**constant that divides speed (baby control)*/
    private double spee = 0;
 
@@ -123,8 +121,6 @@ public class Robot extends TimedRobot {
    private double ffcalc = 0;
 
    private double sethsPercent = 0;
-   boolean autoclimbhelp = false;
-
 
    @Override
    public void robotInit() {
@@ -191,7 +187,6 @@ public class Robot extends TimedRobot {
      toggleSlowOn = false;
      toggleSlowPressed = false;
      spee = 3;
-     //autoclimbhelp = mClimb.isBelow();
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -242,7 +237,7 @@ public class Robot extends TimedRobot {
         break;
     }
     SmartDashboard.putNumber("velo", velo);
-    //mTab.add("seths", sethsPercent);
+    mTab.add("seths", sethsPercent);
     //TODO do i even need velocity control in another tab?
    }
  
@@ -253,11 +248,7 @@ public class Robot extends TimedRobot {
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
     mIntake.updateIntake();
-<<<<<<< HEAD
-    //mClimb.climberUpdate(); 
-=======
     mClimb.climberUpdate();
->>>>>>> parent of 84fb78a (button climber)
     
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
@@ -298,7 +289,7 @@ public class Robot extends TimedRobot {
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
       }
-      /*else if(guitarController.getRawButton(BUTTONS.driveHundredButton))
+      /*else if(mDriverJoystick.getRawButton(BUTTONS.driveHundredButton))
       {
         //mDrive.drivePercent(1, 1, 1, 1);
        // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
@@ -325,7 +316,7 @@ public class Robot extends TimedRobot {
 
 
 
-      if(guitarController.getRawButton(BUTTONS.shooterButton))
+      if(mDriverJoystick.getRawButton(BUTTONS.shooterButton))
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc);
@@ -346,16 +337,16 @@ public class Robot extends TimedRobot {
         mShoot.setShooterPercent(0);
       }
 
-      /*if(guitarController.getRawButtonPressed(BUTTONS.limelightButton))
+      /*if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
     {
         mLime.limelightToggle();
       }
 */
-      if(guitarController.getRawButton(BUTTONS.elevatorForwardButton))
+      if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
         mElevator.setElevatorPercent(-.8);
       }
-      else if(guitarController.getRawButton(BUTTONS.elevatorBackwardButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
 {
       mElevator.setElevatorPercent(.8);
       }
@@ -367,12 +358,12 @@ public class Robot extends TimedRobot {
       
 
 
-      if(guitarController.getRawButton(BUTTONS.intakeup))
+      if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
         mIntake.setIntakePercent(.9);
       }
-      else if(guitarController.getRawButton(BUTTONS.intakedown))
+      else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
         mIntake.setIntakePercent(-.9);
       }
@@ -382,72 +373,54 @@ public class Robot extends TimedRobot {
         mIntake.setIntakePercent(0);
       }
 
-/*
 
-      if(guitarController.getRawButton(BUTTONS.rollersForwardButton))
+
+      if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
         mIntake.setRollersPercent(1);
       }
-      else if(guitarController.getRawButton(BUTTONS.rollersBackwardButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
       {
         mIntake.setRollersPercent(-1);
       }
-      else
+      /*else
       {
         mIntake.setRollersPercent(0);
-      }
+      }*/
  
 
-<<<<<<< HEAD
-      if(guitarController.getPOV() == BUTTONS.resetClimbPOV)
-      {
-        mClimb.zeroVClimbb();
-      }
-=======
-
->>>>>>> parent of 84fb78a (button climber)
 
 
-// joystick
-      if(guitarController.getRawButton(BUTTONS.climbRightUpButton))
+
+
+      if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
       {
         mClimb.telescopePercentRight(0.5);
       }
-      else if(guitarController.getRawButton(BUTTONS.climbRightDownButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
       {
         mClimb.telescopePercentRight(-0.5);
       }
 
 
 
-
-if(guitarController.getRawButton(BUTTONS.climbRightUpButton))
-      {
-        mClimb.telescopePercentRight(0.5);
-      }
-      else if(guitarController.getRawButton(BUTTONS.climbRightDownButton))
-      {
-        mClimb.telescopePercentRight(-0.5);
-      }
-
-
-      if(guitarController.getRawButton(BUTTONS.climbLeftUpButton))
+      if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
       {
         mClimb.telescopePercentLeft(0.5);
       }
-      else if(guitarController.getRawButton(BUTTONS.climbLeftDownButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
       {
         mClimb.telescopePercentLeft(-0.5);
       }
 
-
+/*
     if(toggleClimbOn == false)
     {
-      if(guitarController.getRawButton(BUTTONS.climbUpButton))
+      if(mDriverJoystick.getRawButton(BUTTONS.climbUpButton))
       {
         mClimb.telescopePercent(0.5, -0.5);
       }
-      else if(guitarController.getRawButton(BUTTONS.climbDownButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.climbDownButton))
       {
         mClimb.telescopePercent(-0.5, 0.5);
       }
@@ -487,58 +460,59 @@ if(guitarController.getRawButton(BUTTONS.climbRightUpButton))
         mClimb.telescopePercentLeft(0);
       }
     }
+*/
 
-if(toggleClimbOn)
+if(mDriverJoystick.getRawButton(BUTTONS.hoodButton))
 {
-  mClimb.climbAuto(autoclimbhelp);
+  if(toggleClimbOn)
+  {
+    mHood.setHoodPercent(0.1);
+  }
+  else
+  {
+    mHood.setHoodPercent(-0.1);
+  }
 }
-if(!mClimb.isAbove())
+else
 {
-  autoclimbhelp = true;
-  toggleClimbOn = false;
-}
-if(!mClimb.isBelow())
-{
-  toggleClimbOn = false;
-  autoclimbhelp = false;
+  mHood.setHoodPercent(0);
 }
 
-if(guitarController.getPOV() == BUTTONS.climbUpAxis)
+
+if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 {
   mClimb.telescopePercent(sethsPercent, sethsPercent);
 }
-else if(guitarController.getPOV() == BUTTONS.climbDownAxis)
+else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
 {
   mClimb.telescopePercent(-0.5, -0.5);
 }
 
-if(!(guitarController.getPOV() == BUTTONS.climbUpAxis) &&
-!(guitarController.getPOV() == BUTTONS.climbDownAxis) &&
-!guitarController.getRawButton(BUTTONS.climbLeftDownButton) &&
-!guitarController.getRawButton(BUTTONS.climbLeftUpButton) &&
-!guitarController.getRawButton(BUTTONS.climbRightDownButton) &&
-!guitarController.getRawButton(BUTTONS.climbRightUpButton) && 
-((!mClimb.isAbove() && !autoclimbhelp) || (!mClimb.isBelow() && autoclimbhelp))&&
-!toggleClimbOn)
+if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
 {
   mClimb.telescopePercent(0,0);
 }
 
 if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
-!(guitarController.getRawButton(BUTTONS.rollersForwardButton)) &&
-!(guitarController.getRawButton(BUTTONS.rollersBackwardButton)) &&
-!(guitarController.getRawButton(BUTTONS.elevatorBackwardButton)) &&
-!(guitarController.getRawButton(BUTTONS.elevatorForwardButton)))
+!(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton)))
 {
   mIntake.setRollersPercent(0);
   mElevator.setElevatorPercent(0);
 }
-
-    if(guitarController.getPOV() == 0)
+/*
+    if(mDriverJoystick.getPOV() == 0)
     {
       mHood.setHoodPercent(0.1);
     }
-    else if(guitarController.getPOV() == 180)
+    else if(mDriverJoystick.getPOV() == 180)
     {
       mHood.setHoodPercent(-0.1);
     }
@@ -548,7 +522,7 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
     }
     */
 
-     /* if(guitarController.getRawButton(7))
+     /* if(mDriverJoystick.getRawButton(7))
       {
         mIntake.setIntakePercent(1);
       }
@@ -578,7 +552,7 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
       driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putBoolean("is", toggleClimbOn);
-      SmartDashboard.putNumber("povjoy", guitarController.getPOV());
+      SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
       SmartDashboard.putNumber("povx", xbox.getPOV());
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
       //SmartDashboard.putNumber("ffcalc", ffcalc);
@@ -630,7 +604,7 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
 
   public void updateClimbToggle()
   {
-      if(guitarController.getRawButton(BUTTONS.climbAutoButton)){
+      if(xbox.getRawButton(BUTTONS.hoodModeToggle)){
           if(!toggleClimbPressed){
               toggleClimbOn = !toggleClimbOn;
          
@@ -640,44 +614,6 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
       else{
           toggleClimbPressed = false;
       }
-
-/*
-  {
-      if(guitarController.getPOV() == BUTTONS.climbAutoPOV)){
-          if(!toggleClimbPressed){
-              toggleClimbOn = !toggleClimbOn;
-         
-              toggleClimbPressed = true;
-          }
-      }
-      else{
-          toggleClimbPressed = false;
-      }
-      */
-      /*
-      if(guitarController.getRawButton(BUTTONS.climbLeftUpButton) && (guitarController.getRawButton(BUTTONS.climbLeftUpButton2)))
-      {
-        mClimb.telescopePercentLeft(0.5);
-      }
-      else if(guitarController.getRawButton(BUTTONS.climbLeftDownButton) && (guitarController.getRawButton(BUTTONS.climbLeftDownButton2)))
-      {
-        mClimb.telescopePercentLeft(-0.5);
-      }
-
-
-
-      if(guitarController.getRawButton(BUTTONS.climbRightUpButton) && (guitarController.getRawButton(BUTTONS.climbRightUpButton2)))
-      {
-        mClimb.telescopePercentRight(0.5);
-      }
-      else if(guitarController.getRawButton(BUTTONS.climbRightDownButton) && (guitarController.getRawButton(BUTTONS.climbRightDownButton2)))
-      {
-        mClimb.telescopePercentRight(-0.5);
-      }
-*/
-
-
-
   }
+  
 }
-
