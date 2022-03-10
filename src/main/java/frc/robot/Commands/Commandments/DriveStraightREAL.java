@@ -4,6 +4,7 @@
 
 package frc.robot.Commands.Commandments;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Drive;
 import frc.robot.Drive.ETHERAUTO;
@@ -52,14 +53,15 @@ public class DriveStraightREAL extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    mDrive.setMagicStraight(inches, maxVelo, maxAccel);
+    //mDrive.setMagicStraight(inches, maxVelo, maxAccel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    mDrive.updateMagicStraight();
-    mDrive.autoTurnUpdate(inches, angle, RCW, mode, turny);
+   // mDrive.updateMagicStraight();
+    mDrive.autoTurnUpdate(inches, angle, RCW, mode, turny); 
+    SmartDashboard.putNumber("AUTONASX", mDrive.getNavx());
   }
 
   // Called once the command ends or is interrupted.
