@@ -123,6 +123,12 @@ public class Robot extends TimedRobot {
 
    private double sethsPercent = 0;
 
+   private boolean leftGoingUp = false;
+   private boolean rightGoingUp = false;
+
+   private boolean toggleLeftClimbOn = false;
+   private boolean toggleRightClimbOn = false;
+
    @Override
    public void robotInit() {
      //Shuffleboard.startRecording();
@@ -188,7 +194,11 @@ public class Robot extends TimedRobot {
      toggleFastPressed = false;
      toggleSlowOn = false;
      toggleSlowPressed = false;
+     toggleLeftClimbOn = false;
+     toggleRightClimbOn = false;
      spee = 3;
+     leftGoingUp = false;
+     rightGoingUp = false;
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -395,25 +405,7 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
-      {
-        mClimb.telescopePercentRight(0.5);
-      }
-      else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
-      {
-        mClimb.telescopePercentRight(-0.5);
-      }
-
-
-
-      if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
-      {
-        mClimb.telescopePercentLeft(0.5);
-      }
-      else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
-      {
-        mClimb.telescopePercentLeft(-0.5);
-      }
+    
 
 /*
     if(toggleClimbOn == false)
@@ -464,22 +456,6 @@ public class Robot extends TimedRobot {
     }
 */
 
-if(mDriverJoystick.getRawButton(BUTTONS.hoodButton))
-{
-  if(toggleClimbOn)
-  {
-    mHood.setHoodPercent(0.1);
-  }
-  else
-  {
-    mHood.setHoodPercent(-0.1);
-  }
-}
-else
-{
-  mHood.setHoodPercent(0);
-}
-
 
 if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 {
@@ -490,15 +466,84 @@ else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
   mClimb.telescopePercent(-0.5, -0.5);
 }
 
+if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+{
+  mClimb.telescopePercentRight(0.5);
+}
+else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
+{
+  mClimb.telescopePercentRight(-0.5);
+}
+
+
+
+if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
+{
+  mClimb.telescopePercentLeft(0.5);
+}
+else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
+{
+  mClimb.telescopePercentLeft(-0.5);
+}
+
+
+
+if(toggleLeftClimbOn)
+{
+  mClimb.climbAutoLeft(leftGoingUp);
+}
+
+if(toggleRightClimbOn)
+{
+  mClimb.climbAutoRight(rightGoingUp);
+}
+
+if(!mClimb.isLeftAbove() && !leftGoingUp)
+{
+  leftGoingUp = true;
+  toggleLeftClimbOn = false;
+}
+
+if(!mClimb.isRightAbove() && !rightGoingUp)
+{
+  rightGoingUp = true;
+  toggleRightClimbOn = false;
+}
+
+if(!mClimb.isLeftBelow() && leftGoingUp)
+{
+  leftGoingUp = false;
+  toggleLeftClimbOn = false;
+}
+
+if(!mClimb.isRightBelow() && rightGoingUp)
+{
+  leftGoingUp = false;
+  toggleRightClimbOn = false;
+}
+
 if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+!mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton) &&
+(!toggleLeftClimbOn || !toggleRightClimbOn))
 {
   mClimb.telescopePercent(0,0);
 }
+
+if((mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) ||
+(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) ||
+mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) ||
+mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) ||
+mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) ||
+mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+{
+  toggleLeftClimbOn = false;
+  toggleRightClimbOn = false;
+}
+
 
 if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
@@ -553,7 +598,8 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
       slider = SmartDashboard.getNumber("slider", 0);
       driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
-      SmartDashboard.putBoolean("is", toggleClimbOn);
+      SmartDashboard.putBoolean("right on", toggleRightClimbOn);
+      SmartDashboard.putBoolean("left on", toggleLeftClimbOn);
       SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
       SmartDashboard.putNumber("povx", xbox.getPOV());
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
@@ -606,9 +652,11 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
 
   public void updateClimbToggle()
   {
-      if(xbox.getRawButton(BUTTONS.hoodModeToggle)){
+      if(xbox.getRawButton(BUTTONS.climbAutoButton)){
           if(!toggleClimbPressed){
-              toggleClimbOn = !toggleClimbOn;
+              toggleLeftClimbOn = !toggleLeftClimbOn;
+              toggleRightClimbOn = !toggleRightClimbOn;
+
          
               toggleClimbPressed = true;
           }

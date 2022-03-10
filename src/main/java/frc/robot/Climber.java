@@ -103,6 +103,59 @@ public class Climber {
         telescopeArmLeft.setSelectedSensorPosition(0);
     }
 
+
+
+    public void climbAutoLeft(boolean leftGoingUp)
+    {
+        if(isLeftBelow() && leftGoingUp)
+        {
+            telescopePercentLeft(0.3);
+        }
+        else if(isLeftAbove() && !leftGoingUp)
+        {
+            telescopePercentLeft(-0.3);
+        }
+    }
+
+    public void climbAutoRight(boolean rightGoingUp)
+    {
+        if(isRightBelow() && rightGoingUp)
+        {
+            telescopePercentRight(0.3);
+        }
+        else if(isRightAbove() && !rightGoingUp)
+        {
+            telescopePercentRight(-0.3);
+        }
+    }
+
+    public boolean isRightAbove()
+    {
+        return telescopeArmRight.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
+    }
+    public boolean isRightBelow()
+    {
+        return telescopeArmRight.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
+    }
+    public boolean isLeftAbove()
+    {
+        return telescopeArmLeft.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
+    }
+    public boolean isLeftBelow()
+    {
+        return telescopeArmLeft.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
+    }
+    public boolean isBelow()
+    {
+        return isLeftBelow() && isRightBelow();
+    }
+    public boolean isAbove()
+    {
+        return isLeftAbove() && isRightAbove();
+    }
+
+
+
     private static class InstanceHolder
     {
         private static final Climber mInstance = new Climber();

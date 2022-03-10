@@ -262,7 +262,8 @@ public final class Constants {
         public static int telescopeMagicSCurve = 0;
 
         //how many rotations native until high point
-        public static double telescopeHighPointNative = 0;
+        public static double telescopeHighPointNative = 219000;
+        public static double telescopeLowPointNative = 100;
 
         public static double telescopeNativePerInch = 0;
         //TODO try to find constant of slope of native per inch?
@@ -328,7 +329,7 @@ public final class Constants {
         public static int shooterButton = 1;
         public static int climbUpAxis = 0; //left
         public static int climbDownAxis = 180; //right
-        public static int hoodButton = 2;
+        public static int climbAutoButton = 2;
 
         public static int climbLeftUpButton = 8; //5
         public static int climbLeftDownButton = 7; //3
