@@ -749,7 +749,7 @@ public class Drive {
 
 
 //TODO if this works credit them
-    double hP, hI, hD = 1;
+    double hP, hI, hD = 0.001;
     double hIntegral, hDerivative, hPreviousError, hError;
 
     //programming done right
@@ -847,6 +847,7 @@ public class Drive {
     public double lengthB = 0;
     public double FWDauto = 0;
     public double STRauto = 0;
+    public double RCWtemp = 0;
 
     /**
     Calculates a curved autonomous path's radius by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
@@ -997,7 +998,7 @@ public class Drive {
      * @see {@link #swerveAutonomousEther(FWD, STR, RCW)}
      * @see {@link #updateMagicStraight()}
     */
-    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW, ETHERAUTO mode, ETHERRCW turny)
+    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCWauto, ETHERAUTO mode, ETHERRCW turny)
     {
         currentDistance = 
             (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
@@ -1013,16 +1014,20 @@ public class Drive {
         }
         else if(mode == ETHERAUTO.Straight)
         {
-            FWDauto = Math.sin(thetaTurn)/3;
-            STRauto = Math.cos(thetaTurn)/3;
+            FWDauto = Math.sin(thetaTurn)/10;
+            STRauto = Math.cos(thetaTurn)/10;
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
         }
-        if(turny == ETHERRCW.Specific && Math.abs(getNavx()) <= thetaTurn + 10 || Math.abs(getNavx()) >= thetaTurn -10)
+        if(turny == ETHERRCW.Specific && (Math.abs(getNavx()) <= thetaTurn + 10 && Math.abs(getNavx()) >= thetaTurn  -10))
         {
-            RCW = 0;
+            RCWtemp = 0;
         }
-        swerveAutonomousEther(FWDauto, STRauto, RCW);
+        else if(turny == ETHERRCW.Specific)
+        {
+            RCWtemp = headerStraighter(RCWauto);
+        }
+        swerveAutonomousEther(FWDauto, STRauto, RCWtemp);
 /*
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
         topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
