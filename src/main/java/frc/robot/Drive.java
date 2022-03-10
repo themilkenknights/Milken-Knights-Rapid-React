@@ -804,18 +804,34 @@ public class Drive {
         double wa3 = Math.atan2(A,D)*180/Constants.kPi;
         double wa4 = Math.atan2(A,C)*180/Constants.kPi; 
 
+        double ws1 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(C, 2)));      
+        double ws2 = Math.sqrt((Math.pow(B, 2)) + (Math.pow(D, 2)));     
+        double ws3 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(D, 2)));    
+        double ws4 = Math.sqrt((Math.pow(A, 2)) + (Math.pow(C, 2)));   
 
+        double max=ws1; if(ws2>max)max=ws2; if(ws3>max)max=ws3; if(ws4>max)max=ws4;
+        if(max>1){ws1/=max; ws2/=max; ws3/=max; ws4/=max;}
        
         wa1 = MkUtil.setDirection(topTurnRight, wa1, driveTopRightEther);
         wa2 = MkUtil.setDirection(topTurnLeft, wa2, driveTopLeftEther);
         wa3 = MkUtil.setDirection(bottomTurnLeft, wa3, driveBotLeftEther);
         wa4 = MkUtil.setDirection(bottomTurnRight, wa4, driveBotRightEther);
 
+        
 
-        topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
-        topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
-        bottomTurnLeft.set(ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
-        bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
+
+        topTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa1, TURN.greerRatio)); // ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(wa1, TURN.greerRatio)));
+        topTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa2, TURN.greerRatio)); //ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(wa2, TURN.greerRatio)));
+        bottomTurnLeft.set(ControlMode.Position, MkUtil.degreesToNative(wa3, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnLeftCalculateNative(MkUtil.degreesToNative(wa3, TURN.greerRatio)));
+        bottomTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa4, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
+
+
+        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1);
+        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
+        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
+        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
+
+        driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
     }
 
 
@@ -829,6 +845,8 @@ public class Drive {
     public double turnDistance = 0;
     public double distanceA = 0;
     public double lengthB = 0;
+    public double FWDauto = 0;
+    public double STRauto = 0;
 
     /**
     Calculates a curved autonomous path's radius by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
@@ -979,16 +997,31 @@ public class Drive {
      * @see {@link #swerveAutonomousEther(FWD, STR, RCW)}
      * @see {@link #updateMagicStraight()}
     */
-    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW)
+    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCW, ETHERAUTO mode, ETHERRCW turny)
     {
         currentDistance = 
             (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
             MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
             MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
-
-        double FWDauto = Math.sin(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
-        double STRauto = Math.cos(((currentDistance/totalDistance)*thetaTurn) * Constants.kPi / 180);
+        if(mode == ETHERAUTO.Curve)
+        {
+            FWDauto = Math.sin((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
+            STRauto = Math.cos((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
+            SmartDashboard.putNumber("STRauto", STRauto);
+            SmartDashboard.putNumber("FWDauto", FWDauto);
+        }
+        else if(mode == ETHERAUTO.Straight)
+        {
+            FWDauto = Math.sin(thetaTurn)/3;
+            STRauto = Math.cos(thetaTurn)/3;
+            SmartDashboard.putNumber("STRauto", STRauto);
+            SmartDashboard.putNumber("FWDauto", FWDauto);
+        }
+        if(turny == ETHERRCW.Specific && Math.abs(getNavx()) <= thetaTurn + 10 || Math.abs(getNavx()) >= thetaTurn -10)
+        {
+            RCW = 0;
+        }
         swerveAutonomousEther(FWDauto, STRauto, RCW);
 /*
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
@@ -1110,6 +1143,12 @@ public class Drive {
         return Math.abs(err) < 0.1 && Math.abs(avgVelInches) < 0.1; //0.5, 0.5
     }
 
+    public boolean isEtherMoveDone(double inchesEther)
+    {
+        double err = inchesEther - avgDistInches;              //TODO 0.1?? 
+        return Math.abs(err) < 0.1 && Math.abs(avgVelInches) < 0.1; //0.5, 0.5
+    }
+
     /**
      * Returns the state of percent turning (use if using {@link #updateMagicTurnAlone} and using native units instead of inches in {@link #setMagicTurn})
      * @return True if percent turning is done
@@ -1123,7 +1162,15 @@ public class Drive {
     }
 
 
+    public enum ETHERAUTO
+    {
+        Straight, Curve
+    }
 
+    public enum ETHERRCW
+    {
+        Specific, Forever
+    }
     
 
 

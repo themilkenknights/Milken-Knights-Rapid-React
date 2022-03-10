@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.Commandments.DriveStraightREAL;
 import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Drive.ETHERAUTO;
+import frc.robot.Drive.ETHERRCW;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -17,12 +19,15 @@ public class ForbiddenAuto extends SequentialCommandGroup {
   private double inches  = 21;
   private double FWD = 1;
   private double STR = 0;
-  private double RCW = 0.2;
+  private double RCW = 0.3;
   private double maxVelo = DRIVE.magicVelo;
   private double maxAccel = DRIVE.magicAccel;
+  private ETHERAUTO mode = ETHERAUTO.Straight;
+  private ETHERRCW turny = ETHERRCW.Specific;
+  private double angle = 90;
   public ForbiddenAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(deadline(new DriveStraightREAL(inches, FWD, STR, RCW, maxVelo, maxAccel).withTimeout(6)));
+    addCommands(deadline(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle).withTimeout(6)));
   }
 }

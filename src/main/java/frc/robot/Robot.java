@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.DriveStr8;
+import frc.robot.Commands.ForbiddenAuto;
+import frc.robot.Commands.JacksAuto;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
@@ -128,6 +130,7 @@ public class Robot extends TimedRobot {
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
+     mTab.add("davx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
@@ -145,13 +148,12 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
-     mTab.add("davx",mDrive.getNavx());
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new DriveComp();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new ForbiddenAuto ();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: 
          break;

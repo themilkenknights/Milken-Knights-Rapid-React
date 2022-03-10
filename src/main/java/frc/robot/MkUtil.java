@@ -425,4 +425,29 @@ public class MkUtil {
     {
       return (limitAbsolute((setpoint - hoodPosition) * HoodKP, maxPosition));
     }
+
+    //!Le formuler 
+    //(-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio)
+
+  /**
+   * toggle button
+   * @param togglePressed boolean for when pressed
+   * @param toggleOn boolean for toggle mode (use this as toggle)
+   * @param button actual boolean for the button
+   * @author Programming Done Right
+   */
+  public void updateToggle(boolean togglePressed, boolean toggleOn, boolean button)
+  {
+      if(button){
+          if(!togglePressed){
+              toggleOn = !toggleOn;
+      
+              togglePressed = true;
+          }
+      }
+      else{
+        togglePressed = false;
+      }
+  }
+
 }
