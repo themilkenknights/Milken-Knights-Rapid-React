@@ -7,6 +7,7 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
 import frc.robot.Commands.Commandments.DriveStraight;
+import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
 import frc.robot.Commands.Commandments.Shoot;
 import frc.robot.Commands.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
@@ -37,8 +38,10 @@ public class JacksAuto extends SequentialCommandGroup {
     addCommands(deadline(new Shoot(-0.7, 0.5, SHOOT.jacksWackyShooterVelocity).withTimeout(3)), 
                deadline(new DriveStraight(distanceA, lengthB, 1, -((angle) % 90), DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)),
               //!deadline(new Turn(0).withTimeout(1)), dont know if we need these
-              deadline(new DriveStraight(distanceA2, lengthB2, 1, -((angle2) % 90), DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
+              deadline(new DriveStraight(distanceA2, lengthB2, 1, -((angle2) % 90), DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)),
 
+              //strafe
+            deadline(new DriveStraightREALSUPERREAL(20, 90, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }
 }
