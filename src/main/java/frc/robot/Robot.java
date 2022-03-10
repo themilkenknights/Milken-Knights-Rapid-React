@@ -525,12 +525,19 @@ if((!mClimb.isLeftBelow() && leftGoingUp) && (!mClimb.isRightBelow() && rightGoi
 if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) &&
+!mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton)&&
+!toggleLeftClimbOn)
+{
+  mClimb.telescopePercentLeft(0);
+}
+
+if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) &&
 !mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton) &&
-(!toggleLeftClimbOn || !toggleRightClimbOn))
+!toggleRightClimbOn)
 {
-  mClimb.telescopePercent(0,0);
+  mClimb.telescopePercentRight(0);
 }
 
 if((mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) ||
