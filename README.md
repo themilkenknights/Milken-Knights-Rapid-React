@@ -58,7 +58,7 @@
 - Tried using WPIs SwerveControllerCommand, but it was too advanced for my feeble peasant brain, so I used Ethers papers for teleop movement.
 - For auto, I created a custom auto using math and motion magic.
 - SysID was also too complicated, and when I tried finding PIDF values for WPIs code and other PID loops, the values were no where near what they should have been. So, all PIDF values are guess and check values.
-- If anyone has a tutorial or very detailed code explaining how to use SysID and/or WPIs SwerveControllerCommand, please send it to me. Would appreciate it a lot.
+- If anyone has a tutorial or code explaining how to use SysID and/or WPIs SwerveControllerCommand, please send it to me. Would appreciate it a lot.
 <br/>
 
 ## MILKEN KNIGHTS WEBSITE
