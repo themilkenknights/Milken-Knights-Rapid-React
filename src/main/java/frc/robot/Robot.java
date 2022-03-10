@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee1", veloch.veloOne);
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.addOption("spee3", veloch.veloThree);
-     veloshufflething.setDefaultOption("spee1", veloch.veloOne);
+     veloshufflething.setDefaultOption("spee1", veloch.veloOne);}
    @Override
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
@@ -199,7 +199,7 @@ public class Robot extends TimedRobot {
        
       case veloThree:
         velo = 4000;
-        break;
+        break;}
     }
  
   @Override
