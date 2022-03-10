@@ -463,27 +463,27 @@ if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 }
 else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
 {
-  mClimb.telescopePercent(-0.5, -0.5);
+  mClimb.telescopePercent(-1, -1);
 }
 
 if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
 {
-  mClimb.telescopePercentRight(0.5);
+  mClimb.telescopePercentRight(1);
 }
 else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
 {
-  mClimb.telescopePercentRight(-0.5);
+  mClimb.telescopePercentRight(-1);
 }
 
 
 
 if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
 {
-  mClimb.telescopePercentLeft(0.5);
+  mClimb.telescopePercentLeft(1);
 }
 else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
 {
-  mClimb.telescopePercentLeft(-0.5);
+  mClimb.telescopePercentLeft(-1);
 }
 
 

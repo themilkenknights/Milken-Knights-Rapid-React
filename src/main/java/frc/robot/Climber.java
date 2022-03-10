@@ -119,11 +119,11 @@ public class Climber {
     {
         if(isLeftBelow() && leftGoingUp)
         {
-            telescopePercentLeft(0.3);
+            telescopePercentLeft(1);
         }
         else if(isLeftAbove() && !leftGoingUp)
         {
-            telescopePercentLeft(-0.3);
+            telescopePercentLeft(-1);
         }
     }
 
@@ -131,11 +131,11 @@ public class Climber {
     {
         if(isRightBelow() && rightGoingUp)
         {
-            telescopePercentRight(0.3);
+            telescopePercentRight(1);
         }
         else if(isRightAbove() && !rightGoingUp)
         {
-            telescopePercentRight(-0.3);
+            telescopePercentRight(-1);
         }
     }
 
