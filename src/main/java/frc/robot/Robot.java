@@ -207,7 +207,7 @@ public class Robot extends TimedRobot {
      }
      mDrive.resetDrive();
      SmartDashboard.putNumber("slider", 0);
-     SmartDashboard.putNumber("driveSlider", 0);
+     //SmartDashboard.putNumber("driveSlider", 0);
      switch (veloshufflething.getSelected()) {
       case veloOne:
         velo = 0;
@@ -259,7 +259,7 @@ public class Robot extends TimedRobot {
     
     mDrive.driveUpdate();
     mShoot.shooterUpdate();
-    mIntake.updateIntake();
+    //mIntake.updateIntake();
     mClimb.climberUpdate();
     
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
@@ -631,7 +631,7 @@ isLeftBelow = true
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
       slider = SmartDashboard.getNumber("slider", 0);
-      driveSlider = SmartDashboard.getNumber("driveSlider", 0);
+      //driveSlider = SmartDashboard.getNumber("driveSlider", 0);
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putBoolean("right on", toggleRightClimbOn);
       SmartDashboard.putBoolean("left on", toggleLeftClimbOn);
