@@ -488,15 +488,6 @@ else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
 
 
 
-if(toggleLeftClimbOn)
-{
-  mClimb.climbAutoLeft(leftGoingUp);
-}
-
-if(toggleRightClimbOn)
-{
-  mClimb.climbAutoRight(rightGoingUp);
-}
 
 if(!mClimb.isLeftAbove() && !leftGoingUp)
 {
@@ -554,6 +545,19 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
   mIntake.setRollersPercent(0);
   mElevator.setElevatorPercent(0);
 }
+
+
+if(toggleLeftClimbOn)
+{
+  mClimb.climbAutoLeft(leftGoingUp);
+}
+
+if(toggleRightClimbOn)
+{
+  mClimb.climbAutoRight(rightGoingUp);
+}
+
+
 /*
     if(mDriverJoystick.getPOV() == 0)
     {
