@@ -248,7 +248,7 @@ public class Robot extends TimedRobot {
         sethsPercent = 1.00;
         break;
     }
-    SmartDashboard.putNumber("velo", velo);
+    //SmartDashboard.putNumber("velo", velo);
     mTab.add("seths", sethsPercent);
     //TODO do i even need velocity control in another tab?
    }
@@ -628,10 +628,13 @@ isLeftBelow = true
       SmartDashboard.putNumber("spee", spee);
       SmartDashboard.putBoolean("right on", toggleRightClimbOn);
       SmartDashboard.putBoolean("left on", toggleLeftClimbOn);
-      SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
-      SmartDashboard.putNumber("povx", xbox.getPOV());
+      //SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
+      //SmartDashboard.putNumber("povx", xbox.getPOV());
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
       //SmartDashboard.putNumber("ffcalc", ffcalc);
+
+      SmartDashboard.putNumber("test xbox", (xbox.getRawAxis(BUTTONS.forwardAxis) * Math.cos(Math.toRadians(0))) + (xbox.getRawAxis(BUTTONS.strafeAxis) *  Math.sin(Math.toRadians(0))));
+      SmartDashboard.putNumber("test box two", Math.atan2(xbox.getRawAxis(BUTTONS.forwardAxis),xbox.getRawAxis(BUTTONS.strafeAxis))*180/Constants.kPi);
     }
 
   @Override
