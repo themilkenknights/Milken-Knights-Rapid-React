@@ -9,8 +9,9 @@ import frc.robot.Drive;
 //TODO hopefully this works
 public class DriveStraightREAL extends CommandBase {
   private double inches;
-  private int FWD;
-  private int STR;
+  private double FWD;
+  private double STR;
+  private double RCW;
   private double maxVelo;
   private double maxAccel;
   Drive mDrive = Drive.getInstance();
@@ -20,11 +21,12 @@ public class DriveStraightREAL extends CommandBase {
    * @param FWD y value as if it was from the xbox controller [-1, 1]
    * @param STR x value as if it was from the xbox controller [-1, 1]
    */
-  public DriveStraightREAL(double inches, int FWD, int STR, double maxVelo, double maxAccel) {
+  public DriveStraightREAL(double inches, double FWD, double STR, double RCW, double maxVelo, double maxAccel) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.inches = inches;
     this.FWD = FWD;
     this.STR = STR;
+    this.RCW = RCW;
     this.maxVelo = maxVelo;
     this.maxAccel = maxAccel;
   }
@@ -39,7 +41,7 @@ public class DriveStraightREAL extends CommandBase {
   @Override
   public void execute() {
     mDrive.updateMagicStraight();
-    mDrive.swerveAutonomousEther(FWD, STR, 0);
+    mDrive.swerveAutonomousEther(FWD, STR, RCW);
   }
 
   // Called once the command ends or is interrupted.
