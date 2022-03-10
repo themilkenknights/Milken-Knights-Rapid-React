@@ -491,26 +491,36 @@ else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
 
 if(!mClimb.isLeftAbove() && !leftGoingUp)
 {
-  leftGoingUp = true;
   toggleLeftClimbOn = false;
 }
 
 if(!mClimb.isRightAbove() && !rightGoingUp)
 {
-  rightGoingUp = true;
   toggleRightClimbOn = false;
 }
 
 if(!mClimb.isLeftBelow() && leftGoingUp)
 {
-  leftGoingUp = false;
   toggleLeftClimbOn = false;
 }
 
 if(!mClimb.isRightBelow() && rightGoingUp)
 {
-  leftGoingUp = false;
   toggleRightClimbOn = false;
+}
+
+
+
+if((!mClimb.isLeftAbove() && !leftGoingUp) && (!mClimb.isRightAbove() && !rightGoingUp)) 
+{
+  leftGoingUp = true;
+  rightGoingUp = true;
+}
+
+if((!mClimb.isLeftBelow() && leftGoingUp) && (!mClimb.isRightBelow() && rightGoingUp))
+{
+  leftGoingUp = false;
+  rightGoingUp = false;
 }
 
 if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
