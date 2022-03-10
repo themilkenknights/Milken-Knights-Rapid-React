@@ -1,20 +1,15 @@
 # Milken-Knights-Rapid-React
 ## ~~stolen~~ code from
 - ### SWERVE DRIVE:
-     - team 6624 - best path code and 180 awarness code
-     - team 1684 - 180 awarness code
-     - ether (chief delphi) - swerve drive  
-<br/>
-
+     - Team 6624 - best path code and 180 awarness code
+     - Team 1684 - 180 awarness code
+     - Ether (chief delphi) - swerve drive  
 - ### SWERVE AUTONOMOUS:
-     - team 3244 - basic auto structure and pidf config
-     - team 7166 - organization of auto and they had a similar auto
-<br/>
-
+     - Team 3244 - basic auto structure and pidf config
+     - Team 7166 - organization of auto and they had a similar auto
 - ### MISC:
      - Programming Done Right - toggle button
      - Everyone whos code I used but forgot to cite - most things
-<br/>
 
 ## ROBOT MECHANISMS
 - ### Drivetrain
@@ -38,7 +33,7 @@
 - our robot is decked out with the finest gear, as you can clearly see from these descriptive descriptions!
 <br/>
 
-## Robot Features
+## ROBOT FEATURES
 - ### Teleop
      - Flawless user controlled swerve with no drift and can even fly
      - Intake balls from miles away with our great intake
@@ -53,9 +48,17 @@
 <br/>
 
 ## HOW TO USE:
-- not really user friendly rn, all you need to do is change the constants (i think)
-- also download the Better Comments extension for color coded comments
-- all functions and most variables should have javadocs. if they dont, they are either not mine and more info about them can be found on there own documentation page, or its mine and i forgot to add a javadoc
+- Not really user friendly rn, all you need to do is change the constants (i think)
+- Also download the Better Comments extension for color coded comments
+- All functions and most variables should have javadocs. if they dont, they are either not mine and more info about them can be found on there own documentation page, or its mine and i forgot to add a javadoc
+<br/>
+
+## HOW DID WE CODE THE ROBOT?
+- Copy paste for teleop mainly, with some editing here and there.
+- Tried using WPIs SwerveControllerCommand, but it was too advanced for my feeble peasant brain, so I used Ethers papers for teleop movement.
+- For auto, I created a custom auto using math and motion magic.
+- SysID was also too complicated, and when I tried finding PIDF values for WPIs code and other PID loops, the values were no where near what they should have been. So, all PIDF values are guess and check values.
+- If anyone has a tutorial or very detailed code explaining how to use SysID and/or WPIs SwerveControllerCommand, please send it to me. Would appreciate it a lot.
 <br/>
 
 ## MILKEN KNIGHTS WEBSITE
