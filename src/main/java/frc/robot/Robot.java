@@ -510,7 +510,6 @@ if(!mClimb.isRightBelow() && rightGoingUp)
 }
 
 
-
 if((!mClimb.isLeftAbove() && !leftGoingUp) && (!mClimb.isRightAbove() && !rightGoingUp)) 
 {
   leftGoingUp = true;
