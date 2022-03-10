@@ -249,7 +249,7 @@ public class Robot extends TimedRobot {
         break;
     }
     //SmartDashboard.putNumber("velo", velo);
-    mTab.add("seths", sethsPercent);
+    //mTab.add("seths", sethsPercent);
     //TODO do i even need velocity control in another tab?
    }
  
@@ -492,11 +492,13 @@ else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
 if(!mClimb.isLeftAbove() && !leftGoingUp)
 {
   toggleLeftClimbOn = false;
+  mClimb.zeroLeftClimb();
 }
 
 if(!mClimb.isRightAbove() && !rightGoingUp)
 {
   toggleRightClimbOn = false;
+  mClimb.zeroRightClimb();
 }
 
 if(!mClimb.isLeftBelow() && leftGoingUp)
@@ -690,12 +692,12 @@ isLeftBelow = true
 
   public void updateClimbToggle()
   {
-      if(xbox.getRawButton(BUTTONS.climbAutoButton)){
+      if(mDriverJoystick.getRawButton(BUTTONS.climbAutoButton)){
           if(!toggleClimbPressed){
               toggleLeftClimbOn = !toggleLeftClimbOn;
               toggleRightClimbOn = !toggleRightClimbOn;
 
-         
+              
               toggleClimbPressed = true;
           }
       }
