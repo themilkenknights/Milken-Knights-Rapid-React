@@ -28,6 +28,7 @@ import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 
@@ -145,6 +146,7 @@ public class Robot extends TimedRobot {
      sethChooseThing.addOption("100", sethChooser.hundred);
      sethChooseThing.setDefaultOption("70", sethChooser.seventy);
      //etc.
+     //TODO fun fact make sethChooser and auto stuff into arrays, then for loop the shit to make less code
    }
  
    @Override
@@ -322,7 +324,7 @@ public class Robot extends TimedRobot {
         mShoot.setShooterNativeVeloctiy(ffcalc);
         if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
         {
-          mElevator.setElevatorPercent(-0.8);
+          mElevator.setElevatorPercent(ELEVATOR.mySpeed);
           mIntake.setRollersPercent(1);
         }
         //mShoot.setShooterPercent(xbox.getRawAxis(2));

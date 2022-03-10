@@ -174,6 +174,7 @@ public final class Constants {
         public static double maxError = 1580;
 
         public static double wackyShooterVelocity = 11661.97; 
+        public static double jacksWackyShooterVelocity = 5000;
     }
 
  /**class containing variables that relate to hood*/
@@ -195,6 +196,9 @@ public final class Constants {
         public static int elevatorCANID = 10;//11;
 
         public static double elevatorGreerRatio = 0;
+
+        public static double jacksSpeed = 0.4;
+        public static double mySpeed = -0.8;
     }
 
  /**class containing variables that relate to intakinh*/
