@@ -17,14 +17,12 @@ import frc.robot.Drive.ETHERRCW;
 public class ForbiddenAuto extends SequentialCommandGroup {
   /** Creates a new ForbiddenAuto. */
   private double inches  = 21;
-  private double FWD = 1;
-  private double STR = 0;
-  private double RCW = 0.3;
+  private double RCW = 0.1;
   private double maxVelo = DRIVE.magicVelo;
   private double maxAccel = DRIVE.magicAccel;
   private ETHERAUTO mode = ETHERAUTO.Straight;
   private ETHERRCW turny = ETHERRCW.Specific;
-  private double angle = 90;
+  private double angle = 0;
   public ForbiddenAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
