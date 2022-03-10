@@ -559,6 +559,21 @@ if(toggleRightClimbOn)
 
 
 /*
+
+isLeftAbove = true
+isLeftBelow = false
+
+-
+|
+|       isLeftAbove = true
+|       isLeftBelow = true
+|
+-
+isLeftAbove = false
+isLeftBelow = true
+*/
+
+/*
     if(mDriverJoystick.getPOV() == 0)
     {
       mHood.setHoodPercent(0.1);
