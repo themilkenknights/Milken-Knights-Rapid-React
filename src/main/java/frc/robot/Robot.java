@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
    
    private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
-   private SendableChooser<sethChooser> sethChooseThing = new SendableChooser<sethChooser>();
+   
    
 /**for wpi swerve and auto*/
    private RobotContainer m_robotContainer;
@@ -84,10 +84,6 @@ public class Robot extends TimedRobot {
    }
 
 
-   public enum sethChooser
-   {
-     fifty, sixty, seventy, eighty, ninety, hundred
-   }
 
 /**for slider widget*/
    private double slider;
@@ -121,8 +117,6 @@ public class Robot extends TimedRobot {
 
    private double ffcalc = 0;
 
-   private double sethsPercent = 0;
-
    private boolean leftGoingUp = false;
    private boolean rightGoingUp = false;
 
@@ -134,7 +128,6 @@ public class Robot extends TimedRobot {
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
-     mTab.add("seth percent", sethChooseThing).withWidget(BuiltInWidgets.kSplitButtonChooser);
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
@@ -142,19 +135,6 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.addOption("spee3", veloch.veloThree);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
-
-
-     sethChooseThing.addOption("50", sethChooser.fifty);
-     sethChooseThing.addOption("60", sethChooser.sixty);
-     sethChooseThing.addOption("70", sethChooser.seventy);
-     sethChooseThing.addOption("80", sethChooser.eighty);
-     sethChooseThing.addOption("90", sethChooser.ninety);
-     sethChooseThing.addOption("100", sethChooser.hundred);
-     sethChooseThing.setDefaultOption("70", sethChooser.seventy);
-     //etc.
-     //TODO fun fact make sethChooser and auto stuff into arrays, then for loop the shit to make less code
-   }
- 
    @Override
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
@@ -221,38 +201,6 @@ public class Robot extends TimedRobot {
         velo = 4000;
         break;
     }
-
-
-    switch (sethChooseThing.getSelected()) {
-      case fifty:
-        sethsPercent = .50;
-        break;
-        
-      case sixty:
-        sethsPercent = .60;
-        break;
-       
-      case seventy:
-        sethsPercent = .70;
-        break;
-
-      case eighty:
-        sethsPercent = .80;
-        break;
-        
-      case ninety:
-        sethsPercent = .90;
-        break;
-       
-      case hundred:
-        sethsPercent = 1.00;
-        break;
-    }
-    //SmartDashboard.putNumber("velo", velo);
-    //mTab.add("seths", sethsPercent);
-    //TODO do i even need velocity control in another tab?
-   }
- 
  
   @Override
   public void teleopPeriodic() {
@@ -459,7 +407,7 @@ public class Robot extends TimedRobot {
 
 if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
 {
-  mClimb.telescopePercent(sethsPercent, sethsPercent);
+  mClimb.telescopePercent(1, -1);
 }
 else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
 {
@@ -591,30 +539,6 @@ isLeftAbove = false
 isLeftBelow = true
 */
 
-/*
-    if(mDriverJoystick.getPOV() == 0)
-    {
-      mHood.setHoodPercent(0.1);
-    }
-    else if(mDriverJoystick.getPOV() == 180)
-    {
-      mHood.setHoodPercent(-0.1);
-    }
-    else
-    {
-      mHood.setHoodPercent(0);
-    }
-    */
-
-     /* if(mDriverJoystick.getRawButton(7))
-      {
-        mIntake.setIntakePercent(1);
-      }
-      else
-      {
-        mIntake.setIntakePercent(0);
-      }
-*/
 
       if(toggleFastOn){
         // Do something when toggled on
