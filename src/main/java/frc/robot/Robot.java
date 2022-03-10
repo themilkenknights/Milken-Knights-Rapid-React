@@ -130,7 +130,7 @@ public class Robot extends TimedRobot {
      mTab.add("seth percent", sethChooseThing).withWidget(BuiltInWidgets.kSplitButtonChooser);
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
-     positionChooser.setDefaultOption("20 ball auto", AutoPosition.LEFT);
+     positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
      veloshufflething.addOption("spee1", veloch.veloOne);
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.addOption("spee3", veloch.veloThree);
@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
      mDrive.resetNavx();
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new DriveStr8();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new DriveComp();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: 
          break;
@@ -322,10 +322,9 @@ public class Robot extends TimedRobot {
         mShoot.setShooterNativeVeloctiy(ffcalc);
         if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
         {
-          mElevator.setElevatorPercent(.4);
+          mElevator.setElevatorPercent(-0.8);
           mIntake.setRollersPercent(1);
         }
-        //public static double wackyShooterVelocity = 5000; 
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else if(xbox.getStartButton())
