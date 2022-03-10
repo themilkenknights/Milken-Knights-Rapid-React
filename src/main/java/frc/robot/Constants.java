@@ -173,7 +173,7 @@ public final class Constants {
 
         public static double maxError = 1580;
 
-        public static double wackyShooterVelocity = 11661.97; 
+        public static double wackyShooterVelocity = 5000; 
     }
 
  /**class containing variables that relate to hood*/

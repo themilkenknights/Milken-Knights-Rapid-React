@@ -7,8 +7,10 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
 import frc.robot.Commands.Commandments.DriveStraight;
+import frc.robot.Commands.Commandments.Shoot;
 import frc.robot.Commands.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
+import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,20 +18,23 @@ import frc.robot.Constants.TURN;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveStr8 extends SequentialCommandGroup {
   private Drive mDrive = Drive.getInstance();
-  private double distanceA = 34;
-  private double lengthB = 24;
-  private double angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
-  private double maxAccel = 600;
-
+  private double distanceA = -120;
+  private double lengthf = -200;
+  private double angle = mDrive.calculateAngleOfPath(distanceA, lengthf);
+  private double anglestuff = mDrive.calculateAngleOfPath(32, 43);
+  private double maxAccel = 15000;
+  private double distanceA2 = -220;
+  private double lengthB2 = -300;
+private double angle2 = 45;
 /**Curved drive sequential command*/
   public DriveStr8() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-
-    addCommands(deadline(new Turn(((angle) % 90))).withTimeout(1), 
-                deadline(new DriveStraight(distanceA, lengthB, 0, -((angle) % 90), DRIVE.magicVelo, DRIVE.magicAccel)).withTimeout(6));
-
-                //TODO see if above still works, then do this
+    addCommands(deadline(new Shoot(-0.7, 0.5, SHOOT.wackyShooterVelocity).withTimeout(3), 
+                deadline(new DriveStraight(distanceA, lengthf, 1, -((angle) % 90), DRIVE.magicVelo, DRIVE.magicAccel)).withTimeout(6),
+                (deadline(new Turn(90).withTimeout(6),
+                deadline(new DriveStraight(distanceA2, lengthB2, 1, angle2, DRIVE.magicVelo, DRIVE.magicAccel)).withTimeout(2)))));
+              
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }
 }
