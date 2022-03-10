@@ -23,7 +23,7 @@ public class JacksAuto extends SequentialCommandGroup {
   private double lengthB = -200;
   private double angle = mDrive.calculateAngleOfPath(distanceA, lengthB);
   
-  private double maxAccel = 15000; //!r u using this?
+  private double maxAccel = 15000; //!r u using this? more accel = faster according to my big brain
   private double distanceA2 = -220;
   private double lengthB2 = -300;
   private double angle2 = mDrive.calculateAngleOfPath(distanceA2, lengthB2);
