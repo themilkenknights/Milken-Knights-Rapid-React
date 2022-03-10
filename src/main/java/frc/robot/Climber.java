@@ -103,6 +103,16 @@ public class Climber {
         telescopeArmLeft.setSelectedSensorPosition(0);
     }
 
+    public void zeroLeftClimb()
+    {
+        telescopeArmLeft.setSelectedSensorPosition(0);
+    }
+
+    public void zeroRightClimb()
+    {
+        telescopeArmRight.setSelectedSensorPosition(0);
+    }
+
 
 
     public void climbAutoLeft(boolean leftGoingUp)
