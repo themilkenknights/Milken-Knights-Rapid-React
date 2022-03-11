@@ -758,13 +758,12 @@ public class Drive {
 
 
 //TODO if this works credit them
-    double hP = 0.001, hI = 0.001, hD = hP * 0.1;
+    double hP = 0.01, hI = 0.001, hD = hP * 0.1;
     double hIntegral, hDerivative, hPreviousError, hError;
 
     //programming done right
     public double headerStraighter(double hSetpoint)
     {
-        hSetpoint = MkUtil.setDirection(getNavx(), hSetpoint);
         hError = hSetpoint -  getNavx();// Error = Target - Actual
         hIntegral += (hError*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
         hDerivative = (hError - hPreviousError) / .02;
@@ -837,10 +836,10 @@ public class Drive {
         bottomTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa4, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
 
 
-        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1)/5;
-        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2)/5;
-        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3)/5;
-        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4)/5;
+        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1)/8;
+        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2)/8;
+        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3)/8;
+        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4)/8;
 
         driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
     }
@@ -1017,25 +1016,21 @@ public class Drive {
             MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
             MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
-        /*if(mode == ETHERAUTO.Curve)
+        if(mode == ETHERAUTO.Curve)
         {
             FWDauto = Math.cos((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
             STRauto = Math.sin((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
-        }*/
-        //else if(mode == ETHERAUTO.Straight)
-        //{
+        }
+        else if(mode == ETHERAUTO.Straight)
+        {
             FWDauto = Math.cos(thetaTurn);
             STRauto = Math.sin(thetaTurn);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
-        //}
-        if(/*turny == ETHERRCW.Specific && */(Math.abs(getNavx()) <= turnyAuto + 10 && Math.abs(getNavx()) >= turnyAuto  -10))
-        {
-            RCWtemp = 0;
         }
-        else //if(/*turny == ETHERRCW.Specific*/)
+        else if(turny == ETHERRCW.Specific)
         {
             RCWtemp = headerStraighter(turnyAuto);
         }

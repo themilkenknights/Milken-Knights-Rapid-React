@@ -16,7 +16,7 @@ import frc.robot.Drive.ETHERRCW;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ForbiddenAuto extends SequentialCommandGroup {
   /** Creates a new ForbiddenAuto. */
-  private double inches  = 0;
+  private double inches  = 21;
   private double RCW = 0;
   private double maxVelo = DRIVE.magicVelo;
   private double maxAccel = DRIVE.magicAccel;
