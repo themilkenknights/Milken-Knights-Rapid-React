@@ -123,8 +123,8 @@ public class SwerveModule {
 
     //TODO could use integrated pid, but doesnt have continuous input. need to think about it
 
-    SmartDashboard.putNumber("driving motor", MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()));
-    SmartDashboard.putNumber("drive setpoint", state.speedMetersPerSecond);
+    //SmartDashboard.putNumber("driving motor", MkUtil.nativePer100MsToMetersPerSec(m_driveMotor.getSelectedSensorVelocity()));
+    //SmartDashboard.putNumber("drive setpoint", state.speedMetersPerSecond);
     //SmartDashboard.putNumber("turning motor", turnOutput);
     //SmartDashboard.putNumber("turning feed motor", turnFeedforward);
 

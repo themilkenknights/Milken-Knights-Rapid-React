@@ -340,7 +340,7 @@ public class Drive {
     {
         //updateDriveDriveVelocity();
         //updateDriveTurn();
-        updateDriveTurnEncoder();
+        //updateDriveTurnEncoder();
       
       
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
@@ -696,8 +696,8 @@ public class Drive {
         STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
 
-        SmartDashboard.putNumber("frd", FWD);
-        SmartDashboard.putNumber("str", STR);
+        //SmartDashboard.putNumber("frd", FWD);
+        //SmartDashboard.putNumber("str", STR);
 
         double A = STR - RCW*(Constants.L/Constants.R);
         double B = STR + RCW*(Constants.L/Constants.R);
@@ -728,10 +728,10 @@ public class Drive {
         ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
         ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
 
-        SmartDashboard.putNumber("wa1",wa1);
-        SmartDashboard.putNumber("wa2",wa2);
-        SmartDashboard.putNumber("wa3",wa3);
-        SmartDashboard.putNumber("wa4",wa4);
+        //SmartDashboard.putNumber("wa1",wa1);
+        //SmartDashboard.putNumber("wa2",wa2);
+        //SmartDashboard.putNumber("wa3",wa3);
+        //SmartDashboard.putNumber("wa4",wa4);
 /*
         topDriveRight.set(ControlMode.PercentOutput, ws1);
         topDriveLeft.set(ControlMode.PercentOutput, ws2);
@@ -1111,8 +1111,8 @@ public class Drive {
         topTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
         bottomTurnLeft.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
         bottomTurnRight.set(ControlMode.MotionMagic, MkUtil.degreesToNative((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)), TURN.greerRatio));
-        SmartDashboard.putNumber("currentdist", currentDistance);
-        SmartDashboard.putNumber("WORK", (-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)));
+        //SmartDashboard.putNumber("currentdist", currentDistance);
+        //SmartDashboard.putNumber("WORK", (-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)));
     }
 
     /**
@@ -1140,8 +1140,8 @@ public class Drive {
         leftBottomOutput = MkUtil.inchesToNative(distance);
         rightBottomOutput = MkUtil.inchesToNative(distance);
 
-        SmartDashboard.putNumber("dist", distance);
-        SmartDashboard.putNumber("leftout", leftTopOutput);
+        //SmartDashboard.putNumber("dist", distance);
+        //SmartDashboard.putNumber("leftout", leftTopOutput);
     }
 
     /**

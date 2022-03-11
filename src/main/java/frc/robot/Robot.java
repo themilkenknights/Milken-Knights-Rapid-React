@@ -209,7 +209,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     mDrive.driveUpdate();
-    mShoot.shooterUpdate();
+    //mShoot.shooterUpdate();
     //mIntake.updateIntake();
     mClimb.climberUpdate();
     
@@ -569,8 +569,8 @@ isLeftBelow = true
       //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
       //SmartDashboard.putNumber("ffcalc", ffcalc);
 
-      SmartDashboard.putNumber("test xbox", (xbox.getRawAxis(BUTTONS.forwardAxis) * Math.cos(Math.toRadians(0))) + (xbox.getRawAxis(BUTTONS.strafeAxis) *  Math.sin(Math.toRadians(0))));
-      SmartDashboard.putNumber("test box two", Math.atan2(xbox.getRawAxis(BUTTONS.forwardAxis),xbox.getRawAxis(BUTTONS.strafeAxis))*180/Constants.kPi);
+      //SmartDashboard.putNumber("test xbox", (xbox.getRawAxis(BUTTONS.forwardAxis) * Math.cos(Math.toRadians(0))) + (xbox.getRawAxis(BUTTONS.strafeAxis) *  Math.sin(Math.toRadians(0))));
+      //SmartDashboard.putNumber("test box two", Math.atan2(xbox.getRawAxis(BUTTONS.forwardAxis),xbox.getRawAxis(BUTTONS.strafeAxis))*180/Constants.kPi);
     }
 
   @Override

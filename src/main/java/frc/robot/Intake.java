@@ -78,7 +78,7 @@ public class Intake {
  */
     public void setRollersPercent(double setpoint)
     {
-        SmartDashboard.putNumber("Rollers", setpoint);
+        //SmartDashboard.putNumber("Rollers", setpoint);
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 

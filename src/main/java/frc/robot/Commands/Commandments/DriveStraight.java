@@ -79,8 +79,8 @@ public class DriveStraight extends CommandBase {
     mDrive.updateMagicStraight();
     mDrive.updateMagicTurn(distanceDrive);
     //mDrive.autoTurnUpdate(distanceDrive, angle, RCW);
-    SmartDashboard.putNumber("distance", distanceDrive);
-    SmartDashboard.putNumber("ang", angle);
+    //SmartDashboard.putNumber("distance", distanceDrive);
+    //SmartDashboard.putNumber("ang", angle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
