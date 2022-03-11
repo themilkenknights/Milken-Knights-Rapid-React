@@ -102,6 +102,8 @@ public class Drive {
  /**Average distance of driving motors in inches*/
     private double avgDistInches;
 
+ /**Value for putting up highest velocity for drive motors*/
+    private double topLeft = 0, topRight = 0, botLeft = 0, botRight = 0;
 
     private Drive()
     {
@@ -348,7 +350,7 @@ public class Drive {
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
 
         SmartDashboard.putNumber("navx", getNavx());
-        updateNavxCalibration();
+        //updateNavxCalibration();
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
         
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
@@ -393,8 +395,7 @@ public class Drive {
 
     }
 
- /**Value for putting up highest velocity for drive motors*/
-    double topLeft = 0, topRight = 0, botLeft = 0, botRight = 0;
+ 
     
  /**Updates drive velocity values in shuffleboard*/
     public void updateDriveDriveVelocity()
