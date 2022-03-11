@@ -19,6 +19,7 @@ public class DriveStraightREAL extends CommandBase {
   private double angle;//mDrive.calculateAngleOfPath(distanceA, lengthB);
   private ETHERAUTO mode;
   private ETHERRCW turny;
+  private double turnyAngle;
   Drive mDrive = Drive.getInstance();
   /**
    * a true drive straight command for autonomous (uses motion magic for drive and ether for turn)
@@ -26,7 +27,7 @@ public class DriveStraightREAL extends CommandBase {
    * @param FWD y value as if it was from the xbox controller [-1, 1]
    * @param STR x value as if it was from the xbox controller [-1, 1]
    */
-  public DriveStraightREAL(double inches, double RCW, double maxVelo, double maxAccel, ETHERAUTO mode, ETHERRCW turny, double angle) {
+  public DriveStraightREAL(double inches, double RCW, double maxVelo, double maxAccel, ETHERAUTO mode, ETHERRCW turny, double angle, double turnyAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.inches = inches;
     this.maxVelo = maxVelo;
@@ -36,10 +37,12 @@ public class DriveStraightREAL extends CommandBase {
     this.angle = angle;
     this.mode = mode;
     this.turny = turny;
+    this.turnyAngle = turnyAngle;
   }
   
-  public DriveStraightREAL(double inches, double lengthB, double RCW, double maxVelo, double maxAccel, ETHERAUTO mode, ETHERRCW turny)
+  public DriveStraightREAL(double inches, double lengthB, double RCW, double maxVelo, double maxAccel, ETHERAUTO mode, ETHERRCW turny, double turnyAngle)
   {
+    this.turnyAngle = turnyAngle;
     this.inches = inches;
     this.lengthB = lengthB;
     this.maxVelo = maxVelo;
@@ -60,8 +63,7 @@ public class DriveStraightREAL extends CommandBase {
   @Override
   public void execute() {
    // mDrive.updateMagicStraight();
-    mDrive.autoTurnUpdate(inches, angle, RCW, mode, turny); 
-    SmartDashboard.putNumber("AUTONASX", mDrive.getNavx());
+    mDrive.autoTurnUpdate(inches, angle, RCW, mode, turny, turnyAngle); 
   }
 
   // Called once the command ends or is interrupted.

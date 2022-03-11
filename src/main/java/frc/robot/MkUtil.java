@@ -448,6 +448,31 @@ public class MkUtil {
       else{
         togglePressed = false;
       }
-  }
+    }
+
+
+
+  public static double setDirection(double current, double setpoint)
+    {
+        // find closest angle to setpoint
+        double setpointAngle = closestAngle(current, setpoint);
+        // find closest angle to setpoint + 180
+        double setpointAngleFlipped = closestAngle(current, setpoint + 180.0);
+        // if the closest angle to setpoint is shorter
+        if (Math.abs(setpointAngle) <= Math.abs(setpointAngleFlipped))
+        {
+            // unflip the motor direction use the setpoint
+            return (current + setpointAngle);
+        }
+        // if the closest angle to setpoint + 180 is shorter
+        else
+        {
+            // flip the motor direction and use the setpoint + 180
+            return (current + setpointAngleFlipped);
+        }
+    }
+
+  
+  
 
 }

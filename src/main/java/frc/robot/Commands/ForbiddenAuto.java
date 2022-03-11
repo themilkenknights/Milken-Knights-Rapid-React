@@ -16,16 +16,17 @@ import frc.robot.Drive.ETHERRCW;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ForbiddenAuto extends SequentialCommandGroup {
   /** Creates a new ForbiddenAuto. */
-  private double inches  = 21;
-  private double RCW = 0.1;
+  private double inches  = 0;
+  private double RCW = 0;
   private double maxVelo = DRIVE.magicVelo;
   private double maxAccel = DRIVE.magicAccel;
   private ETHERAUTO mode = ETHERAUTO.Straight;
   private ETHERRCW turny = ETHERRCW.Specific;
-  private double angle = 0;
+  private double angle = 90;
+  private double turnyAngle = 90;
   public ForbiddenAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(deadline(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle).withTimeout(6)));
+    addCommands(deadline(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6)));
   }
 }

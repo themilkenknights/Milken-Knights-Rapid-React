@@ -346,7 +346,7 @@ public class Drive {
       
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
 
-        //SmartDashboard.putNumber("navx", getNavx());
+        SmartDashboard.putNumber("navx", getNavx());
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
 
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
@@ -749,16 +749,18 @@ public class Drive {
 
 
 //TODO if this works credit them
-    double hP, hI, hD = 0.001;
+    double hP = 0.001, hI = 0.001, hD = hP * 0.1;
     double hIntegral, hDerivative, hPreviousError, hError;
 
     //programming done right
     public double headerStraighter(double hSetpoint)
     {
+        hSetpoint = MkUtil.setDirection(getNavx(), hSetpoint);
         hError = hSetpoint -  getNavx();// Error = Target - Actual
         hIntegral += (hError*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-        hDerivative = (hError - this.hPreviousError) / .02;
-        return hP*hError + hI*this.hIntegral + hD*hDerivative;
+        hDerivative = (hError - hPreviousError) / .02;
+        return hP*hError + hI*hIntegral + hD*hDerivative;
+        
     }
 
     public void updateHeaderFix(double hAngle)
@@ -788,8 +790,8 @@ public class Drive {
     public void swerveAutonomousEther(double FWD, double STR, double RCW)
     {
         double yaw = getNavx();
-        double temp = (FWD * Math.cos(Math.toRadians(yaw))) + (STR* Math.sin(Math.toRadians(yaw)));
-        STR = (-FWD * Math.sin(Math.toRadians(yaw))) + (STR * Math.cos(Math.toRadians(yaw)));
+        double temp = FWD * Math.cos(Math.toRadians(yaw)) + STR * Math.sin(Math.toRadians(yaw));
+        STR = -FWD * Math.sin(Math.toRadians(yaw)) + STR * Math.cos(Math.toRadians(yaw));
         FWD = temp;
 
 
@@ -826,10 +828,10 @@ public class Drive {
         bottomTurnRight.set(ControlMode.Position, MkUtil.degreesToNative(wa4, TURN.greerRatio)); //ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(wa4, TURN.greerRatio)));
 
 
-        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1);
-        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2);
-        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
-        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
+        ws1 = MkUtil.isPositive(driveTopRightEther.getP(), ws1)/5;
+        ws2 = MkUtil.isPositive(driveTopLeftEther.getP(), ws2)/5;
+        ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3)/5;
+        ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4)/5;
 
         driveVelocity(ws2 * 21600, ws1 * 21600, ws3 * 21600, ws4 * 21600);
     }
@@ -847,7 +849,7 @@ public class Drive {
     public double lengthB = 0;
     public double FWDauto = 0;
     public double STRauto = 0;
-    public double RCWtemp = 0;
+   //public double RCWtemp = 0;
 
     /**
     Calculates a curved autonomous path's radius by using the distance between the starting and ending point and the distance between the middle of the path and the height of the angular path
@@ -998,8 +1000,9 @@ public class Drive {
      * @see {@link #swerveAutonomousEther(FWD, STR, RCW)}
      * @see {@link #updateMagicStraight()}
     */
-    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCWauto, ETHERAUTO mode, ETHERRCW turny)
+    public void autoTurnUpdate(double totalDistance, double thetaTurn, double RCWauto, ETHERAUTO mode, ETHERRCW turny, double turnyAuto)
     {
+        double RCWtemp = RCWauto;
         currentDistance = 
             (MkUtil.nativeToInches(topDriveLeft.getSelectedSensorPosition()) +
             MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
@@ -1007,27 +1010,31 @@ public class Drive {
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
         if(mode == ETHERAUTO.Curve)
         {
-            FWDauto = Math.sin((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
-            STRauto = Math.cos((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
+            FWDauto = Math.cos((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
+            STRauto = Math.sin((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
         }
         else if(mode == ETHERAUTO.Straight)
         {
-            FWDauto = Math.sin(thetaTurn)/10;
-            STRauto = Math.cos(thetaTurn)/10;
+            FWDauto = Math.cos(thetaTurn);
+            STRauto = Math.sin(thetaTurn);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
         }
-        if(turny == ETHERRCW.Specific && (Math.abs(getNavx()) <= thetaTurn + 10 && Math.abs(getNavx()) >= thetaTurn  -10))
+        if(turny == ETHERRCW.Specific && (Math.abs(getNavx()) <= turnyAuto + 10 && Math.abs(getNavx()) >= turnyAuto  -10))
         {
             RCWtemp = 0;
         }
         else if(turny == ETHERRCW.Specific)
         {
-            RCWtemp = headerStraighter(RCWauto);
+            RCWtemp = headerStraighter(turnyAuto);
         }
-        swerveAutonomousEther(FWDauto, STRauto, RCWtemp);
+        swerveAutonomousEther(-FWDauto, STRauto, RCWtemp);
+        SmartDashboard.putNumber("AUTONASX", getNavx());
+        SmartDashboard.putNumber("jihngnhjing", headerStraighter(turnyAuto));
+
+        //swerveAutonomousEther(FWDauto, -STRauto, RCWtemp);
 /*
         topTurnLeft.set(ControlMode.PercentOutput, topTurnLeftCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
         topTurnRight.set(ControlMode.PercentOutput, topTurnRightCalculateNative(MkUtil.degreesToNative(((currentDistance/totalDistance)*thetaTurn), TURN.greerRatio)));
@@ -1071,7 +1078,7 @@ public class Drive {
 
     /**
      * Resets turn motors and sets motion magic velocity, acceleration, and distance
-     * @param setpoint Distance (inches, and the same distance set in the {@link #setMagicStraight} function). however, if you are turning without driving, use native units instead of inches
+     * @param setpoint Distance or angle idk anymore (inches, and the same distance set in the {@link #setMagicStraight} function). however, if you are turning without driving, use native units instead of inches
      * @see {@link #setMagicStraight(setpoint)}
      */
     public void setMagicTurn(double setpoint)

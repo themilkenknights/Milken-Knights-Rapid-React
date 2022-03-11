@@ -165,7 +165,7 @@ public class Robot extends TimedRobot {
   
    @Override
    public void autonomousPeriodic() {
-     //mDrive.driveUpdate();
+     mDrive.driveUpdate();
    }
  
    @Override
@@ -416,22 +416,22 @@ else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
   mClimb.telescopePercent(-1, -1);
 }
 
-if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton) && mClimb.isRightBelow())
 {
   mClimb.telescopePercentRight(1);
 }
-else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton))
+else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) && mClimb.isRightAbove())
 {
   mClimb.telescopePercentRight(-1);
 }
 
 
 
-if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton))
+if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) && mClimb.isLeftBelow())
 {
   mClimb.telescopePercentLeft(1);
 }
-else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton))
+else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) && mClimb.isLeftAbove())
 {
   mClimb.telescopePercentLeft(-1);
 }
