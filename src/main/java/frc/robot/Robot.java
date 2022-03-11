@@ -151,6 +151,7 @@ public class Robot extends TimedRobot {
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
+     //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
      switch (positionChooser.getSelected()) {
        case LEFT:
          m_autonomousCommand = new ForbiddenAuto ();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
