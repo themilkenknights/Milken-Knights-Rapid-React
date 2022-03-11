@@ -348,8 +348,9 @@ public class Drive {
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
 
         SmartDashboard.putNumber("navx", getNavx());
+        updateNavxCalibration();
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
-        navXSHIT = 180-navX.getYaw();
+        
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
@@ -451,6 +452,13 @@ public class Drive {
         SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
         SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
+    }
+
+    public void updateNavxCalibration()
+    {
+        SmartDashboard.putBoolean("isboardlevelyawresetenable", navX.isBoardlevelYawResetEnabled());
+        SmartDashboard.putBoolean("iscalibrating", navX.isCalibrating());
+        SmartDashboard.putBoolean("ismagnetometercalibrated", navX.isMagnetometerCalibrated());
     }
 
 
@@ -560,7 +568,7 @@ public class Drive {
      */
     public double getNavx()
     {
-        return navXSHIT;
+        return 180-navX.getYaw();
     }
 
     /**
