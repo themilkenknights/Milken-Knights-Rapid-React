@@ -217,7 +217,6 @@ public class Drive {
         bottomTurnLeft.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomLeftCANCoder, TURN.greerRatio));
         bottomTurnRight.setSelectedSensorPosition(MkUtil.degreesToNative(offsetBottomRightCANCoder, TURN.greerRatio));*/
 
-        //TODO ujncomment these when zeroing is done
         topTurnLeftEncoder.configMagnetOffset(TURN.topLeftOffset);
         topTurnRightEncoder.configMagnetOffset(TURN.topRightOffset);
         bottomTurnLeftEncoder.configMagnetOffset(TURN.bottomLeftOffset);

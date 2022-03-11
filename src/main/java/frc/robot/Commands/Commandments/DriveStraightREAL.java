@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Drive;
 import frc.robot.Drive.ETHERAUTO;
 import frc.robot.Drive.ETHERRCW;
-//TODO hopefully this works
+
 public class DriveStraightREAL extends CommandBase {
   private double inches;
   private double RCW;

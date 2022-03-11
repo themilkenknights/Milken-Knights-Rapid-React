@@ -30,7 +30,6 @@ public class DriveComp extends SequentialCommandGroup {
                 deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
 
-                //TODO see if above still works, then do this
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }
 }

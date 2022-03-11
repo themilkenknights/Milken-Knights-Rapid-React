@@ -384,7 +384,7 @@ public class MkUtil {
         }
     }
 
-    //TODO hope these work
+    //? i have no idea if these work
     /**
      * converts native velocity (1n/100ms) into degree velocity (1d/1s)
      * @param gimmeRots velocity (1n/100ms)
