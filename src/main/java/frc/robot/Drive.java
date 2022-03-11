@@ -550,7 +550,7 @@ public class Drive {
  /**Resets navX*/
     public void resetNavx()
     {
-        navX.reset();
+        navX.zeroYaw();
     }
 
     /**
