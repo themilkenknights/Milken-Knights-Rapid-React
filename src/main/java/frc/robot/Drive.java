@@ -49,6 +49,8 @@ public class Drive {
     private PIDController driveBotLeftEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
     private PIDController driveBotRightEther = new PIDController(DRIVE.driveKP, DRIVE.driveKI, DRIVE.driveKD);
 
+    private double navXSHIT;
+
     public AHRS navX = new AHRS();
 
  /**Distance variable for driving in autonomous*/
@@ -347,7 +349,7 @@ public class Drive {
 
         SmartDashboard.putNumber("navx", getNavx());
        // SmartDashboard.putNumber("status", topTurnLeft.getStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0));
-
+        navXSHIT = 180-navX.getYaw();
        // SmartDashboard.putNumber("top left vel", topTurnLeft.getMotorOutputPercent());
 
         leftTopVelNative = topDriveLeft.getSelectedSensorVelocity();
@@ -558,7 +560,7 @@ public class Drive {
      */
     public double getNavx()
     {
-        return  180-navX.getYaw();
+        return navXSHIT;
     }
 
     /**
@@ -1007,30 +1009,30 @@ public class Drive {
             MkUtil.nativeToInches(topDriveRight.getSelectedSensorPosition()) +
             MkUtil.nativeToInches(bottomDriveLeft.getSelectedSensorPosition()) + 
             MkUtil.nativeToInches(bottomDriveRight.getSelectedSensorPosition())) / 4;
-        if(mode == ETHERAUTO.Curve)
+        /*if(mode == ETHERAUTO.Curve)
         {
             FWDauto = Math.cos((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
             STRauto = Math.sin((-1 * turnDistance) + (2 * ((currentDistance/totalDistance)*turnDistance)) * Constants.kPi / 180);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
-        }
-        else if(mode == ETHERAUTO.Straight)
-        {
+        }*/
+        //else if(mode == ETHERAUTO.Straight)
+        //{
             FWDauto = Math.cos(thetaTurn);
             STRauto = Math.sin(thetaTurn);
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
-        }
-        if(turny == ETHERRCW.Specific && (Math.abs(getNavx()) <= turnyAuto + 10 && Math.abs(getNavx()) >= turnyAuto  -10))
+        //}
+        if(/*turny == ETHERRCW.Specific && */(Math.abs(getNavx()) <= turnyAuto + 10 && Math.abs(getNavx()) >= turnyAuto  -10))
         {
             RCWtemp = 0;
         }
-        else if(turny == ETHERRCW.Specific)
+        else //if(/*turny == ETHERRCW.Specific*/)
         {
             RCWtemp = headerStraighter(turnyAuto);
         }
         swerveAutonomousEther(-FWDauto, STRauto, RCWtemp);
-        SmartDashboard.putNumber("AUTONASX", getNavx());
+        //SmartDashboard.putNumber("AUTONASX", getNavx());
         SmartDashboard.putNumber("jihngnhjing", headerStraighter(turnyAuto));
 
         //swerveAutonomousEther(FWDauto, -STRauto, RCWtemp);
