@@ -30,6 +30,7 @@
      - Secure and safe bumpers
      - Made of pool noodle and fabric
      - Can withstand up to 20000 Newtons of force
+
 - our robot is decked out with the finest gear, as you can clearly see from these descriptive descriptions!
 <br/>
 
@@ -44,6 +45,7 @@
 - ### Self Defence
      - Turn baby mode off and spin like a beyblade to freak the crap out of your opponents!
      - Spontaneously dissasemble to confuse your opponents and teamates alike
+
 - our robot is very high tech and advanced, and is even a work in progress!
 <br/>
 
