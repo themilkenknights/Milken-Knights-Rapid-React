@@ -421,6 +421,14 @@ public class MkUtil {
 
 
 
+    /**
+     * from 2020 robot (using a neo 550)
+     * @param setpoint setpoint in native
+     * @param hoodPosition current hood position
+     * @param maxPosition max native units hood can go
+     * @param HoodKP p term for hood pid
+     * @return percent to power the hood motor by
+     */
     public static double hoodPIDPercent(double setpoint, double hoodPosition, double maxPosition, double HoodKP)
     {
       return (limitAbsolute((setpoint - hoodPosition) * HoodKP, maxPosition));

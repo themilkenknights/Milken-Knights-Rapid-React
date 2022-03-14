@@ -4,11 +4,6 @@
 
 package frc.robot;
 
-import javax.lang.model.util.ElementScanner6;
-
-//!                   sigma grindset rule #29534 - always keep your accidental imports, even if you never use them
-
-
 
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,21 +19,14 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Commands.DriveComp;
-import frc.robot.Commands.DriveStr8;
-import frc.robot.Commands.ForbiddenAuto;
-import frc.robot.Commands.JacksAuto;
-import frc.robot.Commands.Nothing;
-import frc.robot.Commands.Commandments.Shoot;
-import frc.robot.Commands.Commandments.Turn;
+import frc.robot.Commands.Commandments.DriveStraightREAL;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
+import frc.robot.Drive.ETHERAUTO;
+import frc.robot.Drive.ETHERRCW;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
@@ -137,10 +125,18 @@ public class Robot extends TimedRobot {
    private boolean toggleLeftClimbOn = false;
    private boolean toggleRightClimbOn = false;
 
+   private double inches = 21;
+   private double RCW = 0;
+   private double maxVelo = DRIVE.magicVelo;
+   private double maxAccel = DRIVE.magicAccel;
+   private ETHERAUTO mode = ETHERAUTO.Straight;
+   private ETHERRCW turny = ETHERRCW.Specific;
+   private double angle = 90;
+   private double turnyAngle = 90;
+
    @Override
    public void robotInit() {
-     testCommandArray.addParallelCommandGroup(new Turn(90).withTimeout(1), new Shoot(0, 0, 1000));
-     testCommandArray.addParallelCommandGroup(new Turn(0).withTimeout(1), new Shoot(0, 0, 1000));
+     testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
@@ -151,7 +147,9 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee1", veloch.veloOne);
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.addOption("spee3", veloch.veloThree);
-     veloshufflething.setDefaultOption("spee1", veloch.veloOne);}
+     veloshufflething.setDefaultOption("spee1", veloch.veloOne);
+    }
+    
    @Override
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();

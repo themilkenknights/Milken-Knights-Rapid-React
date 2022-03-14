@@ -14,6 +14,8 @@ public class Nothing extends SequentialCommandGroup {
   public Nothing() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
+    //May the ballroom remain eternal. C'est fini.
     addCommands();
   }
 }
