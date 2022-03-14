@@ -76,6 +76,10 @@ public class CommandArray {
         }
     }
 
+    /**
+     * "Creates a new ParallelCommandGroup. The given commands will be executed simultaneously. The command group will finish when the last command finishes. If the CommandGroup is interrupted, only the commands that are still running will be interrupted."
+     * @param command commands
+     */
     public void addParallelCommandGroup(Command... command)
     {
         commands.add(new ParallelCommandGroup(command));
@@ -145,6 +149,10 @@ public class CommandArray {
         return commands;
     }
 
+    /**
+     * "Creates a new SequentialCommandGroup. The given commands will be run sequentially, with the CommandGroup finishing when the last command finishes."
+     * @return new SequentialCommandGroup
+     */
     public SequentialCommandGroup asSequentialCommandGroup()
     {
         return new SequentialCommandGroup(toCommandArray());
