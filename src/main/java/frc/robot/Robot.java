@@ -24,10 +24,15 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.DriveStr8;
 import frc.robot.Commands.ForbiddenAuto;
 import frc.robot.Commands.JacksAuto;
+import frc.robot.Commands.Nothing;
+import frc.robot.Commands.Commandments.Turn;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
@@ -36,6 +41,7 @@ import frc.robot.Constants.TURN;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
+import frc.robot.miscellaneous.CommandCreator.CommandArray;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -72,6 +78,8 @@ public class Robot extends TimedRobot {
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
    
    private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
+
+   private CommandArray testCommandArray = new CommandArray("testCommandArray");
    
    
 /**for wpi swerve and auto*/
@@ -130,6 +138,7 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
+     testCommandArray.addParallelCommandGroup(new Turn(90).withTimeout(1), new Turn(0));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
@@ -157,7 +166,7 @@ public class Robot extends TimedRobot {
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new ForbiddenAuto ();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: 
          break;
