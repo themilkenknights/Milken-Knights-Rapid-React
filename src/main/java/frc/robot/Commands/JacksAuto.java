@@ -6,10 +6,10 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
-import frc.robot.Commands.Commandments.DriveStraight;
-import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
-import frc.robot.Commands.Commandments.Shoot;
-import frc.robot.Commands.Commandments.Turn;
+import frc.robot.Commandments.DriveStraight;
+import frc.robot.Commandments.DriveStraightREALSUPERREAL;
+import frc.robot.Commandments.Shoot;
+import frc.robot.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;

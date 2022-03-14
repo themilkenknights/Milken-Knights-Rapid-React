@@ -6,8 +6,8 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
-import frc.robot.Commands.Commandments.DriveStraightREALSUPERREAL;
-import frc.robot.Commands.Commandments.Turn;
+import frc.robot.Commandments.DriveStraightREALSUPERREAL;
+import frc.robot.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
