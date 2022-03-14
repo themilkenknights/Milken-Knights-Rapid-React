@@ -67,7 +67,7 @@ public class CommandArray {
         names.add(name);
     }
 
-    public void addCommands(Command[] command)
+    public void addCommands(Command... command)
     {
         for(Command e : command)
         {
@@ -76,13 +76,40 @@ public class CommandArray {
         }
     }
 
-    /**
+    public void addCommands(String[] nameCom, Command... command)
+    {
+        for(int i = 0; i < nameCom.length; i++)
+        {
+            commands.add(command[i]);
+            names.add(nameCom[i]);
+        }
+    }
+
+     /**
      * "Creates a new ParallelCommandGroup. The given commands will be executed simultaneously. The command group will finish when the last command finishes. If the CommandGroup is interrupted, only the commands that are still running will be interrupted."
      * @param command commands
      */
     public void addParallelCommandGroup(Command... command)
     {
         commands.add(new ParallelCommandGroup(command));
+        for(Command e : command)
+        {
+            names.add(e.getName());
+        }
+    }
+
+    /**
+     * "Creates a new ParallelCommandGroup. The given commands will be executed simultaneously. The command group will finish when the last command finishes. If the CommandGroup is interrupted, only the commands that are still running will be interrupted."
+     * @param namePar array of string names
+     * @param command commands
+     */
+    public void addParallelCommandGroup(String[] namePar, Command... command)
+    {
+        commands.add(new ParallelCommandGroup(command));
+        for(String e : namePar)
+        {
+            names.add(e);
+        }
     }
 
     public void setSpecialNote(String name, String specialNote)
