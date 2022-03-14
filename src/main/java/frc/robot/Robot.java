@@ -151,7 +151,6 @@ public class Robot extends TimedRobot {
    public void autonomousInit() {
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
-     //test
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
