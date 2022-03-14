@@ -112,6 +112,23 @@ public class CommandArray {
         }
     }
 
+
+    /**
+     * "Creates a new ParallelCommandGroup. The given commands will be executed simultaneously. The command group will finish when the last command finishes. If the CommandGroup is interrupted, only the commands that are still running will be interrupted."
+     * @param namePar array of string names
+     * @param specialNotePar array of string special notes
+     * @param command commands
+     */
+    public void addParallelCommandGroup(String[] namePar, String[] specialNotePar, Command... command)
+    {
+        commands.add(new ParallelCommandGroup(command));
+        for(int i = 0; i < namePar.length; i++)
+        {
+            names.add(namePar[i]);
+            specialNotes.add(specialNotePar[i]);
+        }
+    }
+
     public void setSpecialNote(String name, String specialNote)
     {
         specialNotes.set(names.indexOf(name), specialNote);
