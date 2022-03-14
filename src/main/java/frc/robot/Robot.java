@@ -32,6 +32,7 @@ import frc.robot.Commands.DriveStr8;
 import frc.robot.Commands.ForbiddenAuto;
 import frc.robot.Commands.JacksAuto;
 import frc.robot.Commands.Nothing;
+import frc.robot.Commands.Commandments.Shoot;
 import frc.robot.Commands.Commandments.Turn;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
@@ -41,7 +42,7 @@ import frc.robot.Constants.TURN;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
-import frc.robot.miscellaneous.CommandCreator.CommandArray;
+import frc.robot.miscellaneous.CommandArray;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -138,7 +139,8 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
-     testCommandArray.addParallelCommandGroup(new Turn(90).withTimeout(1), new Turn(0));
+     testCommandArray.addParallelCommandGroup(new Turn(90).withTimeout(1), new Shoot(0, 0, 1000));
+     testCommandArray.addParallelCommandGroup(new Turn(0).withTimeout(1), new Shoot(0, 0, 1000));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
