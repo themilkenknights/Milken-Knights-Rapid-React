@@ -33,6 +33,9 @@ import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
 import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
+import frc.robot.WPI.RobotContainer;
+import frc.robot.miscellaneous.Lights;
+import frc.robot.miscellaneous.Shuffle;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
