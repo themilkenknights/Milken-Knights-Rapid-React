@@ -4,18 +4,31 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
+    {
+      "type": "java",
+      "name": "Launch EzLogger",
+      "request": "launch",
+      "mainClass": "frc.robot.EzLogger",
+      "projectName": "Milken-Knights-Rapid-React"
+    },
+    {
+      "type": "java",
+      "name": "Launch SwerdThings",
+      "request": "launch",
+      "mainClass": "frc.robot.SwerdThings",
+      "projectName": "Milken-Knights-Rapid-React"
+    },
     {
       "type": "wpilib",
       "name": "WPILib Desktop Debug",
       "request": "launch",
-      "desktop": true,
+      "desktop": true
     },
     {
       "type": "wpilib",
       "name": "WPILib roboRIO Debug",
       "request": "launch",
-      "desktop": false,
+      "desktop": false
     }
   ]
 }
