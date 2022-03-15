@@ -442,8 +442,8 @@ else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) && mClimb.isR
 
 if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) && mClimb.isLeftBelow())
 {
-  //mClimb.telescopePercentLeft(1);
-  mClimb.scuffedPIDClimb(20000);
+  mClimb.telescopePercentLeft(1);
+  //mClimb.scuffedPIDClimb(20000);
 }
 else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) && mClimb.isLeftAbove())
 {
