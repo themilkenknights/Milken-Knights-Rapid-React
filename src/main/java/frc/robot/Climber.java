@@ -166,6 +166,13 @@ public class Climber {
 
 
 
+    public void scuffedPIDClimb(double setpoint)
+    {
+        telescopeArmLeft.set(ControlMode.PercentOutput, MkUtil.hoodPIDPercent(setpoint, telescopeArmLeft.getSelectedSensorPosition(), CLIMBER.maxOutput, 0.0001));
+    }
+
+
+
     private static class InstanceHolder
     {
         private static final Climber mInstance = new Climber();

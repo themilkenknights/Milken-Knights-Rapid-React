@@ -270,6 +270,9 @@ public final class Constants {
 
         public static double telescopeTimeHighPoint = 0;
         //TODO find after finding total rotations to high and testing, then time for extra precaution
+
+
+        public static double maxOutput = 0.2;
     }
 
  /**class containing variables that relate to limelight*/
