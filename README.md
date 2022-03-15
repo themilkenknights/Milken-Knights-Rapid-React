@@ -46,6 +46,8 @@ our robot is decked out with the finest gear, as you can clearly see from these 
 - ### Self Defence
      - Turn baby mode off and spin like a beyblade to freak the crap out of your opponents!
      - Spontaneously dissasemble to confuse your opponents and teamates alike
+- ### Logs
+     - (WIP) Every action performed by the robot might/will be recorded and posted in a log, with specific times and dates. I don't know how it will be useful, but you can also spam bully maguire ascii art in the log anytime you want!
 <br/>
 our robot is very high tech and advanced, and is even a work in progress!
 <br/>
