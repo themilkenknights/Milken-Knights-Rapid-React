@@ -6,7 +6,9 @@ package frc.robot.miscellaneous;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.hal.simulation.DriverStationDataJNI;
 import edu.wpi.first.hal.simulation.RoboRioDataJNI;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.simulation.RoboRioSim;
