@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch EzLogger",
       "request": "launch",
+      "mainClass": "frc.robot.miscellaneous.EzLogger",
+      "projectName": "Milken-Knights-Rapid-React"
+    },
+    {
+      "type": "java",
+      "name": "Launch EzLogger",
+      "request": "launch",
       "mainClass": "frc.robot.EzLogger",
       "projectName": "Milken-Knights-Rapid-React"
     },

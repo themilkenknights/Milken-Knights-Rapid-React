@@ -16,18 +16,26 @@ import java.util.UUID;
 /**The NSA's official code (if they had one person working there)*/
 public class EzLogger {
     private static final UUID RUN_INSTANCE_UUID = UUID.randomUUID();
+    private static String todaysDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    private static File file = new File("README.md");
+    private static String ultimatePath = file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("\\" + file.getName()));
+    private static File todaysFolder = new File(staticGetYourFilePath() + "\\logs\\" + staticGetTodaysDate());
     //public static String[] face = new String[11];
     public static String bully = ("                                    .7Y?^./n                                   .7P5?^.:.                     .::::          7Y7!75#B5YY~/n                   ^:^7?77~.         .::7@@@@@@&?./n                  !?^~!??Y7.    :?YYJ?!~:!Y#@@&&@BY~./n                .J#G5Y5!:.     !5Y??PB##BGJ^7B@@&&&&G?./n              .YB#&@@&!       :5?7775#&&&&&B! 7B@&&&#&G~/n              J@@&@@@!        :?YPY?75&&&B#@G   !B@&&&&B^/n             7@@@@@@?         ~J?!7?JJJJJJ#@5    :&&&&@@G./n            !@@@@@@?          .YY?JYY5Y5P&&J.    Y@@@@@@5./n           ~&@&@@@B.           !Y5PPBBPJJBJ     !@@@@@@@J/n          :B&&&@@@P:      .^^:.:!7Y&&##BB##? ^YG&@@@@@@B^/n          !@@&@@@&&#G5?!~?B&&###BPG@@&@@@&@&Y#@@@@@@@@&7/n          :Y&@@@@@@@@@@@&@#&&&&&&&@&&#&&&@&&##&@@@@@@@J/n            :?B@@@@@@@@@@@###&&##&&#BB#&&&##B#@@@@@@&Y./n               ^7YG#@@@@@&####&&&&####&&&&##&&&&&@@@Y/n                   .^?5GBB#B###&@&&@@@&&&&&&&&&&&&&J./n                        .J##BB&@@@&&&#&&&@@&&&&&&&G./n                        ^B###&@@&&###&&&@@&&&@&&&&G./n                        ?##&@@@&###&&&&&&&&&&@&&&&&J/n                       ^G##@@@&&##&&#&&#&&@@@@&&&&&&!/n                       J##@@@&##B#&####&&&&@&@&&&&&&G./n                      7B#@@@&#########&&&@@&&&&&&&&&&G!/n                     ~B&@@@&&#&&&&&&&&&&@@@&&&&&&&&&&&Y./n                    :P#@@@@&&&&&&&&&&&&@&##@&&&&&&&&&&G^/n                   :P&@@&&###&&&&&&&&&@&!.^&&&&&&&&&&&@5./n                  ~5&@@&######&&&&&&&&&#?: Y&&&&&&&&&&@#!/n                 ^Y#@&&&&####&&&&&&&&&&&@&Y~B&&&&&&&&&&&#7/n                 !G##&&&#####&&&&@@&&&&&&##5!B&&&&&&&&&&@B./n                :5###&&&&&########&&&&&&@7:. ^G&@@@@&&&#G!/n               ^P######&&&&&############&#5:  .!Y55J7~:./n              ^G##&&&&&&&&&B&&############&G:/n             ^G##&&&&&@@@#!:Y&&&&#########&@5/n             Y&##&#&&&&@@!   7B&#&&&&#####&&B:/n            ~###&&#&&&&@Y.    :P&&###&&&&&&&&7/n            J#####&&&&@5       ^B&&###&&&&&&@5/n           :B###&&&&&@#~       .~G&&&&#&&&&&&?/n           ?####&&&@@#~.        ^!P&&&&&&&&&&Y/n");
  
+    public static EzLogger getInstance()
+    {
+        return InstanceHolder.mInstance;
+    }
+
+
 /**
  * writes a message in the daily log (creates new log if new daily log hasnt been created)
  * @param message your message
  */
-public static void writeLog(String message)
-{
-    
-    String dateStamp1 = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    try (PrintWriter writer = new PrintWriter(new FileWriter(getYourFilePath() + "\\logs\\" + dateStamp1 + "\\main_log.txt", true))) {
+public void writeLog(String message)
+{    
+    try (PrintWriter writer = new PrintWriter(new FileWriter(getYourFilePath() + "\\logs\\" + getTodaysDate() + "\\main_log.txt", true))) {
         writer.print(RUN_INSTANCE_UUID.toString());
         writer.print(message + "          ");
         writer.print(new Date().toString());
@@ -38,23 +46,73 @@ public static void writeLog(String message)
       }
 }
 
+
+
+
+
+
+
+
+/**
+ * writes a message in the daily log (creates new log if new daily log hasnt been created) but static
+ * @param message your message
+ */
+public static void staticWriteLog(String message)
+{
+    
+    try (PrintWriter writer = new PrintWriter(new FileWriter(staticGetYourFilePath() + "\\logs\\" + staticGetTodaysDate() + "\\main_log.txt", true))) {
+        writer.print(RUN_INSTANCE_UUID.toString());
+        writer.print(message + "          ");
+        writer.print(new Date().toString());
+        writer.println();
+        writer.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+}
+
+
 /**
  * because everyone has different directories, this one gets your specific one
  * @return your unique path. used in the {@link #writeLog(message)} and the {@link #logRobotInit()} function
  */
-public static String getYourFilePath()
+public String getYourFilePath()
 {
-    File file = new File("README.md");
-    return file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("\\" + file.getName()));
+    return ultimatePath;
 }
 
-/** runs everytime you boot up the robot. creates a new daily folder if one hasnt been created
+
+
+/**
+ * because everyone has different directories, this one gets your specific one. but static
+ * @return your unique path. used in the {@link #writeLog(message)} and the {@link #logRobotInit()} function
  */
-public static void logRobotInit() {
-    String dateStamp1 = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    boolean test = new File(getYourFilePath() + "\\logs\\" + dateStamp1).mkdirs();
+public static String staticGetYourFilePath()
+{
+    return ultimatePath;
+}
+
+
+/** runs everytime you boot up the robot. creates a new daily folder if one hasnt been created*/
+public void logRobotInit() {
+    boolean test = todaysFolder.mkdirs();
   }
 
+  /** runs everytime you boot up the robot. creates a new daily folder if one hasnt been created. but static*/
+public static void staticLogRobotInit() {
+    boolean test = todaysFolder.mkdirs();
+  }
+
+
+public String getTodaysDate()
+{
+    return todaysDate;
+}
+
+public static String staticGetTodaysDate()
+{
+    return todaysDate;
+}
 
 
 public static void main(String[] args) {  
@@ -77,7 +135,7 @@ public static void main(String[] args) {
     //boolean test = new File(getYourFilePath() + "\\logs").mkdirs();
 
 
-    logRobotInit();
+    staticLogRobotInit();
     //for(int i = 0; i < face.length; i++)
     //{
 
@@ -87,7 +145,7 @@ public static void main(String[] args) {
             //System.out.println(bully.indexOf("/n"));
             String temp = bully;
             bully = bully.substring(0, bully.indexOf("/n"));
-            writeLog(bully);
+            staticWriteLog(bully);
             bully = temp;
             bully = bully.substring(bully.indexOf("/n")+2, bully.length());
         }
@@ -95,4 +153,9 @@ public static void main(String[] args) {
 
     //}
 }
+
+private static class InstanceHolder
+    {
+        private static final EzLogger mInstance = new EzLogger();
+    } 
 }

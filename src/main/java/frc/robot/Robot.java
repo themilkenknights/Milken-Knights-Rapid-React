@@ -6,6 +6,8 @@ package frc.robot;
 
 
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -31,6 +33,7 @@ import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
 import frc.robot.miscellaneous.CommandArray;
+import frc.robot.miscellaneous.EzLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -48,6 +51,7 @@ public class Robot extends TimedRobot {
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
+   private EzLogger mLog = EzLogger.getInstance();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -134,8 +138,11 @@ public class Robot extends TimedRobot {
    private double angle = 90;
    private double turnyAngle = 90;
 
+
    @Override
    public void robotInit() {
+     mLog.logRobotInit();
+     mLog.writeLog("Robot Initialized");
      testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
@@ -146,7 +153,6 @@ public class Robot extends TimedRobot {
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
      veloshufflething.addOption("spee1", veloch.veloOne);
      veloshufflething.addOption("spee2", veloch.veloTwo);
-     veloshufflething.addOption("spee3", veloch.veloThree);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
     }
 
@@ -158,12 +164,14 @@ public class Robot extends TimedRobot {
  
    @Override
    public void autonomousInit() {
+     mLog.writeLog("Autonomous Initialized");
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
+     mLog.writeLog("Running Auto: " + positionChooser.getSelected().toString());
      switch (positionChooser.getSelected()) {
        case LEFT:
          m_autonomousCommand = testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
@@ -183,17 +191,8 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
-     toggleClimbOn = false;
-     toggleClimbPressed = false;
-     toggleFastOn = false;
-     toggleFastPressed = false;
-     toggleSlowOn = false;
-     toggleSlowPressed = false;
-     toggleLeftClimbOn = false;
-     toggleRightClimbOn = false;
-     spee = 3;
-     leftGoingUp = false;
-     rightGoingUp = false;
+     mLog.writeLog("Teleop Initialized");
+    variableInitializerTeleop();
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -214,7 +213,8 @@ public class Robot extends TimedRobot {
        
       case veloThree:
         velo = 4000;
-        break;}
+        break;
+      }
     }
  
   @Override
@@ -643,6 +643,22 @@ isLeftBelow = true
       else{
           toggleClimbPressed = false;
       }
+  }
+
+  
+  public void variableInitializerTeleop()
+  {
+    toggleClimbOn = false;
+    toggleClimbPressed = false;
+    toggleFastOn = false;
+    toggleFastPressed = false;
+    toggleSlowOn = false;
+    toggleSlowPressed = false;
+    toggleLeftClimbOn = false;
+    toggleRightClimbOn = false;
+    spee = 3;
+    leftGoingUp = false;
+    rightGoingUp = false;
   }
   
 }
