@@ -74,7 +74,7 @@ public static void main(String[] args) {
     //face dont work :(
     
     //! RUN THIS ONCE IN YOUR LIFETIME AND NEVER AGAIN IF YOU WANT LOG TO WORK
-    //boolean test = new File(pathfile + "\\logs").mkdirs();
+    //boolean test = new File(getYourFilePath() + "\\logs").mkdirs();
 
 
     logRobotInit();
