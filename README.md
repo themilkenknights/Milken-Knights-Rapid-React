@@ -67,3 +67,7 @@ our robot is very high tech and advanced, and is even a work in progress!
 
 ## MILKEN KNIGHTS WEBSITE
 - https://milkenknights.com/
+<br/>
+<br/>
+
+![alt text](https://github.com/themilkenknights/Milken-Knights-Rapid-React/blob/main/9b74540da182480bf9a6a91d10e6c433.jpg?raw=true)
