@@ -8,20 +8,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import frc.robot.Constants.LOGS;
+
 
 /**The NSA's official code (if they had one person working there)*/
 public class EzLogger {
+ /**Random thing in swerd code. may be data id*/
     private static final UUID RUN_INSTANCE_UUID = UUID.randomUUID();
     private static String todaysDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private static File file = new File("README.md");
     private static String ultimatePath = file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("\\" + file.getName()));
     private static File todaysFolder = new File(staticGetYourFilePath() + "\\logs\\" + staticGetTodaysDate());
-    //public static String[] face = new String[11];
+ /**le bully ascii art*/
     public static String bully = ("                                    .7Y?^./n                                   .7P5?^.:.                     .::::          7Y7!75#B5YY~/n                   ^:^7?77~.         .::7@@@@@@&?./n                  !?^~!??Y7.    :?YYJ?!~:!Y#@@&&@BY~./n                .J#G5Y5!:.     !5Y??PB##BGJ^7B@@&&&&G?./n              .YB#&@@&!       :5?7775#&&&&&B! 7B@&&&#&G~/n              J@@&@@@!        :?YPY?75&&&B#@G   !B@&&&&B^/n             7@@@@@@?         ~J?!7?JJJJJJ#@5    :&&&&@@G./n            !@@@@@@?          .YY?JYY5Y5P&&J.    Y@@@@@@5./n           ~&@&@@@B.           !Y5PPBBPJJBJ     !@@@@@@@J/n          :B&&&@@@P:      .^^:.:!7Y&&##BB##? ^YG&@@@@@@B^/n          !@@&@@@&&#G5?!~?B&&###BPG@@&@@@&@&Y#@@@@@@@@&7/n          :Y&@@@@@@@@@@@&@#&&&&&&&@&&#&&&@&&##&@@@@@@@J/n            :?B@@@@@@@@@@@###&&##&&#BB#&&&##B#@@@@@@&Y./n               ^7YG#@@@@@&####&&&&####&&&&##&&&&&@@@Y/n                   .^?5GBB#B###&@&&@@@&&&&&&&&&&&&&J./n                        .J##BB&@@@&&&#&&&@@&&&&&&&G./n                        ^B###&@@&&###&&&@@&&&@&&&&G./n                        ?##&@@@&###&&&&&&&&&&@&&&&&J/n                       ^G##@@@&&##&&#&&#&&@@@@&&&&&&!/n                       J##@@@&##B#&####&&&&@&@&&&&&&G./n                      7B#@@@&#########&&&@@&&&&&&&&&&G!/n                     ~B&@@@&&#&&&&&&&&&&@@@&&&&&&&&&&&Y./n                    :P#@@@@&&&&&&&&&&&&@&##@&&&&&&&&&&G^/n                   :P&@@&&###&&&&&&&&&@&!.^&&&&&&&&&&&@5./n                  ~5&@@&######&&&&&&&&&#?: Y&&&&&&&&&&@#!/n                 ^Y#@&&&&####&&&&&&&&&&&@&Y~B&&&&&&&&&&&#7/n                 !G##&&&#####&&&&@@&&&&&&##5!B&&&&&&&&&&@B./n                :5###&&&&&########&&&&&&@7:. ^G&@@@@&&&#G!/n               ^P######&&&&&############&#5:  .!Y55J7~:./n              ^G##&&&&&&&&&B&&############&G:/n             ^G##&&&&&@@@#!:Y&&&&#########&@5/n             Y&##&#&&&&@@!   7B&#&&&&#####&&B:/n            ~###&&#&&&&@Y.    :P&&###&&&&&&&&7/n            J#####&&&&@5       ^B&&###&&&&&&@5/n           :B###&&&&&@#~       .~G&&&&#&&&&&&?/n           ?####&&&@@#~.        ^!P&&&&&&&&&&Y/n");
     public static File todaysLog = new File(ultimatePath + "\\logs\\" + todaysDate + "\\main_log.txt");
 
@@ -75,10 +77,6 @@ public static void staticWriteLog(String message)
 }
 
 
-/**
- * because everyone has different directories, this one gets your specific one
- * @return your unique path. used in the {@link #writeLog(message)} and the {@link #logRobotInit()} function
- */
 public String getYourFilePath()
 {
     return ultimatePath;
@@ -86,10 +84,6 @@ public String getYourFilePath()
 
 
 
-/**
- * because everyone has different directories, this one gets your specific one. but static
- * @return your unique path. used in the {@link #writeLog(message)} and the {@link #logRobotInit()} function
- */
 public static String staticGetYourFilePath()
 {
     return ultimatePath;
@@ -101,7 +95,7 @@ public void logRobotInit() {
     boolean test = todaysFolder.mkdirs();
   }
 
-  /** runs everytime you boot up the robot. creates a new daily folder if one hasnt been created. but static*/
+/** runs everytime you boot up the robot. creates a new daily folder if one hasnt been created. but static*/
 public static void staticLogRobotInit() {
     boolean test = todaysFolder.mkdirs();
 }
@@ -118,14 +112,14 @@ public static String staticGetTodaysDate()
 }
 
 
-
+/**deletes log if its size is over a certain threshold*/
 public void deleteLog()
 {
-    if(todaysLog.length() > 100000)
+    if(todaysLog.length() > LOGS.maxSizeThreshold)
     {
         //System.out.println("HELLO");
         //System.out.println(todaysLog.length());
-        staticWriteLog("goodbye");
+        staticWriteLog("goodbye world");
         todaysLog.delete();
     }
     //System.out.println(todaysLog.length());
@@ -133,14 +127,14 @@ public void deleteLog()
 
 
 
-
+/**deletes log if its size is over a certain threshold. but static*/
 public static void staticDeleteLog()
 {
-    if(todaysLog.length() > 100000)
+    if(todaysLog.length() > LOGS.maxSizeThreshold)
     {
         //System.out.println("HELLO");
         //System.out.println(todaysLog.length());
-        staticWriteLog("goodbye");
+        staticWriteLog("goodbye world");
         todaysLog.delete();
     }
     //System.out.println(todaysLog.length());
@@ -150,7 +144,7 @@ public static void staticDeleteLog()
 
 public static void main(String[] args) {  
     /*
-    face[0] = "⣿⣿⣿⣿⣿⡿⠿⠻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠻⠻⠟⠻⢿⣿⣿⣿⣿";
+    face[0] ="⣿⣿⣿⣿⣿⡿⠿⠻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠻⠻⠟⠻⢿⣿⣿⣿⣿";
     face[1] ="⣿⣿⡟⠁⢀⣠⣤⣤⣤⣤⣄⣀⣀⣀⣹⣿⣿⣷⣄⣀⣀⣀⣀⣤⣤⣤⣤⣀⠐⢽⣿⣿⣿";
     face[2] ="⣿⣿⣿⣶⣿⡿⣛⡒⠒⠒⢒⠒⣲⠙⣿⣿⣿⣿⠟⣵⡒⢒⠒⠒⡀⣘⡻⣿⣿⣾⣿⣿⣿ ";
     face[3] ="⣿⣿⣿⣿⣏⣞⡛⠃⠀⠀⠸⠷⢿⣧⣿⣿⣿⣿⣧⣿⣷⣛⣀⣀⣁⣛⣛⣮⣿⣿⣿⣿⣿ ";
@@ -160,15 +154,15 @@ public static void main(String[] args) {
     face[7] ="⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢻⣿⠏⣼⣿⣿⣿⣿⣿ ";
     face[8] ="⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠟⢛⣉⣴⣿⡏⣸⣿⣿⣿⣿⣿⣿ ";
     face[9] ="⣿⣿⣿⣿⣿⣿⣿⣿⣧⣠⣤⣤⣤⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿⣿⣿⠃⣿⣿⣿⣿⣿⣿⣿ ";
-    face[10] = "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿";
-    */
-    //face dont work :(
+   face[10] ="⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿";
+                  hello there. welcome to cryptoland      */
+
     
     //! RUN THIS ONCE IN YOUR LIFETIME AND NEVER AGAIN IF YOU WANT LOG TO WORK
     //boolean test = new File(getYourFilePath() + "\\logs").mkdirs();
+    
+    
     staticLogRobotInit();
-    //for(int i = 0; i < face.length; i++)
-    //{
 
         //bully creator lol
         for(int i = 0; i < 37; i++)
@@ -180,11 +174,13 @@ public static void main(String[] args) {
             bully = temp;
             bully = bully.substring(bully.indexOf("/n")+2, bully.length());
         }
-        //writeLog(pathfile + "\\logs\\" + day, bully);//face[i]);
 
-    //}
     staticDeleteLog();
 }
+
+
+
+
 
 private static class InstanceHolder
     {

@@ -129,19 +129,19 @@ public class CommandArray {
         }
     }
 
-    public void setSpecialNote(String name, String specialNote)
+    public void setSpecialNote(String name, String newSpecialNote)
     {
-        specialNotes.set(names.indexOf(name), specialNote);
+        specialNotes.set(names.indexOf(name), newSpecialNote);
     }
 
-    public void setSpecialNote(Command command, String specialNote)
+    public void setSpecialNote(Command command, String newSpecialNote)
     {
-        specialNotes.set(commands.indexOf(command), specialNote);
+        specialNotes.set(commands.indexOf(command), newSpecialNote);
     }
 
-    public void setSpecialNote(String specialNote)
+    public void setSpecialNote(String newSpecialNote)
     {
-        this.specialNote = specialNote;
+        this.specialNote = newSpecialNote;
     }
 
     public void setName(String name, String newName)

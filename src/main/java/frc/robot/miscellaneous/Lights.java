@@ -57,7 +57,6 @@ public class Lights {
                     timer.reset();
                     LEDS.setData(buffer);
                 }
-            
         }
       }
 

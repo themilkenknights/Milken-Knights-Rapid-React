@@ -55,37 +55,24 @@ public class Intake {
         return InstanceHolder.mInstance;
     }
 
- /**Updates intake values in shuffleboard*/
     public void updateIntake()
     {
         SmartDashboard.putNumber("magencLeft", intakeLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 
-/**
- * Powers the intake motors at varying speeds [-1, 1]
- * @param setpoint Setpoint of the motor
- */
     public void setIntakePercent(double setpoint)
     {
         intakeRight.set(ControlMode.PercentOutput, setpoint);
         intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
-/**
- * Powers the roller motor at varying speeds [-1, 1]
- * @param setpoint Setpoint of the motor
- */
     public void setRollersPercent(double setpoint)
     {
         //SmartDashboard.putNumber("Rollers", setpoint);
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 
-/**
- * Sets the intake motors mag encoders position
- * @param setpoint In units (idk yet)
- */
     public void setMagPosition(double setpoint)
     {
         intakeLeft.setSelectedSensorPosition(setpoint);

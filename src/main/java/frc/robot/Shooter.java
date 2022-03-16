@@ -61,17 +61,12 @@ public class Shooter {
         return InstanceHolder.mInstance;
     }
     
- /**Updates shooter values in shuffleboard*/
     public void shooterUpdate()
     {
         SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
         SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
     }
 
-/**
- * Powers the shooter motors at varying speeds [-1, 1] 
- * @param setpoint Setpoint of the motors
- */
     public void setShooterPercent(double setpoint)
     {
         shootLeft.set(ControlMode.PercentOutput, setpoint);

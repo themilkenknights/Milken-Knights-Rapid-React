@@ -297,6 +297,9 @@ public final class Constants {
     {
         public static int PWMPORT = 0; 
         public static int bufferNum = 100; 
+
+        //TODO see if less than 255 turns down brightness, not color
+        public static int MaxRGBValue = 200;
     }
     
  /**class containing variables that relate to button mapping*/
@@ -415,6 +418,14 @@ public final class Constants {
 
      /**conversion factor */
         public static double nativeToMetersPerSec = (10 * (MkUtil.inchesToMeters(DRIVE.kWheelDiameterInches) * kPi))/(DRIVE.greerRatio * 2048);
+    }
+
+
+
+
+    public static class LOGS
+    {
+      public static int maxSizeThreshold = 100000;
     }
 }
 

@@ -339,7 +339,6 @@ public class Drive {
         return InstanceHolder.mInstance;
     }
 
- /**Periodically updates values*/
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
@@ -397,7 +396,6 @@ public class Drive {
 
  
     
- /**Updates drive velocity values in shuffleboard*/
     public void updateDriveDriveVelocity()
     {
         SmartDashboard.putNumber("topleftvelocity", topLeft);
@@ -422,7 +420,6 @@ public class Drive {
         }
     }
 
- /**Updates raw drive velocity values to shuffleboard*/
     public void updateDriveDriveRaw()
     {
         SmartDashboard.putNumber("topleftvelocity", topDriveLeft.getSelectedSensorVelocity());
@@ -431,7 +428,6 @@ public class Drive {
         SmartDashboard.putNumber("bottomrightvelocity", bottomDriveRight.getSelectedSensorVelocity());
     }
 
- /**Updates some turn values in shuffleboard*/
     public void updateDriveTurn()
     {
         SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
@@ -446,7 +442,6 @@ public class Drive {
         SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
     }
 
- /**Updates turn encoder values in shuffleboard*/
     public void updateDriveTurnEncoder()
     {
         SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
@@ -464,7 +459,6 @@ public class Drive {
 
 
 
- /**Powers all angular motors at varying speeds [-1, 1]*/
     public void turnPercent(double topleft, double topright, double botleft, double botright)
     {
         topTurnLeft.set(ControlMode.PercentOutput, topleft);
@@ -482,7 +476,6 @@ public class Drive {
         bottomTurnRight.set(ControlMode.PercentOutput, bottomTurnRightCalculateNative(MkUtil.degreesToNative(botright, TURN.greerRatio)));
     }
     
- /**Powers all drive motors at varying speeds [-1, 1]*/
     public void drivePercent(double topleft, double topright, double botleft, double botright)
     {
         topDriveLeft.set(ControlMode.PercentOutput, topleft);
@@ -506,11 +499,6 @@ public class Drive {
    */
     }
 
-
-    /**
-     * Sets all angular motors' integrated encoder's position to {@code setpoint}
-     * @param setpoint Angular setpoint
-     */
     public void setPosTurn(double setpoint)
     {
         topTurnLeft.setSelectedSensorPosition(setpoint);
@@ -519,7 +507,6 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(setpoint);
     }
 
- /**Sets all angular motors' integrated encoder's positions to zero*/
     public void resetTurn()
     {
         topTurnLeft.setSelectedSensorPosition(0);
@@ -528,7 +515,6 @@ public class Drive {
         bottomTurnRight.setSelectedSensorPosition(0);
     }
 
- /**Sets all drive motors' integrated encoder's positions to zero*/
     public void resetDrive()
     {
         topDriveLeft.setSelectedSensorPosition(0);
@@ -557,7 +543,6 @@ public class Drive {
    
     }
 
- /**Resets navX*/
     public void resetNavx()
     {
         navX.zeroYaw();
@@ -1005,7 +990,10 @@ public class Drive {
      * Using the {@link #swerveAutonomousEther} and motion magic, an autonomous angled path of motion can be achieved
      * @param totalDistance Length of curved path
      * @param thetaTurn Angle of curved path
-     * @param RCW [-1, 1] For spinny, 0 for no spinny
+     * @param RCWauto [-1, 1] For spinny, 0 for no spinny
+     * @param mode Curve or Straight
+     * @param turny Specific or Infinite
+     * @param turnyAuto (if using specific for turny) angle that robot tries to keep when moving
      * @see {@link #swerveAutonomousEther(FWD, STR, RCW)}
      * @see {@link #updateMagicStraight()}
     */
@@ -1160,6 +1148,11 @@ public class Drive {
         return Math.abs(err) < 0.1 && Math.abs(avgVelInches) < 0.1; //0.5, 0.5
     }
 
+    /**
+     * same as {@link #isMagicStraightDone} but you can customize the distance variable
+     * @param inchesEther distance of the ether
+     * @return True if ether is done
+     */
     public boolean isEtherMoveDone(double inchesEther)
     {
         double err = inchesEther - avgDistInches;              //TODO 0.1?? 
@@ -1178,12 +1171,13 @@ public class Drive {
         return Math.abs(err) < 0.5;
     }
 
-
+    /**Mode of the ether auto's path*/
     public enum ETHERAUTO
     {
         Straight, Curve
     }
 
+    /**Mode of the ether auto's turn */
     public enum ETHERRCW
     {
         Specific, Forever

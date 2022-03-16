@@ -60,43 +60,29 @@ public class Climber {
         return InstanceHolder.mInstance;
     }
 
- /**Updates Climber values in shuffleboard*/
     public void climberUpdate()
     {
         SmartDashboard.putNumber("right climb", telescopeArmRight.getSelectedSensorPosition());
         SmartDashboard.putNumber("left climb", telescopeArmLeft.getSelectedSensorPosition());
     }
 
-    /**
-     * Powers the telescoping arms at varying speeds [-1, 1]
-     * @param percentleft Setpoint of the left motor
-     * @param percentright Setpoint of the right motor
-     */
     public void telescopePercent(double percentleft, double percentright)
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, percentleft);
         telescopeArmRight.set(ControlMode.PercentOutput, percentright);
     }
 
-    /**
-     * Powers the right telescoping arm at varying speeds [-1, 1]
-     * @param setpoint Setpoint of the motor
-     */
     public void telescopePercentRight(double setpoint)
     {
         telescopeArmRight.set(ControlMode.PercentOutput, setpoint);
     }
 
-    /**
-     * Powers the left telescoping arm at varying speeds [-1, 1]
-     * @param setpoint Setpoint of the motor
-     */
     public void telescopePercentLeft(double setpoint)
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
-    /**Zeros the telescoping arms' integrated encoder*/
+
     public void zeroVClimbb()
     {
         telescopeArmRight.setSelectedSensorPosition(0);
@@ -114,7 +100,10 @@ public class Climber {
     }
 
 
-
+/**
+ * auto function for left arm
+ * @param leftGoingUp if true, go up. else, go down
+ */
     public void climbAutoLeft(boolean leftGoingUp)
     {
         if(isLeftBelow() && leftGoingUp)
@@ -127,6 +116,10 @@ public class Climber {
         }
     }
 
+/**
+ * auto function for right arm
+ * @param rightGoingUp if true, go up. else, go down
+ */
     public void climbAutoRight(boolean rightGoingUp)
     {
         if(isRightBelow() && rightGoingUp)
@@ -139,33 +132,39 @@ public class Climber {
         }
     }
 
+    /**is right arm above low point */
     public boolean isRightAbove()
     {
         return telescopeArmRight.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
     }
+    /**is right arm below high point */
     public boolean isRightBelow()
     {
         return telescopeArmRight.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
     }
+    /**is left arm above low point */
     public boolean isLeftAbove()
     {
         return telescopeArmLeft.getSelectedSensorPosition() > CLIMBER.telescopeLowPointNative;
     }
+    /**is left arm below high point */
     public boolean isLeftBelow()
     {
         return telescopeArmLeft.getSelectedSensorPosition() < CLIMBER.telescopeHighPointNative;
     }
+    /**are both arms below high point */
     public boolean isBelow()
     {
         return isLeftBelow() && isRightBelow();
     }
+    /**are both arms above low point */
     public boolean isAbove()
     {
         return isLeftAbove() && isRightAbove();
     }
 
 
-
+    /**prayin to god. pls make this work */
     public void scuffedPIDClimb(double setpoint)
     {
         telescopeArmLeft.set(ControlMode.PercentOutput, MkUtil.hoodPIDPercent(setpoint, telescopeArmLeft.getSelectedSensorPosition(), CLIMBER.maxOutput, 0.0001));
