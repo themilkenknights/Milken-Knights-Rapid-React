@@ -146,6 +146,8 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
+    variableInitializerTeleop();
+    mDrive.assignTalonArray();
      mLog.logRobotInit();
      mLog.writeLog("Robot Initialized");
      testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
@@ -197,7 +199,6 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopInit() {
      mLog.writeLog("Teleop Initialized");
-    variableInitializerTeleop();
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);

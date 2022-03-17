@@ -34,6 +34,7 @@ public class AutoChooser {
     public void robotPeriodicAutoChooser()
     {
         CommandScheduler.getInstance().run();
+        Shuffle.getInstance().update();
     }
 
     public void autoInitAutoChooser(AutoChoosers choose, CommandArray... arr)

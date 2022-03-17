@@ -21,10 +21,13 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
+import frc.robot.miscellaneous.EzLogger;
 
 
 /**The Drive class contains all functions for anything related to DIY swerve drive (ether drive, DIY auto, etc)*/
 public class Drive {
+    private EzLogger mLog = EzLogger.getInstance(); 
+
     public TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
     public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
     public TalonFX bottomTurnLeft = new TalonFX(TURN.bottomTurnLeftCANID);
@@ -98,6 +101,9 @@ public class Drive {
 
  /**Average velocity of driving motors in inches*/
     private double avgVelInches;
+
+ /**Average velocity of driving motors in native units*/
+    private double avgVelNative;
 
  /**Average distance of driving motors in inches*/
     private double avgDistInches;
@@ -386,6 +392,7 @@ public class Drive {
 
         avgDistInches = (leftTopPosInch + rightTopPosInch + leftBottomPosInch + rightBottomPosInch) /4.0;
         avgVelInches = (leftTopVelInch + rightTopVelInch + leftBottomVelInch + rightBottomVelInch) / 4.0;
+        avgVelNative = (leftTopVelNative + rightTopVelNative + leftBottomVelNative + rightBottomVelNative) / 4.0;
 
         leftTopDeg = MkUtil.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), TURN.greerRatio);
         rightTopDeg = MkUtil.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), TURN.greerRatio);
@@ -1185,6 +1192,159 @@ public class Drive {
     
 
 
+    public void testDriveMotors(double speed, double time)
+    {
+        driveVelocity(speed, speed, speed, speed);
+        if(time > 1)
+        {
+            driveErrorTest[0] = (driveErrorTest[0] + avgVelNative)/2;
+            driveErrorTest[1] = (driveErrorTest[1] + avgVelNative)/2;
+            
+            driveErrorTest[2] = (driveErrorTest[2] + leftTopVelNative)/2;
+            driveErrorTest[3] = (driveErrorTest[3] + rightTopVelNative)/2;
+            driveErrorTest[4] = (driveErrorTest[4] + leftBottomVelNative)/2;
+            driveErrorTest[5] = (driveErrorTest[5] + rightBottomVelNative)/2;
+
+            driveErrorTest[6] = (driveErrorTest[6] + leftTopVelNative)/2;
+            driveErrorTest[7] = (driveErrorTest[7] + rightTopVelNative)/2;
+            driveErrorTest[8] = (driveErrorTest[8] + leftBottomVelNative)/2;
+            driveErrorTest[9] = (driveErrorTest[9] + rightBottomVelNative)/2;
+        }
+        else
+        {
+            driveErrorTest[0] = 0;
+            driveErrorTest[1] = speed;
+            driveErrorTest[2] = 0;
+            driveErrorTest[3] = 0;
+            driveErrorTest[4] = 0;
+            driveErrorTest[5] = 0;
+            driveErrorTest[6] = speed;
+            driveErrorTest[7] = speed;
+            driveErrorTest[8] = speed;
+            driveErrorTest[9] = speed;
+        }
+    }
+
+    public void testAngleMotors(double angle, double time)
+    {
+        turnCalcPercent(angle, angle, angle, angle);
+        if(time > 1)
+        {
+            turnErrorTest[0] = (turnErrorTest[0] + avgVelNative)/2;
+            turnErrorTest[1] = (turnErrorTest[1] + avgVelNative)/2;
+            
+            turnErrorTest[2] = (turnErrorTest[2] + leftTopVelNative)/2;
+            turnErrorTest[3] = (turnErrorTest[3] + rightTopVelNative)/2;
+            turnErrorTest[4] = (turnErrorTest[4] + leftBottomVelNative)/2;
+            turnErrorTest[5] = (turnErrorTest[5] + rightBottomVelNative)/2;
+
+            turnErrorTest[6] = (turnErrorTest[6] + leftTopVelNative)/2;
+            turnErrorTest[7] = (turnErrorTest[7] + rightTopVelNative)/2;
+            turnErrorTest[8] = (turnErrorTest[8] + leftBottomVelNative)/2;
+            turnErrorTest[9] = (turnErrorTest[9] + rightBottomVelNative)/2;
+        }
+        else
+        {
+            turnErrorTest[0] = 0;
+            turnErrorTest[1] = angle;
+            turnErrorTest[2] = 0;
+            turnErrorTest[3] = 0;
+            turnErrorTest[4] = 0;
+            turnErrorTest[5] = 0;
+            turnErrorTest[6] = angle;
+            turnErrorTest[7] = angle;
+            turnErrorTest[8] = angle;
+            turnErrorTest[9] = angle;
+        }
+    }
+
+
+
+    public TalonFX[] getDriveMotors()
+    {
+        return driveMotors;
+    }
+
+    public TalonFX[] getTurnMotors()
+    {
+        return turnMotors;
+    }
+
+    /**0 driveErrZero, 1 driveErrFull, 2-5 driveMotorErrZero, 6-9 driveMotorErrFull*/
+    private double[] driveErrorTest = new double[10];
+
+    /**0 turnErrZero, 1 turnErrFull, 2-5 turnMotorErrZero, 6-9 turnMotorErrFull*/
+    private double[] turnErrorTest = new double[10];
+
+
+    private TalonFX[] driveMotors = new TalonFX[4];
+
+    private TalonFX[] turnMotors = new TalonFX[4];
+
+
+    public void assignTalonArray()
+    {
+        driveMotors[0] = topDriveLeft;
+        driveMotors[1] = topTurnRight;
+        driveMotors[2] = bottomTurnLeft;
+        driveMotors[3] = bottomTurnRight;
+
+        turnMotors[0] = topTurnLeft;
+        turnMotors[1] = topTurnRight;
+        turnMotors[2] = bottomTurnLeft;
+        turnMotors[3] = bottomTurnRight;
+    }
+
+
+    public double getError(ERROR type, int err)
+    {
+        switch(type)
+        {
+            //TODO no breaks, says its bad, idk tho lets hope it doesnt crash
+            case DRIVE:
+                return driveErrorTest[err];
+            case TURN:
+                return turnErrorTest[err];
+            default:
+                mLog.writeLog("tf is this enum");
+        }
+        return driveErrorTest[err];
+    }
+
+
+
+    public enum ERROR
+    {
+        DRIVE, TURN;
+    }
+
+   /* private double driveErrorTestFromZero = 0;
+    private double driveErrorTestFromFull = 0;
+
+    private double driveTopLeftErrorTestFromZero = 0;
+    private double driveTopRightErrorTestFromZero = 0;
+    private double driveBottomLeftErrorTestFromZero = 0;
+    private double driveBottomRightErrorTestFromZero = 0;
+
+    private double driveTopLeftErrorTestFromFull = 0;
+    private double driveTopRightErrorTestFromFull = 0;
+    private double driveBottomLeftErrorTestFromFull = 0;
+    private double driveBottomRightErrorTestFromFull = 0;
+
+
+    private double turnErrorTestFromZero = 0;
+    private double turnErrorTestFromFull = 0;
+
+    private double turnTopLeftErrorTestFromZero = 0;
+    private double turnTopRightErrorTestFromZero = 0;
+    private double turnBottomLeftErrorTestFromZero = 0;
+    private double turnBottomRightErrorTestFromZero = 0;
+
+    private double turnTopLeftErrorTestFromFull = 0;
+    private double turnTopRightErrorTestFromFull = 0;
+    private double turnBottomLeftErrorTestFromFull = 0;
+    private double turnBottomRightErrorTestFromFull = 0;
+    */
 
     private static class InstanceHolder
     {
