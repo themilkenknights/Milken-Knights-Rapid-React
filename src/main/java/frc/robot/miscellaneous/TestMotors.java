@@ -12,10 +12,33 @@ public class TestMotors {
     private Drive mDrive = Drive.getInstance();
     private EzLogger mLog = EzLogger.getInstance();
     private MkTimerV2 mTime = new MkTimerV2(3);
+    private MkTimerV2 mTimeAll = new MkTimerV2();
     private boolean starting = true;
     private boolean drivingDone = false;
+    private boolean turningDone = false;
     private double driveEndTime = 0;
     private double turnEndTime = 0;
+
+    public void reset()
+    {
+        starting = true;
+        drivingDone = false;
+        turningDone = false;
+        driveEndTime = 0;
+        turnEndTime = 0;
+    }
+
+    public void start()
+    {
+        mTimeAll.startTimer();
+        reset();
+    }
+
+    public double getTime()
+    {
+        return mTimeAll.getTime();
+    }
+
     public boolean testMotors(double speed, double angle)
     {
         if(starting)
@@ -23,11 +46,11 @@ public class TestMotors {
             mTime.startTimer();
             starting = false;
         }
-        else if(!drivingDone && !starting)
+        if(!drivingDone && !starting)
         {
             mDrive.testDriveMotors(speed, mTime.getTime());
         }
-        else if(drivingDone && !starting)
+        else if(!turningDone && drivingDone && !starting)
         {
             mDrive.testAngleMotors(angle, mTime.getTime());
         }
@@ -37,8 +60,10 @@ public class TestMotors {
             drivingDone = true;
             starting = true;
         }
-        else if(mTime.isTimerDone() && drivingDone)
+        else if(mTime.isTimerDone() && drivingDone && !turningDone)
         {
+            starting = false;
+            turningDone = true;
             turnEndTime = mTime.getTime();
             mLog.writeLog("Drive End Time: " + driveEndTime);
             mLog.writeLog("Turn End Time: " + turnEndTime);

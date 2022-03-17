@@ -33,6 +33,7 @@ import frc.robot.Drive.ETHERRCW;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
+import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.CommandArray;
 import frc.robot.miscellaneous.EzLogger;
 
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
    private EzLogger mLog = EzLogger.getInstance();
+   private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -140,9 +142,8 @@ public class Robot extends TimedRobot {
    private double turnyAngle = 90;
 
 
-   private boolean firstTimeSafety = true;
-   private Timer safteyTestTimer = new Timer();
-
+   private boolean doneTest = false;
+   private boolean tester = true;
 
    @Override
    public void robotInit() {
@@ -600,11 +601,25 @@ isLeftBelow = true
 
   @Override
   public void testInit() {
-
+    variableInitializerTest();
+    mTest.start();
   }
 
   @Override
   public void testPeriodic() {
+    //TODO test a while loop? work or not? unless ask swerd or others
+    if(!doneTest)
+    {
+      if(!tester)
+      {
+        doneTest = true;
+        mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
+      }
+      else
+      {
+        tester = mTest.testMotors(216000, 90);
+      }
+    }
   }
 
 /**updates state of fast toggle for driving */
@@ -672,7 +687,8 @@ isLeftBelow = true
 
   public void variableInitializerTest()
   {
-    firstTimeSafety = true;
+    doneTest = false;
+    tester = true;
   }
   
 }
