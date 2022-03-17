@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -137,6 +138,10 @@ public class Robot extends TimedRobot {
    private ETHERRCW turny = ETHERRCW.Specific;
    private double angle = 90;
    private double turnyAngle = 90;
+
+
+   private boolean firstTimeSafety = true;
+   private Timer safteyTestTimer = new Timer();
 
 
    @Override
@@ -593,7 +598,9 @@ isLeftBelow = true
   public void disabledPeriodic() {}
 
   @Override
-  public void testInit() {}
+  public void testInit() {
+
+  }
 
   @Override
   public void testPeriodic() {
@@ -660,6 +667,11 @@ isLeftBelow = true
     spee = 3;
     leftGoingUp = false;
     rightGoingUp = false;
+  }
+
+  public void variableInitializerTest()
+  {
+    firstTimeSafety = true;
   }
   
 }

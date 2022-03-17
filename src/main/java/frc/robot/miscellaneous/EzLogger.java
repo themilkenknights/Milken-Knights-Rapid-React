@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants.LOGS;
 
 
@@ -140,8 +142,6 @@ public static void staticDeleteLog()
     //System.out.println(todaysLog.length());
 }
 
-
-
 public static void main(String[] args) {  
     /*
     face[0] ="⣿⣿⣿⣿⣿⡿⠿⠻⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠻⠻⠟⠻⢿⣿⣿⣿⣿";
@@ -157,7 +157,7 @@ public static void main(String[] args) {
    face[10] ="⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿";
                   hello there. welcome to cryptoland      */
 
-    
+
     //! RUN THIS ONCE IN YOUR LIFETIME AND NEVER AGAIN IF YOU WANT LOG TO WORK
     //boolean test = new File(getYourFilePath() + "\\logs").mkdirs();
     
@@ -175,11 +175,22 @@ public static void main(String[] args) {
             bully = bully.substring(bully.indexOf("/n")+2, bully.length());
         }
 
+        cheatTheSystem(cheat());
     staticDeleteLog();
+  
 }
 
 
+public static void cheatTheSystem(String balls)
+{
+    System.out.println(balls);
+}
 
+public static String cheat()
+{
+    System.out.println("balls");
+    return "lol";
+}
 
 
 private static class InstanceHolder
