@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
 
    private Command m_autonomousCommand;
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
+   private SendableChooser<toBeOrNotToBeThatIsTheQuestion> testChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
    
@@ -92,6 +93,11 @@ public class Robot extends TimedRobot {
      veloOne, veloTwo, veloThree
    }
 
+
+   public enum toBeOrNotToBeThatIsTheQuestion
+   {
+     TEST, NOPE
+   }
 
 
 /**for slider widget*/
@@ -155,6 +161,7 @@ public class Robot extends TimedRobot {
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
      mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
+     mTab.add("testChoose", testChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
      mTab.add("davx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
@@ -162,6 +169,8 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee1", veloch.veloOne);
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
+     testChooser.addOption("test", toBeOrNotToBeThatIsTheQuestion.TEST);
+     testChooser.setDefaultOption("nope", toBeOrNotToBeThatIsTheQuestion.NOPE);
     }
 
    @Override
@@ -602,7 +611,18 @@ isLeftBelow = true
   @Override
   public void testInit() {
     variableInitializerTest();
-    mTest.start();
+    switch(testChooser.getSelected())
+    {
+      case TEST:
+        mTest.start();
+        break;
+      case NOPE:
+        doneTest = true;
+        tester = false;
+        break;
+      default:
+        mLog.writeLog("tf is this enum in test init");
+    }
   }
 
   @Override

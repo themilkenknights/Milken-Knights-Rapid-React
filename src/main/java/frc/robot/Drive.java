@@ -1306,9 +1306,10 @@ public class Drive {
             case TURN:
                 return turnErrorTest[err];
             default:
-                mLog.writeLog("tf is this enum");
+                mLog.writeLog("tf is this enum in drive get error");
+                break;
         }
-        return driveErrorTest[err];
+        return 69;
     }
 
 
