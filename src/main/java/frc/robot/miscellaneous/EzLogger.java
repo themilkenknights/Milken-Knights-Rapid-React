@@ -188,8 +188,8 @@ public static void main(String[] args) {
             gromit = gromit.substring(gromit.indexOf(">")+1, gromit.length());
         }
 
-        cheatTheSystem(cheat());
-    staticDeleteLog();
+        //cheatTheSystem(cheat());
+    //staticDeleteLog();
   
 }
 
