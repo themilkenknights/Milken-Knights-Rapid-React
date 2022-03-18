@@ -32,11 +32,11 @@ import frc.robot.Drive.ETHERAUTO;
 import frc.robot.Drive.ETHERRCW;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
-import frc.robot.miscellaneous.Shuffle;
+import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
-import frc.robot.miscellaneous.TestMotors.MECHANISM;
+import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
 import frc.robot.miscellaneous.CommandArray;
-import frc.robot.miscellaneous.EzLogger;
+//import frc.robot.miscellaneous.EzLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -54,8 +54,8 @@ public class Robot extends TimedRobot {
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
-   private EzLogger mLog = EzLogger.getInstance();
-   private TestMotors mTest = new TestMotors();
+   //private EzLogger mLog = EzLogger.getInstance();
+   //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -157,8 +157,8 @@ public class Robot extends TimedRobot {
    public void robotInit() {
     variableInitializerTeleop();
     mDrive.assignTalonArray();
-     mLog.logRobotInit();
-     mLog.writeLog("Robot Initialized");
+     //mLog.logRobotInit();
+     //mLog.writeLog("Robot Initialized");
      testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
@@ -187,14 +187,14 @@ public class Robot extends TimedRobot {
  
    @Override
    public void autonomousInit() {
-     mLog.writeLog("Autonomous Initialized");
+     //mLog.writeLog("Autonomous Initialized");
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
-     mLog.writeLog("Running Auto: " + positionChooser.getSelected().toString());
+     //mLog.writeLog("Running Auto: " + positionChooser.getSelected().toString());
      switch (positionChooser.getSelected()) {
        case LEFT:
          m_autonomousCommand = testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
@@ -214,7 +214,7 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
-     mLog.writeLog("Teleop Initialized");
+     //mLog.writeLog("Teleop Initialized");
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -616,7 +616,7 @@ isLeftBelow = true
 
   @Override
   public void testInit() {
-    mTest.resetAll();
+    //mTest.resetAll();
     switch(testChooser.getSelected())
     {
       case TEST:
@@ -638,7 +638,7 @@ isLeftBelow = true
         doneTestModule = true;
         break;
       default:
-        mLog.writeLog("tf is this enum in test init");
+        //mLog.writeLog("tf is this enum in test init");
         doneTestModule = true;
     }
   }
@@ -654,27 +654,27 @@ isLeftBelow = true
       case TEST:
         if(!doneTestModule)
         {
-          doneTestModule = mTest.testMotors(216000, 90);
+        //  doneTestModule = mTest.testMotors(216000, 90);
         }
         else
         {
-          mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
+         // mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
           doneDone = true;
         }
         break;
       case SHOOTER:
         if(!doneTestMechanism)
         {
-          doneTestMechanism = mTest.testMechanism(SHOOT.maxVelo, MECHANISM.Shooter);
+        //  doneTestMechanism = mTest.testMechanism(SHOOT.maxVelo, MECHANISM.Shooter);
         }
         else 
         {
-          mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
+        //  mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
           doneDone = true;
         }
         break;
       default:
-        mLog.writeLog("tf is this enum in test periodic");
+       // mLog.writeLog("tf is this enum in test periodic");
         doneDone = true;
         break;
       }

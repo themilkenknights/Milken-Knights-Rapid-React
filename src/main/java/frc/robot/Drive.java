@@ -21,12 +21,12 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.TURN;
-import frc.robot.miscellaneous.EzLogger;
+//import frc.robot.miscellaneous.EzLogger;
 
 
 /**The Drive class contains all functions for anything related to DIY swerve drive (ether drive, DIY auto, etc)*/
 public class Drive {
-    private EzLogger mLog = EzLogger.getInstance(); 
+//    private EzLogger mLog = EzLogger.getInstance(); 
 
     public TalonFX topTurnLeft = new TalonFX(TURN.topTurnLeftCANID);
     public TalonFX topTurnRight = new TalonFX(TURN.topTurnRightCANID);
@@ -1306,7 +1306,7 @@ public class Drive {
             case TURN:
                 return turnErrorTest[err];
             default:
-                mLog.writeLog("tf is this enum in drive get error");
+                //mLog.writeLog("tf is this enum in drive get error");
                 break;
         }
         return 69;
