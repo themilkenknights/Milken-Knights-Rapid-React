@@ -21,7 +21,6 @@ import frc.robot.Constants.LOGS;
 public class EzLogger {
  /**Random thing in swerd code. may be data id*/
     private static final UUID RUN_INSTANCE_UUID = UUID.randomUUID();
-    private static String todaysDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private static File file = new File("README.md");
     private static String ultimatePath = file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf("\\" + file.getName()));
     private static File todaysFolder = new File(staticGetYourFilePath() + "\\logs\\" + staticGetTodaysDate());
@@ -30,7 +29,7 @@ public class EzLogger {
     
     public static String gromit = ("                  NKkxddoddxO0OxxkkkOOO000K00000OOOOOOOOOkxxx0N>               W0o;'''',,,,,;codxxkkkkOOOkOOOOOOkkkkkkOkkkxdoolxX>             W0c............':oddxxkkkkkOOOkkkkkkOOOkkkkkkxdol,.oN>            Nd'......,ldxkkdollodxxkkkO000OOOkkO0OkO0Okkkxxdol,.;K>           No......,dKW     WOoodxxkkkOkl,.'oOOkc'.'dOkkkxxdol,.;K>          Wx......;OW        KdoxxkkkOOkc'.,oOOkc'.,okkkkxxdoc,.:K>          0;.....'xW         XxdxxkkkOOkkxxkOO00OxxxkkkOkkxdoc'.cX>        WWx......cK          XxdxkkkkOOOOOOOOOOOOOOOOOOkkkxdo:'.cX>        NXl......xN          KxxxxkkkkkOOOOOOOOOOOOOOOkkkkxdo:'.:K>        NKl......oX         W0xxxkkkkkkOOOOO000000OOOOOkkkxxol,.'kW>        WXo......,kN       WKkxxxkkkkOOOOOOO0000000OOOOOOkkxxoc'.cX>         Wk' .....;kN      XkdxxkkkkOOOO000000OOOOOOOOOOOOOkxxo:..kW>          Xc.......'l0N   NkddxxkkkkOOO000OxxdddxkkOOOOOOOOkkxdl,.cN>           0:........,lk0KkodxxkkkkkOOkdc,.......';cdkOOOOOOkkxo:.:K>           WKc..........';codxxkkkkkkx:.    ....   ..;dOOOOOkkxoc.cX>             Xo,..........:odxxxkkkkx:.    ....      .'okOkkkkxol:xW>              NOc.........;odxxkkkkko'      .         .;xkkkkxxxdkX>               WXkl,......,oxxxxkkkko'                .,dkkkkxxkKN>                  WXOxolloxkxdxxxxxkd:.     ..       ..cxkxxxxkKW>                          W0xdddxxxxd;..           ..:dxxxxxkKW>                           W0xodddddddl;'...   ...';lddddddkKW>                            WXkddddddddooc:;;;;;:cloooooodkXW>                              WNXKKK000OOOOkxddxkkOOOOOO0XW>                                MMMMMMMMMMWWWMMMMMMMMMMM>                                                             >");
     
-    public static File todaysLog = new File(ultimatePath + "\\logs\\" + todaysDate + "\\main_log.txt");
+    public static File todaysLog = new File(ultimatePath + "\\logs\\" + staticGetTodaysDate() + "\\main_log.txt");
 
 
     public static EzLogger getInstance()
@@ -108,12 +107,12 @@ public static void staticLogRobotInit() {
 
 public String getTodaysDate()
 {
-    return todaysDate;
+    return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 }
 
 public static String staticGetTodaysDate()
 {
-    return todaysDate;
+    return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 }
 
 
@@ -187,6 +186,8 @@ public static void main(String[] args) {
             gromit = temp;
             gromit = gromit.substring(gromit.indexOf(">")+1, gromit.length());
         }
+
+        
 
         //cheatTheSystem(cheat());
     //staticDeleteLog();
