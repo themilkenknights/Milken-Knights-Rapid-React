@@ -199,6 +199,18 @@ public final class Constants {
 
         public static double jacksSpeed = 0.4;
         public static double mySpeed = -0.8;
+
+        public static int velocityMeasAmount = 16;
+        public static int statusOneMeas = 25;
+        public static int statusTwoMeas = 25;      
+        
+        public static double elevatorKP = 0;
+        public static double elevatorKI = 0;
+        public static double elevatorKD = 0;
+        public static double elevatorKF = 0;
+
+        public static double maxError = 0;
+        public static double maxVelo = 0;
     }
 
  /**class containing variables that relate to intakinh*/
