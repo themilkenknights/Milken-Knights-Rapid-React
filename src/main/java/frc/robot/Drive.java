@@ -1270,16 +1270,16 @@ public class Drive {
         return turnMotors;
     }
 
-    /**0 driveErrZero, 1 driveErrFull, 2-5 driveMotorErrZero, 6-9 driveMotorErrFull*/
+    /**0 driveErrZero, 1 driveErrFull, 2-5 driveMotorErrZero, 6-9 driveMotorErrFull (topLeft, topRight, botLeft, botRight)*/
     private double[] driveErrorTest = new double[10];
 
-    /**0 turnErrZero, 1 turnErrFull, 2-5 turnMotorErrZero, 6-9 turnMotorErrFull*/
+    /**0 turnErrZero, 1 turnErrFull, 2-5 turnMotorErrZero, 6-9 turnMotorErrFull (topLeft, topRight, botLeft, botRight)*/
     private double[] turnErrorTest = new double[10];
 
 
-    private TalonFX[] driveMotors = new TalonFX[4];
+    private TalonFX[] driveMotors = new TalonFX[6];
 
-    private TalonFX[] turnMotors = new TalonFX[4];
+    private TalonFX[] turnMotors = new TalonFX[6];
 
 
     public void assignTalonArray()

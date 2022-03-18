@@ -34,6 +34,7 @@ import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.Shuffle;
 import frc.robot.miscellaneous.TestMotors;
+import frc.robot.miscellaneous.TestMotors.MECHANISM;
 import frc.robot.miscellaneous.CommandArray;
 import frc.robot.miscellaneous.EzLogger;
 
@@ -96,7 +97,7 @@ public class Robot extends TimedRobot {
 
    public enum toBeOrNotToBeThatIsTheQuestion
    {
-     TEST, NOPE
+     TEST, SHOOTER, CLIMBER, INTAKE, ELEVATOR, NOPE
    }
 
 
@@ -148,8 +149,9 @@ public class Robot extends TimedRobot {
    private double turnyAngle = 90;
 
 
-   private boolean doneTest = false;
-   private boolean tester = true;
+   private boolean doneTestModule = false;
+   private boolean doneTestMechanism = false;
+   private boolean doneDone = false;
 
    @Override
    public void robotInit() {
@@ -170,6 +172,10 @@ public class Robot extends TimedRobot {
      veloshufflething.addOption("spee2", veloch.veloTwo);
      veloshufflething.setDefaultOption("spee1", veloch.veloOne);
      testChooser.addOption("test", toBeOrNotToBeThatIsTheQuestion.TEST);
+     testChooser.addOption("shooter", toBeOrNotToBeThatIsTheQuestion.SHOOTER);
+     testChooser.addOption("climber", toBeOrNotToBeThatIsTheQuestion.CLIMBER);
+     testChooser.addOption("intake", toBeOrNotToBeThatIsTheQuestion.INTAKE);
+     testChooser.addOption("elevator", toBeOrNotToBeThatIsTheQuestion.ELEVATOR);
      testChooser.setDefaultOption("nope", toBeOrNotToBeThatIsTheQuestion.NOPE);
     }
 
@@ -610,34 +616,67 @@ isLeftBelow = true
 
   @Override
   public void testInit() {
-    variableInitializerTest();
+    mTest.resetAll();
     switch(testChooser.getSelected())
     {
       case TEST:
-        mTest.start();
+        doneTestModule = false;
+        break;
+      case SHOOTER:
+        doneTestMechanism = false;
+        break;
+      case ELEVATOR:
+        doneTestMechanism = false;
+        break;
+      case INTAKE:
+        doneTestMechanism = false;
+        break;
+      case CLIMBER:
+        doneTestMechanism = false;
         break;
       case NOPE:
-        doneTest = true;
-        tester = false;
+        doneTestModule = true;
         break;
       default:
         mLog.writeLog("tf is this enum in test init");
+        doneTestModule = true;
     }
   }
 
   @Override
   public void testPeriodic() {
     //TODO test a while loop? work or not? unless ask swerd or others
-    if(!doneTest)
+    //TODO if i put the break after the else or in the else would it make a difference? philisophical 
+    if(!doneDone)
     {
-      if(!tester)
-      {
-        doneTest = true;
-        mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
-      }
-      else
-      {
-        tester = mTest.testMotors(216000, 90);
+    switch(testChooser.getSelected())
+    {
+      case TEST:
+        if(!doneTestModule)
+        {
+          doneTestModule = mTest.testMotors(216000, 90);
+        }
+        else
+        {
+          mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
+          doneDone = true;
+        }
+        break;
+      case SHOOTER:
+        if(!doneTestMechanism)
+        {
+          doneTestMechanism = mTest.testMechanism(SHOOT.maxVelo, MECHANISM.Shooter);
+        }
+        else 
+        {
+          mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
+          doneDone = true;
+        }
+        break;
+      default:
+        mLog.writeLog("tf is this enum in test periodic");
+        doneDone = true;
+        break;
       }
     }
   }
@@ -705,10 +744,5 @@ isLeftBelow = true
     rightGoingUp = false;
   }
 
-  public void variableInitializerTest()
-  {
-    doneTest = false;
-    tester = true;
-  }
   
 }

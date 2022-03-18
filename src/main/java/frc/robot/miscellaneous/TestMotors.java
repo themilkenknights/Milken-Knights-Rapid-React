@@ -5,33 +5,32 @@
 package frc.robot.miscellaneous;
 
 import frc.robot.Drive;
+import frc.robot.Shooter;
 import frc.robot.Drive.ERROR;
 
 /** Add your docs here. */
 public class TestMotors {
     private Drive mDrive = Drive.getInstance();
+    private Shooter mShoot = Shooter.getInstance();
     private EzLogger mLog = EzLogger.getInstance();
     private MkTimerV2 mTime = new MkTimerV2(3);
     private MkTimerV2 mTimeAll = new MkTimerV2();
     private boolean starting = true;
     private boolean drivingDone = false;
     private boolean turningDone = false;
-    private double driveEndTime = 0;
-    private double turnEndTime = 0;
+    private boolean mechanismDone = false;
 
-    public void reset()
+    public void resetAll()
     {
         starting = true;
         drivingDone = false;
         turningDone = false;
-        driveEndTime = 0;
-        turnEndTime = 0;
+        mechanismDone = false;
     }
 
     public void start()
     {
         mTimeAll.startTimer();
-        reset();
     }
 
     public double getTime()
@@ -46,7 +45,7 @@ public class TestMotors {
             mTime.startTimer();
             starting = false;
         }
-        if(!drivingDone && !starting)
+        else if(!drivingDone && !starting)
         {
             mDrive.testDriveMotors(speed, mTime.getTime());
         }
@@ -56,7 +55,6 @@ public class TestMotors {
         }
         if(mTime.isTimerDone() && !drivingDone)
         {
-            driveEndTime = mTime.getTime();
             drivingDone = true;
             starting = true;
         }
@@ -64,9 +62,6 @@ public class TestMotors {
         {
             starting = false;
             turningDone = true;
-            turnEndTime = mTime.getTime();
-            mLog.writeLog("Drive End Time: " + driveEndTime);
-            mLog.writeLog("Turn End Time: " + turnEndTime);
             for(int i = 0; i < 20; i++)
             {
                 if(i < 10)
@@ -78,8 +73,60 @@ public class TestMotors {
                     mLog.writeLog("Accuracy For turnErrorTest[" + i%10 + "]: " + Double.toString(mDrive.getError(ERROR.TURN, i%10)));
                 }
             }
-            return false;
+            mDrive.resetDrive();
+            mDrive.encoderZero();
+            return true;
         }
-        return true;
+        return false;
+    }
+
+
+
+
+    public boolean testMechanism(double setpoint, MECHANISM mechanism)
+    {
+        if(starting)
+        {
+            mTime.startTimer();
+            starting = false;
+        }
+        else if(!mechanismDone && !starting)
+        {
+            switch(mechanism)
+            {
+                case Shooter:
+                    mShoot.shootErrorTestVelocity(setpoint, mTime.getTime());
+                    break;
+                default:
+                    mLog.writeLog("tf is this enum in test mechanism");
+                    return false;
+            }
+        }
+        if(mTime.isTimerDone() && !mechanismDone)
+        {
+            starting = false;
+            mechanismDone = true;
+            switch(mechanism)
+            {
+                case Shooter:
+                    for(int i = 0; i < 6; i++)
+                    {
+                        mLog.writeLog("Accuracy For shootErrorTest[" + i + "]: " + Double.toString(mShoot.getError(i)));
+                    }
+                    break;
+                default: 
+                    mLog.writeLog("tf is this enum in test mechanism");
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public enum MECHANISM 
+    {
+        Shooter, Climber, Intake, Elevator
     }
 }

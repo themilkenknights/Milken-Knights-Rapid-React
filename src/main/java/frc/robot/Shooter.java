@@ -19,6 +19,9 @@ public class Shooter {
     
      TalonFX shootLeft = new TalonFX(SHOOT.shootLeftCANID);
      TalonFX shootRight = new TalonFX(SHOOT.shootRightCANID);
+     private double avgShootSpeed = 0;
+     private double leftShootVelocity = 0;
+     private double rightShootVelocity = 0;
     
     private Shooter()
     {
@@ -62,6 +65,13 @@ public class Shooter {
     }
     
     public void shooterUpdate()
+    {
+        avgShootSpeed = (getShootLeftVelocity() + getShootRightVelocity()) / 2;
+        leftShootVelocity = getShootLeftVelocity();
+        rightShootVelocity = getShootRightVelocity();
+    }
+
+    public void updateShooterVelocity()
     {
         SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
         SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
@@ -112,6 +122,40 @@ public class Shooter {
     {
         return shootRight.getSelectedSensorVelocity();
     }
+
+    public void shootErrorTestVelocity(double speed, double time)
+    {
+        setShooterNativeVeloctiy(speed);
+        if(time > 1)
+        {
+            shootErrorTest[0] = (shootErrorTest[0] + avgShootSpeed)/2;
+            shootErrorTest[1] = (shootErrorTest[1] + avgShootSpeed)/2;
+            
+            shootErrorTest[2] = (shootErrorTest[2] + leftShootVelocity)/2;
+            shootErrorTest[3] = (shootErrorTest[3] + rightShootVelocity)/2;
+
+            shootErrorTest[4] = (shootErrorTest[4] + leftShootVelocity)/2;
+            shootErrorTest[5] = (shootErrorTest[5] + rightShootVelocity)/2;
+        }
+        else
+        {
+            shootErrorTest[0] = 0;
+            shootErrorTest[1] = speed;
+            shootErrorTest[2] = 0;
+            shootErrorTest[3] = 0;
+            shootErrorTest[4] = speed;
+            shootErrorTest[5] = speed;
+        }
+    }
+
+
+    public double getError(int err)
+    {
+        return shootErrorTest[err];
+    }
+
+/**0 shootErrZero, 1 shootErrFull, 2-3 shootMotorErrZero, 4-5 shootMotorErrFull (left, right)*/
+    private double[] shootErrorTest = new double[6];
 
     private static class InstanceHolder
     {
