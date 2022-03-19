@@ -16,8 +16,8 @@ import frc.robot.Constants.INTAKE;
 /**The Intake class contains everything related to the intake, including deployers and rollers*/
 public class Intake {
     //// add another intake motor
-    private TalonSRX intakeLeft = new TalonSRX(INTAKE.intakeLeftCANID);
-    private TalonSRX intakeRight = new TalonSRX(INTAKE.intakeRightCANID);
+    private TalonSRX intake = new TalonSRX(INTAKE.intakeCANID);
+    //private TalonSRX intakeRight = new TalonSRX(INTAKE.intakeRightCANID);
     private TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
 
     //private boolean isOut = false;
@@ -25,19 +25,12 @@ public class Intake {
 
     private Intake()
     {
-        intakeLeft.configFactoryDefault();
-        intakeLeft.setNeutralMode(NeutralMode.Coast);
-        intakeLeft.setInverted(INTAKE.leftFlipped);
-        intakeLeft.enableVoltageCompensation(true);
-        intakeLeft.configVoltageCompSaturation(INTAKE.voltComp);
-        intakeLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        intake.configFactoryDefault();
+        intake.setNeutralMode(NeutralMode.Coast);
+        intake.enableVoltageCompensation(true);
+        intake.configVoltageCompSaturation(INTAKE.voltComp);
+        intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
-        intakeRight.configFactoryDefault();
-        intakeRight.setNeutralMode(NeutralMode.Coast);
-        intakeRight.setInverted(INTAKE.leftFlipped); // <-- not inverse of left because wiring is bad
-        intakeRight.enableVoltageCompensation(true);
-        intakeRight.configVoltageCompSaturation(INTAKE.voltComp);
-        intakeRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         //intakeRight.follow(intakeLeft);
         
         //intake.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
@@ -57,14 +50,14 @@ public class Intake {
 
     public void updateIntake()
     {
-        SmartDashboard.putNumber("magencLeft", intakeLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("magencLeft", intake.getSelectedSensorPosition());
+       // SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 
     public void setIntakePercent(double setpoint)
     {
-        intakeRight.set(ControlMode.PercentOutput, setpoint);
-        intakeLeft.set(ControlMode.PercentOutput, setpoint);
+        intake.set(ControlMode.PercentOutput, setpoint);
+      //  intakeLeft.set(ControlMode.PercentOutput, setpoint);
     }
 
     public void setRollersPercent(double setpoint)
@@ -75,13 +68,14 @@ public class Intake {
 
     public void setMagPosition(double setpoint)
     {
-        intakeLeft.setSelectedSensorPosition(setpoint);
+        intake.setSelectedSensorPosition(setpoint);
     }
 
 /**
  * Diy intake
  * @param button Toggle button
  */
+/*
     public void bangBangIntake(boolean button) //TODO need to test to see if it works
     {
         if(intakeLeft.getSelectedSensorPosition() <= INTAKE.intakeInMaxError)
@@ -117,7 +111,7 @@ public class Intake {
                 setIntakePercent(-INTAKE.intakeBangBangSpeed);
             }
         }
-    }   
+    }   */
 
     private static class InstanceHolder
     {

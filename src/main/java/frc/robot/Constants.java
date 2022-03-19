@@ -218,11 +218,11 @@ public final class Constants {
     {
         public static double voltComp = 12;
 
-        public static boolean leftFlipped = true; 
+        //public static boolean leftFlipped = true; 
 
             //facing ask me about my robot sticker, left is left and right is right
-        public static int intakeLeftCANID = 9;//0;// 9; //14;
-        public static int intakeRightCANID = 13;
+        public static int intakeCANID = 9;//0;// 9; //14;
+        //public static int intakeRightCANID = 13;
         public static int rollersCANID = 12;//14;//13; //13;
 
         public static double intakeGreerRatio = 0;
