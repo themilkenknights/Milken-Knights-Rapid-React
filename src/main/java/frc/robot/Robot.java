@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+//TODO use this instead of read me file path
+//"/home/lvuser/crash_tracking.txt
 
 
 import java.util.ArrayList;
@@ -36,7 +38,6 @@ import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
 import frc.robot.miscellaneous.CommandArray;
-//import frc.robot.miscellaneous.EzLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
