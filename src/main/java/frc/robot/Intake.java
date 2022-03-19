@@ -26,7 +26,7 @@ public class Intake {
     private Intake()
     {
         intake.configFactoryDefault();
-        intake.setNeutralMode(NeutralMode.Coast);
+        intake.setNeutralMode(NeutralMode.Brake);
         intake.enableVoltageCompensation(true);
         intake.configVoltageCompSaturation(INTAKE.voltComp);
         intake.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
