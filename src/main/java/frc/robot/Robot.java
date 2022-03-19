@@ -28,6 +28,7 @@ import frc.robot.Commandments.DriveStraightREAL;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
+import frc.robot.Constants.INTAKE;
 import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 import frc.robot.Drive.ETHERAUTO;
@@ -118,6 +119,7 @@ public class Robot extends TimedRobot {
    private int velo = 0;
 
    private double ffcalc = 0;
+   private double eleFFCalc = 0;
 
    private boolean leftGoingUp = false;
    private boolean rightGoingUp = false;
@@ -303,11 +305,15 @@ public class Robot extends TimedRobot {
 */
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
-        mElevator.setElevatorPercent(-.8);
+        eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
+        mElevator.setElevatorVelocity(eleFFCalc);
+        //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
-{
-      mElevator.setElevatorPercent(.8);
+      {
+        eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
+        mElevator.setElevatorVelocity(-eleFFCalc);
+        //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
       /*else
       {
@@ -320,11 +326,11 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
-        mIntake.setIntakePercent(.2);
+        mIntake.setIntakePercent(INTAKE.intakeSpeed);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
-        mIntake.setIntakePercent(-.2);
+        mIntake.setIntakePercent(-INTAKE.intakeSpeed);
       }
       else
       {
@@ -336,11 +342,11 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
-        mIntake.setRollersPercent(1);
+        mIntake.setRollersPercent(INTAKE.rollerSpeed);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
       {
-        mIntake.setRollersPercent(-1);
+        mIntake.setRollersPercent(-INTAKE.rollerSpeed);
       }
       /*else
       {

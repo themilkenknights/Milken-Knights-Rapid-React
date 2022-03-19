@@ -48,7 +48,7 @@ public class Elevator {
         elevator.set(ControlMode.Velocity, setpoint);
     }
 
-    public double shooterFeedForward(double setpoint)
+    public double elevatorFeedForward(double setpoint)
     {
         return ELEVATOR.maxError * (Math.cos((Constants.kPi / 2) * (1+(setpoint / ELEVATOR.maxVelo))));
     }

@@ -204,13 +204,13 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;      
         
-        public static double elevatorKP = 0;
+        public static double elevatorKP = 0.01;
         public static double elevatorKI = 0;
         public static double elevatorKD = 0;
         public static double elevatorKF = 0;
 
-        public static double maxError = 0;
-        public static double maxVelo = 0;
+        public static double maxError = 1580;
+        public static double maxVelo = 18900;
     }
 
  /**class containing variables that relate to intakinh*/
@@ -246,6 +246,10 @@ public final class Constants {
      
      /**p value for diy pid*/
         public static double intakeBangBangSpeed = 0.5; //TODO may need to tune this if its too fast/slow
+
+
+        public static double intakeSpeed = 0.2;
+        public static double rollerSpeed = 1;
     }
 
  /**class containing variables that relate to climbing*/
