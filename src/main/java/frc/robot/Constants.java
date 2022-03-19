@@ -204,7 +204,11 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;      
         
+<<<<<<< Updated upstream
         public static double elevatorKP = 0.01;
+=======
+        public static double elevatorKP = 0.00000001;
+>>>>>>> Stashed changes
         public static double elevatorKI = 0;
         public static double elevatorKD = 0;
         public static double elevatorKF = 0;
@@ -344,8 +348,8 @@ public final class Constants {
         //joystick
         public static int intakeup = 12; //8
         public static int intakedown = 11; //7
-        public static int rollersForwardButton = 3; //11
-        public static int rollersBackwardButton = 5; //12
+        public static int rollersForwardButton = 5; //11
+        public static int rollersBackwardButton = 3; //12
         public static int elevatorForwardButton = 4; //9
         public static int elevatorBackwardButton = 6; //1
         public static int shooterButton = 1;
