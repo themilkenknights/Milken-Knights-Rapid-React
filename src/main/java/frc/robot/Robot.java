@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+//TODO use this instead of read me file path
+//"/home/lvuser/crash_tracking.txt
 
 
 import java.util.ArrayList;
@@ -36,7 +38,6 @@ import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
 import frc.robot.miscellaneous.CommandArray;
-//import frc.robot.miscellaneous.EzLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -70,11 +71,9 @@ public class Robot extends TimedRobot {
 
    private Command m_autonomousCommand;
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
-   private SendableChooser<toBeOrNotToBeThatIsTheQuestion> testChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
    
-   private SendableChooser<veloch> veloshufflething = new SendableChooser<veloch>();
 
    private CommandArray testCommandArray = new CommandArray("testCommandArray");
    
@@ -85,18 +84,6 @@ public class Robot extends TimedRobot {
 /**states of autonomous*/ 
    public enum AutoPosition {
      LEFT, NOTHING
-   }
-
-/**states of shooter speed*/
-   public enum veloch
-   {
-     veloOne, veloTwo, veloThree
-   }
-
-
-   public enum toBeOrNotToBeThatIsTheQuestion
-   {
-     TEST, SHOOTER, CLIMBER, INTAKE, ELEVATOR, NOPE
    }
 
 
@@ -160,21 +147,12 @@ public class Robot extends TimedRobot {
      testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
-     mTab.add("velochoose", veloshufflething).withWidget(BuiltInWidgets.kSplitButtonChooser);
-     mTab.add("testChoose", testChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
+    
      mTab.add("davx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
-     veloshufflething.addOption("spee1", veloch.veloOne);
-     veloshufflething.addOption("spee2", veloch.veloTwo);
-     veloshufflething.setDefaultOption("spee1", veloch.veloOne);
-     testChooser.addOption("test", toBeOrNotToBeThatIsTheQuestion.TEST);
-     testChooser.addOption("shooter", toBeOrNotToBeThatIsTheQuestion.SHOOTER);
-     testChooser.addOption("climber", toBeOrNotToBeThatIsTheQuestion.CLIMBER);
-     testChooser.addOption("intake", toBeOrNotToBeThatIsTheQuestion.INTAKE);
-     testChooser.addOption("elevator", toBeOrNotToBeThatIsTheQuestion.ELEVATOR);
-     testChooser.setDefaultOption("nope", toBeOrNotToBeThatIsTheQuestion.NOPE);
+    
     }
 
    @Override
@@ -220,19 +198,7 @@ public class Robot extends TimedRobot {
      mDrive.resetDrive();
      SmartDashboard.putNumber("slider", 0);
      //SmartDashboard.putNumber("driveSlider", 0);
-     switch (veloshufflething.getSelected()) {
-      case veloOne:
-        velo = 0;
-        break;
-        
-      case veloTwo:
-        velo = 2000;
-        break;
-       
-      case veloThree:
-        velo = 4000;
-        break;
-      }
+     
     }
  
   @Override
@@ -612,65 +578,12 @@ isLeftBelow = true
 
   @Override
   public void testInit() {
-    //mTest.resetAll();
-    switch(testChooser.getSelected())
-    {
-      case TEST:
-        doneTestModule = false;
-        break;
-      case SHOOTER:
-        doneTestMechanism = false;
-        break;
-      case ELEVATOR:
-        doneTestMechanism = false;
-        break;
-      case INTAKE:
-        doneTestMechanism = false;
-        break;
-      case CLIMBER:
-        doneTestMechanism = false;
-        break;
-      case NOPE:
-        doneTestModule = true;
-        break;
-      default:
-        doneTestModule = true;
-    }
+    
   }
 
   @Override
   public void testPeriodic() {
-    //TODO test a while loop? work or not? unless ask swerd or others
-    //TODO if i put the break after the else or in the else would it make a difference? philisophical 
-    if(!doneDone)
-    {
-    switch(testChooser.getSelected())
-    {
-      case TEST:
-        if(!doneTestModule)
-        {
-        //  doneTestModule = mTest.testMotors(216000, 90);
-        }
-        else
-        {
-          doneDone = true;
-        }
-        break;
-      case SHOOTER:
-        if(!doneTestMechanism)
-        {
-        //  doneTestMechanism = mTest.testMechanism(SHOOT.maxVelo, MECHANISM.Shooter);
-        }
-        else 
-        {
-          doneDone = true;
-        }
-        break;
-      default:
-        doneDone = true;
-        break;
-      }
-    }
+  
   }
 
 /**updates state of fast toggle for driving */

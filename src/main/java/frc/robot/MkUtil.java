@@ -204,7 +204,7 @@ public class MkUtil {
     }
   }
 
-  //!     this is ben binders mkutil extension, above is swerdlow code
+  //!     this is ben binders mkutil extension, above is other code
 
   /**
    * (Falcon) native units to degrees
