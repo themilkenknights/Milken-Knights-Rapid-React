@@ -317,11 +317,11 @@ public class Robot extends TimedRobot {
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc);
-        if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
+        /*if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
         {
           mElevator.setElevatorPercent(ELEVATOR.mySpeed);
           mIntake.setRollersPercent(1);
-        }
+        }*/
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
       else if(xbox.getStartButton())
