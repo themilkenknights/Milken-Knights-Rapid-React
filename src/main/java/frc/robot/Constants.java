@@ -204,11 +204,7 @@ public final class Constants {
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;      
         
-<<<<<<< Updated upstream
-        public static double elevatorKP = 0.01;
-=======
         public static double elevatorKP = 0.00000001;
->>>>>>> Stashed changes
         public static double elevatorKI = 0;
         public static double elevatorKD = 0;
         public static double elevatorKF = 0;
@@ -236,8 +232,6 @@ public final class Constants {
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; 
-
-        public static double timeIntake = 0;
 
      /**how much it needs to rotate to move into out position*/
         public static double intakeRotationsNative = 0;

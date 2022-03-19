@@ -344,7 +344,7 @@ public class Robot extends TimedRobot {
       {
         mIntake.setRollersPercent(-INTAKE.rollerSpeed);
       }
-      elsed
+      else
       {
         mIntake.setRollersPercent(0);
       }
