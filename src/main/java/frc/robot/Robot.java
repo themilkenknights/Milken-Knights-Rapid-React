@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
-   //private EzLogger mLog = EzLogger.getInstance();
    //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
@@ -157,8 +156,7 @@ public class Robot extends TimedRobot {
    public void robotInit() {
     variableInitializerTeleop();
     mDrive.assignTalonArray();
-     //mLog.logRobotInit();
-     //mLog.writeLog("Robot Initialized");
+     
      testCommandArray.addParallelCommandGroup(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(6));
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
@@ -187,14 +185,13 @@ public class Robot extends TimedRobot {
  
    @Override
    public void autonomousInit() {
-     //mLog.writeLog("Autonomous Initialized");
+    
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
      mDrive.encoderZero();
      mDrive.resetDrive();
      mDrive.resetNavx();
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
-     //mLog.writeLog("Running Auto: " + positionChooser.getSelected().toString());
      switch (positionChooser.getSelected()) {
        case LEFT:
          m_autonomousCommand = testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
@@ -214,7 +211,6 @@ public class Robot extends TimedRobot {
  
    @Override
    public void teleopInit() {
-     //mLog.writeLog("Teleop Initialized");
      mDrive.encoderZero();
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
@@ -638,7 +634,6 @@ isLeftBelow = true
         doneTestModule = true;
         break;
       default:
-        //mLog.writeLog("tf is this enum in test init");
         doneTestModule = true;
     }
   }
@@ -658,7 +653,6 @@ isLeftBelow = true
         }
         else
         {
-         // mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
           doneDone = true;
         }
         break;
@@ -669,12 +663,10 @@ isLeftBelow = true
         }
         else 
         {
-        //  mLog.writeLog("Test Complete In: " + mTest.getTime() + " Seconds");
           doneDone = true;
         }
         break;
       default:
-       // mLog.writeLog("tf is this enum in test periodic");
         doneDone = true;
         break;
       }

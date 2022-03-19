@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 /** Add your docs here. */
 public class AutoChooser {
     private Command m_autonomousCommand;
-    //private EzLogger mLog = EzLogger.getInstance();
     private enum AutoChoosers
     {
         TOPLEFT, TOP, TOPRIGHT, BOTLEFT, BOT, BOTRIGHT, NOTHING
@@ -39,9 +38,7 @@ public class AutoChooser {
 
     public void autoInitAutoChooser(AutoChoosers choose, CommandArray... arr)
     {
-    //    mLog.writeLog("Autonomous Initialized");
         Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
-        //mLog.writeLog("Running Auto: " + positionChooser.getSelected().toString());
      switch (positionChooser.getSelected()) {
          case TOPLEFT:
              m_autonomousCommand = arr[0].asSequentialCommandGroup();// new
@@ -78,7 +75,6 @@ public class AutoChooser {
 
     public void teleopInitAutoChooser()
     {
-      //  mLog.writeLog("Teleop Initialized");
         Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
         if (m_autonomousCommand != null) {
         m_autonomousCommand.cancel();
