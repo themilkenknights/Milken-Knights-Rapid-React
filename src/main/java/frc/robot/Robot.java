@@ -305,7 +305,6 @@ public class Robot extends TimedRobot {
 */
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
-<<<<<<< Updated upstream
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
         //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
@@ -315,18 +314,7 @@ public class Robot extends TimedRobot {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(-eleFFCalc);
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
-=======
-        mElevator.setElevatorPercent(-.2);
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
-{
-      mElevator.setElevatorPercent(.2);
->>>>>>> Stashed changes
-      }
-      /*else
-      {
-        mElevator.setElevatorPercent(0);
-      }*/
 
       
 
@@ -356,10 +344,10 @@ public class Robot extends TimedRobot {
       {
         mIntake.setRollersPercent(-INTAKE.rollerSpeed);
       }
-      /*else
+      elsed
       {
         mIntake.setRollersPercent(0);
-      }*/
+      }
  
 
 
@@ -516,7 +504,7 @@ mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
 }
 
 
-if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
+/*if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&
@@ -524,7 +512,7 @@ if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wa
 {
   mIntake.setRollersPercent(0);
   mElevator.setElevatorPercent(0);
-}
+}*/
 
 
 if(toggleLeftClimbOn)
