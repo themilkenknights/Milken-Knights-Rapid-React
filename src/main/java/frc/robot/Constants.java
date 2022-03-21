@@ -216,6 +216,11 @@ public final class Constants {
  /**class containing variables that relate to intakinh*/
     public static class INTAKE 
     {
+       
+      public static int velocityMeasAmount = 16;
+      public static int statusOneMeas = 25;
+      public static int statusTwoMeas = 25;      
+      
         public static double voltComp = 12;
 
         //public static boolean leftFlipped = true; 
