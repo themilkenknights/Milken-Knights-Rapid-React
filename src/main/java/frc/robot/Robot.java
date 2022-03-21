@@ -214,7 +214,7 @@ public class Robot extends TimedRobot {
     
     mDrive.driveUpdate();
     //mShoot.shooterUpdate();
-    //mIntake.updateIntake();
+    mIntake.updateIntake();
     mClimb.climberUpdate();
     mElevator.updateElevator();
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
