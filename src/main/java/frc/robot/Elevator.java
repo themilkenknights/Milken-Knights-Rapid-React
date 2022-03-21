@@ -10,6 +10,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 import frc.robot.Constants.ELEVATOR;
 
@@ -36,6 +38,11 @@ public class Elevator {
     public static Elevator getInstance()
     {
         return InstanceHolder.mInstance;
+    }
+
+    public void updateElevator()
+    {
+        SmartDashboard.putNumber("elerpm", elevator.getSelectedSensorVelocity());
     }
 
     public void setElevatorPercent(double setpoint)

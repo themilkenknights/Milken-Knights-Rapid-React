@@ -749,7 +749,7 @@ public class Drive {
 
 
 //TODO if this works credit them
-    double hP = 0.01, hI = 0.001, hD = hP * 0.1;
+    double hP = 0.001, hI = 0.0001, hD = hP * 0.1;
     double hIntegral, hDerivative, hPreviousError, hError;
 
     //programming done right
@@ -1024,7 +1024,7 @@ public class Drive {
             SmartDashboard.putNumber("STRauto", STRauto);
             SmartDashboard.putNumber("FWDauto", FWDauto);
         }
-        else if(turny == ETHERRCW.Specific)
+        if(turny == ETHERRCW.Specific)
         {
             RCWtemp = headerStraighter(turnyAuto);
         }

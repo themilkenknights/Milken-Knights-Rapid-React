@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commandments.DriveStraightREAL;
+import frc.robot.Commands.ForbiddenAuto;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
 import frc.robot.Constants.ELEVATOR;
@@ -35,6 +36,7 @@ import frc.robot.Drive.ETHERAUTO;
 import frc.robot.Drive.ETHERRCW;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
+import frc.robot.miscellaneous.MkTimerV2;
 import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
@@ -56,6 +58,7 @@ public class Robot extends TimedRobot {
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private Hood mHood = Hood.getInstance();
+   private MkTimerV2 mTime = new MkTimerV2(0.25);
    //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
@@ -141,6 +144,9 @@ public class Robot extends TimedRobot {
    private boolean doneTestMechanism = false;
    private boolean doneDone = false;
 
+
+   private boolean elevatorAfterShock = false;
+
    @Override
    public void robotInit() {
     variableInitializerTeleop();
@@ -153,7 +159,7 @@ public class Robot extends TimedRobot {
      mTab.add("davx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
-     positionChooser.setDefaultOption("Left Trench", AutoPosition.LEFT);
+     positionChooser.setDefaultOption("Jacks Auto", AutoPosition.LEFT);
     
     }
 
@@ -174,7 +180,7 @@ public class Robot extends TimedRobot {
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new ForbiddenAuto();// testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: 
          break;
@@ -210,7 +216,7 @@ public class Robot extends TimedRobot {
     //mShoot.shooterUpdate();
     //mIntake.updateIntake();
     mClimb.climberUpdate();
-    
+    mElevator.updateElevator();
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
@@ -306,15 +312,19 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
-        mElevator.setElevatorVelocity(eleFFCalc);
+        mElevator.setElevatorVelocity(-eleFFCalc);
         //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
-        mElevator.setElevatorVelocity(-eleFFCalc);
+        mElevator.setElevatorVelocity(eleFFCalc);
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
+     /* else
+      {
+        mElevator.setElevatorPercent(0);
+      }*/
 
       
 
@@ -339,15 +349,26 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
       {
         mIntake.setRollersPercent(INTAKE.rollerSpeed);
+        eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
+        mElevator.setElevatorVelocity(eleFFCalc);
+        elevatorAfterShock = true;
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
       {
         mIntake.setRollersPercent(-INTAKE.rollerSpeed);
+        eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
+        mElevator.setElevatorVelocity(-eleFFCalc);
+        elevatorAfterShock = true;
       }
-      else
+      else if(!mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton) && !mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton) && elevatorAfterShock)
+      {
+        mTime.startTimer();
+        elevatorAfterShock = false;
+      }
+     /* else
       {
         mIntake.setRollersPercent(0);
-      }
+      }*/
  
 
 
@@ -504,15 +525,23 @@ mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
 }
 
 
-/*if((mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
+if(//mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton)))
-{
+{ 
+  if(!mTime.isTimerDone())
+  {
+    eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
+    mElevator.setElevatorVelocity(eleFFCalc);
+  }
+  else
+  {
+    mElevator.setElevatorPercent(0);
+  }
   mIntake.setRollersPercent(0);
-  mElevator.setElevatorPercent(0);
-}*/
+}
 
 
 if(toggleLeftClimbOn)

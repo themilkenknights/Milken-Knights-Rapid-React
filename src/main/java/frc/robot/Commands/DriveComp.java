@@ -17,7 +17,7 @@ import frc.robot.Constants.SHOOT;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveComp extends SequentialCommandGroup {
   private Drive mDrive = Drive.getInstance();
-  private double distanceA = -120;
+  private double distanceA = 120;
   private double angle = 0;
 
 
@@ -26,7 +26,7 @@ public class DriveComp extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
  
-    addCommands(deadline(new Shoot(-0.5, 0.5, SHOOT.wackyShooterVelocity).withTimeout(5)),
+    addCommands(deadline(new Shoot(-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)),
                 deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
 

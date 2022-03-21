@@ -173,7 +173,7 @@ public final class Constants {
 
         public static double maxError = 1580;
 
-        public static double wackyShooterVelocity = 11661.97; 
+        public static double wackyShooterVelocity = 11000; 
         public static double jacksWackyShooterVelocity = 5000;
     }
 
@@ -198,13 +198,13 @@ public final class Constants {
         public static double elevatorGreerRatio = 0;
 
         public static double jacksSpeed = 0.4;
-        public static double mySpeed = -0.8;
+        public static double mySpeed = -0.3;
 
         public static int velocityMeasAmount = 16;
         public static int statusOneMeas = 25;
         public static int statusTwoMeas = 25;      
         
-        public static double elevatorKP = 0.00000001;
+        public static double elevatorKP = 0.1;
         public static double elevatorKI = 0;
         public static double elevatorKD = 0;
         public static double elevatorKF = 0;
