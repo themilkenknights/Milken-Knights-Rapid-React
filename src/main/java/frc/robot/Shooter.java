@@ -102,7 +102,7 @@ public class Shooter {
     */
 
 /**
- * Calculates feedforward for the shooter
+ * Calculates feedforward for the shooter. i have been told i should be using majority kF, and little kP. lol. will do next comp
  * @param setpoint Native velocity setpoint in the {@link #setShooterNativeVelocity} function
  * @return Feedforward that should be added when setting a setpoint
  * @see {@link #setShooterNativeVeloctiy(setpoint)}
