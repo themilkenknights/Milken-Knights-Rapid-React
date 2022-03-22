@@ -225,6 +225,8 @@ public class Robot extends TimedRobot {
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
+    //!mIntake.setIntakeEncoderPosition(0);
+
     fwd = (xbox.getRawAxis(BUTTONS.forwardAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
     str = (xbox.getRawAxis(BUTTONS.strafeAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
     rcw = (xbox.getRawAxis(BUTTONS.spinAxis) - TURN.deadband) / (1 - TURN.deadband);
