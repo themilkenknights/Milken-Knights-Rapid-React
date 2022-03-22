@@ -177,7 +177,6 @@ public final class Constants {
         public static double jacksWackyShooterVelocity = 5000;
     }
 
- /**class containing variables that relate to hood*/
 
  /**class containing variables that relate to elevator*/
     public static class ELEVATOR 
@@ -302,21 +301,8 @@ public final class Constants {
         public static int forwardAxis = 1;
         public static int strafeAxis = 0;
         public static int spinAxis = 4;
-        public static int hoodFowardButton = 90; //POV 90
-        public static int hoodBackwardButton = 270; //POV 180
         public static int babySpeedFastAngle = 0;
         public static int babySpeedToddlerAngle = 180;
-
-
-        //when mode is enabled
-        public static int hoodModeToggle = 7; // left of xbox button
-/*
-        public static int climbLeftUpButton = 5; //left bumper
-        public static int climbLeftDownAxis = 2; //left trigger
-
-        public static int climbRightUpButton  = 6; //riht bumper
-        public static int climbRightDownAxis = 3; //right trigger
-*/
 
         //joystick
         public static int intakeup = 12; //8
@@ -334,17 +320,7 @@ public final class Constants {
         public static int climbLeftDownButton = 7; //3
         public static int climbRightUpButton = 10; //6
         public static int climbRightDownButton = 9; //4
-        
-
-
-       // public static int hoodUpAngle = 0;
-        // public static int hoodDownAngle = 180;
-
-        //*if climb is maunual
-        
-
-        //*if climb is automatic
-        //public static int climbToggleButton = 999;
+      
     }
 
  /**class containing variables that relate to autonomous*/

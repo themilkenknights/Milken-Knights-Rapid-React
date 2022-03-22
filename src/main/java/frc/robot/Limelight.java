@@ -24,18 +24,7 @@ public class Limelight {
 /**Whether the limelight has any valid targets (0 or 1)*/
   private final NetworkTableEntry tv = table.getEntry("tv");
 
-  private final NetworkTableEntry pipeline = table.getEntry("UR_MUM");
 
-    private Limelight()
-    {
-        table.getEntry("UR_MOM").setValue(0);
-        table.getEntry("ledMode").setValue(3);
-    }
-
-    public static Limelight getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
 /*
 https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fixed-angle-camera
     public double getInchesDistance(double ty)
@@ -56,12 +45,6 @@ https://docs.limelightvision.io/en/latest/cs_estimating_distance.html#using-a-fi
 
         
     }
-
-    private static class InstanceHolder
-    {
-        private static final Limelight mInstance = new Limelight();
-    } 
-
 
 
 

@@ -54,11 +54,9 @@ public class Robot extends TimedRobot {
    private Shooter mShoot = Shooter.getInstance();
    private Elevator mElevator = Elevator.getInstance();
    private Intake mIntake = Intake.getInstance();
-   private Limelight mLime = Limelight.getInstance();
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private MkTimerV2 mTime = new MkTimerV2(0.25);
-   //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
    private Joystick mDriverJoystick = new Joystick(1);
 
@@ -305,11 +303,7 @@ public class Robot extends TimedRobot {
         mShoot.setShooterPercent(0);
       }
 
-      /*if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
-    {
-        mLime.limelightToggle();
-      }
-*/
+
       if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
