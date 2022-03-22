@@ -149,6 +149,7 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
+    mIntake.setIntakeEncoderPosition(0);
     variableInitializerTeleop();
     mDrive.assignTalonArray();
      
@@ -225,7 +226,7 @@ public class Robot extends TimedRobot {
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
-    //!mIntake.setIntakeEncoderPosition(0);
+    
 
     fwd = (xbox.getRawAxis(BUTTONS.forwardAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
     str = (xbox.getRawAxis(BUTTONS.strafeAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
