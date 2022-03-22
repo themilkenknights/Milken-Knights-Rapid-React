@@ -149,7 +149,6 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
-    mIntake.setIntakeEncoderPosition(0);
     variableInitializerTeleop();
     mDrive.assignTalonArray();
      
@@ -340,7 +339,7 @@ public class Robot extends TimedRobot {
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {
-        mIntake.setIntakePercent(-INTAKE.intakeSpeed);
+        mIntake.setIntakeEncoderPosition(0);
       }
       else
       {

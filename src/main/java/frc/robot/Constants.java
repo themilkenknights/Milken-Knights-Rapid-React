@@ -233,13 +233,13 @@ public final class Constants {
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
 
-        public static double intakeKP = 0.1;
+        public static double intakeKP = 0.8;
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; 
 
      /**how much it needs to rotate to move into out position*/
-        public static double intakeRotationsNative = -1600;
+        public static double intakeRotationsNative = -1300;
      
      /**threshold for intake rotations, since it wont be accurate*/
         public static double intakeOutThreshold = 0;
