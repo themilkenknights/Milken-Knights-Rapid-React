@@ -1,6 +1,5 @@
 package frc.robot.miscellaneous;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -8,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shuffle {
 
-  private final AnalogInput pressure = new AnalogInput(0);
   private double lastTime = Timer.getFPGATimestamp();
   private boolean mUpdateDashboard;
   private int loopOverrunWarning;
