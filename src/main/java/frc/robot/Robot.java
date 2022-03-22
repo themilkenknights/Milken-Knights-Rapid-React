@@ -332,8 +332,8 @@ public class Robot extends TimedRobot {
       if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
       {
         //mIntake.setRollersPercent(0.5);
-        mIntake.setIntakePercent(INTAKE.intakeSpeed);
-        //!mIntake.setIntakePosition(setpoint);
+        //mIntake.setIntakePercent(INTAKE.intakeSpeed);
+        mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
       }
       else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
       {

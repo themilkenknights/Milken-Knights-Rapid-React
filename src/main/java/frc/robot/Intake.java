@@ -21,7 +21,7 @@ public class Intake {
     //// add another intake motor
     private TalonFX intake = new TalonFX(INTAKE.intakeCANID);
     //private TalonSRX intakeRight = new TalonSRX(INTAKE.intakeRightCANID);
-    private TalonFX rollers = new TalonFX(INTAKE.rollersCANID);
+    private TalonSRX rollers = new TalonSRX(INTAKE.rollersCANID);
 
     //private boolean isOut = false;
     //private boolean move = false;
@@ -80,7 +80,7 @@ public class Intake {
         rollers.set(ControlMode.PercentOutput, setpoint);
     }
 
-    public void setMagPosition(double setpoint)
+    public void setIntakeEncoderPosition(double setpoint)
     {
         intake.setSelectedSensorPosition(setpoint);
     }
