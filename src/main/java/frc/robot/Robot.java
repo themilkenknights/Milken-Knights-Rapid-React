@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
    private Limelight mLime = Limelight.getInstance();
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
-   private Hood mHood = Hood.getInstance();
    private MkTimerV2 mTime = new MkTimerV2(0.25);
    //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);

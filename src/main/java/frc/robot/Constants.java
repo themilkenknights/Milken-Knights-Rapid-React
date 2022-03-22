@@ -178,15 +178,6 @@ public final class Constants {
     }
 
  /**class containing variables that relate to hood*/
-    public static class HOOD
-    {
-        public static double voltComp = 12;
-        
-        public static int hoodCANID = 9999;  //23; //21; //22;
-
-        public static double maxOutput = 0.25;
-        public static double hoodKP = 0.15;
-    }
 
  /**class containing variables that relate to elevator*/
     public static class ELEVATOR 
@@ -233,13 +224,13 @@ public final class Constants {
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
 
-        public static double intakeKP = 0.8;
+        public static double intakeKP = 0.1;
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; 
 
      /**how much it needs to rotate to move into out position*/
-        public static double intakeRotationsNative = -1300;
+        public static double intakeRotationsNative = 8209;
      
      /**threshold for intake rotations, since it wont be accurate*/
         public static double intakeOutThreshold = 0;
@@ -292,23 +283,6 @@ public final class Constants {
 
 
         public static double maxOutput = 0.2;
-    }
-
- /**class containing variables that relate to limelight*/
-    public static class LIMELIGHT
-    {
-        //              inches
-        
-        public static double angleAboveHorizontal = 0;
-        public static double heightLime = 0;
-        //public static double lowerGoalHeight = 0; 
-        public static double upperGoalHeight = 0;
-
-        public static double closestDistanceHoodAngleLow = 0;
-        public static double closestDistanceRPMLow = 0;
-        
-        public static double closestDistanceHoodAngleHigh = 0;
-        public static double closestDistanceRPMHigh = 0;
     }
 
  /**class containing variables that relate to leds*/
