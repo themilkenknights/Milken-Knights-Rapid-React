@@ -7,6 +7,9 @@
 - ### SWERVE AUTONOMOUS:
      - Team 3244 - basic auto structure and pidf config
      - Team 7166 - organization of auto and they had a similar auto
+     - Programming Done Right - heading correction
+- ### LOGGING:
+     - 
 - ### MISC:
      - Programming Done Right - toggle button
      - Everyone whos code I used but forgot to cite - most things
@@ -16,13 +19,18 @@
      - 4 Swerve modules, 2 Faclons per module
      - It can go unicorn drive mode
      - Baby mode for optimum safety
+     - Has 5 gallons of loctite stored in the screws
 - ### Shooter
-     - ...........
+     - Shoot backwards, idk why but thats what they built!
+     - Very very fast, but can only score low goal! so much wasted potential
 - ### Intake
-     - ............
+     - Taking inspiration from doggy doors, our intake is small, compact, and effective! (i think)
+     - Mechanum wheels help center the balls into the narrow space, ensuring maximum efficacy!
+     - Stow position is up, not in! We are very unique
 - ### Climber
      - Ingenious climber using 2 telescope arms, 1 Faclon per arm
      - Uses physics and magic to work. Very cool
+     - Warning: the motors might scream. Rest assured, however, these are screams of happiness!
 - ### Bumpers
      - Secure and safe bumpers
      - Made of pool noodle and fabric
@@ -43,6 +51,8 @@ our robot is decked out with the finest gear, as you can clearly see from these 
 - ### Self Defence
      - Turn baby mode off and spin like a beyblade to freak the crap out of your opponents!
      - Spontaneously dissasemble to confuse your opponents and teamates alike
+- ### Logging
+     - After cursing myself to use java to work with networks instead of using another language, I have finally figured out how to log succesfully. WIP, but promising. Should be semi automated, with the only thing one would need to do is to run a script
 <br/>
 our robot is very high tech and advanced, and is even a work in progress!
 <br/>
