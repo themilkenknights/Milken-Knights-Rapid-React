@@ -528,8 +528,6 @@ mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV)
 
 
 if(
-!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis))) < 0.2) &&
-!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis))) < 0.2) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton)) &&
 !((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis))) < 0.1))
