@@ -114,6 +114,48 @@ public class Lights {
           LEDS.setData(buffer);
       }
 
+
+
+
+      public void ukraine()
+      {
+        for (var i = 0; i < LIGHTS.bufferNum; i++) 
+        {   
+                timer.start();
+                if(i < (LIGHTS.bufferNum / 4))
+                {
+                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 0, 0, LIGHTS.MaxRGBValue);
+                }
+                else if(i >= (LIGHTS.bufferNum / 4) && i < ((2 * LIGHTS.bufferNum) / 4))
+                {
+                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, 0);
+                }
+                else if(i >= (LIGHTS.bufferNum / 3) && i < ((2 * LIGHTS.bufferNum) / 3))
+                {
+                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 0, 0, LIGHTS.MaxRGBValue);
+                }
+                else
+                {
+                    buffer.setRGB((i+offset)% LIGHTS.bufferNum, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, 0);
+                }
+                if(timer.get() > 0.08)
+                {
+                    offset = (offset + 1) % LIGHTS.bufferNum;
+                    timer.reset();
+                    LEDS.setData(buffer);
+                }
+        }
+      }
+
+      public void off()
+      {
+        for(int i = 0; i < LIGHTS.bufferNum; i++)
+        {
+            buffer.setRGB(i, 0, 0, 0);
+        }
+        LEDS.setData(buffer);
+      }
+
     private static class InstanceHolder
     {
         private static final Lights mInstance = new Lights();

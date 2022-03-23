@@ -10,8 +10,12 @@ package frc.robot;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.Joystick;
+import org.opencv.ml.Ml;
 
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -148,6 +152,9 @@ public class Robot extends TimedRobot {
    private boolean isBothStickPressed = false;
    private boolean isBothTriggerPressed = false;
 
+   private boolean toggleLightsPressed = false;
+   private int lightMode = 0;
+
    @Override
    public void robotInit() {
     variableInitializerTeleop();
@@ -222,6 +229,7 @@ public class Robot extends TimedRobot {
     updateFastToggle();
     updateSlowToggle();
    updateClimbToggle();
+   updateLightsToggle();
 //i <3 MILFZ and Steven Hawking 
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
@@ -586,13 +594,43 @@ isLeftBelow = true
       }
       else if(toggleSlowOn){
         spee = 1;
-        mLights.french();
+        //mLights.french();
       }
       else{
           // Do something when toggled off
         spee = 3;
       }
-
+/*
+      switch(lightMode)
+      {
+        case 0:
+          mLights.french();
+        
+        case 1:
+          mLights.lilNavXTWO();
+        
+        case 2:
+          mLights.voltage(RobotController.getBatteryVoltage());
+        
+        case 3:
+          mLights.ukraine();
+      }*/
+if(lightMode == 0)
+{
+      mLights.french();
+}
+else if(lightMode == 1)
+{
+  mLights.voltage(RobotController.getBatteryVoltage());
+}
+else if(lightMode == 2)
+{
+  mLights.lilNavXTWO();
+}
+else
+{
+  mLights.ukraine();
+}
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
@@ -611,7 +649,9 @@ isLeftBelow = true
     }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    mLights.off();
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -673,6 +713,25 @@ isLeftBelow = true
       }
   }
 
+
+
+  public void updateLightsToggle()
+  {
+      if(xbox.getRawButton(8)){
+          if(!toggleLightsPressed)
+          {
+            lightMode++;
+            lightMode = lightMode%4;
+            SmartDashboard.putNumber("grshbirsgfhb", Math.random());
+              
+              toggleLightsPressed = true;
+          }
+      }
+      else{
+          toggleLightsPressed = false;
+      }
+  }
+
   
   public void variableInitializerTeleop()
   {
@@ -689,6 +748,8 @@ isLeftBelow = true
     rightGoingUp = false;
     isBothStickPressed = false;
     isBothTriggerPressed = false;
+    toggleLightsPressed = false;
+    lightMode = 0;
   }
 
   
