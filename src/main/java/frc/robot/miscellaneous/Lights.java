@@ -86,6 +86,7 @@ public class Lights {
    /**setphan version*/
       public void lilNavXTWO()
       {
+          //TODO add 90 somewhere here to make forward true forward
         navXRot = (((mDrive.getNavx() + 360) % 360) * LIGHTS.bufferNum/360);
         for(int i = 0; i < LIGHTS.bufferNum; i++)
         {
