@@ -54,14 +54,11 @@ public class Robot extends TimedRobot {
    private Shooter mShoot = Shooter.getInstance();
    private Elevator mElevator = Elevator.getInstance();
    private Intake mIntake = Intake.getInstance();
-   private Limelight mLime = Limelight.getInstance();
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
-   private Hood mHood = Hood.getInstance();
    private MkTimerV2 mTime = new MkTimerV2(0.25);
-   //private TestMotors mTest = new TestMotors();
    private XboxController xbox = new XboxController(0);
-   private Joystick mDriverJoystick = new Joystick(1);
+   private XboxController mDriverJoystick = new XboxController(1);
 
 
 /**forward movement axis*/ 
@@ -146,6 +143,10 @@ public class Robot extends TimedRobot {
 
 
    private boolean elevatorAfterShock = false;
+
+
+   private boolean isBothStickPressed = false;
+   private boolean isBothTriggerPressed = false;
 
    @Override
    public void robotInit() {
@@ -285,10 +286,10 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawButton(BUTTONS.shooterButton))
+      if(mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis) > 0.1)
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
-        mShoot.setShooterNativeVeloctiy(ffcalc);
+        mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
         /*if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
         {
           mElevator.setElevatorPercent(ELEVATOR.mySpeed);
@@ -296,28 +297,29 @@ public class Robot extends TimedRobot {
         }*/
         //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
-      else if(xbox.getStartButton())
+      /*else if(xbox.getStartButton())
       {
         ffcalc = -mShoot.shooterFeedForward(slider) + slider;
         mShoot.setShooterNativeVeloctiy(ffcalc);
+      }*/
+      else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
+      {
+        ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
+        mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
       }
       else
       {
         mShoot.setShooterPercent(0);
       }
 
-      /*if(mDriverJoystick.getRawButtonPressed(BUTTONS.limelightButton))
-    {
-        mLime.limelightToggle();
-      }
-*/
-      if(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton))
+
+      if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.1)
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(-eleFFCalc);
         //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton))
+      else if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) < -0.1)
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
@@ -331,15 +333,15 @@ public class Robot extends TimedRobot {
       
 
 
-      if(mDriverJoystick.getRawButton(BUTTONS.intakeup))
+      if(mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
       {
         //mIntake.setRollersPercent(0.5);
         //mIntake.setIntakePercent(INTAKE.intakeSpeed);
         mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.intakedown))
+      else if(mDriverJoystick.getRawButton(BUTTONS.stowIntakeButton))
       {
-        mIntake.setIntakeEncoderPosition(0);
+        mIntake.setIntakePosition(0);
       }
       else
       {
@@ -348,22 +350,27 @@ public class Robot extends TimedRobot {
       }
 
 
+      if(mDriverJoystick.getRawButton(BUTTONS.zeroIntakeButtons))
+      { 
+        mIntake.setIntakeEncoderPosition(0);
+      }
 
-      if(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton))
+
+      if(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton))
       {
         mIntake.setRollersPercent(INTAKE.rollerSpeed);
         eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
         mElevator.setElevatorVelocity(eleFFCalc);
         elevatorAfterShock = true;
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton))
+      else if(mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton))
       {
         mIntake.setRollersPercent(-INTAKE.rollerSpeed);
         eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
         mElevator.setElevatorVelocity(-eleFFCalc);
         elevatorAfterShock = true;
       }
-      else if(!mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton) && !mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton) && elevatorAfterShock)
+      else if(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton) && mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton) && elevatorAfterShock)
       {
         mTime.startTimer();
         elevatorAfterShock = false;
@@ -373,9 +380,6 @@ public class Robot extends TimedRobot {
         mIntake.setRollersPercent(0);
       }*/
  
-
-
-
 
 
     
@@ -430,32 +434,32 @@ public class Robot extends TimedRobot {
 */
 
 
-if(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis)
+if(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons) > 0.1)
 {
   mClimb.telescopePercent(1, -1);
 }
-else if(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis)
+else if(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons) < -0.1)
 {
   mClimb.telescopePercent(-1, -1);
 }
 
-if(mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton) && mClimb.isRightBelow())
+if(mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV && mClimb.isRightBelow())
 {
   mClimb.telescopePercentRight(1);
 }
-else if(mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) && mClimb.isRightAbove())
+else if(mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV && mClimb.isRightAbove())
 {
   mClimb.telescopePercentRight(-1);
 }
 
 
 
-if(mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) && mClimb.isLeftBelow())
+if(mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV && mClimb.isLeftBelow())
 {
   mClimb.telescopePercentLeft(1);
   //mClimb.scuffedPIDClimb(20000);
 }
-else if(mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) && mClimb.isLeftAbove())
+else if(mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV && mClimb.isLeftAbove())
 {
   mClimb.telescopePercentLeft(-1);
 }
@@ -498,41 +502,43 @@ if((!mClimb.isLeftBelow() && leftGoingUp) && (!mClimb.isRightBelow() && rightGoi
   rightGoingUp = false;
 }
 
-if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
-!(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton)&&
-!toggleLeftClimbOn)
+if(
+!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV) &&
+!(toggleLeftClimbOn))
 {
   mClimb.telescopePercentLeft(0);
 }
 
-if(!(mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) &&
-!(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) &&
-!mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton) &&
+if(
+
+!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV) &&
+!(mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV) &&
 !toggleRightClimbOn)
 {
   mClimb.telescopePercentRight(0);
 }
 
-if((mDriverJoystick.getPOV() == BUTTONS.climbUpAxis) ||
-(mDriverJoystick.getPOV() == BUTTONS.climbDownAxis) ||
-mDriverJoystick.getRawButton(BUTTONS.climbLeftDownButton) ||
-mDriverJoystick.getRawButton(BUTTONS.climbLeftUpButton) ||
-mDriverJoystick.getRawButton(BUTTONS.climbRightDownButton) ||
-mDriverJoystick.getRawButton(BUTTONS.climbRightUpButton))
+if(
+!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) ||
+mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV ||
+mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV ||
+mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV ||
+mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV)
 {
   toggleLeftClimbOn = false;
   toggleRightClimbOn = false;
 }
 
 
-if(//mShoot.getShootRightVelocity() + mShoot.getShootLeftVelocity())/2 < SHOOT.wackyShooterVelocity &&
-!(mDriverJoystick.getRawButton(BUTTONS.rollersForwardButton)) &&
-!(mDriverJoystick.getRawButton(BUTTONS.rollersBackwardButton)) &&
-!(mDriverJoystick.getRawButton(BUTTONS.elevatorBackwardButton)) &&
-!(mDriverJoystick.getRawButton(BUTTONS.elevatorForwardButton)))
+if(
+!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis))) < 0.2) &&
+!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis))) < 0.2) &&
+!(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton)) &&
+!(mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton)) &&
+!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis))) < 0.1))
 { 
   if(!mTime.isTimerDone())
   {
@@ -681,6 +687,8 @@ isLeftBelow = true
     spee = 3;
     leftGoingUp = false;
     rightGoingUp = false;
+    isBothStickPressed = false;
+    isBothTriggerPressed = false;
   }
 
   
