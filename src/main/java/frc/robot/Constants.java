@@ -331,7 +331,7 @@ public final class Constants {
       public static int climbAutoButton = 7;
       public static int rollerForwardButton = 6;
       public static int rollerBackwardButton = 5;
-      public static int elevatorAxis = 1;
+      public static int elevatorAxis = 5;
       public static int deployIntakeButton = 1; //A
       public static int stowIntakeButton = 2; //B
       public static int zeroIntakeButtons = 4; //X, left, right; button, bumper respectivley
