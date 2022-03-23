@@ -298,27 +298,22 @@ public class Robot extends TimedRobot {
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
-        /*if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
-        {
-          mElevator.setElevatorPercent(ELEVATOR.mySpeed);
-          mIntake.setRollersPercent(1);
-        }*/
-        //mShoot.setShooterPercent(xbox.getRawAxis(2));
-      }
-      /*else if(xbox.getStartButton())
-      {
-        ffcalc = -mShoot.shooterFeedForward(slider) + slider;
-        mShoot.setShooterNativeVeloctiy(ffcalc);
-      }*/
-      else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
-      {
-        ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
-        mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
       }
       else
       {
         mShoot.setShooterPercent(0);
       }
+
+
+    if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
+    {
+      ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
+      mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
+    }
+    else
+    {
+      mShoot.setShooterPercent(0);
+    }
 
 
       if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.1)
@@ -331,12 +326,13 @@ public class Robot extends TimedRobot {
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
+      
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
-     /* else
+      else
       {
         mElevator.setElevatorPercent(0);
-      }*/
+      }
 
       
 
