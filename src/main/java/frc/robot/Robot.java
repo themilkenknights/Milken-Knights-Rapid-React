@@ -329,10 +329,6 @@ public class Robot extends TimedRobot {
       
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
-      else
-      {
-        mElevator.setElevatorPercent(0);
-      }
 
       
 
@@ -374,7 +370,7 @@ public class Robot extends TimedRobot {
         mElevator.setElevatorVelocity(-eleFFCalc);
         elevatorAfterShock = true;
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton) && mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton) && elevatorAfterShock)
+      else if(!mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton) && !mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton) && elevatorAfterShock)
       {
         mTime.startTimer();
         elevatorAfterShock = false;
