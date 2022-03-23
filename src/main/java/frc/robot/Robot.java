@@ -160,7 +160,10 @@ public class Robot extends TimedRobot {
    private boolean isFreeClimbLeftDown = false;
    private boolean isFreeClimbRightUp = false;
    private boolean isFreeClimbRightDown = false;
-   private boolean isFreeClimbOn = false;
+   private boolean isFreeClimbOn = false;\
+   
+   private boolean toggleIntakeOn = false;
+   private boolean toggleIntakePressed = false;
 
    @Override
    public void robotInit() {
@@ -348,13 +351,13 @@ public class Robot extends TimedRobot {
       
 
 
-      if(mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
+      if(toggleIntakeOn)//  mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
       {
         //mIntake.setRollersPercent(0.5);
         //mIntake.setIntakePercent(INTAKE.intakeSpeed);
         mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
       }
-      else if(mDriverJoystick.getRawButton(BUTTONS.stowIntakeButton))
+      else if(!toggleIntakeOn))
       {
         mIntake.setIntakePosition(0);
       }
@@ -783,6 +786,18 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
       }
   }
 
+
+  public void updateIntakeToggle() {
+    if (mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton)) {
+      if (!toggleIntakePressed) {
+        toggleIntakeOn = !toggleIntakeOn;
+ 
+        toggleIntakePressed = true;
+      }
+    } else {
+      toggleIntakePressed = false;
+    }
+  }
   
   public void variableInitializerTeleop()
   {
@@ -806,6 +821,8 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
     isFreeClimbRightUp = false;
     isFreeClimbRightDown = false;
     isFreeClimbOn = false;
+    toggleIntakeOn = false;
+    toggleIntakePressed = false;
   }
 
   
