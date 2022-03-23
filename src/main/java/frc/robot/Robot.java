@@ -313,24 +313,12 @@ public class Robot extends TimedRobot {
       else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
-        mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
+        mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis));
       }
-<<<<<<< HEAD
-      else if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
-    {
-      ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
-      mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
-    }
-    else
-    {
-      mShoot.setShooterPercent(0);
-    }
-=======
       else
       {
         mShoot.setShooterPercent(0);
       }
->>>>>>> parent of 3355d31 (elevator fix)
 
 
       if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.1)
@@ -343,23 +331,12 @@ public class Robot extends TimedRobot {
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
-<<<<<<< HEAD
-      }
-        else
-        {
-          mElevator.setElevatorPercent(0);
-    
-      
-        //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
-      }
-=======
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
      /* else
       {
         mElevator.setElevatorPercent(0);
       }*/
->>>>>>> parent of 3355d31 (elevator fix)
 
       
 
