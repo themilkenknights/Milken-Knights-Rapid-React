@@ -305,6 +305,7 @@ public final class Constants {
         public static int babySpeedToddlerAngle = 180;
 
         //joystick
+        /*
         public static int intakeup = 12; //8
         public static int intakedown = 11; //7
         public static int rollersForwardButton = 5; //11
@@ -320,6 +321,24 @@ public final class Constants {
         public static int climbLeftDownButton = 7; //3
         public static int climbRightUpButton = 10; //6
         public static int climbRightDownButton = 9; //4
+      */
+
+      //cooler xbox
+      public static int climbLeftUpPOV = 0; //up, then ccw unit circle
+      public static int climbLeftDownPOV = 180;
+      public static int climbRightUpPOV = 90;
+      public static int climbRightDownPOV = 270;
+      public static int climbAutoButton = 7;
+      public static int rollerForwardButton = 6;
+      public static int rollerBackwardButton = 5;
+      public static int elevatorAxis = 5;
+      public static int deployIntakeButton = 1; //A
+      public static int stowIntakeButton = 2; //B
+      public static int zeroIntakeButtons = 4; //X, left, right; button, bumper respectivley
+      public static int shooterForwardAxis = 3;
+      public static int shooterBackwardAxis = 2;//left, right; trigger respectivley
+      public static int climbAxisButtons = 5; 
+
       
     }
 
