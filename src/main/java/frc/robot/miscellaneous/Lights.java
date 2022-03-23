@@ -41,15 +41,15 @@ public class Lights {
                 timer.start();
                 if(i < (LIGHTS.bufferNum / 3))
                 {
-                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 0, 0, 255);
+                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 0, 0, LIGHTS.MaxRGBValue);
                 }
                 else if(i >= (LIGHTS.bufferNum / 3) && i < ((2 * LIGHTS.bufferNum) / 3))
                 {
-                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 255, 255, 255);
+                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
                 }
                 else
                 {
-                    buffer.setRGB((i+offset)% LIGHTS.bufferNum, 255, 0, 0);
+                    buffer.setRGB((i+offset)% LIGHTS.bufferNum, LIGHTS.MaxRGBValue, 0, 0);
                 }
                 if(timer.get() > 0.08)
                 {
@@ -69,13 +69,13 @@ public class Lights {
               buffer.setRGB(((int)i + 100) % 100, 0, 0, 0);
               if(!(i > (((navXRot + LIGHTS.bufferNum) % LIGHTS.bufferNum) + 5) || i < (((navXRot + LIGHTS.bufferNum) % LIGHTS.bufferNum) - 5)))
               {
-                buffer.setRGB(((int)i + 100) % 100, 255, 255, 255);
+                buffer.setRGB(((int)i + 100) % 100, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
               }
               if(navXRot < 5 || navXRot > 95)
               {
                 for(double j = navXRot - 5; j < navXRot + 5; j++)
                 {
-                    buffer.setRGB(((int)j + 100) % 100, 255, 255, 255);
+                    buffer.setRGB(((int)j + 100) % 100, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
                 }
               } 
                 
@@ -109,7 +109,7 @@ public class Lights {
       {
           for(int i = 0; i < LIGHTS.bufferNum; i++)
           {
-              buffer.setRGB(i, (int)(((((volts - 11)/13) * 255))/2), 0, 0);
+              buffer.setRGB(i, (int)(((((volts - 11)/13) * LIGHTS.MaxRGBValue))/2), 0, 0);
           }
           LEDS.setData(buffer);
       }
