@@ -320,6 +320,11 @@ public class Robot extends TimedRobot {
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
+      }
+        else
+        {
+          mElevator.setElevatorPercent(0);
+    
       
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
