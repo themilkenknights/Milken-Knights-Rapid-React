@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Commandments.DriveStraightREAL;
 import frc.robot.Commands.ForbiddenAuto;
 import frc.robot.Constants.BUTTONS;
@@ -615,15 +616,19 @@ isLeftBelow = true
       }*/
 if(lightMode == 0)
 {
-      mLights.french();
+  mLights.off();
 }
 else if(lightMode == 1)
 {
-  mLights.voltage(RobotController.getBatteryVoltage());
+  mLights.lilNavXTWO();
 }
 else if(lightMode == 2)
 {
-  mLights.lilNavXTWO();
+  mLights.voltage(RobotController.getBatteryVoltage());
+}
+else if(lightMode == 3)
+{
+  mLights.french();
 }
 else
 {
@@ -719,7 +724,7 @@ else
           if(!toggleLightsPressed)
           {
             lightMode++;
-            lightMode = lightMode%4;
+            lightMode = lightMode%5;
             SmartDashboard.putNumber("grshbirsgfhb", Math.random());
               
               toggleLightsPressed = true;
