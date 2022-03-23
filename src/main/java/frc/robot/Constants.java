@@ -222,8 +222,7 @@ public final class Constants {
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
-
-        public static double intakeKP = 0.1;
+        public static double intakeKP = 0.02;
         public static double intakeKI = 0;
         public static double intakeKD = 0;
         public static double intakeKF = 0; 
@@ -324,17 +323,19 @@ public final class Constants {
       */
 
       //cooler xbox
-      public static int climbLeftUpPOV = 0; //up, then ccw unit circle
+      public static int climbLeftUpPOV = 0; //up, then cw unit circle
       public static int climbLeftDownPOV = 180;
-      public static int climbRightUpPOV = 90;
-      public static int climbRightDownPOV = 270;
+      public static int climbRightUpPOV = 270;
+      public static int climbRightDownPOV = 90;
+      public static int climbFreePOV = 270;
+      public static int zeroClimbPOV = 90;
       public static int climbAutoButton = 7;
       public static int rollerForwardButton = 6;
       public static int rollerBackwardButton = 5;
       public static int elevatorAxis = 1;
       public static int deployIntakeButton = 1; //A
       public static int stowIntakeButton = 2; //B
-      public static int zeroIntakeButtons = 4; //X, left, right; button, bumper respectivley
+      public static int zeroIntakeButtons = 3; //X, left, right; button, bumper respectivley
       public static int shooterForwardAxis = 3;
       public static int shooterBackwardAxis = 2;//left, right; trigger respectivley
       public static int climbAxisButtons = 5; 

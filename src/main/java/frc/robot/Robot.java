@@ -156,6 +156,12 @@ public class Robot extends TimedRobot {
    private boolean toggleLightsPressed = false;
    private int lightMode = 0;
 
+   private boolean isFreeClimbLeftUp = false;
+   private boolean isFreeClimbLeftDown = false;
+   private boolean isFreeClimbRightUp = false;
+   private boolean isFreeClimbRightDown = false;
+   private boolean isFreeClimbOn = false;
+
    @Override
    public void robotInit() {
     variableInitializerTeleop();
@@ -295,7 +301,7 @@ public class Robot extends TimedRobot {
 
 
 
-      if(mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis) > 0.1)
+      if(mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis) > 0.3)
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
@@ -311,7 +317,7 @@ public class Robot extends TimedRobot {
         ffcalc = -mShoot.shooterFeedForward(slider) + slider;
         mShoot.setShooterNativeVeloctiy(ffcalc);
       }*/
-      else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
+      else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.3)
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis));
@@ -322,13 +328,13 @@ public class Robot extends TimedRobot {
       }
 
 
-      if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.1)
+      if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.3)
       {
-        eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
+        eleFFCalc = -mElevator.elevatorFeedForward(200) + 200;
         mElevator.setElevatorVelocity(-eleFFCalc);
         //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
       }
-      else if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) < -0.1)
+      else if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) < -0.3)
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
@@ -442,10 +448,32 @@ public class Robot extends TimedRobot {
     }
 */
 
+if(isFreeClimbRightUp)
+{
+  mClimb.telescopePercentRight(1);
+  //mClimb.scuffedPIDClimb(20000);
+}
+else if(isFreeClimbRightDown)
+{
+  mClimb.telescopePercentRight(-1);
+}
+
+
+if(isFreeClimbLeftUp)
+{
+  mClimb.telescopePercentLeft(1);
+  //mClimb.scuffedPIDClimb(20000);
+}
+else if(isFreeClimbLeftDown)
+{
+  mClimb.telescopePercentLeft(-1);
+}
+
+
 
 if(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons) > 0.1)
 {
-  mClimb.telescopePercent(1, -1);
+  mClimb.telescopePercent(1, 1);
 }
 else if(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons) < -0.1)
 {
@@ -462,7 +490,6 @@ else if(mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV && mClimb.isRightA
 }
 
 
-
 if(mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV && mClimb.isLeftBelow())
 {
   mClimb.telescopePercentLeft(1);
@@ -473,19 +500,22 @@ else if(mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV && mClimb.isLeftAbo
   mClimb.telescopePercentLeft(-1);
 }
 
-
+if(xbox.getPOV() == BUTTONS.zeroClimbPOV)
+{
+  mClimb.zeroVClimbb();
+}
 
 
 if(!mClimb.isLeftAbove() && !leftGoingUp)
 {
   toggleLeftClimbOn = false;
-  mClimb.zeroLeftClimb();
+  //mClimb.zeroLeftClimb();
 }
 
 if(!mClimb.isRightAbove() && !rightGoingUp)
 {
   toggleRightClimbOn = false;
-  mClimb.zeroRightClimb();
+  //mClimb.zeroRightClimb();
 }
 
 if(!mClimb.isLeftBelow() && leftGoingUp)
@@ -512,30 +542,32 @@ if((!mClimb.isLeftBelow() && leftGoingUp) && (!mClimb.isRightBelow() && rightGoi
 }
 
 if(
-!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) &&
+(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.3) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV) &&
-!(toggleLeftClimbOn))
+!(toggleLeftClimbOn) &&
+!(isFreeClimbOn))
 {
   mClimb.telescopePercentLeft(0);
 }
 
 if(
-
-!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) &&
+(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.3) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV) &&
 !(mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV) &&
-!toggleRightClimbOn)
+!(toggleRightClimbOn) &&
+!(isFreeClimbOn))
 {
   mClimb.telescopePercentRight(0);
 }
 
 if(
-!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.1) ||
+!(Math.abs(mDriverJoystick.getRawAxis(BUTTONS.climbAxisButtons)) < 0.3) ||
 mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV ||
 mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV ||
 mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV ||
-mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV)
+mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV||
+isFreeClimbOn)
 {
   toggleLeftClimbOn = false;
   toggleRightClimbOn = false;
@@ -545,7 +577,7 @@ mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV)
 if(
 !(mDriverJoystick.getRawButton(BUTTONS.rollerForwardButton)) &&
 !(mDriverJoystick.getRawButton(BUTTONS.rollerBackwardButton)) &&
-!((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis))) < 0.1))
+((Math.abs(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis))) < 0.3))
 { 
   if(!mTime.isTimerDone())
   {
@@ -599,7 +631,16 @@ isLeftBelow = true
           // Do something when toggled off
         spee = 3;
       }
-/*
+
+
+
+      isFreeClimbLeftUp = (xbox.getPOV() == BUTTONS.climbFreePOV && mDriverJoystick.getPOV() == BUTTONS.climbLeftUpPOV) ? true : false;
+      isFreeClimbLeftDown = (xbox.getPOV() == BUTTONS.climbFreePOV && mDriverJoystick.getPOV() == BUTTONS.climbLeftDownPOV) ? true : false;
+      isFreeClimbRightUp = (xbox.getPOV() == BUTTONS.climbFreePOV && mDriverJoystick.getPOV() == BUTTONS.climbRightUpPOV) ? true : false;
+      isFreeClimbRightDown = (xbox.getPOV() == BUTTONS.climbFreePOV && mDriverJoystick.getPOV() == BUTTONS.climbRightDownPOV) ? true : false;
+
+      isFreeClimbOn = (isFreeClimbLeftUp||isFreeClimbLeftDown||isFreeClimbRightUp||isFreeClimbRightDown) ? true : false;
+      /*
       switch(lightMode)
       {
         case 0:
@@ -638,6 +679,9 @@ else
 {
   mLights.ukraine();
 }
+
+
+if(xbox.getPOV() == BUTTONS.climbFreePOV)
       //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
       //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
  
@@ -757,6 +801,11 @@ else
     isBothTriggerPressed = false;
     toggleLightsPressed = false;
     lightMode = 0;
+    isFreeClimbLeftUp = false;
+    isFreeClimbLeftDown = false;
+    isFreeClimbRightUp = false;
+    isFreeClimbRightDown = false;
+    isFreeClimbOn = false;
   }
 
   
