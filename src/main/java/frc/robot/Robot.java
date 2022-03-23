@@ -302,7 +302,7 @@ public class Robot extends TimedRobot {
       else if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
     {
       ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
-      mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
+      mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
     }
     else
     {
