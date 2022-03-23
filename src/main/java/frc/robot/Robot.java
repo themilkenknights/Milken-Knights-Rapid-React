@@ -299,13 +299,7 @@ public class Robot extends TimedRobot {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
       }
-      else
-      {
-        mShoot.setShooterPercent(0);
-      }
-
-
-    if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
+      else if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
     {
       ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
       mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
