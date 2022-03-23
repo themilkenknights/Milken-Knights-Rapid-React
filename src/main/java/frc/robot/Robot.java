@@ -628,6 +628,10 @@ else if(lightMode == 2)
 }
 else if(lightMode == 3)
 {
+  mLights.teamMode(DriverStation.getAlliance());
+}
+else if(lightMode == 4)
+{
   mLights.french();
 }
 else
@@ -724,7 +728,7 @@ else
           if(!toggleLightsPressed)
           {
             lightMode++;
-            lightMode = lightMode%5;
+            lightMode = lightMode%6;
             SmartDashboard.putNumber("grshbirsgfhb", Math.random());
               
               toggleLightsPressed = true;

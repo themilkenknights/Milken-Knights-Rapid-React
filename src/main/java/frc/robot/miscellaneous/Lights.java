@@ -6,7 +6,10 @@ package frc.robot.miscellaneous;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.Drive;
 import frc.robot.Constants.LIGHTS;
 
@@ -155,6 +158,27 @@ public class Lights {
             buffer.setRGB(i, 0, 0, 0);
         }
         LEDS.setData(buffer);
+      }
+
+
+      public void teamMode(Alliance all)
+      {
+          if(all == Alliance.Blue)
+          {
+            for(int i = 0; i < LIGHTS.bufferNum; i++)
+            {
+                buffer.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
+            }
+            LEDS.setData(buffer);
+          }
+          else
+          {
+            for(int i = 0; i < LIGHTS.bufferNum; i++)
+            {
+                buffer.setRGB(i, LIGHTS.MaxRGBValue, 0, 0);
+            }
+            LEDS.setData(buffer);
+          }
       }
 
     private static class InstanceHolder
