@@ -298,7 +298,24 @@ public class Robot extends TimedRobot {
       {
         ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
         mShoot.setShooterNativeVeloctiy(ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
+        /*if((mShoot.shootLeft.getSelectedSensorVelocity() + mShoot.shootRight.getSelectedSensorVelocity())/2 >= SHOOT.wackyShooterVelocity)
+        {
+          mElevator.setElevatorPercent(ELEVATOR.mySpeed);
+          mIntake.setRollersPercent(1);
+        }*/
+        //mShoot.setShooterPercent(xbox.getRawAxis(2));
       }
+      /*else if(xbox.getStartButton())
+      {
+        ffcalc = -mShoot.shooterFeedForward(slider) + slider;
+        mShoot.setShooterNativeVeloctiy(ffcalc);
+      }*/
+      else if(mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
+      {
+        ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
+        mShoot.setShooterNativeVeloctiy(-ffcalc * mDriverJoystick.getRawAxis(BUTTONS.shooterForwardAxis));
+      }
+<<<<<<< HEAD
       else if (mDriverJoystick.getRawAxis(BUTTONS.shooterBackwardAxis) > 0.1)
     {
       ffcalc = -mShoot.shooterFeedForward(SHOOT.wackyShooterVelocity) + SHOOT.wackyShooterVelocity;
@@ -308,6 +325,12 @@ public class Robot extends TimedRobot {
     {
       mShoot.setShooterPercent(0);
     }
+=======
+      else
+      {
+        mShoot.setShooterPercent(0);
+      }
+>>>>>>> parent of 3355d31 (elevator fix)
 
 
       if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.1)
@@ -320,6 +343,7 @@ public class Robot extends TimedRobot {
       {
         eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
         mElevator.setElevatorVelocity(eleFFCalc);
+<<<<<<< HEAD
       }
         else
         {
@@ -328,6 +352,14 @@ public class Robot extends TimedRobot {
       
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
+=======
+        //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
+      }
+     /* else
+      {
+        mElevator.setElevatorPercent(0);
+      }*/
+>>>>>>> parent of 3355d31 (elevator fix)
 
       
 
