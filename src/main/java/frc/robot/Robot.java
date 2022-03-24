@@ -196,7 +196,6 @@ public class Robot extends TimedRobot {
  
    @Override
    public void autonomousInit() {
-    
      Shuffleboard.addEventMarker("Auto Init", EventImportance.kNormal);
      //m_robotContainer.resetPID();
      mDrive.encoderZero();
