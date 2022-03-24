@@ -173,7 +173,8 @@ public final class Constants {
 
         public static double maxError = 1580;
 
-        public static double wackyShooterVelocity = 11000; 
+        public static double wackyShooterVelocity = 11661.97;
+        public static double shooterVelocity4201 = 11000; 
         public static double jacksWackyShooterVelocity = 5000;
     }
 
