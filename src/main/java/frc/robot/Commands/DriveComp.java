@@ -7,6 +7,7 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Drive;
 import frc.robot.Commandments.DriveStraightREALSUPERREAL;
+import frc.robot.Commandments.IntakeBall;
 import frc.robot.Commandments.Shoot;
 import frc.robot.Commandments.Turn;
 import frc.robot.Constants.DRIVE;
@@ -26,9 +27,12 @@ public class DriveComp extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
  
-    addCommands(deadline(new Shoot(-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)),
+    addCommands(//deadline(new Shoot(-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)),
+
                 deadline(new Turn(0).withTimeout(1)), 
-                deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)));
+                deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(3), new IntakeBall(3).withTimeout(3)),
+                deadline(new DriveStraightREALSUPERREAL(-distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(3)),
+                deadline(new Shoot(-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)));
 
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }

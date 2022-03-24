@@ -1,5 +1,26 @@
 {
   "NetworkTables": {
+    "FMSInfo": {
+      "open": true
+    },
+    "LiveWindow": {
+      "open": true
+    },
+    "Shuffleboard": {
+      ".metadata": {
+        "open": true
+      },
+      "Match": {
+        "Auto Chooser": {
+          "open": true
+        },
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "open": true
+    },
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/PIDController[10]": "PIDController",
@@ -18,7 +39,49 @@
       "/LiveWindow/Ungrouped/PIDController[9]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
-      "/Shuffleboard/Match/Auto Chooser": "String Chooser"
+      "/Shuffleboard/Match/Auto Chooser": "String Chooser",
+      "/SmartDashboard/auto selector": "String Chooser",
+      "/SmartDashboard/field": "Field2d",
+      "/SmartDashboard/my command": "Command"
+    },
+    "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/LiveWindow/Ungrouped/Scheduler": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/Match/Auto Chooser": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/auto selector": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/field": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/my command": {
+        "window": {
+          "visible": true
+        }
+      }
     }
+  },
+  "NetworkTables Log": {
+    "visible": true
+  },
+  "NetworkTables Settings": {
+    "mode": "Client",
+    "serverTeam": "1836"
   }
 }
