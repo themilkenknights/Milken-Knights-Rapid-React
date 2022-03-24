@@ -212,17 +212,13 @@ public class Robot extends TimedRobot {
      if (m_autonomousCommand != null) {
        m_autonomousCommand.schedule();
      }
-     SmartDashboard.putData("auto selector", positionChooser);
-     //DriveComp command = new DriveComp();
-     SmartDashboard.putData("my command", command);
-     //Field2d fieldd = new Field2d();
-     SmartDashboard.putData("field", fieldd);
+     
 
    }
   
    @Override
    public void autonomousPeriodic() {
-     fieldd.setRobotPose(mOdo.getPose());
+     
      mDrive.driveUpdate();
    }
  
@@ -725,12 +721,18 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
 
   @Override
   public void testInit() {
+    SmartDashboard.putData("auto selector", positionChooser);
+     //DriveComp command = new DriveComp();
+     SmartDashboard.putData("my command", command);
+     //Field2d fieldd = new Field2d();
+     SmartDashboard.putData("field", fieldd);
     
   }
 
   @Override
   public void testPeriodic() {
-  
+    fieldd.setRobotPose(mOdo.getPose());
+    mDrive.driveUpdate();
   }
 
 /**updates state of fast toggle for driving */
