@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Commandments.DriveStraightREAL;
+import frc.robot.Commands.DriveComp;
 import frc.robot.Commands.ForbiddenAuto;
 import frc.robot.Constants.BUTTONS;
 import frc.robot.Constants.DRIVE;
@@ -160,7 +161,7 @@ public class Robot extends TimedRobot {
    private boolean isFreeClimbLeftDown = false;
    private boolean isFreeClimbRightUp = false;
    private boolean isFreeClimbRightDown = false;
-   private boolean isFreeClimbOn = false;\
+   private boolean isFreeClimbOn = false;
    
    private boolean toggleIntakeOn = false;
    private boolean toggleIntakePressed = false;
@@ -198,7 +199,7 @@ public class Robot extends TimedRobot {
      //TODO if zeroyaw in reset navx dont work, remove this and add it into a auto function
      switch (positionChooser.getSelected()) {
        case LEFT:
-         m_autonomousCommand = new ForbiddenAuto();// testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
+         m_autonomousCommand = new DriveComp();// testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
        case NOTHING: 
          break;
@@ -357,7 +358,7 @@ public class Robot extends TimedRobot {
         //mIntake.setIntakePercent(INTAKE.intakeSpeed);
         mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
       }
-      else if(!toggleIntakeOn))
+      else if(!toggleIntakeOn)
       {
         mIntake.setIntakePosition(0);
       }
