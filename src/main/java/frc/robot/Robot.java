@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -43,6 +44,7 @@ import frc.robot.Drive.ETHERRCW;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.MkTimerV2;
+import frc.robot.miscellaneous.Odometry;
 import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
@@ -63,6 +65,7 @@ public class Robot extends TimedRobot {
    private Climber mClimb = Climber.getInstance();
    private Lights mLights = Lights.getInstance();
    private MkTimerV2 mTime = new MkTimerV2(0.25);
+   private Odometry mOdo = Odometry.getInstance();
    private XboxController xbox = new XboxController(0);
    private XboxController mDriverJoystick = new XboxController(1);
 
@@ -166,6 +169,9 @@ public class Robot extends TimedRobot {
    private boolean toggleIntakeOn = false;
    private boolean toggleIntakePressed = false;
 
+   private DriveComp command = new DriveComp();
+   private Field2d fieldd = new Field2d();
+
    @Override
    public void robotInit() {
     variableInitializerTeleop();
@@ -207,10 +213,17 @@ public class Robot extends TimedRobot {
      if (m_autonomousCommand != null) {
        m_autonomousCommand.schedule();
      }
+     SmartDashboard.putData("auto selector", positionChooser);
+     //DriveComp command = new DriveComp();
+     SmartDashboard.putData("my command", command);
+     //Field2d fieldd = new Field2d();
+     SmartDashboard.putData("field", fieldd);
+
    }
   
    @Override
    public void autonomousPeriodic() {
+     fieldd.setRobotPose(mOdo.getPose());
      mDrive.driveUpdate();
    }
  
