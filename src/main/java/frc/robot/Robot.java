@@ -239,8 +239,9 @@ public class Robot extends TimedRobot {
     //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
     updateFastToggle();
     updateSlowToggle();
-   updateClimbToggle();
-   updateLightsToggle();
+    updateClimbToggle();
+    updateLightsToggle();
+    updateIntakeToggle();
 //i <3 MILFZ and Steven Hawking 
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
@@ -350,7 +351,7 @@ public class Robot extends TimedRobot {
       }*/
 
       
-
+SmartDashboard.putBoolean("toin", toggleIntakeOn);
 
       if(toggleIntakeOn)//  mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
       {
