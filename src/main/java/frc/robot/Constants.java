@@ -291,7 +291,7 @@ public final class Constants {
         public static int bufferNum = 151; 
 
         //TODO see if less than 255 turns down brightness, not color
-        public static int MaxRGBValue = 125;
+        public static int MaxRGBValue = 60;
     }
     
  /**class containing variables that relate to button mapping*/
