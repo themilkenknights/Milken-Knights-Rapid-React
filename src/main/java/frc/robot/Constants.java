@@ -223,13 +223,13 @@ public final class Constants {
 
         public static double intakeGreerRatio = 0;
         public static double rollersGreerRatio = 0;
-        public static double intakeKP = 0.03;
+        public static double intakeKP = 0.04;
         public static double intakeKI = 0;
-        public static double intakeKD = intakeKP *0.1;
+        public static double intakeKD = intakeKP *0.6;
         public static double intakeKF = 0; 
 
      /**how much it needs to rotate to move into out position*/
-        public static double intakeRotationsNative = 9069;
+        public static double intakeRotationsNative = 7000;
      
      /**threshold for intake rotations, since it wont be accurate*/
         public static double intakeOutThreshold = 0;
@@ -331,8 +331,8 @@ public final class Constants {
       public static int climbFreePOV = 270;
       public static int zeroClimbPOV = 90;
       public static int climbAutoButton = 7;
-      public static int rollerForwardButton = 6;
-      public static int rollerBackwardButton = 5;
+      public static int rollerForwardButton = 5;
+      public static int rollerBackwardButton = 6;
       public static int elevatorAxis = 1;
       public static int deployIntakeButton = 1; //A
       public static int stowIntakeButton = 2; //B

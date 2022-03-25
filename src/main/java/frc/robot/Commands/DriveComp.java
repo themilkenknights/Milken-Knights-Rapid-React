@@ -18,7 +18,7 @@ import frc.robot.Constants.SHOOT;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveComp extends SequentialCommandGroup {
   private Drive mDrive = Drive.getInstance();
-  private double distanceA = 120;
+  private double distanceA = 100;
   private double angle = 0;
 
 

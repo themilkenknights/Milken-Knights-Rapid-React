@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -241,8 +242,7 @@ public class Robot extends TimedRobot {
     updateSlowToggle();
     updateClimbToggle();
     updateLightsToggle();
-    updateIntakeToggle();
-//i <3 MILFZ and Steven Hawking 
+    //updateIntakeToggle();
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
@@ -345,6 +345,8 @@ public class Robot extends TimedRobot {
         mElevator.setElevatorVelocity(eleFFCalc);
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
+
+      SmartDashboard.putNumber("elevator speed", mElevator.elevator.getSelectedSensorVelocity());
      /* else
       {
         mElevator.setElevatorPercent(0);
@@ -608,6 +610,15 @@ if(toggleRightClimbOn)
 }
 
 
+if(mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
+{
+  toggleIntakeOn = true;
+}
+else if(mDriverJoystick.getRawButton(BUTTONS.stowIntakeButton))
+{
+  toggleIntakeOn = false;
+}
+
 /*
 
 isLeftAbove = true
@@ -801,6 +812,7 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
       toggleIntakePressed = false;
     }
   }
+  
   
   public void variableInitializerTeleop()
   {
