@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
      //Shuffleboard.startRecording();
      m_robotContainer = new RobotContainer();
     
-     mTab.add("davx",mDrive.getNavx());
+     mTab.add("navx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
      positionChooser.setDefaultOption("Jacks Auto", AutoPosition.LEFT);
@@ -187,6 +187,7 @@ public class Robot extends TimedRobot {
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
      Shuffle.getInstance().update();
+     mLights.voltage(13);
    }
  
    @Override
@@ -213,6 +214,7 @@ public class Robot extends TimedRobot {
    @Override
    public void autonomousPeriodic() {
      mDrive.driveUpdate();
+  
    }
  
    @Override
@@ -237,9 +239,10 @@ public class Robot extends TimedRobot {
     mIntake.updateIntake();
     mClimb.climberUpdate();
     mElevator.updateElevator();
-    //!are toggle functions using lots of cpu / ram? idk. hope it isnt causing a problem
-    updateFastToggle();
-    updateSlowToggle();
+    //updateFastToggle();
+    //updateSlowToggle();
+    toggleFastOn = false;
+    toggleSlowOn = false;
     updateClimbToggle();
     updateLightsToggle();
     //updateIntakeToggle();
@@ -335,13 +338,13 @@ public class Robot extends TimedRobot {
 
       if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) > 0.3)
       {
-        eleFFCalc = -mElevator.elevatorFeedForward(200) + 200;
+        eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
         mElevator.setElevatorVelocity(-eleFFCalc);
         //mElevator.setElevatorPercent(ELEVATOR.mySpeed);
       }
       else if(mDriverJoystick.getRawAxis(BUTTONS.elevatorAxis) < -0.3)
       {
-        eleFFCalc = -mElevator.elevatorFeedForward(10000) + 10000;
+        eleFFCalc = -mElevator.elevatorFeedForward(1000) + 1000;
         mElevator.setElevatorVelocity(eleFFCalc);
         //mElevator.setElevatorPercent(-ELEVATOR.mySpeed);
       }
@@ -353,7 +356,7 @@ public class Robot extends TimedRobot {
       }*/
 
       
-SmartDashboard.putBoolean("toin", toggleIntakeOn);
+SmartDashboard.putBoolean("Intake", toggleIntakeOn);
 
       if(toggleIntakeOn)//  mDriverJoystick.getRawButton(BUTTONS.deployIntakeButton))
       {
@@ -635,7 +638,7 @@ isLeftBelow = true
 */
 
 
-      if(toggleFastOn){
+  /*if(toggleFastOn){
         // Do something when toggled on
         spee = 7;
       }
@@ -646,7 +649,8 @@ isLeftBelow = true
       else{
           // Do something when toggled off
         spee = 3;
-      }
+      }*/
+      spee = 1;
 
 
 
@@ -671,6 +675,7 @@ isLeftBelow = true
         case 3:
           mLights.ukraine();
       }*/
+      SmartDashboard.putNumber("sppeedd", spee);
 if(lightMode == 0)
 {
   mLights.off();
@@ -697,19 +702,7 @@ else
 }
 
 
-if(xbox.getPOV() == BUTTONS.climbFreePOV)
-      //SmartDashboard.putNumber("x", MkUtil.metersToInches(mOdo.getX()));
-      //SmartDashboard.putNumber("y",  MkUtil.metersToInches(mOdo.getY()));
- 
-      slider = SmartDashboard.getNumber("slider", 0);
-      //driveSlider = SmartDashboard.getNumber("driveSlider", 0);
-      SmartDashboard.putNumber("spee", spee);
-      SmartDashboard.putBoolean("right on", toggleRightClimbOn);
-      SmartDashboard.putBoolean("left on", toggleLeftClimbOn);
-      //SmartDashboard.putNumber("povjoy", mDriverJoystick.getPOV());
-      //SmartDashboard.putNumber("povx", xbox.getPOV());
-      //SmartDashboard.putNumber("feedf", mShoot.shooterFeedForward(slider));
-      //SmartDashboard.putNumber("ffcalc", ffcalc);
+if(xbox.getPOV() == BUTTONS.climbFreePOV);
 
       //SmartDashboard.putNumber("test xbox", (xbox.getRawAxis(BUTTONS.forwardAxis) * Math.cos(Math.toRadians(0))) + (xbox.getRawAxis(BUTTONS.strafeAxis) *  Math.sin(Math.toRadians(0))));
       //SmartDashboard.putNumber("test box two", Math.atan2(xbox.getRawAxis(BUTTONS.forwardAxis),xbox.getRawAxis(BUTTONS.strafeAxis))*180/Constants.kPi);
@@ -734,6 +727,7 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
   public void testPeriodic() {
     //mShoot.setShooterNativeVeloctiy(SHOOT.wackyShooterVelocity);
     mShoot.setShooterPercent(0);
+    mIntake.setIntakeEncoderPosition(0); 
   }
 
 /**updates state of fast toggle for driving */
@@ -792,7 +786,7 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
           {
             lightMode++;
             lightMode = lightMode%6;
-            SmartDashboard.putNumber("grshbirsgfhb", Math.random());
+            SmartDashboard.putNumber("Light Mode", Math.random()); 
               
               toggleLightsPressed = true;
           }
@@ -826,7 +820,7 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
     toggleSlowPressed = false;
     toggleLeftClimbOn = false;
     toggleRightClimbOn = false;
-    spee = 3;
+    spee = 1;
     leftGoingUp = false;
     rightGoingUp = false;
     isBothStickPressed = false;
