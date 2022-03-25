@@ -725,13 +725,15 @@ if(xbox.getPOV() == BUTTONS.climbFreePOV)
 
   @Override
   public void testInit() {
-    
+   mIntake.setIntakeEncoderPosition(0); 
   
+  //mClimb.zeroVClimbb();
   }
 
   @Override
   public void testPeriodic() {
-    
+    //mShoot.setShooterNativeVeloctiy(SHOOT.wackyShooterVelocity);
+    mShoot.setShooterPercent(0);
   }
 
 /**updates state of fast toggle for driving */

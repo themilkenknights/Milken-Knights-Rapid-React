@@ -32,7 +32,7 @@ public class IntakeBall extends CommandBase {
   public void execute() {
       if(!mTime.isTimerDone())
       {
-        mIntake.setRollersPercent(INTAKE.rollerSpeed);
+        mIntake.setRollersPercent(-INTAKE.rollerSpeed);
         mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
       }
   }

@@ -27,5 +27,12 @@ public class ThinkTank {
 
 
     do sysid dumb dumb
+
+
+
+
+
+
+    climber auto - use navx to see if oscillating 
     */
 }
