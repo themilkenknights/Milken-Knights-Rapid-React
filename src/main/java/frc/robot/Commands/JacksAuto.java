@@ -32,7 +32,7 @@ public class JacksAuto extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
 
-    addCommands(deadline(new Shoot(-0.7, 0.5, SHOOT.jacksWackyShooterVelocity).withTimeout(3)), 
+    addCommands(deadline(new Shoot(1.5,-0.7, 0.5, SHOOT.jacksWackyShooterVelocity).withTimeout(3)), 
                deadline(new DriveStraight(distanceA, lengthB, 1, -((angle) % 90), DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)),
               //!deadline(new Turn(0).withTimeout(1)), dont know if we need these
               deadline(new DriveStraight(distanceA2, lengthB2, 1, -((angle2) % 90), DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(6)),

@@ -9,6 +9,7 @@ import frc.robot.Elevator;
 import frc.robot.Intake;
 import frc.robot.Shooter;
 import frc.robot.Constants.SHOOT;
+import frc.robot.miscellaneous.MkTimerV2;
 
 public class Shoot extends CommandBase {
   /** Creates a new Elevator. */
@@ -18,16 +19,22 @@ public class Shoot extends CommandBase {
   private Elevator mElevator = Elevator.getInstance();
   private Shooter mShoot = Shooter.getInstance();
   private Intake mIntake = Intake.getInstance();
-  public Shoot(double eleSetpoint, double rollerSetpoint, double shootSetpoint) {
+  private double time;
+  private MkTimerV2 mTime = new MkTimerV2();
+  public Shoot(double time, double eleSetpoint, double rollerSetpoint, double shootSetpoint) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.eleSetpoint = eleSetpoint;
     this.rollerSetpoint = rollerSetpoint;
     this.shootSetpoint = shootSetpoint;
+    this.time = time;
+    mTime.setFinishTime(this.time);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    mTime.startTimer(this.time);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -51,6 +58,6 @@ public class Shoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return mTime.isTimerDone();
   }
 }

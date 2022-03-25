@@ -23,24 +23,21 @@ public class IntakeBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    mTime.setFinishTime(this.time);
-    mTime.startTimer();
+    mTime.startTimer(this.time);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(!mTime.isTimerDone())
-      {
-        mIntake.setRollersPercent(-INTAKE.rollerSpeed);
-        mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
-      }
+    mIntake.setRollersPercent(-INTAKE.rollerSpeed);
+    mIntake.setIntakePosition(INTAKE.intakeRotationsNative);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    mIntake.setIntakePercent(0);
+    mIntake.setRollersPercent(0);
   }
 
   // Returns true when the command should end.

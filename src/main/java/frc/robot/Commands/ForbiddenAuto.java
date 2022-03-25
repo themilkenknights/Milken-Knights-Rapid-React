@@ -34,7 +34,7 @@ public class ForbiddenAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-                deadline(new Shoot(-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(1.5)),
+                deadline(new Shoot(1.5,-0.5, 0.5, -SHOOT.wackyShooterVelocity).withTimeout(1.5)),
                 deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREAL(inches, RCW, maxVelo, maxAccel, mode, turny, angle, turnyAngle).withTimeout(10)));
   }

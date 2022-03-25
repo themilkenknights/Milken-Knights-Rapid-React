@@ -32,7 +32,7 @@ public class DriveComp extends SequentialCommandGroup {
                 deadline(new Turn(0).withTimeout(1)), 
                 deadline(new DriveStraightREALSUPERREAL(distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(3), new IntakeBall(3).withTimeout(3)),
                 deadline(new DriveStraightREALSUPERREAL(-distanceA, angle, DRIVE.magicVelo, DRIVE.magicAccel).withTimeout(3)),
-                deadline(new Shoot(-0.5, -0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)));
+                deadline(new Shoot(5,-0.5, -0.5, -SHOOT.wackyShooterVelocity).withTimeout(5)));
 
       //addCommands(deadline(new DriveStraightREAL(10, 1, 0)));
   }
