@@ -346,8 +346,8 @@ public class Drive {
     public void driveUpdate()
     {
         //updateDriveDriveVelocity();
-        //updateDriveTurn();
-        //updateDriveTurnEncoder();
+        updateDriveTurn();
+        updateDriveTurnEncoder();
       
       
         //  SmartDashboard.putNumber("currentDistance", currentDistance);
@@ -435,24 +435,24 @@ public class Drive {
 
     public void updateDriveTurn()
     {
-        //SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
-        //SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
-      //  SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
 
-    //    SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
-     //   SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
-     //   SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
+       SmartDashboard.putNumber("topturnright", bottomTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("topturrigdeg", MkUtil.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), TURN.greerRatio));
+        SmartDashboard.putNumber("topturnriiiii", MkUtil.degreesToNative(bottomTurnRightEncoder.getAbsolutePosition(), TURN.greerRatio));
        
-      //  SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
-      //  SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("bottomturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("bottomturnright", bottomTurnRight.getSelectedSensorPosition());
     }
 
     public void updateDriveTurnEncoder()
     {
-   //     SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
-  //      SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
-   //     SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
-   //     SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
     }
 
     public void updateNavxCalibration()

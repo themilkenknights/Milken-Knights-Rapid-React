@@ -89,6 +89,7 @@ public final class Constants {
         public static double deadband = 0.1;
 
         public static double kS = 0.5111;
+        public static double kA = 0;
         public static double kV = 12/maxNativeVelocity;
     }
 
@@ -127,18 +128,18 @@ public final class Constants {
 
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = -72.685546875;// 70.9277343;
-        public static double topRightOffset = -105.8203125;//107.138671875;
+        public static double topRightOffset = -9.4921875;//0;//-92.724609375;//-105.8203125;//107.138671875;
 
         public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
         public static double bottomRightOffset = 46.0546875;//47.109375;  //-
 
         public static double voltComp = 12;
-
-        public static double kS = 0.66294; //0.4969;
         public static double maxVel = 21420;
       
         //TODO get max accel
         public static double maxAccel = 300; 
+        public static double kS = 0.66294; //0.4969;
+        public static double kA = 0;
         public static double kV = 0.10986; //12 / maxVel;
     }
 
@@ -162,8 +163,8 @@ public final class Constants {
         public static double shootKF = 0;
 
         public static double kS = 0;
-        public static double kV = 0;
         public static double kA = 0;
+        public static double kV = 0;
 
         //TODO need to account for battery and shit, battery affects max rpm
         public static double maxVelo = 18900; //17800; //16600;

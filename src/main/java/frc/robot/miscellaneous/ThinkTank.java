@@ -4,6 +4,8 @@
 
 package frc.robot.miscellaneous;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+
 /** Add your docs here. */
 public class ThinkTank {
     /*
@@ -35,4 +37,14 @@ public class ThinkTank {
 
     climber auto - use navx to see if oscillating 
     */
+    /*
+    public ThinkTank()
+    {
+        SimpleMotorFeedforward helo = new SimpleMotorFeedforward(ks, kv, ka)
+        helo.calculate(currentVelocity, nextVelocity, dtSeconds)
+        getSensorVelocity, percent out * max velocity, 0.02
+        see what number this provides, then add this to pid calculate
+    }
+    */
+    
 }
