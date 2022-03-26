@@ -187,7 +187,6 @@ public class Robot extends TimedRobot {
    public void robotPeriodic() {
      CommandScheduler.getInstance().run();
      Shuffle.getInstance().update();
-     mLights.voltage(13);
    }
  
    @Override

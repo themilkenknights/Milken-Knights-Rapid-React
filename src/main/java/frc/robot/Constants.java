@@ -229,7 +229,7 @@ public final class Constants {
         public static double intakeKF = 0; 
 
      /**how much it needs to rotate to move into out position*/
-        public static double intakeRotationsNative = 7450; //7300
+        public static double intakeRotationsNative = 7350; //7300
      
      /**threshold for intake rotations, since it wont be accurate*/
         public static double intakeOutThreshold = 0;
