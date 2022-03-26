@@ -43,7 +43,14 @@ public class ThinkTank {
         SimpleMotorFeedforward helo = new SimpleMotorFeedforward(ks, kv, ka)
         helo.calculate(currentVelocity, nextVelocity, dtSeconds)
         getSensorVelocity, percent out * max velocity, 0.02
+
         see what number this provides, then add this to pid calculate
+
+        combine it with auto if it provides relatively good number
+
+        if its too high its probably because it wants to be primary driving force
+
+        if so, do that and see what happens
     }
     */
     
