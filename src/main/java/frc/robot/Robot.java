@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
    
 /**states of autonomous*/ 
    public enum AutoPosition {
-     LEFT, NOTHING
+     LEFT, 1 Ball
    }
 
 
@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
      mTab.add("navx",mDrive.getNavx());
      Shuffleboard.selectTab("Match");
      positionChooser.addOption("Nothing", AutoPosition.NOTHING);
-     positionChooser.setDefaultOption("Jacks Auto", AutoPosition.LEFT);
+     positionChooser.setDefaultOption("1 Ball", AutoPosition.LEFT);
     
     }
 
@@ -225,8 +225,7 @@ public class Robot extends TimedRobot {
        m_autonomousCommand.cancel();
      }
      mDrive.resetDrive();
-     SmartDashboard.putNumber("slider", 0);
-     //SmartDashboard.putNumber("driveSlider", 0);
+
      
     }
  
@@ -674,7 +673,7 @@ isLeftBelow = true
         case 3:
           mLights.ukraine();
       }*/
-      SmartDashboard.putNumber("sppeedd", spee);
+      SmartDashboard.putNumber("speedSetting", spee);
 if(lightMode == 0)
 {
   mLights.off();

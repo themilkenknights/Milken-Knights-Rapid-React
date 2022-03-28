@@ -62,8 +62,8 @@ public class Climber {
 
     public void climberUpdate()
     {
-        SmartDashboard.putNumber("right climb", telescopeArmRight.getSelectedSensorPosition());
-        SmartDashboard.putNumber("left climb", telescopeArmLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("right climb pos", telescopeArmRight.getSelectedSensorPosition());
+        SmartDashboard.putNumber("left climb pos", telescopeArmLeft.getSelectedSensorPosition());
     }
 
     public void telescopePercent(double percentleft, double percentright)

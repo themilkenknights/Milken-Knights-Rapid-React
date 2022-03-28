@@ -435,7 +435,7 @@ public class Drive {
 
     public void updateDriveTurn()
     {
-        SmartDashboard.putNumber("topturnleft", bottomTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("botturnle", bottomTurnLeft.getSelectedSensorPosition());
         SmartDashboard.putNumber("topturledeg", MkUtil.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), TURN.greerRatio));
         SmartDashboard.putNumber("topturnlefffff", MkUtil.degreesToNative(bottomTurnLeftEncoder.getAbsolutePosition(), TURN.greerRatio));
 
@@ -449,10 +449,10 @@ public class Drive {
 
     public void updateDriveTurnEncoder()
     {
-        SmartDashboard.putNumber("encoderTopLeft", topTurnLeftEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderTopRight", topTurnRightEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderBotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
-        SmartDashboard.putNumber("encoderBotRight", bottomTurnRightEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("TopLeft", topTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("TopRight", topTurnRightEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("BotLeft", bottomTurnLeftEncoder.getAbsolutePosition());
+        SmartDashboard.putNumber("Botright", bottomTurnRightEncoder.getAbsolutePosition());
     }
 
     public void updateNavxCalibration()
@@ -764,7 +764,7 @@ public class Drive {
 
     public void updateHeaderFix(double hAngle)
     {
-        SmartDashboard.putNumber("header return", headerStraighter(hAngle));
+        SmartDashboard.putNumber("Head Angle", headerStraighter(hAngle));
     }
 
 
@@ -1030,7 +1030,7 @@ public class Drive {
         }
         swerveAutonomousEther(-FWDauto, STRauto, RCWtemp);
         //SmartDashboard.putNumber("AUTONASX", getNavx());
-        SmartDashboard.putNumber("jihngnhjing", headerStraighter(turnyAuto));
+        SmartDashboard.putNumber("HeadStraighter", headerStraighter(turnyAuto));
 
         //swerveAutonomousEther(FWDauto, -STRauto, RCWtemp);
 /*

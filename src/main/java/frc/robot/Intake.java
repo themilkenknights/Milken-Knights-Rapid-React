@@ -64,7 +64,7 @@ public class Intake {
 
     public void updateIntake()
     {
-        SmartDashboard.putNumber("position intake", intake.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Intake POS", intake.getSelectedSensorPosition());
        // SmartDashboard.putNumber("magencRight", intakeRight.getSelectedSensorPosition());
     }
 

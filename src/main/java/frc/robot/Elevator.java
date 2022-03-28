@@ -42,7 +42,7 @@ public class Elevator {
 
     public void updateElevator()
     {
-        SmartDashboard.putNumber("elerpm", elevator.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("ElevatorRPM", elevator.getSelectedSensorVelocity());
     }
 
     public void setElevatorPercent(double setpoint)
