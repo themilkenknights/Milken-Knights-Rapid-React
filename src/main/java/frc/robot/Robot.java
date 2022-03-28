@@ -98,11 +98,7 @@ public class Robot extends TimedRobot {
    
 /**states of autonomous*/ 
    public enum AutoPosition {
-<<<<<<< HEAD
      LEFT, Ball, NOTHING
-=======
-     LEFT, NOTHING
->>>>>>> parent of 39905d3 (me want good shuffle board)
    }
 
 
