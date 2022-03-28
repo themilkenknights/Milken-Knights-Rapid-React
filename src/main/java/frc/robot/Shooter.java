@@ -73,8 +73,8 @@ public class Shooter {
 
     public void updateShooterVelocity()
     {
-        SmartDashboard.putNumber("LeftRPM", shootLeft.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("rightRPM", shootRight.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("leftSpeed", shootLeft.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("rightSpeed", shootRight.getSelectedSensorVelocity());
     }
 
     public void setShooterPercent(double setpoint)
