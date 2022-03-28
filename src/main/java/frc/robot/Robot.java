@@ -259,7 +259,7 @@ public class Robot extends TimedRobot {
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
-    
+    /*
 
     fwd = (xbox.getRawAxis(BUTTONS.forwardAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
     str = (xbox.getRawAxis(BUTTONS.strafeAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
@@ -287,8 +287,8 @@ public class Robot extends TimedRobot {
         //weird negative cuz robot is weird. should be negative fwd positive str rcw
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee); //+,-,+
         //mDrive.updateDriveDriveRaw();
-      }
-      else if(xbox.getAButton())
+      }*/
+      if(xbox.getAButton())
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
       }
@@ -298,12 +298,12 @@ public class Robot extends TimedRobot {
        // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
         //mDrive.updateDriveDriveRaw();
       }*/
-      else
+      /*else
       {
         mDrive.turnPercent(0,0,0,0);
         mDrive.drivePercent(0,0,0,0);
       }
-
+*/
       if(xbox.getBButton())
       {
         mDrive.resetDrive();
