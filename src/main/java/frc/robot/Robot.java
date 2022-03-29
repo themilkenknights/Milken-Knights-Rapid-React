@@ -41,13 +41,12 @@ import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 import frc.robot.Drive.ETHERAUTO;
 import frc.robot.Drive.ETHERRCW;
+import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.MkTimerV2;
 import frc.robot.miscellaneous.Shuffle;/*
 import frc.robot.miscellaneous.TestMotors;
 import frc.robot.miscellaneous.TestMotors.MECHANISM;*/
-import frc.robot.threesixfour.CTREConfigs;
-import frc.robot.threesixfour.RobotContainer;
 import frc.robot.miscellaneous.CommandArray;
 
 /**
@@ -58,11 +57,10 @@ import frc.robot.miscellaneous.CommandArray;
  */
 public class Robot extends TimedRobot {
 
-  public static CTREConfigs ctreConfigs;
+
 
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
   
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
@@ -94,7 +92,7 @@ public class Robot extends TimedRobot {
    
    
 /**for wpi swerve and auto*/
-  // private RobotContainer m_robotContainer;
+   private RobotContainer m_robotContainer;
    
 /**states of autonomous*/ 
    public enum AutoPosition {
@@ -176,7 +174,6 @@ public class Robot extends TimedRobot {
 
    @Override
    public void robotInit() {
-    ctreConfigs = new CTREConfigs();
     variableInitializerTeleop();
     mDrive.assignTalonArray();
      
@@ -236,13 +233,8 @@ public class Robot extends TimedRobot {
        m_autonomousCommand.cancel();
      }
      mDrive.resetDrive();
-<<<<<<< HEAD
-     CommandScheduler.getInstance().cancelAll();
+     //ommandScheduler.getInstance().cancelAll();
 
-=======
-     SmartDashboard.putNumber("slider", 0);
-     //SmartDashboard.putNumber("driveSlider", 0);
->>>>>>> parent of 39905d3 (me want good shuffle board)
      
     }
  
