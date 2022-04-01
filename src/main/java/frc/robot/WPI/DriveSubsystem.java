@@ -51,6 +51,12 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {}
 
+
+  public static DriveSubsystem getInstance()
+    {
+        return InstanceHolder.mInstance;
+    }
+
   @Override
   public void periodic() {
     // Update the odometry in the periodic block
@@ -155,4 +161,9 @@ public class DriveSubsystem extends SubsystemBase {
     m_rearLeft.resetPID();
     m_rearRight.resetPID();
   }
+
+  private static class InstanceHolder
+  {
+      private static final DriveSubsystem mInstance = new DriveSubsystem();
+  } 
 }

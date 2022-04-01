@@ -61,15 +61,15 @@ public class SwerveModule {
     m_turningEncoder = turningEncoderChannel;
 
     //TODO test kp first, then see if using p gets us setpoint in time on ground. if ocilation, add d. when it works on ground, add f 
-    m_driveMotor.config_kP(0, AUTO.moduleDriveKP);
-    m_driveMotor.config_kI(0, AUTO.moduleDriveKI);
-    m_driveMotor.config_kD(0, AUTO.moduleDriveKD);
-    m_driveMotor.config_kF(0, 0);
+    m_driveMotor.config_kP(0, DRIVE.driveKP);// AUTO.moduleDriveKP);
+    m_driveMotor.config_kI(0, DRIVE.driveKI);
+    m_driveMotor.config_kD(0, DRIVE.driveKD);
+    m_driveMotor.config_kF(0, DRIVE.driveKF);
 
-    m_turningMotor.config_kP(0, AUTO.moduleTurnKP);
-    m_turningMotor.config_kI(0, AUTO.moduleTurnKI);
-    m_turningMotor.config_kD(0, AUTO.moduleTurnKD);
-    m_turningMotor.config_kF(0, 0);
+    m_turningMotor.config_kP(0, TURN.turnKP);
+    m_turningMotor.config_kI(0, TURN.turnKI);
+    m_turningMotor.config_kD(0, TURN.turnKD);
+    m_turningMotor.config_kF(0, TURN.turnKF);
 
 
     // Set the distance per pulse for the drive encoder. We can simply use the
@@ -103,8 +103,8 @@ public class SwerveModule {
    */
   public void setDesiredState(SwerveModuleState desiredState) {
     // Optimize the reference state to avoid spinning further than 90 degrees
-    SwerveModuleState state =
-        SwerveModuleState.optimize(desiredState, new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
+    SwerveModuleState state = new SwerveModuleState(desiredState.speedMetersPerSecond, desiredState.angle);
+       // SwerveModuleState.optimize(desiredState, new Rotation2d(Math.toRadians(m_turningEncoder.getAbsolutePosition())));
 
     // Calculate the drive output from the drive PID controller.
     //!final double driveOutput =
@@ -119,8 +119,9 @@ public class SwerveModule {
     //final double turnFeedforward =
     //    m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
-    m_driveMotor.set(ControlMode.Velocity, MkUtil.metersPerSecondToNativeUnitsPer100Ms(state.speedMetersPerSecond));  // + driveFeedforward);
-    m_turningMotor.set(ControlMode.Position, MkUtil.degreesToNative(state.angle.getDegrees(), TURN.greerRatio));  // + turnFeedforward);
+    m_driveMotor.set(ControlMode.PercentOutput, state.speedMetersPerSecond/1);  // + driveFeedforward);
+    m_turningMotor.set(ControlMode.Position, MkUtil.degreesToNative(state.angle.getDegrees(), TURN.greerRatio));
+    SmartDashboard.putNumber("turn", state.angle.getDegrees());// + turnFeedforward);
 
     //TODO could use integrated pid, but doesnt have continuous input. need to think about it
 

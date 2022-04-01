@@ -41,6 +41,7 @@ import frc.robot.Constants.SHOOT;
 import frc.robot.Constants.TURN;
 import frc.robot.Drive.ETHERAUTO;
 import frc.robot.Drive.ETHERRCW;
+import frc.robot.WPI.DriveSubsystem;
 import frc.robot.WPI.RobotContainer;
 import frc.robot.miscellaneous.Lights;
 import frc.robot.miscellaneous.MkTimerV2;
@@ -275,6 +276,7 @@ public class Robot extends TimedRobot {
       {
         //weird negative cuz robot is weird. should be negative fwd positive str rcw
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee); //+,-,+
+   // DriveSubsystem.getInstance().drive(fwd, -str, rcw, true);
         //mDrive.updateDriveDriveRaw();
       }
       else if(xbox.getAButton())

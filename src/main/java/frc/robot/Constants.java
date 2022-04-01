@@ -69,7 +69,7 @@ public final class Constants {
         public static double driveKP = 0.21;//0.9;//0.21; //<-- og works with auto
         public static double driveKI = 0;
         public static double driveKD = 0 * driveKP; 
-        public static double driveKF = 1023.0 / maxNativeVelocity;
+        public static double driveKF = 0;//1023.0 / maxNativeVelocity;
 
         public static double driveTopLeftKF = oneEncoderRotation / topLeftMaxNativeVelocity;
         public static double driveTopRightKF = oneEncoderRotation / topRightMaxNativeVelocity;
@@ -128,9 +128,9 @@ public final class Constants {
 
         // (CANCoder) in degrees, 180 to -180 
         public static double topLeftOffset = -72.685546875;// 70.9277343;
-        public static double topRightOffset = -9.4921875;//0;//-92.724609375;//-105.8203125;//107.138671875;
+        public static double topRightOffset = 136.23046875;//(360-50.888671875);//-9.4921875;//0;//-92.724609375;//-105.8203125;//107.138671875;
 
-        public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
+        public static double bottomLeftOffset = -121.72851;//-117.24609375;//-117.94921875; //+
         public static double bottomRightOffset = 46.0546875;//47.109375;  //-
 
         public static double voltComp = 12;
@@ -360,12 +360,12 @@ public final class Constants {
         public static double moduleDriveKD = 0.001;
 
         //auto controlling pid
-        public static double turnSwerveControlKp = 0.2;
-        public static double driveSwerveControlKpY = 0.2;
-        public static double driveSwerveControlKpX = 0.2;
+        public static double turnSwerveControlKp = 1;
+        public static double driveSwerveControlKpY = 1;
+        public static double driveSwerveControlKpX = 1;
 
-        public static double heightMeters = MkUtil.inchesToMeters(L / 2);
-        public static double widthMeters = MkUtil.inchesToMeters(W / 2);
+        public static double heightMeters = MkUtil.inchesToMeters(heightInch / 2);
+        public static double widthMeters = MkUtil.inchesToMeters(widthInch / 2);
 
         public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -376,24 +376,24 @@ public final class Constants {
       
         
         //actual drive module stats
-        public static final double maxModuleTurnVelo = kPi * 2;
-        public static final double maxModuleTurnAccel = kPi * 2;
+        public static final double maxModuleTurnVelo = kPi ;
+        public static final double maxModuleTurnAccel = kPi ;
         
         //actual drive module stats
-        public static final double maxModuleDriveVelo = 2; //2;
-        public static final double maxModuleDriveAccel = 2; //2;
+        public static final double maxModuleDriveVelo = 1; //2;
+        public static final double maxModuleDriveAccel = 1; //2;
         
 
         //for turning constraints
-        public static final double maxAutoTurnVelo = kPi * 2;
-        public static final double maxAutoTurnAccel = kPi * 2;
+        public static final double maxAutoTurnVelo = kPi ;
+        public static final double maxAutoTurnAccel = kPi ;
         
         //for trajectory config
-        public static final double maxAutoDriveVelo = 5; //2;
-        public static final double maxAutoDriveAccel = 5; //2;
+        public static final double maxAutoDriveVelo = 1; //2;
+        public static final double maxAutoDriveAccel = 1; //2;
 
 
-        public static final double maxDriveVelo = 5.0;
+        public static final double maxDriveVelo = 1;
 
         //TODO test these for velocity 
         public static double autoVeloDriveKP = 0.21;
