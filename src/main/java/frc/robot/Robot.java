@@ -57,6 +57,11 @@ import frc.robot.miscellaneous.CommandArray;
  * project.
  */
 public class Robot extends TimedRobot {
+
+
+
+  private Command m_autonomousCommand;
+
   
    private Drive mDrive = Drive.getInstance();
    private Shooter mShoot = Shooter.getInstance();
@@ -78,7 +83,7 @@ public class Robot extends TimedRobot {
 /**rotational movement axis*/ 
    private double rcw;
 
-   private Command m_autonomousCommand;
+   //private Command m_autonomousCommand;
    private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
    private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
    private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
@@ -92,7 +97,7 @@ public class Robot extends TimedRobot {
    
 /**states of autonomous*/ 
    public enum AutoPosition {
-     LEFT, NOTHING
+     LEFT, Ball, NOTHING
    }
 
 
@@ -203,6 +208,8 @@ public class Robot extends TimedRobot {
        case LEFT:
          m_autonomousCommand = new DriveComp();// testCommandArray.asSequentialCommandGroup();//new DriveStr8();//m_robotContainer.getAutonomousCommand();
          break;
+      case Ball:
+        break;
        case NOTHING: 
          break;
      }
@@ -220,14 +227,15 @@ public class Robot extends TimedRobot {
    @Override
    public void teleopInit() {
      mDrive.encoderZero();
+     
      //mClimb.zeroVClimbb();
       Shuffleboard.addEventMarker("Teleop Init", EventImportance.kNormal);
      if (m_autonomousCommand != null) {
        m_autonomousCommand.cancel();
      }
      mDrive.resetDrive();
-     SmartDashboard.putNumber("slider", 0);
-     //SmartDashboard.putNumber("driveSlider", 0);
+     //ommandScheduler.getInstance().cancelAll();
+
      
     }
  
@@ -249,7 +257,7 @@ public class Robot extends TimedRobot {
     //MouseInfo.getPointerInfo();
     //TODO do something with mouse?
 
-    
+    /*
 
     fwd = (xbox.getRawAxis(BUTTONS.forwardAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
     str = (xbox.getRawAxis(BUTTONS.strafeAxis) - DRIVE.deadband) / (1 - DRIVE.deadband);
@@ -278,8 +286,8 @@ public class Robot extends TimedRobot {
         mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee); //+,-,+
    // DriveSubsystem.getInstance().drive(fwd, -str, rcw, true);
         //mDrive.updateDriveDriveRaw();
-      }
-      else if(xbox.getAButton())
+      }*/
+      if(xbox.getAButton())
       {
         mDrive.turnCalcPercent(0, 0, 0, 0);
       }
@@ -289,12 +297,12 @@ public class Robot extends TimedRobot {
        // mDrive.driveVelocity(driveSlider, driveSlider, driveSlider, driveSlider);
         //mDrive.updateDriveDriveRaw();
       }*/
-      else
+      /*else
       {
         mDrive.turnPercent(0,0,0,0);
         mDrive.drivePercent(0,0,0,0);
       }
-
+*/
       if(xbox.getBButton())
       {
         mDrive.resetDrive();

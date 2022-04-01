@@ -22,7 +22,9 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  */
 public final class Constants {
 
- /**apple pie */
+ public static final String Swerve = null;
+
+/**apple pie */
     public static double kPi = 3.14159265359;
     
  /**falcon encoder rotation*/
