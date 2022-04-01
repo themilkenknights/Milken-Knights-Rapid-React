@@ -129,11 +129,19 @@ public final class Constants {
         public static double magicturnKF = 0;
 
         // (CANCoder) in degrees, 180 to -180 
+<<<<<<< Updated upstream
         public static double topLeftOffset = -72.685546875;// 70.9277343;
         public static double topRightOffset = 136.23046875;//(360-50.888671875);//-9.4921875;//0;//-92.724609375;//-105.8203125;//107.138671875;
 
         public static double bottomLeftOffset = -121.72851;//-117.24609375;//-117.94921875; //+
         public static double bottomRightOffset = 46.0546875;//47.109375;  //-
+=======
+        public static double topLeftOffset = 113.642578125;// 70.9277343;
+        public static double topRightOffset = -48.515625;//107.138671875;
+
+        public static double bottomLeftOffset = 58.974609375;//-117.94921875; //+
+        public static double bottomRightOffset = 41.8359375;//47.109375;  //-
+>>>>>>> Stashed changes
 
         public static double voltComp = 12;
         public static double maxVel = 21420;
