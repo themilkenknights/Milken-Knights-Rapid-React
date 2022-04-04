@@ -729,10 +729,10 @@ public class Drive {
         ws3 = MkUtil.isPositive(driveBotLeftEther.getP(), ws3);
         ws4 = MkUtil.isPositive(driveBotRightEther.getP(), ws4);
 
-        //SmartDashboard.putNumber("wa1",wa1);
-        //SmartDashboard.putNumber("wa2",wa2);
-        //SmartDashboard.putNumber("wa3",wa3);
-        //SmartDashboard.putNumber("wa4",wa4);
+        SmartDashboard.putNumber("wa1",wa1);
+        SmartDashboard.putNumber("wa2",wa2);
+        SmartDashboard.putNumber("wa3",wa3);
+        SmartDashboard.putNumber("wa4",wa4);
 /*
         topDriveRight.set(ControlMode.PercentOutput, ws1);
         topDriveLeft.set(ControlMode.PercentOutput, ws2);

@@ -127,11 +127,11 @@ public final class Constants {
         public static double magicturnKF = 0;
 
         // (CANCoder) in degrees, 180 to -180 
-        public static double topLeftOffset = -72.685546875;// 70.9277343;
-        public static double topRightOffset = -9.4921875;//0;//-92.724609375;//-105.8203125;//107.138671875;
+        public static double topLeftOffset = -74.53125;// -72.685546875;// 70.9277343;
+        public static double topRightOffset = 131.1328125;// 130.34179687;//0;//-92.724609375;//-105.8203125;//107.138671875;
 
-        public static double bottomLeftOffset = -117.24609375;//-117.94921875; //+
-        public static double bottomRightOffset = 46.0546875;//47.109375;  //-
+        public static double bottomLeftOffset = -121.640625;// -117.24609375;//-117.94921875; //+
+        public static double bottomRightOffset = 47.197265625;// 46.0546875;//47.109375;  //-
 
         public static double voltComp = 12;
         public static double maxVel = 21420;
@@ -325,8 +325,8 @@ public final class Constants {
       */
 
       //cooler xbox
-      public static int climbLeftUpPOV = 0; //up, then cw unit circle
-      public static int climbLeftDownPOV = 180;
+      public static int climbLeftUpPOV = 180; //up, then cw unit circle
+      public static int climbLeftDownPOV = 0;
       public static int climbRightUpPOV = 270;
       public static int climbRightDownPOV = 90;
       public static int climbFreePOV = 270;
