@@ -274,7 +274,7 @@ public class Robot extends TimedRobot {
       if(fwd != 0 || str != 0 || rcw != 0)
       {
         //weird negative cuz robot is weird. should be negative fwd positive str rcw
-        mDrive.etherSwerve(fwd/spee,-str/spee,rcw/spee); //+,-,+
+        mDrive.etherSwerve(fwd/7,-str/7,rcw/7); //+,-,+
         //mDrive.updateDriveDriveRaw();
       }
       else if(xbox.getAButton())

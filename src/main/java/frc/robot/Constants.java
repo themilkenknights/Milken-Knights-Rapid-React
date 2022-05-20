@@ -116,7 +116,7 @@ public final class Constants {
         public static int bottomTurnRightCANID = 8; //1;
 
         //got these values by guessing and praying
-        public static double turnKP = 0.00008;//0.00008;//0.00008
+        public static double turnKP = 0.085;// 0.00008;//0.00008;//0.00008
         public static double turnKI = 0;
         public static double turnKD = 0.00000001; // turnKP * 0.001; 
         public static double turnKF = 0;
